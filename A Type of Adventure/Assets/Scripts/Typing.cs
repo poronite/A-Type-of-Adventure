@@ -4,31 +4,48 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Typing : MonoBehaviour
-{
-    //Text bank
+{   
+    public Text currentWordOutput, writtenWordsOutput, notWrittenWordsOutput, numMistakesOutput;
 
-    public Text wordOutput, numMistakesOutput;
+    private List<string> words = new List<string>();
 
-    private string remainingWord, currentWord = "testing";
+    private string remainingWord, currentWord;
 
     private int numMistakes;
+
+    [SerializeField]
+    private string mainText;
 
 
     void Start()
     {
+        SetText();
+    }
+
+    private void SetText()
+    {
+        notWrittenWordsOutput.text = mainText;
+
         SetCurrentWord();
     }
 
     private void SetCurrentWord()
     {
-        // get text bank
+        char[] separators = {' ', '.'};
+
+        int wordEnd = notWrittenWordsOutput.text.IndexOf(' ');
+
+        currentWord = notWrittenWordsOutput.text.Substring(0, wordEnd);
+
         SetRemainingWord(currentWord);
+
+        notWrittenWordsOutput.text = notWrittenWordsOutput.text.Remove(0, wordEnd + 1);
     }
 
     private void SetRemainingWord(string word)
     {
         remainingWord = word;
-        wordOutput.text = remainingWord.ToUpper();
+        currentWordOutput.text = remainingWord;
     }
 
     void Update()
@@ -58,7 +75,7 @@ public class Typing : MonoBehaviour
 
             if (remainingWord.Length == 0) //is word complete?
             {
-                SetCurrentWord();
+                NextWord();
             }
         }
         else //wrong letter typed
@@ -72,5 +89,12 @@ public class Typing : MonoBehaviour
     {
         string newWord = remainingWord.Remove(0, 1);
         SetRemainingWord(newWord);
-    }   
+    }
+    
+    private void NextWord()
+    {
+        writtenWordsOutput.text += $"{currentWord} ";
+
+        SetCurrentWord();
+    }
 }
