@@ -375,7 +375,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Number of Mistakes: 0'
+  m_Text: 'Mistakes: 0'
 --- !u!222 &1520848491
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -633,7 +633,7 @@ PrefabInstance:
     - target: {fileID: 5709749580210643132, guid: c64fc1eef97ad7f4b8c245efe50a6bf0,
         type: 3}
       propertyPath: mainText
-      value: Hello my name is
+      value: Hello, my name is bruh.
       objectReference: {fileID: 0}
     - target: {fileID: 5709749580210643132, guid: c64fc1eef97ad7f4b8c245efe50a6bf0,
         type: 3}

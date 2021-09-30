@@ -7,9 +7,9 @@ public class Typing : MonoBehaviour
 {   
     public Text currentWordOutput, writtenWordsOutput, notWrittenWordsOutput, numMistakesOutput;
 
-    private List<string> words = new List<string>();
-
     private string remainingWord, currentWord;
+
+    private char wordSplitter;
 
     private int numMistakes;
 
@@ -31,15 +31,43 @@ public class Typing : MonoBehaviour
 
     private void SetCurrentWord()
     {
-        char[] separators = {' ', '.'};
+        char[] wordSpiltters = {' ', '.', '!', '?', ':', ',', ';'};
 
-        int wordEnd = notWrittenWordsOutput.text.IndexOf(' ');
+        int wordEnd = 0;
+
+        //find end of the next word
+        for (int i = 0; i < notWrittenWordsOutput.text.Length; i++)
+        {
+            for (int j = 0; j < wordSpiltters.Length; j++)
+            {
+                if (notWrittenWordsOutput.text[i] == wordSpiltters[j])
+                {
+                    wordSplitter = wordSpiltters[j];
+
+                    if (wordSplitter == ' ')
+                    {
+                        wordEnd = i; //get word without spiltter
+                    }
+                    else
+                    {
+                        wordEnd = i + 1; //get word with spiltter
+                    }
+
+                    break;
+                }
+            }
+
+            if (wordEnd != 0)
+            {
+                break;
+            }
+        }
 
         currentWord = notWrittenWordsOutput.text.Substring(0, wordEnd);
 
         SetRemainingWord(currentWord);
 
-        notWrittenWordsOutput.text = notWrittenWordsOutput.text.Remove(0, wordEnd + 1);
+        notWrittenWordsOutput.text = notWrittenWordsOutput.text.Remove(0, wordEnd).TrimStart();
     }
 
     private void SetRemainingWord(string word)
@@ -69,7 +97,7 @@ public class Typing : MonoBehaviour
 
     private void EnterLetter(string typedletter)
     {
-        if (remainingWord.IndexOf(typedletter) == 0) //check if typedletter is correct
+        if (remainingWord.ToLower().IndexOf(typedletter) == 0) //check if typedletter is correct | always lower case
         {
             RemoveLetter();
 
@@ -81,7 +109,7 @@ public class Typing : MonoBehaviour
         else //wrong letter typed
         {
             numMistakes++;
-            numMistakesOutput.text = $"Number of Mistakes: {numMistakes}";
+            numMistakesOutput.text = $"Mistakes: {numMistakes}";
         }
     }
 
@@ -93,7 +121,7 @@ public class Typing : MonoBehaviour
     
     private void NextWord()
     {
-        writtenWordsOutput.text += $"{currentWord} ";
+        writtenWordsOutput.text += $"{currentWord} ";        
 
         SetCurrentWord();
     }
