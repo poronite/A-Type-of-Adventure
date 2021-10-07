@@ -13,18 +13,10 @@ public class Typing : MonoBehaviour
 
     private int numMistakes;
 
-    [SerializeField]
-    private string mainText;
 
-
-    void Start()
+    public void SetText(string text)
     {
-        SetText();
-    }
-
-    private void SetText()
-    {
-        notWrittenWordsOutput.text = mainText;
+        notWrittenWordsOutput.text = text;
 
         SetCurrentWord();
     }
