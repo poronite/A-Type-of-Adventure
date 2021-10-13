@@ -1,120 +1,103 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
+
+//This class will receive input from PlayerInput class and will type or delete a letter on the OutputWord string.
+//It will also contain the PlayerState so that it can decide what to do with the input received.
+
+public enum PlayerState
+{
+    Adventure,
+    Combat,
+    Puzzle
+}
 
 public class Typing : MonoBehaviour
-{   
-    public Text currentWordOutput, writtenWordsOutput, notWrittenWordsOutput, numMistakesOutput;
+{
+    [SerializeField]
+    private PlayerState currentPlayerState = PlayerState.Adventure;
 
-    private string remainingWord, currentWord;
+    ///<summary>Word that the player has to currently type.</summary>
+    private string currentWord = "word";
 
-    private char wordSplitter;
+    ///<summary>Output of CurrentWord that the player has already typed.</summary>
+    private string outputWord;
 
-    private int numMistakes;
+    /// <summary>Index of the next letter that needs to be typed by player.</summary>
+    private int nextLetterIndex = 0;
 
 
-    public void SetText(string text)
+    //Unity events
+    public UnityEvent Mistake;
+    public UnityEvent AddTime;
+
+    public void TypeLetter(string letter)
     {
-        notWrittenWordsOutput.text = text;
-
-        SetCurrentWord();
-    }
-
-    private void SetCurrentWord()
-    {
-        char[] wordSpiltters = {' ', '.', '!', '?', ':', ',', ';'};
-
-        int wordEnd = 0;
-
-        //find end of the next word
-        for (int i = 0; i < notWrittenWordsOutput.text.Length; i++)
+        switch (currentPlayerState)
         {
-            for (int j = 0; j < wordSpiltters.Length; j++)
-            {
-                if (notWrittenWordsOutput.text[i] == wordSpiltters[j])
+            case PlayerState.Adventure:
+                if (IsLetterCorrect(letter))
                 {
-                    wordSplitter = wordSpiltters[j];
-
-                    if (wordSplitter == ' ')
-                    {
-                        wordEnd = i; //get word without spiltter
-                    }
-                    else
-                    {
-                        wordEnd = i + 1; //get word with spiltter
-                    }
-
-                    break;
+                    Debug.Log($"Letter typed: {letter}");
                 }
-            }
-
-            if (wordEnd != 0)
-            {
+                else
+                {
+                    Mistake.Invoke();
+                }
                 break;
-            }
+            case PlayerState.Combat:
+                if (IsLetterCorrect(letter))
+                {
+                    Debug.Log($"Letter typed: {letter}");
+                }
+                else
+                {
+                    Mistake.Invoke();
+                }
+                break;
+            case PlayerState.Puzzle:
+                break;
+            default:
+                break;
         }
-
-        currentWord = notWrittenWordsOutput.text.Substring(0, wordEnd);
-
-        SetRemainingWord(currentWord);
-
-        notWrittenWordsOutput.text = notWrittenWordsOutput.text.Remove(0, wordEnd).TrimStart();
     }
 
-    private void SetRemainingWord(string word)
+    /// <summary>Verify if letter received from PlayerInput matches the one to be typed (Adventure and Combat state only).</summary>
+    private bool IsLetterCorrect(string letter)
     {
-        remainingWord = word;
-        currentWordOutput.text = remainingWord;
+        return letter == currentWord[nextLetterIndex].ToString();
     }
 
-    void Update()
+    /// <summary>Delete last letter typed by player (Puzzle state only).</summary>
+    public void DeleteLetter()
     {
-        CheckInput();
+        switch (currentPlayerState)
+        {            
+            case PlayerState.Puzzle:
+                Debug.Log("Last Letter typed was deleted");
+                break;
+            default:
+                break;
+        }
     }
 
-
-    private void CheckInput()
+    private void CountTime()
     {
-        if (Input.anyKeyDown)
+        switch (currentPlayerState)
         {
-            string key = Input.inputString;
-
-            if (key.Length == 1)
-            {
-                EnterLetter(key);
-            }
+            case PlayerState.Adventure:
+            case PlayerState.Combat:
+            case PlayerState.Puzzle:
+                AddTime.Invoke();
+                break;
+            default:
+                break;
         }
     }
 
-    private void EnterLetter(string typedletter)
+    private void Update()
     {
-        if (remainingWord.ToLower().IndexOf(typedletter) == 0) //check if typedletter is correct | always lower case
-        {
-            RemoveLetter();
-
-            if (remainingWord.Length == 0) //is word complete?
-            {
-                NextWord();
-            }
-        }
-        else //wrong letter typed
-        {
-            numMistakes++;
-            numMistakesOutput.text = $"Mistakes: {numMistakes}";
-        }
-    }
-
-    private void RemoveLetter()
-    {
-        string newWord = remainingWord.Remove(0, 1);
-        SetRemainingWord(newWord);
-    }
-    
-    private void NextWord()
-    {
-        writtenWordsOutput.text += $"{currentWord} ";        
-
-        SetCurrentWord();
+        CountTime();
     }
 }
