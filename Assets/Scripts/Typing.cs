@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,10 +20,10 @@ public class Typing : MonoBehaviour
     private PlayerState currentPlayerState = PlayerState.Adventure;
 
     ///<summary>Word that the player has to currently type.</summary>
-    private string currentWord = "word";
+    private string currentWord;
 
     ///<summary>Output of CurrentWord that the player has already typed.</summary>
-    private StringBuilder outputWord;
+    private StringBuilder outputWord = new StringBuilder();
 
     ///<summary>Index of the next letter that needs to be typed by player.</summary>
     private int nextLetterIndex = 0;
@@ -71,8 +69,8 @@ public class Typing : MonoBehaviour
             case PlayerState.Combat:
                 if (IsLetterCorrect(letter))
                 {
+                    Debug.Log($"Letter typed: {letter} | outputWord: {outputWord}");
                     AddLetter(letter);
-                    Debug.Log($"Letter typed: {letter}");
                 }
                 else
                 {
@@ -90,7 +88,7 @@ public class Typing : MonoBehaviour
     /// <summary>Verify if letter received from PlayerInput matches the one to be typed (Adventure and Combat state only).</summary>
     private bool IsLetterCorrect(string letter)
     {
-        return letter == currentWord[nextLetterIndex].ToString();
+        return letter == currentWord[nextLetterIndex].ToString().ToLower(); //Always lower case
     }
 
 
@@ -105,13 +103,13 @@ public class Typing : MonoBehaviour
             switch (currentPlayerState)
             {
                 case PlayerState.Adventure:
-                    CompleteWordAdv.Invoke(outputWord.ToString());
+                    CompleteWordAdv.Invoke(currentWord.ToString());
                     break;
                 case PlayerState.Combat:
-                    CompleteWordCmb.Invoke(outputWord.ToString());
+                    CompleteWordCmb.Invoke(currentWord.ToString());
                     break;
                 case PlayerState.Puzzle:
-                    CompleteWordPzl.Invoke(outputWord.ToString());
+                    CompleteWordPzl.Invoke(currentWord.ToString());
                     break;
                 default:
                     break;
@@ -122,7 +120,7 @@ public class Typing : MonoBehaviour
 
     private bool IsWordComplete()
     {
-        return outputWord.ToString() == currentWord;
+        return outputWord.ToString() == currentWord.ToLower(); //Always lower case
     }
 
 

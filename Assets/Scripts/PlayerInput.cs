@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 //This class will listen to the player's input and will do 2 different things depending if key pressed is Backspace or not.
@@ -40,7 +38,7 @@ public class PlayerInput : MonoBehaviour
         {
             string key = Input.inputString;
 
-            if (IsLetter(key))
+            if (IsAllowedInput(key))
             {
                 SendLetterInput(key);
             }
@@ -48,9 +46,9 @@ public class PlayerInput : MonoBehaviour
     }
 
 
-    private bool IsLetter(string key)
-    {
-        //key.Length == 1 is so that it doesn't spew errors when pressing shift or similar keys
-        return (key.Length == 1 && char.IsLetter(key[0])); 
+    /// <summary>Allowed Input: letters and separators.</summary>
+    private bool IsAllowedInput(string key)
+    {        
+        return key.Length == 1; 
     }
 }

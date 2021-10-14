@@ -362,4 +362,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c825b7c88a18743870f24e0d47207b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  separators: []
+  separators:
+  - ' '
+  - ','
+  - ;
+  - .
+  - ':'
+  - '!'
+  - '?'
