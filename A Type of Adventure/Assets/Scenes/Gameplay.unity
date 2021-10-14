@@ -247,6 +247,7 @@ GameObject:
   - component: {fileID: 1764022994}
   - component: {fileID: 1764022993}
   - component: {fileID: 1764022992}
+  - component: {fileID: 1764022995}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -281,11 +282,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPlayerState: 0
-  Mistake:
+  AddTime:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1764022994}
-        m_MethodName: AddMistake
+        m_MethodName: AddTimeElapsed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -295,11 +296,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  AddTime:
+  Mistake:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1764022994}
-        m_MethodName: AddTimeElapsed
+        m_MethodName: AddMistake
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -349,3 +350,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMaxHP: 30
   playerAttack: 5
+--- !u!114 &1764022995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764022990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c825b7c88a18743870f24e0d47207b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  separators: []

@@ -9,20 +9,20 @@ using UnityEngine.Events;
 
 public class PlayerInput : MonoBehaviour
 {
+    //Delegates
     delegate void InputDelegate(string input);
     InputDelegate SendLetterInput;
 
+    //Unity events
     public UnityEvent DeleteLetterInput;
 
+
+    //Player game object will never be disabled so OnEnable is enough
     private void OnEnable()
     {
         SendLetterInput += gameObject.GetComponent<Typing>().TypeLetter;
     }
 
-    private void OnDisable()
-    {
-        SendLetterInput -= gameObject.GetComponent<Typing>().TypeLetter;
-    }
 
     void Update()
     {
@@ -46,6 +46,7 @@ public class PlayerInput : MonoBehaviour
             }
         }
     }
+
 
     private bool IsLetter(string key)
     {

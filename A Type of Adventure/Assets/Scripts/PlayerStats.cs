@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    //Variables
     [SerializeField]
     private int playerMaxHP, playerAttack;
 
@@ -15,10 +16,12 @@ public class PlayerStats : MonoBehaviour
     ///<summary>Time elapsed since start of the game. (Adventure, Combat and Puzzle states only).</summary>
     private float timeElapsed;
 
+
     private void Start()
     {
         RecoverFullHP();
     }
+
 
     //Invoked by UnityEvent in Typing script when player does a mistake
     public void AddMistake()
@@ -27,12 +30,14 @@ public class PlayerStats : MonoBehaviour
         Debug.Log($"Number of Mistakes: {numMistakes}");
     }
 
+
     //Invoked by UnityEvent in Typing script every Update
     public void AddTimeElapsed()
     {
         timeElapsed += Time.deltaTime;
         //Debug.Log($"Time elapsed: {(int)timeElapsed}s");
     }
+
 
     public void RecoverFullHP()
     {
