@@ -2,23 +2,24 @@
 using UnityEngine.Events;
 
 //This class will listen to the player's input and will do 2 different things depending if key pressed is Backspace or not.
-//If Backspace pressed: will invoke DeleteLetterInput event that sends to (class name) a request to delete last typed letter (can only be used on certain parts of the game)
-//Other key pressed: will use IsLetter function to verify if key pressed is a letter and if so, trigger the SendLetterDelegate that sends a request to (class name) to type the letter.
+//If Backspace pressed: will invoke DeleteInput event that sends to Typing script a request to delete last typed character (can only be used on certain parts of the game).
+//Other key pressed: will use IsAllowedInput function to verify if key pressed is a allowed character and if so,
+//trigger the SendInput delegate that sends a request to Typing script to type the character.
 
 public class PlayerInput : MonoBehaviour
 {
     //Delegates
     delegate void InputDelegate(string input);
-    InputDelegate SendLetterInput;
+    InputDelegate SendInput;
 
     //Unity events
-    public UnityEvent DeleteLetterInput;
+    public UnityEvent DeleteInput;
 
 
     //Player game object will never be disabled so OnEnable is enough
     private void OnEnable()
     {
-        SendLetterInput += gameObject.GetComponent<Typing>().TypeLetter;
+        SendInput += gameObject.GetComponent<Typing>().TypeCharacter;
     }
 
 
@@ -29,10 +30,10 @@ public class PlayerInput : MonoBehaviour
 
 
     private void CheckInput()
-    {
+    {        
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            DeleteLetterInput.Invoke();
+            DeleteInput.Invoke();
         }
         else if (Input.anyKeyDown)
         {
@@ -40,13 +41,13 @@ public class PlayerInput : MonoBehaviour
 
             if (IsAllowedInput(key))
             {
-                SendLetterInput(key);
+                SendInput(key);
             }
         }
     }
 
 
-    /// <summary>Allowed Input: letters and separators.</summary>
+    /// <summary>Allowed Input: letters and separators (. , ! : etc).</summary>
     private bool IsAllowedInput(string key)
     {        
         return key.Length == 1; 

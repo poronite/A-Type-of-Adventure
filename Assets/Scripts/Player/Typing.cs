@@ -25,8 +25,8 @@ public class Typing : MonoBehaviour
     ///<summary>Output of CurrentWord that the player has already typed.</summary>
     private StringBuilder outputWord = new StringBuilder();
 
-    ///<summary>Index of the next letter that needs to be typed by player.</summary>
-    private int nextLetterIndex = 0;
+    ///<summary>Index of the next character that needs to be typed by player.</summary>
+    private int nextCharacterIndex = 0;
 
 
     //Unity events
@@ -53,24 +53,24 @@ public class Typing : MonoBehaviour
     public void NewWord(string word)
     {
         currentWord = word;
-        nextLetterIndex = 0;
+        nextCharacterIndex = 0;
         outputWord.Clear();
     }
 
 
-    ///<summary>Invoked by PlayerInput script's SendLetterInput Delegate when player types a letter. | 
-    ///Adventure and Combat: If correct add letter, if not mistake += 1. |
-    ///Puzzle: Always add letter.</summary>
-    public void TypeLetter(string letter)
+    ///<summary>Invoked by PlayerInput script's SendInput Delegate when player types a letter. | 
+    ///Adventure and Combat: If correct AddCharacter, if not mistake += 1. |
+    ///Puzzle: Always add character.</summary>
+    public void TypeCharacter(string character)
     {
         switch (currentPlayerState)
         {
             case PlayerState.Adventure:
             case PlayerState.Combat:
-                if (IsLetterCorrect(letter))
+                if (IsCharacterCorrect(character))
                 {
-                    Debug.Log($"Letter typed: {letter} | outputWord: {outputWord}");
-                    AddLetter(letter);
+                    Debug.Log($"Character typed: {character}");
+                    AddCharacter(character);
                 }
                 else
                 {
@@ -86,20 +86,21 @@ public class Typing : MonoBehaviour
 
 
     /// <summary>Verify if letter received from PlayerInput matches the one to be typed (Adventure and Combat state only).</summary>
-    private bool IsLetterCorrect(string letter)
+    private bool IsCharacterCorrect(string character)
     {
-        return letter == currentWord[nextLetterIndex].ToString().ToLower(); //Always lower case
+        return character == currentWord[nextCharacterIndex].ToString().ToLower(); //Always lower case
     }
 
 
     /// <summary>If letter is correct, add this letter to outputWord.</summary>
-    private void AddLetter(string letter)
+    private void AddCharacter(string character)
     {
-        outputWord.Append(letter);
-        nextLetterIndex++;
+        outputWord.Append(character);
+        nextCharacterIndex++;
 
         if (IsWordComplete())
         {
+            Debug.Log($"outputWord: {outputWord}");
             switch (currentPlayerState)
             {
                 case PlayerState.Adventure:
@@ -124,13 +125,13 @@ public class Typing : MonoBehaviour
     }
 
 
-    /// <summary>Delete last letter typed by player (Puzzle state only).</summary>
+    /// <summary>Delete last character typed by player (Puzzle state only).</summary>
     public void DeleteLetter()
     {
         switch (currentPlayerState)
         {            
             case PlayerState.Puzzle:
-                Debug.Log("Last letter typed was deleted");
+                Debug.Log("Last character typed was deleted");
                 break;
             default:
                 break;

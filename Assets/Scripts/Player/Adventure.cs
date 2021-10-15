@@ -6,15 +6,11 @@ using UnityEngine;
 
 public class Adventure : MonoBehaviour
 {
-    //Variables
-    [SerializeField]
-    private string[] separators;
-
     ///<summary>Already written plot text.</summary>
     private StringBuilder writtenPlotText = new StringBuilder();
 
     ///<summary>Still not written plot text.</summary>
-    private string remainingPlotText = "Once, upon a time, the hero was doing nothing.";    
+    private string remainingPlotText = "Once, upon a time, the hero was doing nothing. ";    
 
 
     //Delegates
@@ -34,12 +30,19 @@ public class Adventure : MonoBehaviour
 
     public void CompleteWordAdv(string word)
     {
-        //Every word has either a blank space or a separator + blank space
+        //Every word ends with a blank space | Example: "time, " "hero "
         //since blank spaces aren't going to be used for gameplay we ignore them when sending a word,
         //but because of that it needs to be added here.
         writtenPlotText.Append(word + " ");
 
-        NextWordAdv();
+        if (!IsPlotSegmentComplete())
+        {
+            NextWordAdv();
+        }
+        else
+        {
+            Debug.Log("Plot Segment Complete.");
+        }
     }
 
 
@@ -51,29 +54,10 @@ public class Adventure : MonoBehaviour
 
         for (int i = 0; i < remainingPlotText.Length; i++)
         {
-            for (int j = 0; j < separators.Length; j++)
+            if (IsNextWordEnd(i))
             {
-                if (IsNextWordEnd(separators[j], i))
-                {
-                    //If blank separator, just get the word
-                    if (IsNotBlankSeparator(separators[j]))
-                    {
-                        nextWordEndIndex = i + 1;
-                    }
-                    else //Else the word and the separator
-                    {
-                        nextWordEndIndex = i;
-                    }
-
-                    //To prevent unneeded loops
-                    break;
-                }
-            }
-
-            //To prevent gamebreaking loops
-            if (nextWordEndIndex != 0)
-            {
-                break;
+                nextWordEndIndex = i;
+                break; //To prevent gamebreaking loops
             }
         }
 
@@ -88,15 +72,15 @@ public class Adventure : MonoBehaviour
 
 
     /// <summary>Verifies if current remainingPlotText index is the end of a word. |
-    /// The end of a word is always a separator.</summary>
-    private bool IsNextWordEnd(string separator, int index)
+    /// The end of a word is always a blank space.</summary>
+    private bool IsNextWordEnd(int index)
     {
-        return remainingPlotText[index].ToString() == separator;
+        return remainingPlotText[index].ToString() == " ";
     }
 
 
-    private bool IsNotBlankSeparator(string separator)
+    private bool IsPlotSegmentComplete()
     {
-        return separator != " ";
+        return remainingPlotText == string.Empty;
     }
 }
