@@ -34,15 +34,28 @@ public class Typing : MonoBehaviour
     public UnityEvent Mistake;
 
     //Delegates
+    //Invoke the respective state script to output character to UI
+    delegate void OutputCharacterDelegate(string character);
+    OutputCharacterDelegate OutputCharacterAdv;
+    OutputCharacterDelegate OutputCharacterCmb;
+    OutputCharacterDelegate OutputCharacterPzl;
+
+    //When word is complete
     delegate void CompleteWordDelegate(string input);
     CompleteWordDelegate CompleteWordAdv;
     CompleteWordDelegate CompleteWordCmb;
     CompleteWordDelegate CompleteWordPzl;
 
+    
+
 
     //Player game object will never be disabled so OnEnable is enough
     private void OnEnable()
     {
+        OutputCharacterAdv += gameObject.GetComponent<Adventure>().AddCharacterUIAdv;
+        //OutputCharacterCmb += gameObject.GetComponent<Combat>().AddCharacterUICmb;
+        //OutputCharacterPzl += gameObject.GetComponent<Puzzle>().AddCharacterUIPzl;
+
         CompleteWordAdv += gameObject.GetComponent<Adventure>().CompleteWordAdv;
         //CompleteWordCmb += gameObject.GetComponent<Combat>().CompleteWordCmb;
         //CompleteWordPzl += gameObject.GetComponent<Puzzle>().CompleteWordPzl;
@@ -69,7 +82,6 @@ public class Typing : MonoBehaviour
             case PlayerState.Combat:
                 if (IsCharacterCorrect(character))
                 {
-                    Debug.Log($"Character typed: {character}");
                     AddCharacter(character);
                 }
                 else
@@ -95,33 +107,47 @@ public class Typing : MonoBehaviour
     /// <summary>If letter is correct, add this letter to outputWord.</summary>
     private void AddCharacter(string character)
     {
+        //Verify if character is supposed to be displayed as upper case and if so make it upper case.
+        if (IsCharacterUpperCase())
+        {
+            character = character.ToUpper();
+        }
+
         outputWord.Append(character);
         nextCharacterIndex++;
 
-        if (IsWordComplete())
+        Debug.Log($"Character typed: {character}");
+
+        switch (currentPlayerState)
         {
-            Debug.Log($"outputWord: {outputWord}");
-            switch (currentPlayerState)
-            {
-                case PlayerState.Adventure:
+            case PlayerState.Adventure:
+                OutputCharacterAdv.Invoke(character);
+
+                if (IsWordComplete())
+                {
+                    Debug.Log($"outputWord: {outputWord}");
                     CompleteWordAdv.Invoke(currentWord.ToString());
-                    break;
-                case PlayerState.Combat:
-                    CompleteWordCmb.Invoke(currentWord.ToString());
-                    break;
-                case PlayerState.Puzzle:
-                    CompleteWordPzl.Invoke(currentWord.ToString());
-                    break;
-                default:
-                    break;
-            }
+                }
+                break;
+            case PlayerState.Combat:
+                break;
+            case PlayerState.Puzzle:
+                break;
+            default:
+                break;
         }
+    }
+
+    
+    private bool IsCharacterUpperCase()
+    {
+        return char.IsUpper(currentWord[nextCharacterIndex]);
     }
 
 
     private bool IsWordComplete()
     {
-        return outputWord.ToString() == currentWord.ToLower(); //Always lower case
+        return outputWord.ToString() == currentWord;
     }
 
 

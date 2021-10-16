@@ -37,7 +37,7 @@ public class PlayerInput : MonoBehaviour
         }
         else if (Input.anyKeyDown)
         {
-            string key = Input.inputString;
+            string key = Input.inputString.ToLower();
 
             if (IsAllowedInput(key))
             {

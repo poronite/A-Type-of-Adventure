@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using UnityEngine;
+using UnityEngine.Events;
 
 //This script will be used to manage everything involving Adventure: when typing the plot of the game.
 //It will be able to add written words to writtenPlotText and send next word of remainingPlotText to Typing script's currentWord
@@ -10,17 +11,35 @@ public class Adventure : MonoBehaviour
     private StringBuilder writtenPlotText = new StringBuilder();
 
     ///<summary>Still not written plot text.</summary>
-    private string remainingPlotText = "Once, upon a time, the hero was doing nothing. ";    
+    private string remainingPlotText = "Once, upon a time, the hero was doing nothing. ";
 
 
     //Delegates
     delegate void WordDelegate(string input);
     WordDelegate SendNextWord;
 
+    delegate void OutputUIDelegate(string output);
+    OutputUIDelegate DisplayCharacterAdv;
+    OutputUIDelegate UpdateWrittenTextUIAdv;
+    OutputUIDelegate UpdateRemainingTextUIAdv;
+    OutputUIDelegate DisplayNewCurrentWordAdv;
 
-    //Player game object will never be disabled so OnEnable is enough
-    private void OnEnable()
+    delegate void ClearOutputUIDelegate();
+    ClearOutputUIDelegate ClearOutputWordAdv;
+
+
+
+    /// <summary>Adventure starts when Graphics scene is loaded</summary>
+    public void StartAdventure()
     {
+        AdventureUI AdvUIController = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<AdventureUI>();
+
+        DisplayCharacterAdv += AdvUIController.DisplayNewOutputWordUIAdv;
+        UpdateWrittenTextUIAdv += AdvUIController.UpdateWrittenTextUIAdv;
+        UpdateRemainingTextUIAdv += AdvUIController.UpdateRemainingTextUIAdv;
+        DisplayNewCurrentWordAdv += AdvUIController.DisplayNewCurrentWordUIAdv;
+        ClearOutputWordAdv += AdvUIController.ClearOutputWordUIAdv;
+
         SendNextWord += gameObject.GetComponent<Typing>().NewWord;
 
         //Start of a new game (Adventure)
@@ -35,12 +54,17 @@ public class Adventure : MonoBehaviour
         //but because of that it needs to be added here.
         writtenPlotText.Append(word + " ");
 
+        UpdateWrittenTextUIAdv.Invoke(writtenPlotText.ToString());
+
         if (!IsPlotSegmentComplete())
         {
             NextWordAdv();
         }
         else
         {
+            DisplayNewCurrentWordAdv.Invoke(string.Empty);
+            ClearOutputWordAdv.Invoke();
+
             Debug.Log("Plot Segment Complete.");
         }
     }
@@ -68,6 +92,10 @@ public class Adventure : MonoBehaviour
         Debug.Log($"|{newWord}| |{remainingPlotText}|");
 
         SendNextWord(newWord);
+
+        UpdateRemainingTextUIAdv.Invoke(remainingPlotText);
+        DisplayNewCurrentWordAdv.Invoke(newWord);
+        ClearOutputWordAdv.Invoke();
     }
 
 
@@ -83,4 +111,13 @@ public class Adventure : MonoBehaviour
     {
         return remainingPlotText == string.Empty;
     }
+
+
+    ///<summary>Send character to AdventureUI script to be added to the word being displayed</summary>
+    public void AddCharacterUIAdv(string character)
+    {
+        DisplayCharacterAdv.Invoke(character);
+    }
+
+    
 }
