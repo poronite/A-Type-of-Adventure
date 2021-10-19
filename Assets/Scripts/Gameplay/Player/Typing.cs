@@ -126,7 +126,7 @@ public class Typing : MonoBehaviour
         outputWord.Append(character);
         nextCharacterIndex++;
 
-        Debug.Log($"Character typed: {character}");
+        //Debug.Log($"Character typed: {character}");
 
         switch (currentPlayerState)
         {
@@ -135,7 +135,7 @@ public class Typing : MonoBehaviour
 
                 if (IsWordComplete())
                 {
-                    Debug.Log($"outputWord: {outputWord}");
+                    //Debug.Log($"outputWord: {outputWord}");
                     CompleteWordAdv.Invoke(currentWord.ToString());
                 }
                 break;

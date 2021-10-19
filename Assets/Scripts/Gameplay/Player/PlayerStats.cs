@@ -19,14 +19,15 @@ public class PlayerStats : MonoBehaviour
     UpdateInfoUIDelegate UpdateMistakesUI;
 
 
-    private void Awake()
+    private void Start()
     {
         RecoverFullHP();
     }
 
-    public void SetDelegates()
+
+    public void SetGeneralUIDelegates()
     {
-        GeneralUI UIUpdater = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<GeneralUI>();
+        GeneralUI UIUpdater = GameObject.FindGameObjectWithTag("GeneralUI").GetComponent<GeneralUI>();
 
         UpdateTimeElapsedUI += UIUpdater.SetTimeElapsedUI;
         UpdateMistakesUI += UIUpdater.SetMistakesUI;

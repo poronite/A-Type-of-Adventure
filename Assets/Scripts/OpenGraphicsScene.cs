@@ -18,10 +18,10 @@ public class OpenGraphicsScene : MonoBehaviour
             yield return loadedLevel;
         }
 
+        //Delegates for UI
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        player.GetComponent<Adventure>().StartAdventure();
-        player.GetComponent<PlayerStats>().SetDelegates();
-        
+        player.GetComponent<PlayerStats>().SetGeneralUIDelegates();
+        player.GetComponent<Adventure>().StartAdventure();        
     }
 }

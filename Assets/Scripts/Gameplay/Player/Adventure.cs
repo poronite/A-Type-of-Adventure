@@ -91,7 +91,7 @@ public class Adventure : MonoBehaviour
 
         remainingPlotText = remainingPlotText.Remove(0, nextWordEndIndex).TrimStart();
 
-        Debug.Log($"|{newWord}| |{remainingPlotText}|");
+        //Debug.Log($"|{newWord}| |{remainingPlotText}|");
 
         SendNextWord(newWord);
 
