@@ -18,6 +18,10 @@ public class OpenGraphicsScene : MonoBehaviour
             yield return loadedLevel;
         }
 
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        player.GetComponent<Adventure>().StartAdventure();
+        player.GetComponent<PlayerStats>().SetDelegates();
+        
     }
 }

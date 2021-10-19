@@ -66,6 +66,8 @@ public class Adventure : MonoBehaviour
             ClearOutputWordAdv.Invoke();
 
             Debug.Log("Plot Segment Complete.");
+
+            SendNextWord(string.Empty);
         }
     }
 

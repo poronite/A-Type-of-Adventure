@@ -12,12 +12,24 @@ public class PlayerStats : MonoBehaviour
     private int numMistakes;
 
     ///<summary>Time elapsed since start of the game. (Adventure, Combat and Puzzle states only).</summary>
-    private float timeElapsed;
+    private float timeElapsedSeconds;
+
+    delegate void UpdateInfoUIDelegate(int info);
+    UpdateInfoUIDelegate UpdateTimeElapsedUI;
+    UpdateInfoUIDelegate UpdateMistakesUI;
 
 
-    private void Start()
+    private void Awake()
     {
         RecoverFullHP();
+    }
+
+    public void SetDelegates()
+    {
+        GeneralUI UIUpdater = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<GeneralUI>();
+
+        UpdateTimeElapsedUI += UIUpdater.SetTimeElapsedUI;
+        UpdateMistakesUI += UIUpdater.SetMistakesUI;
     }
 
 
@@ -25,15 +37,17 @@ public class PlayerStats : MonoBehaviour
     public void AddMistake()
     {
         numMistakes++;
-        Debug.Log($"Number of Mistakes: {numMistakes}");
+
+        UpdateMistakesUI(numMistakes);
     }
 
 
     //Invoked by UnityEvent in Typing script every Update
     public void AddTimeElapsed()
     {
-        timeElapsed += Time.deltaTime;
-        //Debug.Log($"Time elapsed: {(int)timeElapsed}s");
+        timeElapsedSeconds += Time.deltaTime;
+
+        UpdateTimeElapsedUI((int)timeElapsedSeconds);
     }
 
 

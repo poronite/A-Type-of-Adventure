@@ -76,24 +76,34 @@ public class Typing : MonoBehaviour
     ///Puzzle: Always add character.</summary>
     public void TypeCharacter(string character)
     {
-        switch (currentPlayerState)
+        if (CurrentWordExist())
         {
-            case PlayerState.Adventure:
-            case PlayerState.Combat:
-                if (IsCharacterCorrect(character))
-                {
-                    AddCharacter(character);
-                }
-                else
-                {
-                    Mistake.Invoke();
-                }
-                break;
-            case PlayerState.Puzzle:
-                break;
-            default:
-                break;
+            switch (currentPlayerState)
+            {
+                case PlayerState.Adventure:
+                case PlayerState.Combat:
+                    if (IsCharacterCorrect(character))
+                    {
+                        AddCharacter(character);
+                    }
+                    else
+                    {
+                        Mistake.Invoke();
+                    }
+                    break;
+                case PlayerState.Puzzle:
+                    break;
+                default:
+                    break;
+            }
         }
+    }
+
+    
+    //Just to prevent unnecessary errors to the console
+    private bool CurrentWordExist()
+    {
+        return currentWord != "";
     }
 
 
