@@ -13,6 +13,8 @@ public class Adventure : MonoBehaviour
     ///<summary>Still not written plot text.</summary>
     private string remainingPlotText = "Once, upon a time, the hero was doing nothing. ";
 
+    /// <summary>Next word to be written.</summary>
+    private string nextWord;
 
     //Delegates
     delegate void WordDelegate(string word);
@@ -50,12 +52,12 @@ public class Adventure : MonoBehaviour
     }
 
 
-    public void CompleteWordAdv(string word)
+    public void CompleteWordAdv()
     {
         //Every word ends with a blank space | Example: "time, " "hero "
         //since blank spaces aren't going to be used for gameplay we ignore them when sending a word,
         //but because of that it needs to be added here.
-        writtenPlotText.Append(word + " ");
+        writtenPlotText.Append(nextWord + " ");
 
         UpdateWrittenTextUIAdv.Invoke(writtenPlotText.ToString());
 
@@ -79,7 +81,7 @@ public class Adventure : MonoBehaviour
     {
         int nextWordEndIndex = 0;
 
-        string newWord;
+        nextWord = string.Empty;
 
         for (int i = 0; i < remainingPlotText.Length; i++)
         {
@@ -90,16 +92,16 @@ public class Adventure : MonoBehaviour
             }
         }
 
-        newWord = remainingPlotText.Substring(0, nextWordEndIndex);
+        nextWord = remainingPlotText.Substring(0, nextWordEndIndex);
 
         remainingPlotText = remainingPlotText.Remove(0, nextWordEndIndex).TrimStart();
 
         //Debug.Log($"|{newWord}| |{remainingPlotText}|");
 
-        SendNextWordAdv(newWord);
+        SendNextWordAdv(nextWord);
 
         UpdateRemainingTextUIAdv.Invoke(remainingPlotText);
-        DisplayNewCurrentWordAdv.Invoke(newWord);
+        DisplayNewCurrentWordAdv.Invoke(nextWord);
         ClearOutputWordAdv.Invoke();
     }
 

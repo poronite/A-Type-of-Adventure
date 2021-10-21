@@ -6,7 +6,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     private int playerMaxHP, playerAttack;
 
-    private int playerCurrentHP;
+    public int PlayerCurrentHP;
 
     ///<summary>Number of mistakes player does while typing (Adventure and Combat states only).</summary>
     private int numMistakes;
@@ -17,6 +17,12 @@ public class PlayerStats : MonoBehaviour
     delegate void UpdateInfoUIDelegate(int info);
     UpdateInfoUIDelegate UpdateTimeElapsedUI;
     UpdateInfoUIDelegate UpdateMistakesUI;
+
+
+    public int PlayerAttack
+    {
+        get => playerAttack;
+    }
 
 
     private void Start()
@@ -54,6 +60,6 @@ public class PlayerStats : MonoBehaviour
 
     public void RecoverFullHP()
     {
-        playerCurrentHP = playerMaxHP;
+        PlayerCurrentHP = playerMaxHP;
     }
 }

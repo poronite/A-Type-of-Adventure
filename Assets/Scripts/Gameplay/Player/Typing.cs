@@ -45,10 +45,10 @@ public class Typing : MonoBehaviour
     DecideAction SendCharacterCmb;
 
     //When word is complete
-    delegate void CompleteWordDelegate(string input);
+    delegate void CompleteWordDelegate();
     CompleteWordDelegate CompleteWordAdv;
     CompleteWordDelegate CompleteWordCmb;
-    CompleteWordDelegate CompleteWordPzl;
+    //CompleteWordDelegate CompleteWordPzl;
 
     
 
@@ -60,7 +60,7 @@ public class Typing : MonoBehaviour
         //OutputCharacterCmb += gameObject.GetComponent<Combat>().AddCharacterUICmb;
         //OutputCharacterPzl += gameObject.GetComponent<Puzzle>().AddCharacterUIPzl;
 
-        SendCharacterCmb += gameObject.GetComponent<Combat>().SetWordCmb;
+        SendCharacterCmb += gameObject.GetComponent<Combat>().SetChosenWordCmb;
 
         CompleteWordAdv += gameObject.GetComponent<Adventure>().CompleteWordAdv;
         CompleteWordCmb += gameObject.GetComponent<Combat>().CompleteWordCmb;
@@ -121,7 +121,7 @@ public class Typing : MonoBehaviour
     //Also used for combat when the player has to decide between 2 words: attack and dodge word.
     private bool CurrentWordExist()
     {
-        return currentWord != "";
+        return currentWord != string.Empty;
     }
 
 
@@ -154,7 +154,7 @@ public class Typing : MonoBehaviour
                 if (IsWordComplete())
                 {
                     //Debug.Log($"outputWord: {outputWord}");
-                    CompleteWordAdv.Invoke(currentWord.ToString());
+                    CompleteWordAdv.Invoke();
                 }
                 break;
             case PlayerState.Combat:
@@ -162,7 +162,7 @@ public class Typing : MonoBehaviour
 
                 if (IsWordComplete())
                 {
-                    //CompleteWordCmb.Invoke(currentWord.ToString());
+                    CompleteWordCmb.Invoke();
                 }
 
                 break;

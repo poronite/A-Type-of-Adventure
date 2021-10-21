@@ -10,6 +10,7 @@ TagManager:
   - AdventureGfxUI
   - GeneralUI
   - Enemy
+  - CombatGfxUI
   layers:
   - Default
   - TransparentFX
