@@ -40,6 +40,10 @@ public class Typing : MonoBehaviour
     OutputCharacterDelegate OutputCharacterCmb;
     OutputCharacterDelegate OutputCharacterPzl;
 
+    //when player has to decide between attack and dodge
+    delegate void DecideAction(string character);
+    DecideAction SendCharacterCmb;
+
     //When word is complete
     delegate void CompleteWordDelegate(string input);
     CompleteWordDelegate CompleteWordAdv;
@@ -56,8 +60,10 @@ public class Typing : MonoBehaviour
         //OutputCharacterCmb += gameObject.GetComponent<Combat>().AddCharacterUICmb;
         //OutputCharacterPzl += gameObject.GetComponent<Puzzle>().AddCharacterUIPzl;
 
+        SendCharacterCmb += gameObject.GetComponent<Combat>().SetWordCmb;
+
         CompleteWordAdv += gameObject.GetComponent<Adventure>().CompleteWordAdv;
-        //CompleteWordCmb += gameObject.GetComponent<Combat>().CompleteWordCmb;
+        CompleteWordCmb += gameObject.GetComponent<Combat>().CompleteWordCmb;
         //CompleteWordPzl += gameObject.GetComponent<Puzzle>().CompleteWordPzl;
     }
 
@@ -97,10 +103,22 @@ public class Typing : MonoBehaviour
                     break;
             }
         }
+        else
+        {
+            switch (currentPlayerState)
+            {
+                case PlayerState.Combat:
+                    SendCharacterCmb.Invoke(character);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     
-    //Just to prevent unnecessary errors to the console
+    //Just to prevent unnecessary errors to the console.
+    //Also used for combat when the player has to decide between 2 words: attack and dodge word.
     private bool CurrentWordExist()
     {
         return currentWord != "";
@@ -140,6 +158,13 @@ public class Typing : MonoBehaviour
                 }
                 break;
             case PlayerState.Combat:
+                //outputcharacterCmb
+
+                if (IsWordComplete())
+                {
+                    //CompleteWordCmb.Invoke(currentWord.ToString());
+                }
+
                 break;
             case PlayerState.Puzzle:
                 break;

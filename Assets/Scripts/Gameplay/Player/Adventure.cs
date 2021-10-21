@@ -15,8 +15,8 @@ public class Adventure : MonoBehaviour
 
 
     //Delegates
-    delegate void WordDelegate(string input);
-    WordDelegate SendNextWord;
+    delegate void WordDelegate(string word);
+    WordDelegate SendNextWordAdv;
 
     delegate void OutputUIDelegate(string output);
     OutputUIDelegate DisplayCharacterAdv;
@@ -29,8 +29,8 @@ public class Adventure : MonoBehaviour
 
 
 
-    /// <summary>Adventure starts when Graphics scene is loaded</summary>
-    public void StartAdventure()
+    ///<summary>Adventure starts when Graphics scene is loaded</summary>
+    public void SetDelegatesAdv()
     {
         AdventureUI AdvUIController = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<AdventureUI>();
 
@@ -40,8 +40,11 @@ public class Adventure : MonoBehaviour
         DisplayNewCurrentWordAdv += AdvUIController.DisplayNewCurrentWordUIAdv;
         ClearOutputWordAdv += AdvUIController.ClearOutputWordUIAdv;
 
-        SendNextWord += gameObject.GetComponent<Typing>().NewWord;
+        SendNextWordAdv += gameObject.GetComponent<Typing>().NewWord;
+    }
 
+    public void StartAdventure()
+    {
         //Start of a new game (Adventure)
         NextWordAdv();
     }
@@ -67,7 +70,7 @@ public class Adventure : MonoBehaviour
 
             Debug.Log("Plot Segment Complete.");
 
-            SendNextWord(string.Empty);
+            SendNextWordAdv(string.Empty);
         }
     }
 
@@ -93,7 +96,7 @@ public class Adventure : MonoBehaviour
 
         //Debug.Log($"|{newWord}| |{remainingPlotText}|");
 
-        SendNextWord(newWord);
+        SendNextWordAdv(newWord);
 
         UpdateRemainingTextUIAdv.Invoke(remainingPlotText);
         DisplayNewCurrentWordAdv.Invoke(newWord);
