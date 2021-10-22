@@ -35,9 +35,11 @@ public class Combat : MonoBehaviour
         stats = gameObject.GetComponent<PlayerStats>();
     }
 
+
     public void SetDelegatesCmb()
     {
         SendNextWordCmb += gameObject.GetComponent<Typing>().NewWord;
+        AttackEnemy += GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().TakeDamage;
     }
 
 
@@ -94,6 +96,7 @@ public class Combat : MonoBehaviour
         Debug.Log("Attacked");
         //AttackEnemy.Invoke(stats.PlayerAttack);
     }
+
 
     private void Dodge()
     {
