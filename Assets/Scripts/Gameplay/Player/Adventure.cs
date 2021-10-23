@@ -11,7 +11,7 @@ public class Adventure : MonoBehaviour
     private StringBuilder writtenPlotText = new StringBuilder();
 
     ///<summary>Still not written plot text.</summary>
-    private string remainingPlotText = "Once, upon a time, the hero was doing nothing. ";
+    private string remainingPlotText = "a ";
 
     /// <summary>Next word to be written.</summary>
     private string nextWord;
@@ -48,6 +48,7 @@ public class Adventure : MonoBehaviour
     public void StartAdventure()
     {
         //Start of a new game (Adventure)
+        gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Adventure;
         NextWordAdv();
     }
 
@@ -73,6 +74,8 @@ public class Adventure : MonoBehaviour
             Debug.Log("Plot Segment Complete.");
 
             SendNextWordAdv(string.Empty);
+
+            gameObject.GetComponent<Combat>().StartCombat();
         }
     }
 

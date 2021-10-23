@@ -8,6 +8,12 @@ using UnityEngine;
 public class EnemyTemplate : ScriptableObject
 {
     [SerializeField]
+    private new string name;
+
+    [SerializeField]
+    private Sprite sprite;
+
+    [SerializeField]
     private int maxHP;
 
     [SerializeField]
@@ -15,6 +21,17 @@ public class EnemyTemplate : ScriptableObject
 
     [SerializeField]
     private bool isBoss;
+
+
+    public string Name
+    {
+        get => name;
+    }
+
+    public Sprite Sprite
+    {
+        get => sprite;
+    }
 
     public int MaxHP
     {

@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public Typing TypingController;
+
     private EnemyStats stats;
 
     private float timeSinceLastAttack;
@@ -45,8 +47,17 @@ public class Enemy : MonoBehaviour
     ///<summary>Function that readies the enemy attack over a fixed duration.</summary>
     private void ReadyAttack()
     {
-        timeSinceLastAttack += Time.deltaTime;
-        IsAttackReady();
+        if (IsOnCombat())
+        {
+            timeSinceLastAttack += Time.deltaTime;
+            IsAttackReady();
+        }
+    }
+
+
+    private bool IsOnCombat()
+    {
+        return TypingController.CurrentPlayerState == PlayerState.Combat;
     }
 
 

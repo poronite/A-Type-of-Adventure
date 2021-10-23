@@ -16,8 +16,7 @@ public enum PlayerState
 public class Typing : MonoBehaviour
 {
     //Variables
-    [SerializeField]
-    private PlayerState currentPlayerState = PlayerState.Adventure;
+    public PlayerState CurrentPlayerState = PlayerState.Adventure;
 
     ///<summary>Word that the player has to currently type.</summary>
     private string currentWord;
@@ -82,9 +81,11 @@ public class Typing : MonoBehaviour
     ///Puzzle: Always add character.</summary>
     public void TypeCharacter(string character)
     {
+        Debug.Log("Attempt to type character: " + character);
+
         if (CurrentWordExist())
         {
-            switch (currentPlayerState)
+            switch (CurrentPlayerState)
             {
                 case PlayerState.Adventure:
                 case PlayerState.Combat:
@@ -105,7 +106,7 @@ public class Typing : MonoBehaviour
         }
         else
         {
-            switch (currentPlayerState)
+            switch (CurrentPlayerState)
             {
                 case PlayerState.Combat:
                     SendCharacterCmb.Invoke(character);
@@ -132,7 +133,7 @@ public class Typing : MonoBehaviour
     }
 
 
-    /// <summary>If letter is correct, add this letter to outputWord.</summary>
+    ///<summary>If letter is correct, add this letter to outputWord.</summary>
     private void AddCharacter(string character)
     {
         //Verify if character is supposed to be displayed as upper case and if so make it upper case.
@@ -144,9 +145,9 @@ public class Typing : MonoBehaviour
         outputWord.Append(character);
         nextCharacterIndex++;
 
-        //Debug.Log($"Character typed: {character}");
+        Debug.Log($"Character typed: {character} | {outputWord}");
 
-        switch (currentPlayerState)
+        switch (CurrentPlayerState)
         {
             case PlayerState.Adventure:
                 OutputCharacterAdv.Invoke(character);
@@ -162,6 +163,8 @@ public class Typing : MonoBehaviour
 
                 if (IsWordComplete())
                 {
+                    Debug.Log("Word Completed");
+                    
                     CompleteWordCmb.Invoke();
                 }
 
@@ -189,7 +192,7 @@ public class Typing : MonoBehaviour
     /// <summary>Delete last character typed by player (Puzzle state only).</summary>
     public void DeleteLetter()
     {
-        switch (currentPlayerState)
+        switch (CurrentPlayerState)
         {            
             case PlayerState.Puzzle:
                 Debug.Log("Last character typed was deleted");
@@ -202,7 +205,7 @@ public class Typing : MonoBehaviour
 
     private void CountTime()
     {
-        switch (currentPlayerState)
+        switch (CurrentPlayerState)
         {
             case PlayerState.Adventure:
             case PlayerState.Combat:

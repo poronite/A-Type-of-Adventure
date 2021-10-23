@@ -4,31 +4,54 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
-    public int CurrentHP;
+    private int enemyCurrentHP;
 
     public int Attack;
 
     //duration that the enemy takes to attack
     public float AttackSpeed;
 
-    public bool IsBoss;
+    private bool isBoss;
+
+    private bool isEnemyDead;
 
 
     public void SetupEnemy(EnemyTemplate enemyData)
     {
-        CurrentHP = enemyData.MaxHP;
+        enemyCurrentHP = enemyData.MaxHP;
         Attack = enemyData.Attack;
-        IsBoss = enemyData.IsBoss;
+        isBoss = enemyData.IsBoss;
 
-        if (IsBoss)
+        if (isBoss)
             AttackSpeed = 1.5f;
         else
-            AttackSpeed = 2.0f;
+            AttackSpeed = 3.5f;
+
+        isEnemyDead = false;
     }
 
 
     public void TakeDamage(int damage)
     {
-        CurrentHP -= damage;
+        if (!isEnemyDead)
+        {
+            enemyCurrentHP -= damage;
+            if (enemyCurrentHP <= 0)
+            {
+                EnemyDies();
+            }
+            else
+            {
+                Debug.Log($"Enemy took {damage} damage | {enemyCurrentHP} HP left.");
+            }
+        }
+    }
+
+
+    private void EnemyDies()
+    {
+        enemyCurrentHP = 0;
+        isEnemyDead = true;
+        Debug.Log("Enemy Died");
     }
 }

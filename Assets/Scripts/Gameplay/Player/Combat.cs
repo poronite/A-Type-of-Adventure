@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 //This script will be used to manage everything involving Combat: when fighting against an enemy.
 //
@@ -16,6 +17,8 @@ public class Combat : MonoBehaviour
 {
     private PlayerStats stats;
 
+    public EnemyTemplate enemy;
+
     private Actions actionChosen;
 
     private string attackWordText = "Attack";
@@ -29,6 +32,9 @@ public class Combat : MonoBehaviour
     delegate void AttackDelegate(int damage);
     AttackDelegate AttackEnemy;
 
+    [SerializeField]
+    private UnityEvent ActivateDodge; 
+
 
     private void Start()
     {
@@ -40,6 +46,14 @@ public class Combat : MonoBehaviour
     {
         SendNextWordCmb += gameObject.GetComponent<Typing>().NewWord;
         AttackEnemy += GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().TakeDamage;
+    }
+
+
+    public void StartCombat()
+    {
+        gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Combat;
+        GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().SetupEnemy(enemy);
+        Debug.Log("Started combat.");
     }
 
 
@@ -60,17 +74,20 @@ public class Combat : MonoBehaviour
     {
         if (character == attackWordText[0].ToString().ToLower())
         {
+            Debug.Log("Chose to attack.");
             actionChosen = Actions.Attack;
             return attackWordText;
         }    
         else if (character == dodgeWordText[0].ToString().ToLower())
         {
+            Debug.Log("Chose to dodge.");
             actionChosen = Actions.Dodge;
             return dodgeWordText;
         }
 
         //in case player doesn't type a letter equal to the
         //first letter of one of the words displayed
+        Debug.Log("Didn't choose anything.");
         return string.Empty;
     }
 
@@ -87,19 +104,24 @@ public class Combat : MonoBehaviour
                 break;
             default:
                 break;
-        }        
+        }
+
+        //clear everything so the player can choose the next action
+        SendNextWordCmb.Invoke(string.Empty);
+        Debug.Log("Choose the next action.");
     }
 
 
     private void Attack()
     {
         Debug.Log("Attacked");
-        //AttackEnemy.Invoke(stats.PlayerAttack);
+        AttackEnemy.Invoke(stats.PlayerAttack);
     }
 
 
     private void Dodge()
     {
         Debug.Log("Dodged");
+        ActivateDodge.Invoke();
     }
 }
