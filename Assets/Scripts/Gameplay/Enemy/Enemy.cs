@@ -32,7 +32,10 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
-        DealDamage.Invoke(stats.Attack);
+        if (!stats.IsEnemyDead)
+        {
+            DealDamage.Invoke(stats.Attack);
+        }
     }
     // ↑
     private void IsAttackReady()

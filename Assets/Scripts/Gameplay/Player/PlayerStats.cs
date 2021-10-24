@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -18,14 +19,23 @@ public class PlayerStats : MonoBehaviour
     ///<summary>Time elapsed since start of the game. (Adventure, Combat and Puzzle states only).</summary>
     private float timeElapsedSeconds;
 
+
     delegate void UpdateInfoUIDelegate(int info);
     UpdateInfoUIDelegate UpdateTimeElapsedUI;
     UpdateInfoUIDelegate UpdateMistakesUI;
+
+    [SerializeField]
+    private UnityEvent GameOver;
 
 
     public int PlayerAttack
     {
         get => playerAttack;
+    }
+
+    public bool IsPlayerDead
+    {
+        get => isPlayerDead;
     }
 
 
@@ -92,6 +102,7 @@ public class PlayerStats : MonoBehaviour
     {
         playerCurrentHP = 0;
         isPlayerDead = true;
+        GameOver.Invoke();
         Debug.Log("Player died.");
     }
 

@@ -10,7 +10,8 @@ public enum PlayerState
 {
     Adventure,
     Combat,
-    Puzzle
+    Puzzle,
+    Dead
 }
 
 public class Typing : MonoBehaviour
@@ -26,6 +27,9 @@ public class Typing : MonoBehaviour
 
     ///<summary>Index of the next character that needs to be typed by player.</summary>
     private int nextCharacterIndex = 0;
+
+    /// <summary>First letter of the action (attack or dodge) that the player chose.</summary>
+    private string firstLetterAction;
 
 
     //Unity events
@@ -70,7 +74,21 @@ public class Typing : MonoBehaviour
     ///<summary>Invoked by Adventure, Combat and Puzzle scripts' SendNextWord delegate.</summary>
     public void NewWord(string word)
     {
+        ClearWords();
         currentWord = word;
+
+        //This is so that the player doesn't have to type
+        //the first letter of the action twice when typing the action chosen.
+        if (CurrentPlayerState == PlayerState.Combat)
+        {
+            AddCharacter(firstLetterAction);
+        }
+    }
+
+
+    public void ClearWords()
+    {
+        currentWord = string.Empty;
         nextCharacterIndex = 0;
         outputWord.Clear();
     }
@@ -109,6 +127,7 @@ public class Typing : MonoBehaviour
             switch (CurrentPlayerState)
             {
                 case PlayerState.Combat:
+                    firstLetterAction = character;
                     SendCharacterCmb.Invoke(character);
                     break;
                 default:
@@ -215,6 +234,12 @@ public class Typing : MonoBehaviour
             default:
                 break;
         }
+    }
+
+
+    public void GameOver()
+    {
+        CurrentPlayerState = PlayerState.Dead;
     }
 
 

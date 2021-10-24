@@ -13,7 +13,7 @@ public class EnemyStats : MonoBehaviour
 
     private bool isBoss;
 
-    private bool isEnemyDead;
+    public bool IsEnemyDead;
 
 
     public void SetupEnemy(EnemyTemplate enemyData)
@@ -27,13 +27,13 @@ public class EnemyStats : MonoBehaviour
         else
             AttackSpeed = 3.5f;
 
-        isEnemyDead = false;
+        IsEnemyDead = false;
     }
 
 
     public void TakeDamage(int damage)
     {
-        if (!isEnemyDead)
+        if (!IsEnemyDead)
         {
             enemyCurrentHP -= damage;
             if (enemyCurrentHP <= 0)
@@ -51,7 +51,7 @@ public class EnemyStats : MonoBehaviour
     private void EnemyDies()
     {
         enemyCurrentHP = 0;
-        isEnemyDead = true;
+        IsEnemyDead = true;
         Debug.Log("Enemy Died");
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 //This script will be used to manage everything involving Combat: when fighting against an enemy.
-//
 
 public enum Actions
 {
@@ -21,8 +20,13 @@ public class Combat : MonoBehaviour
 
     private Actions actionChosen;
 
-    private string attackWordText = "Attack";
-    private string dodgeWordText = "Dodge";
+    private List<string> attackWordsList = new List<string> { "Punch", "Kick", "Tackle", "Slash"};
+    private string attackWordText = string.Empty;
+    private string previousAttackWord = string.Empty; //so that the same word doesn't appear twice in a row
+
+    private List<string> dodgeWordsList = new List<string> { "Roll", "Dash", "Crouch", "Jump"};
+    private string dodgeWordText = string.Empty;
+    private string previousDodgeWord = string.Empty; //so that the same word doesn't appear twice in a row
 
 
     //Delegates
@@ -33,7 +37,10 @@ public class Combat : MonoBehaviour
     AttackDelegate AttackEnemy;
 
     [SerializeField]
-    private UnityEvent ActivateDodge; 
+    private UnityEvent ActivateDodge;
+
+    [SerializeField]
+    private UnityEvent ClearWord;
 
 
     private void Start()
@@ -53,7 +60,49 @@ public class Combat : MonoBehaviour
     {
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Combat;
         GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().SetupEnemy(enemy);
+        SetWords();
         Debug.Log("Started combat.");
+    }
+
+
+    /// <summary>Set the next attack and dodge word for the player to choose.
+    /// The same word can't appear twice.</summary>
+    private void SetWords()
+    {
+        //clear everything so the player can choose the next action
+        ClearWord.Invoke();
+
+        int index;
+
+        //attack
+        //choose the new attack word
+        index = Random.Range(0, attackWordsList.Count - 1);
+        attackWordText = attackWordsList[index];
+
+        //add previous word back to the list
+        if (previousAttackWord != string.Empty)
+            attackWordsList.Add(previousAttackWord);
+
+        //remove the new attack word from the list 
+        previousAttackWord = attackWordText;
+        attackWordsList.Remove(previousAttackWord);
+
+
+        //dodge
+        //choose the new dodge word
+        index = Random.Range(0, dodgeWordsList.Count - 1);
+        dodgeWordText = dodgeWordsList[index];
+
+        //add previous word back to the list
+        if (previousDodgeWord != string.Empty)
+            dodgeWordsList.Add(previousDodgeWord);
+
+        //remove the new dodge word from the list 
+        previousDodgeWord = dodgeWordText;
+        dodgeWordsList.Remove(previousDodgeWord);
+
+
+        Debug.Log($"Choose the next word: {attackWordText} or {dodgeWordText}");
     }
 
 
@@ -87,7 +136,7 @@ public class Combat : MonoBehaviour
 
         //in case player doesn't type a letter equal to the
         //first letter of one of the words displayed
-        Debug.Log("Didn't choose anything.");
+        Debug.Log("Didn't choose anything. Try Again.");
         return string.Empty;
     }
 
@@ -106,9 +155,8 @@ public class Combat : MonoBehaviour
                 break;
         }
 
-        //clear everything so the player can choose the next action
-        SendNextWordCmb.Invoke(string.Empty);
-        Debug.Log("Choose the next action.");
+
+        SetWords();
     }
 
 

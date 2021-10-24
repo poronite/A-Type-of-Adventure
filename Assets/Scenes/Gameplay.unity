@@ -178,10 +178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d240e438963614eab6b81cd8fd9df7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHP: 0
   Attack: 0
   AttackSpeed: 0
-  IsBoss: 0
+  IsEnemyDead: 0
 --- !u!1 &881209544
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +340,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMaxHP: 30
   playerAttack: 5
+  GameOver:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1764022992}
+        m_MethodName: GameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1764022995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,6 +384,20 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1764022994}
         m_MethodName: ActivateDodge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ClearWord:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1764022992}
+        m_MethodName: ClearWords
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
