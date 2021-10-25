@@ -25,7 +25,7 @@ public class AdventureUI : MonoBehaviour
         outputTextUIAdv.text += character;
     }
 
-    /// <summary>Clear outputWordUIAdv after player has finished writing the word.</summary>
+    /// <summary>Clear outputWordUIAdv after player has finished typing the word.</summary>
     public void ClearOutputWordUIAdv()
     {
         outputTextUIAdv.text = string.Empty;

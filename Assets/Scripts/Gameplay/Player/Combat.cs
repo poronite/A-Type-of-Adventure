@@ -113,6 +113,9 @@ public class Combat : MonoBehaviour
 
         string decidedWord = DecideAction(character);
 
+        //set color of current and output word
+        //set new current word
+
         SendNextWordCmb.Invoke(decidedWord);
     }
 
