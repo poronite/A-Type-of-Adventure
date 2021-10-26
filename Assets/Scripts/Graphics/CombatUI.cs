@@ -36,7 +36,7 @@ public class CombatUI : MonoBehaviour
 
 
     ///<summary>Clear current and output words after player has finished typing the word chosen.</summary>
-    public void ClearCurrentOutputWordCmb()
+    public void ClearCurrentOutputWordUICmb()
     {
         currentTextUICmb.text = string.Empty;
         outputTextUICmb.text = string.Empty;
@@ -44,7 +44,7 @@ public class CombatUI : MonoBehaviour
 
 
     ///<summary>Display on screen the words that the player can choose from.</summary>
-    public void DisplayNewAttackDodgeWords(string attackWord, string dodgeWord)
+    public void DisplayNewAttackDodgeWordsUICmb(string attackWord, string dodgeWord)
     {
         attackWordTextUICmb.text = attackWord;
         dodgeWordTextUICmb.text = dodgeWord;
@@ -52,7 +52,7 @@ public class CombatUI : MonoBehaviour
 
 
     ///<summary>Clear attack and dodge words after player made a decision.</summary>
-    public void ClearAttackDodgeWords()
+    public void ClearAttackDodgeWordsUICmb()
     {
         attackWordTextUICmb.text = string.Empty;
         dodgeWordTextUICmb.text = string.Empty;
@@ -60,7 +60,7 @@ public class CombatUI : MonoBehaviour
 
 
     ///<summary>Change current and output words color based on action chosen by player.</summary>
-    public void DefineWordColor(Actions action)
+    public void DefineWordColorUICmb(Actions action)
     {
         switch (action)
         {
@@ -79,7 +79,7 @@ public class CombatUI : MonoBehaviour
 
 
     ///<summary> Display new current word based on action chosen by player.</summary>
-    public void DisplayNewCurrentWord(Actions action)
+    public void DisplayNewCurrentWordUICmb(Actions action)
     {
         switch (action)
         {

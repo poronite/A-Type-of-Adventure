@@ -11,6 +11,7 @@ TagManager:
   - GeneralUI
   - Enemy
   - CombatGfxUI
+  - LoadingScreen
   layers:
   - Default
   - TransparentFX

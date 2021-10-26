@@ -36,6 +36,23 @@ public class Combat : MonoBehaviour
     delegate void AttackDelegate(int damage);
     AttackDelegate AttackEnemy;
 
+    //UI Delegates
+    delegate void ClearDelegate();
+    ClearDelegate ClearCurrentOutputWordCmb;
+    ClearDelegate ClearAttackDodgeWordsCmb;
+
+    delegate void DisplayOutputWordDelegate(string character);
+    DisplayOutputWordDelegate DisplayNewOutputWordCmb;
+
+    delegate void DisplayActionWordsDelegate(string attackWord, string dodgeWord);
+    DisplayActionWordsDelegate DisplayNewAttackDodgeWordsCmb;
+
+    delegate void ActionBasedDelegate(Actions action);
+    ActionBasedDelegate DefineWordColorCmb;
+    ActionBasedDelegate DisplayNewCurrentWordCmb;
+
+
+    //Unity Events
     [SerializeField]
     private UnityEvent ActivateDodge;
 
@@ -53,6 +70,15 @@ public class Combat : MonoBehaviour
     {
         SendNextWordCmb += gameObject.GetComponent<Typing>().NewWord;
         AttackEnemy += GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().TakeDamage;
+
+        CombatUI CmbUIController = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>();
+
+        ClearCurrentOutputWordCmb += CmbUIController.ClearCurrentOutputWordUICmb;
+        ClearAttackDodgeWordsCmb += CmbUIController.ClearAttackDodgeWordsUICmb;
+        DisplayNewOutputWordCmb += CmbUIController.DisplayNewOutputWordUICmb;
+        DisplayNewAttackDodgeWordsCmb += CmbUIController.DisplayNewAttackDodgeWordsUICmb;
+        DefineWordColorCmb += CmbUIController.DefineWordColorUICmb;
+        DisplayNewCurrentWordCmb += CmbUIController.DisplayNewCurrentWordUICmb;
     }
 
 
@@ -71,6 +97,8 @@ public class Combat : MonoBehaviour
     {
         //clear everything so the player can choose the next action
         ClearWord.Invoke();
+        ClearCurrentOutputWordCmb.Invoke();
+
 
         int index;
 
@@ -102,6 +130,7 @@ public class Combat : MonoBehaviour
         dodgeWordsList.Remove(previousDodgeWord);
 
 
+        DisplayNewAttackDodgeWordsCmb.Invoke(attackWordText, dodgeWordText);
         Debug.Log($"Choose the next word: {attackWordText} or {dodgeWordText}");
     }
 
@@ -113,8 +142,10 @@ public class Combat : MonoBehaviour
 
         string decidedWord = DecideAction(character);
 
-        //set color of current and output word
-        //set new current word
+        ClearAttackDodgeWordsCmb.Invoke();
+
+        DefineWordColorCmb.Invoke(actionChosen);
+        DisplayNewCurrentWordCmb.Invoke(actionChosen);
 
         SendNextWordCmb.Invoke(decidedWord);
     }
@@ -160,6 +191,11 @@ public class Combat : MonoBehaviour
 
 
         SetWords();
+    }
+
+    public void AddCharacterUICmb(string character)
+    {
+        DisplayNewOutputWordCmb.Invoke(character);
     }
 
 

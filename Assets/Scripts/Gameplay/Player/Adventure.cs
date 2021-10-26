@@ -21,9 +21,9 @@ public class Adventure : MonoBehaviour
     WordDelegate SendNextWordAdv;
 
     delegate void OutputUIDelegate(string output);
-    OutputUIDelegate DisplayCharacterAdv;
-    OutputUIDelegate UpdateWrittenTextUIAdv;
-    OutputUIDelegate UpdateRemainingTextUIAdv;
+    OutputUIDelegate DisplayNewOutputWordAdv;
+    OutputUIDelegate UpdateWrittenTextAdv;
+    OutputUIDelegate UpdateRemainingTextAdv;
     OutputUIDelegate DisplayNewCurrentWordAdv;
 
     delegate void ClearOutputUIDelegate();
@@ -36,9 +36,9 @@ public class Adventure : MonoBehaviour
     {
         AdventureUI AdvUIController = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<AdventureUI>();
 
-        DisplayCharacterAdv += AdvUIController.DisplayNewOutputWordUIAdv;
-        UpdateWrittenTextUIAdv += AdvUIController.UpdateWrittenTextUIAdv;
-        UpdateRemainingTextUIAdv += AdvUIController.UpdateRemainingTextUIAdv;
+        DisplayNewOutputWordAdv += AdvUIController.DisplayNewOutputWordUIAdv;
+        UpdateWrittenTextAdv += AdvUIController.UpdateWrittenTextUIAdv;
+        UpdateRemainingTextAdv += AdvUIController.UpdateRemainingTextUIAdv;
         DisplayNewCurrentWordAdv += AdvUIController.DisplayNewCurrentWordUIAdv;
         ClearOutputWordAdv += AdvUIController.ClearOutputWordUIAdv;
 
@@ -60,7 +60,7 @@ public class Adventure : MonoBehaviour
         //but because of that it needs to be added here.
         writtenPlotText.Append(nextWord + " ");
 
-        UpdateWrittenTextUIAdv.Invoke(writtenPlotText.ToString());
+        UpdateWrittenTextAdv.Invoke(writtenPlotText.ToString());
 
         if (!IsPlotSegmentComplete())
         {
@@ -103,7 +103,7 @@ public class Adventure : MonoBehaviour
 
         SendNextWordAdv(nextWord);
 
-        UpdateRemainingTextUIAdv.Invoke(remainingPlotText);
+        UpdateRemainingTextAdv.Invoke(remainingPlotText);
         DisplayNewCurrentWordAdv.Invoke(nextWord);
         ClearOutputWordAdv.Invoke();
     }
@@ -126,7 +126,7 @@ public class Adventure : MonoBehaviour
     ///<summary>Send character to AdventureUI script to be added to the word being displayed</summary>
     public void AddCharacterUIAdv(string character)
     {
-        DisplayCharacterAdv.Invoke(character);
+        DisplayNewOutputWordAdv.Invoke(character);
     }
 
     
