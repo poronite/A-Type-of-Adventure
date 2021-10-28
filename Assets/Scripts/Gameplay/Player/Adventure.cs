@@ -45,9 +45,9 @@ public class Adventure : MonoBehaviour
         SendNextWordAdv += gameObject.GetComponent<Typing>().NewWord;
     }
 
-    public void StartAdventure()
+    public void StartAdventure() //Start of a new game (Adventure)
     {
-        //Start of a new game (Adventure)
+        GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure();
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Adventure;
         NextWordAdv();
     }

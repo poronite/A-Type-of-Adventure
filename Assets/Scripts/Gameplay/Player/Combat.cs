@@ -82,8 +82,9 @@ public class Combat : MonoBehaviour
     }
 
 
-    public void StartCombat()
+    public void StartCombat() //Start of a new game (Adventure)
     {
+        GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateCombat();
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Combat;
         GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().SetupEnemy(enemy);
         SetWords();
@@ -142,10 +143,13 @@ public class Combat : MonoBehaviour
 
         string decidedWord = DecideAction(character);
 
-        ClearAttackDodgeWordsCmb.Invoke();
+        if (!(actionChosen == Actions.None))
+        {
+            DefineWordColorCmb.Invoke(actionChosen);
+            DisplayNewCurrentWordCmb.Invoke(actionChosen);
 
-        DefineWordColorCmb.Invoke(actionChosen);
-        DisplayNewCurrentWordCmb.Invoke(actionChosen);
+            ClearAttackDodgeWordsCmb.Invoke();
+        }
 
         SendNextWordCmb.Invoke(decidedWord);
     }

@@ -60,7 +60,7 @@ public class Typing : MonoBehaviour
     private void OnEnable()
     {
         OutputCharacterAdv += gameObject.GetComponent<Adventure>().AddCharacterUIAdv;
-        //OutputCharacterCmb += gameObject.GetComponent<Combat>().AddCharacterUICmb;
+        OutputCharacterCmb += gameObject.GetComponent<Combat>().AddCharacterUICmb;
         //OutputCharacterPzl += gameObject.GetComponent<Puzzle>().AddCharacterUIPzl;
 
         SendCharacterCmb += gameObject.GetComponent<Combat>().SetChosenWordCmb;
@@ -127,6 +127,8 @@ public class Typing : MonoBehaviour
             switch (CurrentPlayerState)
             {
                 case PlayerState.Combat:
+                    //store the first letter of the word of the action chosen
+                    //in order to re use it so that the player doesn't have to type it again
                     firstLetterAction = character;
                     SendCharacterCmb.Invoke(character);
                     break;
@@ -178,7 +180,7 @@ public class Typing : MonoBehaviour
                 }
                 break;
             case PlayerState.Combat:
-                //outputcharacterCmb
+                OutputCharacterCmb.Invoke(character);
 
                 if (IsWordComplete())
                 {
