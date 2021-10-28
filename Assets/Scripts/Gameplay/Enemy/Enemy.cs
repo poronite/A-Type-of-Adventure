@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour
     delegate void DealDamageDelegate(int damage);
     DealDamageDelegate DealDamage;
 
+    delegate void EnemyAttackWordFill(float time, float attackspeed);
+    EnemyAttackWordFill UpdateEnemyAttackWordFill;
+
 
 
     private void Start()
@@ -27,12 +30,13 @@ public class Enemy : MonoBehaviour
     public void SetDelegatesEnemy()
     {
         DealDamage += GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().TakeDamage;
+        UpdateEnemyAttackWordFill += GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateEnemyAttackWordFillUI;
     }
 
 
     private void Attack()
     {
-        if (!stats.IsEnemyDead)
+        if (!IsEnemyDead())
         {
             DealDamage.Invoke(stats.Attack);
         }
@@ -50,11 +54,18 @@ public class Enemy : MonoBehaviour
     ///<summary>Function that readies the enemy attack over a fixed duration.</summary>
     private void ReadyAttack()
     {
-        if (IsOnCombat())
+        if (IsOnCombat() && !IsEnemyDead())
         {
             timeSinceLastAttack += Time.deltaTime;
+            UpdateEnemyAttackWordFill.Invoke(timeSinceLastAttack, stats.AttackSpeed);
             IsAttackReady();
         }
+    }
+
+
+    private bool IsEnemyDead()
+    {
+        return stats.IsEnemyDead;
     }
 
 

@@ -26,8 +26,12 @@ public class CombatUI : MonoBehaviour
     [SerializeField]
     private Text outputTextUICmb;
 
+    [SerializeField]
+    private Image enemyAttackWordFill;
 
-    
+
+
+    //Player
     ///<summary>Display output with new character added.</summary>
     public void DisplayNewOutputWordUICmb(string character)
     {
@@ -92,5 +96,13 @@ public class CombatUI : MonoBehaviour
             default:
                 break;
         }
+    }
+
+
+    //Enemy
+    /// <summary>Increase enemy's attack word fill based on time elapsed since last attack.</summary>
+    public void UpdateEnemyAttackWordFillUI(float time, float attackSpeed)
+    {
+        enemyAttackWordFill.fillAmount = time / attackSpeed;
     }
 }
