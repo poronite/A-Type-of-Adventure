@@ -29,13 +29,16 @@ public class OpenGraphicsScene : MonoBehaviour
     private void SetupStartGame()
     {
         //setup delegates
+        //player
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-
         player.GetComponent<PlayerStats>().SetGeneralUIDelegates();
         player.GetComponent<Adventure>().SetDelegatesAdv();
         player.GetComponent<Combat>().SetDelegatesCmb();
 
-        GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>().SetDelegatesEnemy();
+        //enemy
+        GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
+        enemy.GetComponent<Enemy>().SetDelegatesEnemy();
+        enemy.GetComponent<EnemyStats>().SetDelegatesEnemyStats();
 
 
         //Start Game

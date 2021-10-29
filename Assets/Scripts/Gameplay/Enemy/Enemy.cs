@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    //references and variables
     public Typing TypingController;
 
     private EnemyStats stats;
@@ -13,11 +14,14 @@ public class Enemy : MonoBehaviour
     private float timeSinceLastAttack;
 
 
+    //delegates
     delegate void DealDamageDelegate(int damage);
     DealDamageDelegate DealDamage;
 
-    delegate void EnemyAttackWordFill(float time, float attackspeed);
+    delegate void EnemyAttackWordFill(float fillAmount);
     EnemyAttackWordFill UpdateEnemyAttackWordFill;
+
+    
 
 
 
@@ -57,7 +61,7 @@ public class Enemy : MonoBehaviour
         if (IsOnCombat() && !IsEnemyDead())
         {
             timeSinceLastAttack += Time.deltaTime;
-            UpdateEnemyAttackWordFill.Invoke(timeSinceLastAttack, stats.AttackSpeed);
+            UpdateEnemyAttackWordFill.Invoke(timeSinceLastAttack / stats.AttackSpeed);
             IsAttackReady();
         }
     }

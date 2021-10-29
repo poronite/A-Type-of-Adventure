@@ -29,6 +29,12 @@ public class CombatUI : MonoBehaviour
     [SerializeField]
     private Image enemyAttackWordFill;
 
+    [SerializeField]
+    private Image playerHealthBarFill;
+
+    [SerializeField]
+    private Image enemyHealthBarFill;
+
 
 
     //Player
@@ -101,8 +107,24 @@ public class CombatUI : MonoBehaviour
 
     //Enemy
     /// <summary>Increase enemy's attack word fill based on time elapsed since last attack.</summary>
-    public void UpdateEnemyAttackWordFillUI(float time, float attackSpeed)
+    public void UpdateEnemyAttackWordFillUI(float fillAmount)
     {
-        enemyAttackWordFill.fillAmount = time / attackSpeed;
+        enemyAttackWordFill.fillAmount = fillAmount;
+    }
+
+
+    public void UpdateHealthBarFillUI(string id, float fillAmount)
+    {
+        switch (id)
+        {
+            case "Player":
+                playerHealthBarFill.fillAmount = fillAmount;
+                break;
+            case "Enemy":
+                enemyHealthBarFill.fillAmount = fillAmount;
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Script that manages enemy stats.
+//When battle starts it gets the enemy's stats from the enemy scriptable object
+
 public class EnemyStats : MonoBehaviour
 {
+    //variables
+    private int enemyMaxHP;
+
     private int enemyCurrentHP;
 
     public int Attack;
@@ -16,9 +22,21 @@ public class EnemyStats : MonoBehaviour
     public bool IsEnemyDead;
 
 
+    //delegates
+    delegate void EnemyHPBarFill(string id, float fillAmount);
+    EnemyHPBarFill UpdateEnemyHPBarFill;
+
+
+    public void SetDelegatesEnemyStats()
+    {
+        UpdateEnemyHPBarFill += GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateHealthBarFillUI;
+    }
+
+
     public void SetupEnemy(EnemyTemplate enemyData)
     {
-        enemyCurrentHP = enemyData.MaxHP;
+        enemyMaxHP = enemyData.MaxHP;
+        enemyCurrentHP = enemyMaxHP;
         Attack = enemyData.Attack;
         isBoss = enemyData.IsBoss;
 
@@ -28,6 +46,8 @@ public class EnemyStats : MonoBehaviour
             AttackSpeed = 3.5f;
 
         IsEnemyDead = false;
+
+        UpdateEnemyHPBarFill("Enemy", 1);
     }
 
 
@@ -36,6 +56,7 @@ public class EnemyStats : MonoBehaviour
         if (!IsEnemyDead)
         {
             enemyCurrentHP -= damage;
+
             if (enemyCurrentHP <= 0)
             {
                 EnemyDies();
@@ -44,6 +65,8 @@ public class EnemyStats : MonoBehaviour
             {
                 Debug.Log($"Enemy took {damage} damage | {enemyCurrentHP} HP left.");
             }
+
+            UpdateEnemyHPBarFill.Invoke("Enemy", enemyCurrentHP / enemyMaxHP);
         }
     }
 
