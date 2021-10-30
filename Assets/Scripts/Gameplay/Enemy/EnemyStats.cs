@@ -47,7 +47,7 @@ public class EnemyStats : MonoBehaviour
 
         IsEnemyDead = false;
 
-        UpdateEnemyHPBarFill("Enemy", 1);
+        UpdateHPBar();
     }
 
 
@@ -64,9 +64,8 @@ public class EnemyStats : MonoBehaviour
             else
             {
                 Debug.Log($"Enemy took {damage} damage | {enemyCurrentHP} HP left.");
+                UpdateHPBar();
             }
-
-            UpdateEnemyHPBarFill.Invoke("Enemy", enemyCurrentHP / enemyMaxHP);
         }
     }
 
@@ -74,7 +73,15 @@ public class EnemyStats : MonoBehaviour
     private void EnemyDies()
     {
         enemyCurrentHP = 0;
+        UpdateHPBar();
         IsEnemyDead = true;
         Debug.Log("Enemy Died");
+    }
+
+
+    private void UpdateHPBar()
+    {
+        float fillAmount = (float)enemyCurrentHP / (float)enemyMaxHP;
+        UpdateEnemyHPBarFill.Invoke("Enemy", fillAmount);
     }
 }

@@ -20,10 +20,16 @@ public class PlayerStats : MonoBehaviour
     private float timeElapsedSeconds;
 
 
+    //Delegates
     delegate void UpdateInfoUIDelegate(int info);
     UpdateInfoUIDelegate UpdateTimeElapsedUI;
     UpdateInfoUIDelegate UpdateMistakesUI;
 
+    delegate void PlayerHPBarFill(string id, float fillAmount);
+    PlayerHPBarFill UpdatePlayerHPBarFill;
+
+
+    //Unity events
     [SerializeField]
     private UnityEvent GameOver;
 
@@ -51,6 +57,8 @@ public class PlayerStats : MonoBehaviour
 
         UpdateTimeElapsedUI += UIUpdater.SetTimeElapsedUI;
         UpdateMistakesUI += UIUpdater.SetMistakesUI;
+
+        UpdatePlayerHPBarFill += GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateHealthBarFillUI;
     }
 
 
@@ -85,7 +93,8 @@ public class PlayerStats : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log($"Player took {damage} damage | {playerCurrentHP} HP left.");
+                    Debug.Log($"Player took {damage} damage | {playerCurrentHP} HP left | {playerMaxHP} Max HP.");
+                    UpdateHPBar();
                 }
 
             }
@@ -101,6 +110,7 @@ public class PlayerStats : MonoBehaviour
     private void PlayerDies()
     {
         playerCurrentHP = 0;
+        UpdateHPBar();
         isPlayerDead = true;
         GameOver.Invoke();
         Debug.Log("Player died.");
@@ -116,5 +126,13 @@ public class PlayerStats : MonoBehaviour
     public void RecoverFullHP()
     {
         playerCurrentHP = playerMaxHP;
+        UpdateHPBar();
+    }
+
+
+    private void UpdateHPBar()
+    {
+        float fillAmount = (float)playerCurrentHP / (float)playerMaxHP;
+        UpdatePlayerHPBarFill.Invoke("Player", fillAmount);
     }
 }
