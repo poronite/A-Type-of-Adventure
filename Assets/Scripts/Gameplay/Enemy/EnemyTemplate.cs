@@ -4,7 +4,7 @@ using UnityEngine;
 
 //Template to create enemy assets that contain information for each enemy.
 
-[CreateAssetMenu(fileName = "New_Enemy_Stats", menuName = "New Enemy", order = 51)]
+[CreateAssetMenu(fileName = "New_Enemy_Stats", menuName = "New Enemy", order = 52)]
 public class EnemyTemplate : ScriptableObject
 {
     [SerializeField]
