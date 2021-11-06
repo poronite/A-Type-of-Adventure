@@ -12,10 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
   m_Name: Prototype
   m_EditorClassIdentifier: 
-  name: Prototype
-  type: 0
+  levelName: Prototype
+  levelType: 0
+  textToType: 
   wordKey:
-  - oof
+  - 
+  - 
+  - 
   levelValue:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   enemy: {fileID: 11400000, guid: 4f358eaaf0a3ea74297b1b07446dcd3f, type: 2}
+  nextLevelAfterCombat: {fileID: 0}
+  correctWord: 
+  nextLevelAfterPuzzle: {fileID: 0}

@@ -12,11 +12,14 @@ public enum LevelType
 [CreateAssetMenu(fileName = "New_Level", menuName = "New Level", order = 51)]
 public class LevelTemplate : ScriptableObject
 {
-    [SerializeField]
-    private new string name;
+    //Common to all levels
+    public string levelName;
 
-    [SerializeField]
-    private LevelType type;
+    public LevelType levelType;
+
+
+    //Adventure
+    public string textToType;
 
     [SerializeField]
     private List<string> wordKey;
@@ -24,6 +27,19 @@ public class LevelTemplate : ScriptableObject
     [SerializeField]
     private List<LevelTemplate> levelValue;
 
+
+    //Combat
     [SerializeField]
     private EnemyTemplate enemy;
+
+    [SerializeField]
+    private LevelTemplate nextLevelAfterCombat;
+
+
+    //Puzzle
+    [SerializeField]
+    private string correctWord;
+
+    [SerializeField]
+    private LevelTemplate nextLevelAfterPuzzle;
 }
