@@ -7,15 +7,14 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
-    //variables
+    //Variables
     private int enemyMaxHP;
 
     private int enemyCurrentHP;
 
     public int Attack;
 
-    //duration that the enemy takes to attack
-    public float AttackSpeed;
+    public float AttackSpeed; //duration that the enemy takes to attack
 
     private bool isBoss;
 

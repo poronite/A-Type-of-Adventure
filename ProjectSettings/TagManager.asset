@@ -13,6 +13,7 @@ TagManager:
   - CombatGfxUI
   - LoadingScreen
   - GfxUIManager
+  - CurrentLevel
   layers:
   - Default
   - TransparentFX

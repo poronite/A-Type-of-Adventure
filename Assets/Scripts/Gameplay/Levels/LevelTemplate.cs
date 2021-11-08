@@ -12,33 +12,29 @@ public enum LevelType
 public class LevelTemplate : ScriptableObject
 {
     //Common to all levels
-    public string levelName;
+    public string LevelName;
 
-    public LevelType levelType;
+    public LevelType LevelType;
 
 
     //Adventure
-    public string textToType;
+    public string TextToType;
 
-    [SerializeField]
-    private List<string> wordKey;
+    public int NumChoices;
 
-    [SerializeField]
-    private List<LevelTemplate> levelValue;
+    public List<string> WordKey;
+
+    public List<LevelTemplate> LevelValue;
 
 
     //Combat
-    [SerializeField]
-    private EnemyTemplate enemy;
+    public EnemyTemplate Enemy;
 
-    [SerializeField]
-    private LevelTemplate nextLevelAfterCombat;
+    public LevelTemplate NextLevelAfterCombat;
 
 
     //Puzzle
-    [SerializeField]
-    private string correctWord;
+    public string CorrectWord;
 
-    [SerializeField]
-    private LevelTemplate nextLevelAfterPuzzle;
+    public LevelTemplate NextLevelAfterPuzzle;
 }

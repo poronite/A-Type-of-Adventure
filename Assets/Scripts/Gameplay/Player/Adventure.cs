@@ -11,7 +11,7 @@ public class Adventure : MonoBehaviour
     private StringBuilder writtenPlotText = new StringBuilder();
 
     ///<summary>Still not written plot text.</summary>
-    private string remainingPlotText = "a ";
+    private string remainingPlotText;
 
     /// <summary>Next word to be written.</summary>
     private string nextWord;
@@ -34,6 +34,8 @@ public class Adventure : MonoBehaviour
     ///<summary>Adventure starts when Graphics scene is loaded</summary>
     public void SetDelegatesAdv()
     {
+        SendNextWordAdv += gameObject.GetComponent<Typing>().NewWord;
+
         AdventureUI AdvUIController = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<AdventureUI>();
 
         DisplayNewOutputWordAdv += AdvUIController.DisplayNewOutputWordUIAdv;
@@ -41,12 +43,16 @@ public class Adventure : MonoBehaviour
         UpdateRemainingTextAdv += AdvUIController.UpdateRemainingTextUIAdv;
         DisplayNewCurrentWordAdv += AdvUIController.DisplayNewCurrentWordUIAdv;
         ClearOutputWordAdv += AdvUIController.ClearOutputWordUIAdv;
-
-        SendNextWordAdv += gameObject.GetComponent<Typing>().NewWord;
     }
 
-    public void StartAdventure() //Start of a new game (Adventure)
+    public void StartAdventure(string textToType) //Start of a new game (Adventure)
     {
+        //remove any white spaces that may cause problems
+        textToType = textToType.Trim();
+
+        //add a space at the end otherwise player won't be able to type the last word
+        remainingPlotText = textToType + " ";
+
         GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure();
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Adventure;
         NextWordAdv();

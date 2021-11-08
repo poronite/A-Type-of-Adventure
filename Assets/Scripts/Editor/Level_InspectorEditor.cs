@@ -8,7 +8,6 @@ public class Level_InspectorEditor : Editor
 
 
     //Adventure
-    int numChoices;
     SerializedProperty wordKey;
     SerializedProperty levelValue;
 
@@ -20,34 +19,35 @@ public class Level_InspectorEditor : Editor
     SerializedProperty correctWord;
     SerializedProperty nextLevelAfterPuzzle;
 
+
     private void OnEnable()
     {
         level = (LevelTemplate)target;
 
-        wordKey = serializedObject.FindProperty("wordKey");
-        levelValue = serializedObject.FindProperty("levelValue");
+        wordKey = serializedObject.FindProperty("WordKey");
+        levelValue = serializedObject.FindProperty("LevelValue");
 
-        enemy = serializedObject.FindProperty("enemy");
-        nextLevelAfterCombat = serializedObject.FindProperty("nextLevelAfterCombat");
+        enemy = serializedObject.FindProperty("Enemy");
+        nextLevelAfterCombat = serializedObject.FindProperty("NextLevelAfterCombat");
 
-        correctWord = serializedObject.FindProperty("correctWord");
-        nextLevelAfterPuzzle = serializedObject.FindProperty("nextLevelAfterPuzzle");
+        correctWord = serializedObject.FindProperty("CorrectWord");
+        nextLevelAfterPuzzle = serializedObject.FindProperty("NextLevelAfterPuzzle");
     }
 
     public override void OnInspectorGUI()
     {
-        level.levelName = EditorGUILayout.TextField("Name", level.levelName);
+        level.LevelName = EditorGUILayout.TextField("Name", level.LevelName);
 
         EditorGUILayout.Space();
 
-        level.levelType = (LevelType)EditorGUILayout.EnumPopup("Level Type", level.levelType);
+        level.LevelType = (LevelType)EditorGUILayout.EnumPopup("Level Type", level.LevelType);
 
         EditorGUILayout.Space();
         EditorGUILayout.Space();
         EditorGUILayout.Space();
         EditorGUILayout.Space();
 
-        switch (level.levelType)
+        switch (level.LevelType)
         {
             case LevelType.Adventure:
 
@@ -55,36 +55,36 @@ public class Level_InspectorEditor : Editor
 
                 EditorGUILayout.Space();
 
-                level.textToType = EditorGUILayout.TextField("Text to Type", level.textToType);
+                level.TextToType = EditorGUILayout.TextField("Text to Type", level.TextToType);
 
                 EditorGUILayout.Space();
 
-                //Display dictionary
-                serializedObject.Update();
+                level.NumChoices = EditorGUILayout.IntField("Choices", level.NumChoices);
 
-                numChoices = EditorGUILayout.IntField("Choices", numChoices);
+                //Display dictionary
+                serializedObject.Update(); //Never update things other than property fields after this line
 
                 //prevent unnecessary errors
-                if (numChoices < 0)
+                if (level.NumChoices < 0)
                 {
-                    numChoices = 0;
+                    level.NumChoices = 0;
                 }
 
-                wordKey.arraySize = numChoices;
-                levelValue.arraySize = numChoices;
+                wordKey.arraySize = level.NumChoices;
+                levelValue.arraySize = level.NumChoices;
 
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
 
                 EditorGUILayout.BeginVertical();
-                for (int i = 0; i < numChoices; i++)
+                for (int i = 0; i < level.NumChoices; i++)
                 {
                     var choiceWord = wordKey.GetArrayElementAtIndex(i);
                     var choiceLevel = levelValue.GetArrayElementAtIndex(i);
 
                     
-                    EditorGUILayout.PropertyField(choiceWord, new GUIContent($"Word {i}: "), true);
-                    EditorGUILayout.PropertyField(choiceLevel, new GUIContent($"Level {i}: "), true);
+                    EditorGUILayout.PropertyField(choiceWord, new GUIContent($"Required Word {i + 1}: "), true);
+                    EditorGUILayout.PropertyField(choiceLevel, new GUIContent($"Chosen Level {i + 1}: "), true);
                     
 
                     EditorGUILayout.Space();
@@ -92,6 +92,7 @@ public class Level_InspectorEditor : Editor
                 }
 
                 EditorGUILayout.EndVertical();
+
                 serializedObject.ApplyModifiedProperties();
                 break;
             case LevelType.Combat:

@@ -10,22 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
-  m_Name: Prototype
+  m_Name: 2Fight_Proto
   m_EditorClassIdentifier: 
-  levelName: Prototype
-  levelType: 0
-  textToType: aaaaaaaaaa
-  wordKey:
-  - 
-  - 
-  - 
-  - 
-  levelValue:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  enemy: {fileID: 11400000, guid: 4f358eaaf0a3ea74297b1b07446dcd3f, type: 2}
-  nextLevelAfterCombat: {fileID: 0}
-  correctWord: 
-  nextLevelAfterPuzzle: {fileID: 0}
+  LevelName: FightExample
+  LevelType: 1
+  TextToType: 
+  numChoices: 0
+  WordKey: []
+  LevelValue: []
+  Enemy: {fileID: 11400000, guid: 4f358eaaf0a3ea74297b1b07446dcd3f, type: 2}
+  NextLevelAfterCombat: {fileID: 11400000, guid: 23bfaebf083e54f4886e44afe0541cbf,
+    type: 2}
+  CorrectWord: 
+  NextLevelAfterPuzzle: {fileID: 0}

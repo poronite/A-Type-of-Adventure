@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40644ac68cebcb944b0a89f8c0568c9f, type: 3}
   m_Name: TestEnemy
   m_EditorClassIdentifier: 
-  name: Nigger
+  name: Thief
   sprite: {fileID: 0}
-  maxHP: 20
+  maxHP: 40
   attack: 3
   isBoss: 0

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class OpenGraphicsScene : MonoBehaviour
+public class LoadGame : MonoBehaviour
 {
+    [SerializeField]
+    private LevelTemplate firstLevel;
+
     void Awake()
     {
         StartCoroutine(LoadGraphicsScene());
@@ -42,6 +45,6 @@ public class OpenGraphicsScene : MonoBehaviour
 
 
         //Start Game
-        player.GetComponent<Adventure>().StartAdventure();
+        GameObject.FindGameObjectWithTag("CurrentLevel").GetComponent<LevelStats>().SetupLevel(firstLevel);
     }
 }
