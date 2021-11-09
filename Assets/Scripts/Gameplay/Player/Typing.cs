@@ -11,7 +11,8 @@ public enum PlayerState
     Adventure,
     Combat,
     Puzzle,
-    Dead
+    Dead,
+    CombatWon
 }
 
 public class Typing : MonoBehaviour
@@ -242,6 +243,12 @@ public class Typing : MonoBehaviour
     public void GameOver()
     {
         CurrentPlayerState = PlayerState.Dead;
+    }
+
+
+    public void Victory()
+    {
+        CurrentPlayerState = PlayerState.CombatWon;
     }
 
 

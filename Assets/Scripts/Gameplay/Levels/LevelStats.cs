@@ -52,10 +52,13 @@ public class LevelStats : MonoBehaviour
             case LevelType.Adventure:
 
                 textToType = levelData.TextToType;
-                wordKey = levelData.WordKey;
-                levelValue = levelData.LevelValue;
-
-                CreateChoicesDictionary();
+                
+                if (levelData.NumChoices >= 1)
+                {
+                    wordKey = levelData.WordKey;
+                    levelValue = levelData.LevelValue;
+                    CreateChoicesDictionary();
+                }
 
                 //Start adventure
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(textToType);
@@ -67,6 +70,7 @@ public class LevelStats : MonoBehaviour
                 nextLevelAfterCombat = levelData.NextLevelAfterCombat;
 
                 //Start combat
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().StartCombat(enemy, nextLevelAfterCombat);
 
                 break;
             case LevelType.Puzzle:
@@ -88,6 +92,16 @@ public class LevelStats : MonoBehaviour
         for (int i = 0; i < wordKey.Count; i++)
         {
             choices.Add(wordKey[i], levelValue[i]);
+        }
+    }
+
+
+    /// <summary>Choose the next level based on word typed by the player while adventuring.</summary>
+    public void ChooseNextLevel(string word)
+    {
+        if (choices.ContainsKey(word))
+        {
+            SetupLevel(choices[word]);
         }
     }
 }

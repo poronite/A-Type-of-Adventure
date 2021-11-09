@@ -29,12 +29,16 @@ public class Adventure : MonoBehaviour
     delegate void ClearOutputUIDelegate();
     ClearOutputUIDelegate ClearOutputWordAdv;
 
+    delegate void ChangeLevelDelegate(string word);
+    ChangeLevelDelegate ChangeToNewLevel;
+
 
 
     ///<summary>Adventure starts when Graphics scene is loaded</summary>
     public void SetDelegatesAdv()
     {
         SendNextWordAdv += gameObject.GetComponent<Typing>().NewWord;
+        ChangeToNewLevel += GameObject.FindGameObjectWithTag("CurrentLevel").GetComponent<LevelStats>().ChooseNextLevel;
 
         AdventureUI AdvUIController = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<AdventureUI>();
 
@@ -68,6 +72,8 @@ public class Adventure : MonoBehaviour
 
         UpdateWrittenTextAdv.Invoke(writtenPlotText.ToString());
 
+        ChangeToNewLevel.Invoke(nextWord);
+
         if (!IsPlotSegmentComplete())
         {
             NextWordAdv();
@@ -81,7 +87,7 @@ public class Adventure : MonoBehaviour
 
             SendNextWordAdv(string.Empty);
 
-            gameObject.GetComponent<Combat>().StartCombat();
+            //gameObject.GetComponent<Combat>().StartCombat();
         }
     }
 

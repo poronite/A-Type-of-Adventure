@@ -25,10 +25,14 @@ public class EnemyStats : MonoBehaviour
     delegate void EnemyHPBarFill(string id, float fillAmount);
     EnemyHPBarFill UpdateEnemyHPBarFill;
 
+    delegate void EndCombat();
+    EndCombat TriggerVictory;
+
 
     public void SetDelegatesEnemyStats()
     {
         UpdateEnemyHPBarFill += GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateHealthBarFillUI;
+        TriggerVictory += GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().WinCombat;
     }
 
 
@@ -74,6 +78,8 @@ public class EnemyStats : MonoBehaviour
         enemyCurrentHP = 0;
         UpdateHPBar();
         IsEnemyDead = true;
+        TriggerVictory.Invoke();
+        //player win
         Debug.Log("Enemy Died");
     }
 

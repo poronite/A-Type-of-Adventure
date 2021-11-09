@@ -16,8 +16,6 @@ public class Combat : MonoBehaviour
 {
     private PlayerStats stats;
 
-    public EnemyTemplate enemy;
-
     private Actions actionChosen;
 
     private List<string> attackWordsList = new List<string> { "Punch", "Kick", "Tackle", "Slash"};
@@ -27,6 +25,8 @@ public class Combat : MonoBehaviour
     private List<string> dodgeWordsList = new List<string> { "Roll", "Dash", "Crouch", "Jump"};
     private string dodgeWordText = string.Empty;
     private string previousDodgeWord = string.Empty; //so that the same word doesn't appear twice in a row
+
+    private LevelTemplate nextLevel; //next level after player wins the combat
 
 
     //Delegates
@@ -51,6 +51,9 @@ public class Combat : MonoBehaviour
     ActionBasedDelegate DefineWordColorCmb;
     ActionBasedDelegate DisplayNewCurrentWordCmb;
 
+    delegate void ChangeLevelDelegate(LevelTemplate level);
+    ChangeLevelDelegate GoToNextLevel;
+
 
     //Unity Events
     [SerializeField]
@@ -58,6 +61,9 @@ public class Combat : MonoBehaviour
 
     [SerializeField]
     private UnityEvent ClearWord;
+
+    [SerializeField]
+    private UnityEvent WinFight;
 
 
     private void Start()
@@ -70,6 +76,7 @@ public class Combat : MonoBehaviour
     {
         SendNextWordCmb += gameObject.GetComponent<Typing>().NewWord;
         AttackEnemy += GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().TakeDamage;
+        GoToNextLevel += GameObject.FindGameObjectWithTag("CurrentLevel").GetComponent<LevelStats>().SetupLevel;
 
         CombatUI CmbUIController = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>();
 
@@ -82,11 +89,12 @@ public class Combat : MonoBehaviour
     }
 
 
-    public void StartCombat() //Start of a new game (Adventure)
+    public void StartCombat(EnemyTemplate enemy, LevelTemplate nextLevelAfterCombat) //Start of a new game (Adventure)
     {
-        GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateCombat();
+        nextLevel = nextLevelAfterCombat;
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Combat;
         GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().SetupEnemy(enemy);
+        GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateCombat();
         SetWords();
         Debug.Log("Started combat.");
     }
@@ -214,5 +222,12 @@ public class Combat : MonoBehaviour
     {
         Debug.Log("Dodged");
         ActivateDodge.Invoke();
+    }
+
+
+    public void WinCombat()
+    {
+        WinFight.Invoke();
+        GoToNextLevel.Invoke(nextLevel);
     }
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   LevelName: EndExample
   LevelType: 0
   TextToType: After defeating the thief, the hero continued his journey.
-  numChoices: 0
+  NumChoices: 0
   WordKey: []
   LevelValue: []
   Enemy: {fileID: 0}
