@@ -43,8 +43,12 @@ public class LoadGame : MonoBehaviour
         enemy.GetComponent<Enemy>().SetDelegatesEnemy();
         enemy.GetComponent<EnemyStats>().SetDelegatesEnemyStats();
 
+        //level
+        GameObject levelController = GameObject.FindGameObjectWithTag("LevelController");
+        levelController.GetComponent<LevelController>().SetDelegatesLevel();
+
 
         //Start Game
-        GameObject.FindGameObjectWithTag("CurrentLevel").GetComponent<LevelStats>().SetupLevel(firstLevel);
+        GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().SetupLevel(firstLevel);
     }
 }

@@ -132,8 +132,8 @@ GameObject:
   - component: {fileID: 657742800}
   - component: {fileID: 657742801}
   m_Layer: 0
-  m_Name: Current Level
-  m_TagString: CurrentLevel
+  m_Name: LevelController
+  m_TagString: LevelController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

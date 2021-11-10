@@ -18,6 +18,7 @@ public class LevelTemplate : ScriptableObject
 
 
     //Adventure
+    [TextArea(3, 10)]
     public string TextToType;
 
     public int NumChoices;

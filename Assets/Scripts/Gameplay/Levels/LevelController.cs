@@ -4,7 +4,7 @@ using UnityEngine;
 
 //Script that creates the current level based on the stats from the scriptable object.
 
-public class LevelStats : MonoBehaviour
+public class LevelController : MonoBehaviour
 {
     //Variables
     //Common stats
@@ -22,7 +22,7 @@ public class LevelStats : MonoBehaviour
 
     private List<LevelTemplate> levelValue;
 
-    private Dictionary<string, LevelTemplate> choices;
+    private Dictionary<string, LevelTemplate> choices = new Dictionary<string, LevelTemplate>();
 
 
     //If level is of type Combat
@@ -37,9 +37,25 @@ public class LevelStats : MonoBehaviour
     private LevelTemplate nextLevelAfterPuzzle;
 
 
+    delegate void GraphicsDelegate();
+    GraphicsDelegate ShowLoadingScreen;
+    GraphicsDelegate ShowAdventure;
+    GraphicsDelegate ShowCombat;
+    //UIManagerDelegate ShowPuzzle;
+
+
+    public void SetDelegatesLevel()
+    {
+        ShowLoadingScreen += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateLoadingScreen;
+        ShowAdventure += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure;
+        ShowCombat += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateCombat;
+    }
+
 
     public void SetupLevel(LevelTemplate levelToLoad)
     {
+        ShowLoadingScreen.Invoke();
+
         levelData = levelToLoad;
 
         levelName = levelData.LevelName;
@@ -63,6 +79,8 @@ public class LevelStats : MonoBehaviour
                 //Start adventure
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(textToType);
 
+                ShowAdventure.Invoke();
+
                 break;
             case LevelType.Combat:
 
@@ -71,6 +89,8 @@ public class LevelStats : MonoBehaviour
 
                 //Start combat
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().StartCombat(enemy, nextLevelAfterCombat);
+
+                ShowCombat.Invoke();
 
                 break;
             case LevelType.Puzzle:

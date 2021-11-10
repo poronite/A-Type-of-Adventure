@@ -26,8 +26,8 @@ public class Adventure : MonoBehaviour
     OutputUIDelegate UpdateRemainingTextAdv;
     OutputUIDelegate DisplayNewCurrentWordAdv;
 
-    delegate void ClearOutputUIDelegate();
-    ClearOutputUIDelegate ClearOutputWordAdv;
+    delegate void ClearUIDelegate();
+    ClearUIDelegate ClearOutputWordAdv;
 
     delegate void ChangeLevelDelegate(string word);
     ChangeLevelDelegate ChangeToNewLevel;
@@ -38,15 +38,15 @@ public class Adventure : MonoBehaviour
     public void SetDelegatesAdv()
     {
         SendNextWordAdv += gameObject.GetComponent<Typing>().NewWord;
-        ChangeToNewLevel += GameObject.FindGameObjectWithTag("CurrentLevel").GetComponent<LevelStats>().ChooseNextLevel;
+        ChangeToNewLevel += GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().ChooseNextLevel;
 
         AdventureUI AdvUIController = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<AdventureUI>();
 
         DisplayNewOutputWordAdv += AdvUIController.DisplayNewOutputWordUIAdv;
+        ClearOutputWordAdv += AdvUIController.ClearOutputWordUIAdv;
         UpdateWrittenTextAdv += AdvUIController.UpdateWrittenTextUIAdv;
         UpdateRemainingTextAdv += AdvUIController.UpdateRemainingTextUIAdv;
         DisplayNewCurrentWordAdv += AdvUIController.DisplayNewCurrentWordUIAdv;
-        ClearOutputWordAdv += AdvUIController.ClearOutputWordUIAdv;
     }
 
     public void StartAdventure(string textToType) //Start of a new game (Adventure)
@@ -57,7 +57,7 @@ public class Adventure : MonoBehaviour
         //add a space at the end otherwise player won't be able to type the last word
         remainingPlotText = textToType + " ";
 
-        GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure();
+        //GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure();
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Adventure;
         NextWordAdv();
     }
@@ -140,6 +140,4 @@ public class Adventure : MonoBehaviour
     {
         DisplayNewOutputWordAdv.Invoke(character);
     }
-
-    
 }

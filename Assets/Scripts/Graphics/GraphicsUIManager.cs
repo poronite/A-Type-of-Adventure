@@ -15,6 +15,13 @@ public class GraphicsUIManager : MonoBehaviour
     private GameObject Combat;
 
 
+
+    public void ActivateLoadingScreen()
+    {
+        LoadingScreen.SetActive(true);
+    }
+
+
     /// <summary>Deactivate loading screen, adventure, combat and puzzle graphics and UI.</summary>
     public void DeactivateAll()
     {

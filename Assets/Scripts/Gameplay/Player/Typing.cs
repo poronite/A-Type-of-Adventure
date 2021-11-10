@@ -76,7 +76,7 @@ public class Typing : MonoBehaviour
     public void NewWord(string word)
     {
         ClearWords();
-        currentWord = word;
+        currentWord = word.Trim();
 
         //This is so that the player doesn't have to type
         //the first letter of the action twice when typing the action chosen.

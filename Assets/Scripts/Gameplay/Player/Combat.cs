@@ -76,7 +76,7 @@ public class Combat : MonoBehaviour
     {
         SendNextWordCmb += gameObject.GetComponent<Typing>().NewWord;
         AttackEnemy += GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().TakeDamage;
-        GoToNextLevel += GameObject.FindGameObjectWithTag("CurrentLevel").GetComponent<LevelStats>().SetupLevel;
+        GoToNextLevel += GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().SetupLevel;
 
         CombatUI CmbUIController = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>();
 
@@ -94,7 +94,7 @@ public class Combat : MonoBehaviour
         nextLevel = nextLevelAfterCombat;
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Combat;
         GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().SetupEnemy(enemy);
-        GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateCombat();
+        //GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateCombat();
         SetWords();
         Debug.Log("Started combat.");
     }
