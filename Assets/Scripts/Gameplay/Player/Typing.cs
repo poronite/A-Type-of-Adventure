@@ -54,7 +54,12 @@ public class Typing : MonoBehaviour
     CompleteWordDelegate CompleteWordCmb;
     //CompleteWordDelegate CompleteWordPzl;
 
-    
+
+    //TEMPORARY SFX
+    [SerializeField]
+    private AudioSource typeSFX, mistakeSFX, wordCompleteSFX;
+
+
 
 
     //Player game object will never be disabled so OnEnable is enough
@@ -77,6 +82,8 @@ public class Typing : MonoBehaviour
     {
         ClearWords();
         currentWord = word.Trim();
+
+        Debug.Log(currentWord);
 
         //This is so that the player doesn't have to type
         //the first letter of the action twice when typing the action chosen.
@@ -115,6 +122,9 @@ public class Typing : MonoBehaviour
                     else
                     {
                         Mistake.Invoke();
+
+                        //TEMPORARY SOUND EFFECT
+                        mistakeSFX.Play();
                     }
                     break;
                 case PlayerState.Puzzle:
@@ -167,6 +177,9 @@ public class Typing : MonoBehaviour
         outputWord.Append(character);
         nextCharacterIndex++;
 
+        //TEMPORARY SOUND EFFECT
+        typeSFX.Play();
+
         Debug.Log($"Character typed: {character} | {outputWord}");
 
         switch (CurrentPlayerState)
@@ -177,6 +190,10 @@ public class Typing : MonoBehaviour
                 if (IsWordComplete())
                 {
                     //Debug.Log($"outputWord: {outputWord}");
+
+                    //TEMPORARY SOUND EFFECT
+                    wordCompleteSFX.Play();
+
                     CompleteWordAdv.Invoke();
                 }
                 break;
@@ -185,8 +202,11 @@ public class Typing : MonoBehaviour
 
                 if (IsWordComplete())
                 {
-                    Debug.Log("Word Completed");
-                    
+                    //Debug.Log("Word Completed");
+
+                    //TEMPORARY SOUND EFFECT
+                    wordCompleteSFX.Play();
+
                     CompleteWordCmb.Invoke();
                 }
 

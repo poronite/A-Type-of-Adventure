@@ -189,6 +189,11 @@ public class Combat : MonoBehaviour
 
     public void CompleteWordCmb()
     {
+        //this is here because after defeating the enemy 
+        //it was clearing the word that the player had to type
+        //making it impossible to continue the game
+        SetWords(); 
+
         switch (actionChosen)
         {
             case Actions.Attack:
@@ -200,9 +205,6 @@ public class Combat : MonoBehaviour
             default:
                 break;
         }
-
-
-        SetWords();
     }
 
     public void AddCharacterUICmb(string character)
