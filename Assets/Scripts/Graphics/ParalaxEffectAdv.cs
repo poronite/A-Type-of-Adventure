@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Source: https://www.youtube.com/watch?v=zit45k6CUMk
-
 public class ParalaxEffectAdv : MonoBehaviour
 {
     //variables
     private float spriteLength, startPosition;
 
     [SerializeField]
-    private float parallaxEffect;
+    private float parallaxEffectSpeed;
 
 
     //references
@@ -26,18 +24,16 @@ public class ParalaxEffectAdv : MonoBehaviour
 
     private void Update()
     {
-        //to determine if last background should move to the right
-        float limit = cam.transform.position.x * (1 - parallaxEffect);
-        float distanceFromStartPosition = cam.transform.position.x * parallaxEffect;
+        float distance = (cam.transform.position.x * parallaxEffectSpeed);
 
-        transform.position = new Vector3(startPosition + distanceFromStartPosition, transform.position.y, transform.position.z);
-
-        //move sprite to the right if camera is past the border
-        if (limit > startPosition + spriteLength)
+        transform.position = new Vector3(startPosition + distance, transform.position.y, transform.position.z);
+        
+        //move sprite to the right or left if camera is past the border
+        if (transform.position.x - cam.transform.position.x  > 19.2f)
         {
             startPosition += spriteLength;
         }
-        else if (limit < startPosition - (spriteLength / 2))
+        else if (transform.position.x - cam.transform.position.x < -19.2f)
         {
             startPosition -= spriteLength;
         }
