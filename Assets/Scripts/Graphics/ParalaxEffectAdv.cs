@@ -2,41 +2,121 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Copy pasta from: https://www.youtube.com/watch?v=3UO-1suMbNc and https://www.youtube.com/watch?v=Mp6BWCMJZH4
+//with a few changes to make it fitting for the game
+
+
 public class ParalaxEffectAdv : MonoBehaviour
 {
-    //variables
-    private float spriteLength, startPosition;
+    [SerializeField]
+    private GameObject[] layers;
+
+    [SerializeField] 
+    private Sprite[] layer3Sprites;
 
     [SerializeField]
-    private float parallaxEffectSpeed;
+    private Sprite[] layer2Sprites;
+
+    [SerializeField]
+    private Sprite[] layer1Sprites;
 
 
-    //references
-    public GameObject cam;
 
+    private Camera mainCamera;
+    private Vector2 screenBounds;
 
-    private void Start()
+    private Vector3 lastScreenPosition;
+
+    void Start()
     {
-        startPosition = transform.position.x;
-        spriteLength = GetComponent<SpriteRenderer>().bounds.size.x;
+        mainCamera = gameObject.GetComponent<Camera>();
+        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
+
+        foreach (GameObject obj in layers)
+        {
+            loadChildObjects(obj);
+        }
+
+        lastScreenPosition = transform.position;
     }
 
 
-    private void Update()
+    void loadChildObjects(GameObject obj)
     {
-        float distance = (cam.transform.position.x * parallaxEffectSpeed);
+        float objectWidth = obj.GetComponent<SpriteRenderer>().bounds.size.x;
+        //int childsNeeded = (int)Mathf.Ceil(screenBounds.x * 2 / objectWidth);
+        int childsNeeded = 3;
+        GameObject clone = Instantiate(obj) as GameObject;
 
-        transform.position = new Vector3(startPosition + distance, transform.position.y, transform.position.z);
-        
-        //move sprite to the right or left if camera is past the border
-        if (transform.position.x - cam.transform.position.x  > 19.2f)
+        for (int i = 0; i < childsNeeded; i++)
         {
-            startPosition += spriteLength;
+            GameObject c = Instantiate(clone) as GameObject;
+            c.transform.SetParent(obj.transform);
+            c.transform.position = new Vector3(objectWidth * i, obj.transform.position.y, obj.transform.position.z);
+
+            //Debug.Log("Sprite Number: " + i);
+
+            c.name = obj.name; //change name temporary for the following switch case
+
+            switch (c.name)
+            {
+                case "Layer3":
+                    Debug.Log("Sprite Name: " + layer3Sprites[i].name);
+                    c.GetComponent<SpriteRenderer>().sprite = layer3Sprites[i];
+                    break;
+                case "Layer2":
+                    Debug.Log("Sprite Name: " + layer2Sprites[i].name);
+                    c.GetComponent<SpriteRenderer>().sprite = layer2Sprites[i];
+                    break;
+                case "Layer1":
+                    Debug.Log("Sprite Name: " + layer1Sprites[i].name);
+                    c.GetComponent<SpriteRenderer>().sprite = layer1Sprites[i];
+                    break;
+                default:
+                    break;
+            }
+
+            c.name = obj.name + $" {i}"; //give a distinct name to the object
         }
-        else if (transform.position.x - cam.transform.position.x < -19.2f)
-        {
-            startPosition -= spriteLength;
-        }
+
+        Destroy(clone);
+        Destroy(obj.GetComponent<SpriteRenderer>());
     }
 
+
+    void repositionChildObjects(GameObject obj)
+    {
+        Transform[] children = obj.GetComponentsInChildren<Transform>();
+        if (children.Length > 1)
+        {
+            GameObject firstChild = children[1].gameObject;
+            GameObject lastChild = children[children.Length - 1].gameObject;
+            float halfObjectWidth = lastChild.GetComponent<SpriteRenderer>().bounds.extents.x;
+
+            if (transform.position.x + screenBounds.x > lastChild.transform.position.x + halfObjectWidth)
+            {
+                firstChild.transform.SetAsLastSibling();
+                firstChild.transform.position = new Vector3(lastChild.transform.position.x + halfObjectWidth * 2, lastChild.transform.position.y, lastChild.transform.position.z);
+            }
+            else if (transform.position.x - screenBounds.x < firstChild.transform.position.x - halfObjectWidth)
+            {
+                lastChild.transform.SetAsFirstSibling();
+                lastChild.transform.position = new Vector3(firstChild.transform.position.x - halfObjectWidth * 2, firstChild.transform.position.y, firstChild.transform.position.z);
+            }
+        }
+    }
+    
+
+    void LateUpdate()
+    {
+        foreach (GameObject obj in layers)
+        {
+            repositionChildObjects(obj);
+            float parallaxSpeed = 1 - Mathf.Clamp01(Mathf.Abs(transform.position.z / obj.transform.position.z));
+            float difference = transform.position.x - lastScreenPosition.x;
+            obj.transform.Translate(Vector3.right * difference * parallaxSpeed);
+        }
+
+        lastScreenPosition = transform.position;
+    }
 }
