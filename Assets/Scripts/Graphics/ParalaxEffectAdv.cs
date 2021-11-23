@@ -81,6 +81,8 @@ public class ParalaxEffectAdv : MonoBehaviour
 
         Destroy(clone);
         Destroy(obj.GetComponent<SpriteRenderer>());
+
+        gameObject.GetComponent<CameraMovement>().canMoveCamera = true;
     }
 
 

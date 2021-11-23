@@ -32,6 +32,9 @@ public class Adventure : MonoBehaviour
     delegate void ChangeLevelDelegate(string word);
     ChangeLevelDelegate ChangeToNewLevel;
 
+    delegate void RefreshMovement();
+    RefreshMovement RefreshPlayerMovement;
+
 
 
     ///<summary>Adventure starts when Graphics scene is loaded</summary>
@@ -47,6 +50,8 @@ public class Adventure : MonoBehaviour
         UpdateWrittenTextAdv += AdvUIController.UpdateWrittenTextUIAdv;
         UpdateRemainingTextAdv += AdvUIController.UpdateRemainingTextUIAdv;
         DisplayNewCurrentWordAdv += AdvUIController.DisplayNewCurrentWordUIAdv;
+
+        RefreshPlayerMovement = GameObject.FindGameObjectWithTag("PlayerGfx").GetComponent<PlayerMovement>().RefreshPlayerMovementDuration;
     }
 
     public void StartAdventure(string textToType) //Start of a new game (Adventure)
@@ -65,6 +70,9 @@ public class Adventure : MonoBehaviour
 
     public void CompleteWordAdv()
     {
+        //make the player sprite move for 5 seconds
+        RefreshPlayerMovement.Invoke();
+
         //Every word ends with a blank space | Example: "time, " "hero "
         //since blank spaces aren't going to be used for gameplay we ignore them when sending a word,
         //but because of that it needs to be added here.
