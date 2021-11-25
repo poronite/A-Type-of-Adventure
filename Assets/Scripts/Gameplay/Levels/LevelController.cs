@@ -109,6 +109,8 @@ public class LevelController : MonoBehaviour
 
     private void CreateChoicesDictionary()
     {
+        choices = new Dictionary<string, LevelTemplate>();
+
         for (int i = 0; i < wordKey.Count; i++)
         {
             choices.Add(wordKey[i], levelValue[i]);

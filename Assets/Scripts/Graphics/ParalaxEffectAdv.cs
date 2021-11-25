@@ -20,15 +20,23 @@ public class ParalaxEffectAdv : MonoBehaviour
     [SerializeField]
     private Sprite[] layer1Sprites;
 
-
+    [SerializeField]
+    private GameObject playerGfx;
+    private Vector3 playerOriginalPosition;
 
     private Camera mainCamera;
     private Vector2 screenBounds;
 
     private Vector3 lastScreenPosition;
 
-    void Start()
+
+
+    private void Awake()
     {
+        playerOriginalPosition = playerGfx.transform.position;
+
+        Debug.Log($"Original Position: {playerOriginalPosition.x}, {playerOriginalPosition.y}, {playerOriginalPosition.z}");
+
         mainCamera = gameObject.GetComponent<Camera>();
         screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
 
@@ -41,7 +49,7 @@ public class ParalaxEffectAdv : MonoBehaviour
     }
 
 
-    void loadChildObjects(GameObject obj)
+    private void loadChildObjects(GameObject obj)
     {
         float objectWidth = obj.GetComponent<SpriteRenderer>().bounds.size.x;
         //int childsNeeded = (int)Mathf.Ceil(screenBounds.x * 2 / objectWidth);
@@ -81,12 +89,10 @@ public class ParalaxEffectAdv : MonoBehaviour
 
         Destroy(clone);
         Destroy(obj.GetComponent<SpriteRenderer>());
-
-        gameObject.GetComponent<CameraMovement>().canMoveCamera = true;
     }
 
 
-    void repositionChildObjects(GameObject obj)
+    private void repositionChildObjects(GameObject obj)
     {
         Transform[] children = obj.GetComponentsInChildren<Transform>();
         if (children.Length > 1)
@@ -106,6 +112,21 @@ public class ParalaxEffectAdv : MonoBehaviour
                 lastChild.transform.position = new Vector3(firstChild.transform.position.x - halfObjectWidth * 2, firstChild.transform.position.y, firstChild.transform.position.z);
             }
         }
+    }
+
+    //reset positions of camera, layers and lastScreenPosition (used when going into combat or puzzle)
+    public void ResetPositions()
+    {
+        playerGfx.transform.position = playerOriginalPosition;
+
+        transform.position = new Vector3(0, 0, transform.position.z);
+
+        foreach (GameObject obj in layers)
+        {
+            obj.transform.position = new Vector3(0, 0, obj.transform.position.z);
+        }
+
+        lastScreenPosition = transform.position;
     }
     
 

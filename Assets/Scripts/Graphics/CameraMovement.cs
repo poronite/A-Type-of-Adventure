@@ -9,6 +9,10 @@ public class CameraMovement : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
+    //distance between player and camera
+    [SerializeField]
+    private float offsetX;
+
     public bool canMoveCamera = false;
 
     private void LateUpdate()
@@ -20,7 +24,10 @@ public class CameraMovement : MonoBehaviour
     {
         if (canMoveCamera)
         {
-            gameObject.transform.position = new Vector2(player.transform.position.x, gameObject.transform.position.y);
+            gameObject.transform.position = 
+                new Vector3(player.transform.position.x + offsetX,
+                gameObject.transform.position.y, 
+                gameObject.transform.position.z);
         }
     }
 }

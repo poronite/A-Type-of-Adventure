@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Change graphics and behaviour of camera 
+
 public class GraphicsUIManager : MonoBehaviour
 {
     [SerializeField]
@@ -14,20 +16,33 @@ public class GraphicsUIManager : MonoBehaviour
     [SerializeField]
     private GameObject Combat;
 
-
+    [SerializeField]
+    private CameraMovement mainCamera;
 
     public void ActivateLoadingScreen()
     {
-        LoadingScreen.SetActive(true);
+        LoadingScreen.SetActive(true); //for now it only does this
     }
 
 
     /// <summary>Deactivate loading screen, adventure, combat and puzzle graphics and UI.</summary>
     public void DeactivateAll()
     {
-        LoadingScreen.SetActive(false);
+        ActivateLoadingScreen();
+
+        //if last level was adventure reset positions
+        //so that when the player returns from a combat or puzzle
+        //the layers are ready to move
+        if (Adventure.activeSelf) 
+        {
+            mainCamera.GetComponent<ParalaxEffectAdv>().ResetPositions();
+        }
+
+        mainCamera.canMoveCamera = false;
+
         Adventure.SetActive(false);
         Combat.SetActive(false);
+        LoadingScreen.SetActive(false);
     }
 
 
@@ -35,6 +50,7 @@ public class GraphicsUIManager : MonoBehaviour
     public void ActivateAdventure()
     {
         DeactivateAll();
+        mainCamera.canMoveCamera = true; //activate camera
         Adventure.SetActive(true);
     }
 

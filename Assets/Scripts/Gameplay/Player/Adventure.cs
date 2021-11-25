@@ -88,6 +88,7 @@ public class Adventure : MonoBehaviour
         }
         else
         {
+            //check this after to fix bug
             DisplayNewCurrentWordAdv.Invoke(string.Empty);
             ClearOutputWordAdv.Invoke();
 
