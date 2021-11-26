@@ -16,11 +16,16 @@ MonoBehaviour:
   LevelType: 0
   TextToType: Once upon a time, the hero was on a journey to defeat the demon king
     until a thief appeared...
-  NumEvents: 1
+  NumChoices: 1
   WordKey:
   - appeared...
   LevelValue:
   - {fileID: 11400000, guid: 81d45d6c7264e7747ba96a2baa2bca5c, type: 2}
+  NumEvents: 1
+  EventWordKey:
+  - until
+  EventValue:
+  - {fileID: 11400000, guid: dc7fc2971edf6774197aaf9c53e79a02, type: 2}
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   CorrectWord: 

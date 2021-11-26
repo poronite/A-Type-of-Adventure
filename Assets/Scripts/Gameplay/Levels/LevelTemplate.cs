@@ -21,11 +21,13 @@ public class LevelTemplate : ScriptableObject
     [TextArea(3, 10)]
     public string TextToType;
 
-    public int NumEvents;
-
+    public int NumChoices;
     public List<string> WordKey;
-
     public List<LevelTemplate> LevelValue;
+
+    public int NumEvents;
+    public List<string> EventWordKey;
+    public List<EventsTemplate> EventValue;
 
 
     //Combat

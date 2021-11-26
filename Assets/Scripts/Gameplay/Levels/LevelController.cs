@@ -18,11 +18,15 @@ public class LevelController : MonoBehaviour
     //If level is of type Adventure
     private string textToType;
 
+    //choices
     private List<string> wordKey;
-
     private List<LevelTemplate> levelValue;
-
     private Dictionary<string, LevelTemplate> choices = new Dictionary<string, LevelTemplate>();
+
+    //events (for example recover player hp or trigger an animation etc...)
+    private List<string> eventWordKey;
+    private List<EventsTemplate> eventValue;
+    private Dictionary<string, EventsTemplate> events = new Dictionary<string, EventsTemplate>();
 
 
     //If level is of type Combat
@@ -36,6 +40,9 @@ public class LevelController : MonoBehaviour
 
     private LevelTemplate nextLevelAfterPuzzle;
 
+    delegate void TriggerEventsDelegate(string word);
+    TriggerEventsDelegate TriggerEvents;
+
 
     delegate void GraphicsDelegate();
     GraphicsDelegate ShowLoadingScreen;
@@ -46,6 +53,8 @@ public class LevelController : MonoBehaviour
 
     public void SetDelegatesLevel()
     {
+        TriggerEvents = GameObject.FindGameObjectWithTag("EventTrigger").GetComponent<TriggerEvents>().TriggerEvent;
+
         ShowLoadingScreen += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateLoadingScreen;
         ShowAdventure += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure;
         ShowCombat += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateCombat;
@@ -70,13 +79,8 @@ public class LevelController : MonoBehaviour
             case LevelType.Adventure:
 
                 textToType = levelData.TextToType;
-                
-                if (levelData.NumEvents >= 1)
-                {
-                    wordKey = levelData.WordKey;
-                    levelValue = levelData.LevelValue;
-                    CreateChoicesDictionary();
-                }
+
+                CreateDictionaries();
 
                 //Start adventure
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(textToType);
@@ -109,23 +113,52 @@ public class LevelController : MonoBehaviour
     }
 
 
-    private void CreateChoicesDictionary()
+    private void CreateDictionaries()
     {
-        choices = new Dictionary<string, LevelTemplate>();
-
-        for (int i = 0; i < wordKey.Count; i++)
+        if (levelData.NumChoices >= 1)
         {
-            choices.Add(wordKey[i], levelValue[i]);
+            wordKey = levelData.WordKey;
+            levelValue = levelData.LevelValue;
+
+            choices = new Dictionary<string, LevelTemplate>();
+
+            for (int i = 0; i < wordKey.Count; i++)
+            {
+                choices.Add(wordKey[i], levelValue[i]);
+            }
+        }
+
+        if (levelData.NumEvents >= 1)
+        {
+            eventWordKey = levelData.EventWordKey;
+            eventValue = levelData.EventValue;
+
+            events = new Dictionary<string, EventsTemplate>();
+
+            for (int i = 0; i < eventWordKey.Count; i++)
+            {
+                events.Add(eventWordKey[i], eventValue[i]);
+            }
         }
     }
 
 
-    /// <summary>Choose the next level based on word typed by the player while adventuring.</summary>
+    ///<summary>Choose the next level based on the word typed by the player while adventuring.</summary>
     public void ChooseNextLevel(string word)
     {
         if (choices.ContainsKey(word))
         {
             SetupLevel(choices[word]);
+        }
+    }
+
+
+    ///<summary>Trigger a event based on the word typed by the player while adventuring.</summary>
+    public void TriggerEvent(string word)
+    {
+        if (events.ContainsKey(word))
+        {
+            events[word].TriggerEvent();
         }
     }
 

@@ -15,7 +15,7 @@ MonoBehaviour:
   LevelName: FightExample
   LevelType: 1
   TextToType: 
-  NumEvents: 0
+  NumChoices: 0
   WordKey: []
   LevelValue: []
   Enemy: {fileID: 11400000, guid: 4f358eaaf0a3ea74297b1b07446dcd3f, type: 2}

@@ -42,14 +42,14 @@ public class ParalaxEffectAdv : MonoBehaviour
 
         foreach (GameObject obj in layers)
         {
-            loadChildObjects(obj);
+            LoadChildObjects(obj);
         }
 
         lastScreenPosition = transform.position;
     }
 
 
-    private void loadChildObjects(GameObject obj)
+    private void LoadChildObjects(GameObject obj)
     {
         float objectWidth = obj.GetComponent<SpriteRenderer>().bounds.size.x;
         //int childsNeeded = (int)Mathf.Ceil(screenBounds.x * 2 / objectWidth);
@@ -92,7 +92,7 @@ public class ParalaxEffectAdv : MonoBehaviour
     }
 
 
-    private void repositionChildObjects(GameObject obj)
+    private void RepositionChildObjects(GameObject obj)
     {
         Transform[] children = obj.GetComponentsInChildren<Transform>();
         if (children.Length > 1)
@@ -134,7 +134,7 @@ public class ParalaxEffectAdv : MonoBehaviour
     {
         foreach (GameObject obj in layers)
         {
-            repositionChildObjects(obj);
+            RepositionChildObjects(obj);
             float parallaxSpeed = 1 - Mathf.Clamp01(Mathf.Abs(transform.position.z / obj.transform.position.z));
             float difference = transform.position.x - lastScreenPosition.x;
             obj.transform.Translate(Vector3.right * difference * parallaxSpeed);

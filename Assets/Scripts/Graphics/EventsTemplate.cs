@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 
-//script that represents a script instantiates an animation like the enemy jumping closer to the player for example
+//events that are triggered when the player types a certain word
+//there are 2 types of events: 
+//events that can change stats for example restoring the players hp
+//graphics events that trigger an animation or display a picture for example a thief that jumps into the players path
 
 public enum EventType
 {
     Animation
 }
 
-[CreateAssetMenu(fileName = "New_Graphics_Event", menuName = "New Graphics Event", order = 53)]
-public class LevelGraphicsEvents : ScriptableObject
+[CreateAssetMenu(fileName = "New_Event", menuName = "New Event", order = 53)]
+public class EventsTemplate : ScriptableObject
 {
     [SerializeField]
-    private EventType eventType;
+    public EventType eventType;
 
     [SerializeField]
     private GameObject eventTarget;

@@ -12,9 +12,14 @@ public class Level_InspectorEditor : Editor
 
     //Adventure
     SerializedProperty textToType;
-    SerializedProperty numEvents;
+    //choices
+    SerializedProperty numChoices;
     SerializedProperty wordKey;
     SerializedProperty levelValue;
+    //graphics events
+    SerializedProperty numEvents;
+    SerializedProperty eventWordKey;
+    SerializedProperty eventValue;
 
     //Combat
     SerializedProperty enemy;
@@ -33,9 +38,14 @@ public class Level_InspectorEditor : Editor
         levelType = serializedObject.FindProperty("LevelType");
 
         textToType = serializedObject.FindProperty("TextToType");
-        numEvents = serializedObject.FindProperty("NumEvents");
+
+        numChoices = serializedObject.FindProperty("NumChoices");
         wordKey = serializedObject.FindProperty("WordKey");
         levelValue = serializedObject.FindProperty("LevelValue");
+
+        numEvents = serializedObject.FindProperty("NumEvents");
+        eventWordKey = serializedObject.FindProperty("EventWordKey");
+        eventValue = serializedObject.FindProperty("EventValue");
 
         enemy = serializedObject.FindProperty("Enemy");
         nextLevelAfterCombat = serializedObject.FindProperty("NextLevelAfterCombat");
@@ -71,9 +81,43 @@ public class Level_InspectorEditor : Editor
 
                 EditorGUILayout.Space();
 
-                EditorGUILayout.PropertyField(numEvents, new GUIContent("Events: "), true);
 
-                //Display dictionary
+                //Display dictionaries
+
+                //choices
+                EditorGUILayout.PropertyField(numChoices, new GUIContent("Choices: "), true);
+
+                //prevent unnecessary errors
+                if (level.NumChoices < 0)
+                {
+                    level.NumChoices = 0;
+                }
+
+                wordKey.arraySize = level.NumChoices;
+                levelValue.arraySize = level.NumChoices;
+
+                EditorGUILayout.Space();
+                EditorGUILayout.Space();
+
+                EditorGUILayout.BeginVertical();
+                for (int i = 0; i < level.NumChoices; i++)
+                {
+                    var choiceWord = wordKey.GetArrayElementAtIndex(i);
+                    var choiceLevel = levelValue.GetArrayElementAtIndex(i);
+
+                    EditorGUILayout.Space();
+
+                    EditorGUILayout.PropertyField(choiceWord, new GUIContent($"Required Word {i + 1}: "), true);
+                    EditorGUILayout.PropertyField(choiceLevel, new GUIContent($"Chosen Level {i + 1}: "), true);
+                    
+                    EditorGUILayout.Space();
+                }
+                EditorGUILayout.EndVertical();
+
+                EditorGUILayout.Space();
+
+                //events
+                EditorGUILayout.PropertyField(numEvents, new GUIContent("Events: "), true);
 
                 //prevent unnecessary errors
                 if (level.NumEvents < 0)
@@ -81,8 +125,8 @@ public class Level_InspectorEditor : Editor
                     level.NumEvents = 0;
                 }
 
-                wordKey.arraySize = level.NumEvents;
-                levelValue.arraySize = level.NumEvents;
+                eventWordKey.arraySize = level.NumEvents;
+                eventValue.arraySize = level.NumEvents;
 
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
@@ -90,19 +134,20 @@ public class Level_InspectorEditor : Editor
                 EditorGUILayout.BeginVertical();
                 for (int i = 0; i < level.NumEvents; i++)
                 {
-                    var choiceWord = wordKey.GetArrayElementAtIndex(i);
-                    var choiceLevel = levelValue.GetArrayElementAtIndex(i);
-
-                    
-                    EditorGUILayout.PropertyField(choiceWord, new GUIContent($"Required Word {i + 1}: "), true);
-                    EditorGUILayout.PropertyField(choiceLevel, new GUIContent($"Chosen Level {i + 1}: "), true);
-                    
+                    var eventWord = eventWordKey.GetArrayElementAtIndex(i);
+                    var eventLevel = eventValue.GetArrayElementAtIndex(i);
 
                     EditorGUILayout.Space();
+
+                    EditorGUILayout.PropertyField(eventWord, new GUIContent($"Required Word {i + 1}: "), true);
+                    EditorGUILayout.PropertyField(eventLevel, new GUIContent($"Event {i + 1}: "), true);
+
                     EditorGUILayout.Space();
                 }
-
                 EditorGUILayout.EndVertical();
+
+                EditorGUILayout.Space();
+
                 break;
             case LevelType.Combat:
 

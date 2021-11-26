@@ -29,8 +29,9 @@ public class Adventure : MonoBehaviour
     delegate void ClearUIDelegate();
     ClearUIDelegate ClearOutputWordAdv;
 
-    delegate void ChangeLevelDelegate(string word);
-    ChangeLevelDelegate ChangeToNewLevel;
+    delegate void LevelEventDelegate(string word);
+    LevelEventDelegate ChangeToNewLevel;
+    LevelEventDelegate TriggerEvent;
 
     delegate void RefreshMovement();
     RefreshMovement RefreshPlayerMovement;
@@ -41,7 +42,10 @@ public class Adventure : MonoBehaviour
     public void SetDelegatesAdv()
     {
         SendNextWordAdv += gameObject.GetComponent<Typing>().NewWord;
-        ChangeToNewLevel += GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().ChooseNextLevel;
+
+        LevelController LevelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
+        ChangeToNewLevel += LevelController.ChooseNextLevel;
+        TriggerEvent += LevelController.TriggerEvent;
 
         AdventureUI AdvUIController = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<AdventureUI>();
 
@@ -81,6 +85,7 @@ public class Adventure : MonoBehaviour
         UpdateWrittenTextAdv.Invoke(writtenPlotText.ToString());
 
         ChangeToNewLevel.Invoke(nextWord);
+        TriggerEvent.Invoke(nextWord);
 
         if (!IsPlotSegmentComplete())
         {
