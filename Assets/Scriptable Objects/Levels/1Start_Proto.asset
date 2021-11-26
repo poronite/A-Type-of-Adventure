@@ -16,7 +16,7 @@ MonoBehaviour:
   LevelType: 0
   TextToType: Once upon a time, the hero was on a journey to defeat the demon king
     until a thief appeared...
-  NumChoices: 1
+  NumEvents: 1
   WordKey:
   - appeared...
   LevelValue:

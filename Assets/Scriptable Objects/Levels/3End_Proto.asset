@@ -15,7 +15,7 @@ MonoBehaviour:
   LevelName: EndExample
   LevelType: 0
   TextToType: After defeating the thief, the hero continued his journey.
-  NumChoices: 1
+  NumEvents: 1
   WordKey:
   - journey.
   LevelValue:

@@ -56,6 +56,8 @@ public class LevelController : MonoBehaviour
     {
         ShowLoadingScreen.Invoke();
 
+        DestroyGraphicsEventClones();
+
         levelData = levelToLoad;
 
         levelName = levelData.LevelName;
@@ -69,7 +71,7 @@ public class LevelController : MonoBehaviour
 
                 textToType = levelData.TextToType;
                 
-                if (levelData.NumChoices >= 1)
+                if (levelData.NumEvents >= 1)
                 {
                     wordKey = levelData.WordKey;
                     levelValue = levelData.LevelValue;
@@ -124,6 +126,18 @@ public class LevelController : MonoBehaviour
         if (choices.ContainsKey(word))
         {
             SetupLevel(choices[word]);
+        }
+    }
+
+    
+    //destroy the objects such as sprites that are spawned at certain points of the game
+    private void DestroyGraphicsEventClones()
+    {
+        GameObject[] objectsToDelete = GameObject.FindGameObjectsWithTag("GraphicsEventClone");
+
+        foreach (GameObject item in objectsToDelete)
+        {
+            Destroy(item);
         }
     }
 }

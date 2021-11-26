@@ -12,7 +12,7 @@ public class Level_InspectorEditor : Editor
 
     //Adventure
     SerializedProperty textToType;
-    SerializedProperty numChoices;
+    SerializedProperty numEvents;
     SerializedProperty wordKey;
     SerializedProperty levelValue;
 
@@ -33,7 +33,7 @@ public class Level_InspectorEditor : Editor
         levelType = serializedObject.FindProperty("LevelType");
 
         textToType = serializedObject.FindProperty("TextToType");
-        numChoices = serializedObject.FindProperty("NumChoices");
+        numEvents = serializedObject.FindProperty("NumEvents");
         wordKey = serializedObject.FindProperty("WordKey");
         levelValue = serializedObject.FindProperty("LevelValue");
 
@@ -71,24 +71,24 @@ public class Level_InspectorEditor : Editor
 
                 EditorGUILayout.Space();
 
-                EditorGUILayout.PropertyField(numChoices, new GUIContent("Choices: "), true);
+                EditorGUILayout.PropertyField(numEvents, new GUIContent("Events: "), true);
 
                 //Display dictionary
 
                 //prevent unnecessary errors
-                if (level.NumChoices < 0)
+                if (level.NumEvents < 0)
                 {
-                    level.NumChoices = 0;
+                    level.NumEvents = 0;
                 }
 
-                wordKey.arraySize = level.NumChoices;
-                levelValue.arraySize = level.NumChoices;
+                wordKey.arraySize = level.NumEvents;
+                levelValue.arraySize = level.NumEvents;
 
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
 
                 EditorGUILayout.BeginVertical();
-                for (int i = 0; i < level.NumChoices; i++)
+                for (int i = 0; i < level.NumEvents; i++)
                 {
                     var choiceWord = wordKey.GetArrayElementAtIndex(i);
                     var choiceLevel = levelValue.GetArrayElementAtIndex(i);

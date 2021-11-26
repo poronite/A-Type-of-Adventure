@@ -14,7 +14,8 @@ TagManager:
   - LoadingScreen
   - GfxUIManager
   - LevelController
-  - PlayerGfx
+  - GraphicsEvents
+  - GraphicsEventClone
   layers:
   - Default
   - TransparentFX
