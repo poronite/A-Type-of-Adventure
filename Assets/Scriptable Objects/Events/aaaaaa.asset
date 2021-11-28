@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e1aaccb6227d6409cca00de46224ec, type: 3}
   m_Name: aaaaaa
   m_EditorClassIdentifier: 
-  eventType: 0
-  eventTarget: {fileID: 0}
-  spawnOffset: {x: 0, y: 0, z: 0}
-  animationToPlay: 
+  EventType: 0
+  EventTarget: {fileID: 0}
+  SpawnOffset: {x: 0, y: 0, z: 0}
+  AnimationToPlay: 

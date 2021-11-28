@@ -17,6 +17,7 @@ TagManager:
   - GraphicsEvents
   - GraphicsEventClone
   - PlayerGfx
+  - EventController
   layers:
   - Default
   - TransparentFX

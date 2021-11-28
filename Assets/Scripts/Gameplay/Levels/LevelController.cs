@@ -40,7 +40,7 @@ public class LevelController : MonoBehaviour
 
     private LevelTemplate nextLevelAfterPuzzle;
 
-    delegate void TriggerEventsDelegate(string word);
+    delegate void TriggerEventsDelegate(EventsTemplate eventToBeTriggered);
     TriggerEventsDelegate TriggerEvents;
 
 
@@ -53,7 +53,7 @@ public class LevelController : MonoBehaviour
 
     public void SetDelegatesLevel()
     {
-        TriggerEvents = GameObject.FindGameObjectWithTag("EventTrigger").GetComponent<TriggerEvents>().TriggerEvent;
+        TriggerEvents = GameObject.FindGameObjectWithTag("EventController").GetComponent<TriggerEvents>().TriggerEvent;
 
         ShowLoadingScreen += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateLoadingScreen;
         ShowAdventure += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure;
@@ -158,7 +158,7 @@ public class LevelController : MonoBehaviour
     {
         if (events.ContainsKey(word))
         {
-            events[word].TriggerEvent();
+            TriggerEvents.Invoke(events[word]);
         }
     }
 

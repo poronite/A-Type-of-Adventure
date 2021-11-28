@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e1aaccb6227d6409cca00de46224ec, type: 3}
   m_Name: SpawnThiefAdv
   m_EditorClassIdentifier: 
-  eventType: 0
-  eventTarget: {fileID: 3312547129988015813, guid: ee5ab8fd103ad214395108e654f11c43,
+  EventType: 0
+  EventTarget: {fileID: 3312547129988015813, guid: ee5ab8fd103ad214395108e654f11c43,
     type: 3}
-  spawnOffset: {x: 12, y: -1, z: 0}
-  animationToPlay: AppearAnimation
+  SpawnOffset: {x: 12, y: -1.2, z: 0}
+  AnimationToPlay: AppearAnimation
