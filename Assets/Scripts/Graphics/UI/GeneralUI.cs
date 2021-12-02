@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GeneralUI : MonoBehaviour
 {
     //References
     [SerializeField]
-    private Text timeElapsedUI;
+    private TextMeshProUGUI timeElapsedUI;
 
     [SerializeField]
-    private Text numMistakesUI;
+    private TextMeshProUGUI numMistakesUI;
 
 
 

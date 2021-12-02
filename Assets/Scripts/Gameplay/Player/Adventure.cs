@@ -74,7 +74,7 @@ public class Adventure : MonoBehaviour
 
     public void CompleteWordAdv()
     {
-        //make the player sprite move for 5 seconds
+        //make the player sprite move for a few seconds
         RefreshPlayerMovement.Invoke();
 
         //Every word ends with a blank space | Example: "time, " "hero "
@@ -84,7 +84,6 @@ public class Adventure : MonoBehaviour
 
         UpdateWrittenTextAdv.Invoke(writtenPlotText.ToString());
 
-        ChangeToNewLevel.Invoke(nextWord);
         TriggerEvent.Invoke(nextWord);
 
         if (!IsPlotSegmentComplete())
@@ -93,15 +92,13 @@ public class Adventure : MonoBehaviour
         }
         else
         {
-            //check this after to fix bug
-            DisplayNewCurrentWordAdv.Invoke(string.Empty);
-            ClearOutputWordAdv.Invoke();
-
             Debug.Log("Plot Segment Complete.");
 
+            DisplayNewCurrentWordAdv.Invoke(string.Empty);
+            ClearOutputWordAdv.Invoke();
             SendNextWordAdv(string.Empty);
 
-            //gameObject.GetComponent<Combat>().StartCombat();
+            ChangeToNewLevel.Invoke(nextWord);
         }
     }
 

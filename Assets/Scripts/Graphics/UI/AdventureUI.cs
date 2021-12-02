@@ -1,21 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
+using TMPro;
 
 public class AdventureUI : MonoBehaviour
 {
     //References
     [SerializeField]
-    private Text writtenTextUIAdv;
+    private TextMeshProUGUI writtenTextUIAdv;
 
     [SerializeField]
-    private Text currentTextUIAdv;
+    private TextMeshProUGUI currentTextUIAdv;
 
     [SerializeField]
-    private Text outputTextUIAdv;
+    private TextMeshProUGUI outputTextUIAdv;
 
     [SerializeField]
-    private Text remainingTextUIAdv;
+    private TextMeshProUGUI remainingTextUIAdv;
 
 
 

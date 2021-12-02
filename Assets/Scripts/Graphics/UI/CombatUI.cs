@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CombatUI : MonoBehaviour
 {
@@ -15,16 +16,16 @@ public class CombatUI : MonoBehaviour
 
     //References
     [SerializeField]
-    private Text attackWordTextUICmb;
+    private TextMeshProUGUI attackWordTextUICmb;
 
     [SerializeField]
-    private Text dodgeWordTextUICmb;
+    private TextMeshProUGUI dodgeWordTextUICmb;
 
     [SerializeField]
-    private Text currentTextUICmb;
+    private TextMeshProUGUI currentTextUICmb;
 
     [SerializeField]
-    private Text outputTextUICmb;
+    private TextMeshProUGUI outputTextUICmb;
 
     [SerializeField]
     private Image enemyAttackWordFill;
