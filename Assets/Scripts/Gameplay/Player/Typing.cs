@@ -82,7 +82,7 @@ public class Typing : MonoBehaviour
     public void NewWord(string word)
     {
         ClearWords();
-        currentWord = word.Trim();
+        currentWord = word.TrimStart();
 
         Debug.Log(currentWord);
 

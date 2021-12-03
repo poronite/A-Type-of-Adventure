@@ -47,9 +47,9 @@ public class PlayerInput : MonoBehaviour
     }
 
 
-    /// <summary>Allowed Input: letters and separators (. , ! : etc).</summary>
+    /// <summary>Allowed Input: letters, space bar, separators (. , ! : etc).</summary>
     private bool IsAllowedInput(string key)
     {        
-        return key.Length == 1; 
+        return key.Length == 1 || key == " ";
     }
 }

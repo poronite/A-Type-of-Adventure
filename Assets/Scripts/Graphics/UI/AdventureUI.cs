@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class AdventureUI : MonoBehaviour
 {
     //References
+    [SerializeField]
+    private RectTransform currentTextUITransform;
+
+    [SerializeField]
+    private RectTransform outputTextUITransform;
+
     [SerializeField]
     private TextMeshProUGUI writtenTextUIAdv;
 
@@ -44,5 +49,14 @@ public class AdventureUI : MonoBehaviour
     public void DisplayNewCurrentWordUIAdv(string word)
     {
         currentTextUIAdv.text = word;
+
+        //currentTextUIAdv.ForceMeshUpdate();
+
+        Vector2 textSize = currentTextUIAdv.GetPreferredValues(word);
+
+        currentTextUITransform.sizeDelta = textSize;
+        currentTextUITransform.localPosition = new Vector2(0, 0);
+        outputTextUITransform.sizeDelta = textSize;
+        outputTextUITransform.localPosition = new Vector2(0, 0);
     }
 }

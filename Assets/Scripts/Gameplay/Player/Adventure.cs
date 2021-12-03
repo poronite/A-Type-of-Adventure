@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using UnityEngine;
-using UnityEngine.Events;
 
 //This script will be used to manage everything involving Adventure: when typing the plot of the game.
 //It will be able to add written words to writtenPlotText and send next word of remainingPlotText to Typing script's currentWord
@@ -64,7 +63,7 @@ public class Adventure : MonoBehaviour
         textToType = textToType.Trim();
 
         //add a space at the end otherwise player won't be able to type the last word
-        remainingPlotText = textToType + " ";
+        remainingPlotText = textToType;
 
         //GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure();
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Adventure;
@@ -77,14 +76,15 @@ public class Adventure : MonoBehaviour
         //make the player sprite move for a few seconds
         RefreshPlayerMovement.Invoke();
 
+        //this is to add a space to the end of the last word in a level
+        nextWord = nextWord.Trim() + " ";
+
         //Every word ends with a blank space | Example: "time, " "hero "
-        //since blank spaces aren't going to be used for gameplay we ignore them when sending a word,
-        //but because of that it needs to be added here.
-        writtenPlotText.Append(nextWord + " ");
+        writtenPlotText.Append(nextWord);
 
         UpdateWrittenTextAdv.Invoke(writtenPlotText.ToString());
 
-        TriggerEvent.Invoke(nextWord);
+        TriggerEvent.Invoke(nextWord.Trim());
 
         if (!IsPlotSegmentComplete())
         {
@@ -98,7 +98,7 @@ public class Adventure : MonoBehaviour
             ClearOutputWordAdv.Invoke();
             SendNextWordAdv(string.Empty);
 
-            ChangeToNewLevel.Invoke(nextWord);
+            ChangeToNewLevel.Invoke(nextWord.Trim());
         }
     }
 
@@ -109,20 +109,26 @@ public class Adventure : MonoBehaviour
 
         nextWord = string.Empty;
 
-        for (int i = 0; i < remainingPlotText.Length; i++)
+        for (int i = 0; i <= remainingPlotText.Length; i++)
         {
-            if (IsNextWordEnd(i))
+            if (i == remainingPlotText.Length) //if player reaches end of level
             {
                 nextWordEndIndex = i;
                 break; //To prevent gamebreaking loops
             }
+
+            if (IsNextWordEnd(i)) //if player reaches end of word
+            {
+                nextWordEndIndex = i + 1; //include space bar
+                break; //To prevent gamebreaking loops
+            } 
         }
 
         nextWord = remainingPlotText.Substring(0, nextWordEndIndex);
 
         remainingPlotText = remainingPlotText.Remove(0, nextWordEndIndex).TrimStart();
 
-        //Debug.Log($"|{newWord}| |{remainingPlotText}|");
+        Debug.Log($"|{nextWord}| |{remainingPlotText}|");
 
         SendNextWordAdv(nextWord);
 
