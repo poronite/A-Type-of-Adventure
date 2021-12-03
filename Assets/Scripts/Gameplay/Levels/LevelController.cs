@@ -25,8 +25,8 @@ public class LevelController : MonoBehaviour
 
     //events (for example recover player hp or trigger an animation etc...)
     private List<string> eventWordKey;
-    private List<EventsTemplate> eventValue;
-    private Dictionary<string, EventsTemplate> events = new Dictionary<string, EventsTemplate>();
+    private List<EncontersTemplate> eventValue;
+    private Dictionary<string, EncontersTemplate> events = new Dictionary<string, EncontersTemplate>();
 
 
     //If level is of type Combat
@@ -40,8 +40,8 @@ public class LevelController : MonoBehaviour
 
     private LevelTemplate nextLevelAfterPuzzle;
 
-    delegate void TriggerEventsDelegate(EventsTemplate eventToBeTriggered);
-    TriggerEventsDelegate TriggerEvents;
+    delegate void TriggerEncontersDelegate(EncontersTemplate eventToBeTriggered);
+    TriggerEncontersDelegate TriggerEnconters;
 
 
     delegate void GraphicsDelegate();
@@ -53,7 +53,7 @@ public class LevelController : MonoBehaviour
 
     public void SetDelegatesLevel()
     {
-        TriggerEvents = GameObject.FindGameObjectWithTag("EventController").GetComponent<TriggerEvents>().TriggerEvent;
+        TriggerEnconters += GameObject.FindGameObjectWithTag("EncontersController").GetComponent<EnconterController>().EnconterTriggered;
 
         ShowLoadingScreen += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateLoadingScreen;
         ShowAdventure += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure;
@@ -133,7 +133,7 @@ public class LevelController : MonoBehaviour
             eventWordKey = levelData.EventWordKey;
             eventValue = levelData.EventValue;
 
-            events = new Dictionary<string, EventsTemplate>();
+            events = new Dictionary<string, EncontersTemplate>();
 
             for (int i = 0; i < eventWordKey.Count; i++)
             {
@@ -154,11 +154,11 @@ public class LevelController : MonoBehaviour
 
 
     ///<summary>Trigger a event based on the word typed by the player while adventuring.</summary>
-    public void TriggerEvent(string word)
+    public void TriggerEnconter(string word)
     {
         if (events.ContainsKey(word))
         {
-            TriggerEvents.Invoke(events[word]);
+            TriggerEnconters.Invoke(events[word]);
         }
     }
 

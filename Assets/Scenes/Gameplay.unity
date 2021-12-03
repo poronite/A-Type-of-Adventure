@@ -132,8 +132,8 @@ GameObject:
   - component: {fileID: 193121912}
   - component: {fileID: 193121913}
   m_Layer: 0
-  m_Name: EventsController
-  m_TagString: EventController
+  m_Name: EncontersController
+  m_TagString: EncontersController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 193121911}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0ba137197fdc0040b18bb6b4081027d, type: 3}
+  m_Script: {fileID: 11500000, guid: 247887415d2e3ea479b5e375d526e6b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &451469498

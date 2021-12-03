@@ -14,10 +14,12 @@ TagManager:
   - LoadingScreen
   - GfxUIManager
   - LevelController
-  - GraphicsEvents
   - GraphicsEventClone
   - PlayerGfx
   - EventController
+  - Enconters
+  - EncontersClone
+  - EncontersController
   layers:
   - Default
   - TransparentFX

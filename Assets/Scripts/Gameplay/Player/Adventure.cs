@@ -12,7 +12,7 @@ public class Adventure : MonoBehaviour
     ///<summary>Still not written plot text.</summary>
     private string remainingPlotText;
 
-    /// <summary>Next word to be written.</summary>
+    ///<summary>Next word to be written.</summary>
     private string nextWord;
 
     //Delegates
@@ -28,23 +28,23 @@ public class Adventure : MonoBehaviour
     delegate void ClearUIDelegate();
     ClearUIDelegate ClearOutputWordAdv;
 
-    delegate void LevelEventDelegate(string word);
-    LevelEventDelegate ChangeToNewLevel;
-    LevelEventDelegate TriggerEvent;
+    delegate void LevelEnconterDelegate(string word);
+    LevelEnconterDelegate ChangeToNewLevel;
+    LevelEnconterDelegate TriggerEnconter;
 
     delegate void RefreshMovement();
     RefreshMovement RefreshPlayerMovement;
 
 
 
-    ///<summary>Adventure starts when Graphics scene is loaded</summary>
+    ///<summary>Adventure starts when Graphics scene is loaded.</summary>
     public void SetDelegatesAdv()
     {
         SendNextWordAdv += gameObject.GetComponent<Typing>().NewWord;
 
         LevelController LevelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
         ChangeToNewLevel += LevelController.ChooseNextLevel;
-        TriggerEvent += LevelController.TriggerEvent;
+        TriggerEnconter += LevelController.TriggerEnconter;
 
         AdventureUI AdvUIController = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<AdventureUI>();
 
@@ -84,7 +84,7 @@ public class Adventure : MonoBehaviour
 
         UpdateWrittenTextAdv.Invoke(writtenPlotText.ToString());
 
-        TriggerEvent.Invoke(nextWord.Trim());
+        TriggerEnconter.Invoke(nextWord.Trim());
 
         if (!IsPlotSegmentComplete())
         {

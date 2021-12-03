@@ -27,7 +27,7 @@ public class LevelTemplate : ScriptableObject
 
     public int NumEvents;
     public List<string> EventWordKey;
-    public List<EventsTemplate> EventValue;
+    public List<EncontersTemplate> EventValue;
 
 
     //Combat
