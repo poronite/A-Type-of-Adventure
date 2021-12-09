@@ -16,10 +16,9 @@ TagManager:
   - LevelController
   - GraphicsEventClone
   - PlayerGfx
-  - EventController
-  - Enconters
-  - EncontersClone
-  - EncontersController
+  - Encounters
+  - EncountersClone
+  - EncountersController
   layers:
   - Default
   - TransparentFX

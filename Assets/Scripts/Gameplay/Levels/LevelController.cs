@@ -25,8 +25,8 @@ public class LevelController : MonoBehaviour
 
     //events (for example recover player hp or trigger an animation etc...)
     private List<string> eventWordKey;
-    private List<EncontersTemplate> eventValue;
-    private Dictionary<string, EncontersTemplate> events = new Dictionary<string, EncontersTemplate>();
+    private List<EncountersTemplate> eventValue;
+    private Dictionary<string, EncountersTemplate> events = new Dictionary<string, EncountersTemplate>();
 
 
     //If level is of type Combat
@@ -40,8 +40,11 @@ public class LevelController : MonoBehaviour
 
     private LevelTemplate nextLevelAfterPuzzle;
 
-    delegate void TriggerEncontersDelegate(EncontersTemplate eventToBeTriggered);
-    TriggerEncontersDelegate TriggerEnconters;
+    delegate void TriggerEncontersDelegate(EncountersTemplate eventToBeTriggered);
+    TriggerEncontersDelegate TriggerEncounters;
+
+    delegate void SetPlayerMovement(bool movementState);
+    SetPlayerMovement AllowPlayerMovement;
 
 
     delegate void GraphicsDelegate();
@@ -53,7 +56,9 @@ public class LevelController : MonoBehaviour
 
     public void SetDelegatesLevel()
     {
-        TriggerEnconters += GameObject.FindGameObjectWithTag("EncontersController").GetComponent<EnconterController>().EnconterTriggered;
+        EncounterController encountersController = GameObject.FindGameObjectWithTag("EncountersController").GetComponent<EncounterController>();
+        TriggerEncounters += encountersController.EnconterTriggered;
+        AllowPlayerMovement += encountersController.SetPlayerMovement;
 
         ShowLoadingScreen += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateLoadingScreen;
         ShowAdventure += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure;
@@ -66,6 +71,7 @@ public class LevelController : MonoBehaviour
         ShowLoadingScreen.Invoke();
 
         DestroyGraphicsEventClones();
+        AllowPlayerMovement(false);
 
         levelData = levelToLoad;
 
@@ -133,7 +139,7 @@ public class LevelController : MonoBehaviour
             eventWordKey = levelData.EventWordKey;
             eventValue = levelData.EventValue;
 
-            events = new Dictionary<string, EncontersTemplate>();
+            events = new Dictionary<string, EncountersTemplate>();
 
             for (int i = 0; i < eventWordKey.Count; i++)
             {
@@ -158,7 +164,7 @@ public class LevelController : MonoBehaviour
     {
         if (events.ContainsKey(word))
         {
-            TriggerEnconters.Invoke(events[word]);
+            TriggerEncounters.Invoke(events[word]);
         }
     }
 

@@ -54,7 +54,7 @@ public class Adventure : MonoBehaviour
         UpdateRemainingTextAdv += AdvUIController.UpdateRemainingTextUIAdv;
         DisplayNewCurrentWordAdv += AdvUIController.DisplayNewCurrentWordUIAdv;
 
-        RefreshPlayerMovement = GameObject.FindGameObjectWithTag("PlayerGfx").GetComponent<PlayerMovement>().RefreshPlayerMovementDuration;
+        RefreshPlayerMovement = GameObject.FindGameObjectWithTag("PlayerGfx").GetComponent<PlayerMovementAdv>().RefreshPlayerMovementDuration;
     }
 
     public void StartAdventure(string textToType) //Start of a new game (Adventure)

@@ -5,15 +5,15 @@
 //enconters that can change stats for example restoring the players hp
 //graphics enconters that trigger an animation or display a picture for example a thief that jumps into the players path
 
-public enum EnconterType
+public enum EncounterType
 {
-    Animation
+    Assault
 }
 
 [CreateAssetMenu(fileName = "New_Enconter", menuName = "New Enconter", order = 53)]
-public class EncontersTemplate : ScriptableObject
+public class EncountersTemplate : ScriptableObject
 {
-    public EnconterType EnconterType;
+    public EncounterType EnconterType;
 
     public GameObject EnconterTarget;
 

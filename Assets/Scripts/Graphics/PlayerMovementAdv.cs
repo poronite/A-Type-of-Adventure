@@ -5,7 +5,7 @@ using UnityEngine;
 //script that will move the player graphics for 5s when the player clicks.
 //the duration is refreshed to 5s even if there's still remaining seconds left
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementAdv : MonoBehaviour
 {
     [SerializeField]
     private float playerspeed;
@@ -15,14 +15,17 @@ public class PlayerMovement : MonoBehaviour
 
     private float remainingDuration;
 
+    //if player is currently moving 
     private bool isMoving = true;
+
+    //force player to stop
+    private bool isPlayerStopped = false;
 
 
     private void Start()
     {
         RefreshPlayerMovementDuration();
     }
-
 
 
     public void RefreshPlayerMovementDuration()
@@ -33,15 +36,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void StopMovement()
+    //set if player can move or not regardless if player has typed a word
+    public void SetPlayerMovement(bool movementState)
     {
-        isMoving = false;
+        isPlayerStopped = movementState;
     }
 
 
     private void MovePlayer()
     {
-        if (isMoving)
+        if (isMoving && !isPlayerStopped)
         {
             remainingDuration -= Time.deltaTime;
 

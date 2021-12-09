@@ -47,6 +47,10 @@ public class LoadGame : MonoBehaviour
         GameObject levelController = GameObject.FindGameObjectWithTag("LevelController");
         levelController.GetComponent<LevelController>().SetDelegatesLevel();
 
+        //encounters
+        GameObject encounterController = GameObject.FindGameObjectWithTag("EncountersController");
+        encounterController.GetComponent<EncounterController>().SetDelegatesEnconters();
+
 
         //Start Game
         GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().SetupLevel(firstLevel);
