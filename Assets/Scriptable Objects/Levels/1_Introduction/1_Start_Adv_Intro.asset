@@ -23,9 +23,11 @@ MonoBehaviour:
   - rabbit.
   LevelValue:
   - {fileID: 11400000, guid: a8abacd5dc4c9b140aa5cdd19cbed6e7, type: 2}
-  NumEvents: 0
-  EventWordKey: []
-  EventValue: []
+  NumEvents: 1
+  EventWordKey:
+  - stolen,
+  EventValue:
+  - {fileID: 11400000, guid: e3e6761b4901dbe45a84a6fe7463786a, type: 2}
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   CorrectWord: 

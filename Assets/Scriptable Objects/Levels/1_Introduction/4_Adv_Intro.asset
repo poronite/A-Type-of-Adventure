@@ -23,9 +23,11 @@ MonoBehaviour:
   - off.
   LevelValue:
   - {fileID: 11400000, guid: 6c3d8d6aa9b822c408597f24f19dee06, type: 2}
-  NumEvents: 0
-  EventWordKey: []
-  EventValue: []
+  NumEvents: 1
+  EventWordKey:
+  - attempt
+  EventValue:
+  - {fileID: 11400000, guid: dc7fc2971edf6774197aaf9c53e79a02, type: 2}
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   CorrectWord: 

@@ -2,26 +2,30 @@
 
 //encounters that are triggered when the player types a certain word
 //there are several types of encounters:
-//Appear encounter: spawn an npc for example
-//Assault encounter: spawn an npc and ambush the player usually used before a battle
+//Gameplay encounter: trigger a function that affects the player gameplay like restoring the player's hp
+//Graphics encounter: spawn an npc and ambush the player usually used before a battle
 
 
 public enum EncounterType
 {
-    Appear,
-    Assault
+    Gameplay,
+    Graphics
 }
 
-[CreateAssetMenu(fileName = "New_Enconter", menuName = "New Enconter", order = 53)]
+[CreateAssetMenu(fileName = "New_Encounter", menuName = "New Encounter", order = 53)]
 public class EncountersTemplate : ScriptableObject
 {
+    //both
     public EncounterType EncounterType;
 
-    public GameObject EnconterTarget;
+    public bool StopPlayer;
+
+    public float delayBeforePlayerStopping;
+
+    //graphics
+    public GameObject EncounterGfxObject;
 
     public Vector3 SpawnOffset;
-
-    public bool StopPlayer;
 
     public string AnimationToPlay;
 }

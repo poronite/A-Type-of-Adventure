@@ -19,30 +19,45 @@ public class EncounterController : MonoBehaviour
     {
         switch (encounterToBeTriggered.EncounterType)
         {
-            case EncounterType.Appear:
-                AppearEncounter(encounterToBeTriggered);
+            case EncounterType.Gameplay:
                 break;
-            case EncounterType.Assault:
-                AssaultEncounter(encounterToBeTriggered);
+            case EncounterType.Graphics:
+                GameObject instance = SpawnGfxObject(encounterToBeTriggered);
+
+                //graphics encounter can be just a simple sprite or it can also have an animation
+                if (encounterToBeTriggered.AnimationToPlay != string.Empty)
+                {
+                    TriggerAnimation(encounterToBeTriggered.AnimationToPlay, instance);
+                }
+
                 break;
             default:
                 break;
-        } 
+        }
+
+        StartCoroutine(DelayBeforeStoppingMovement(encounterToBeTriggered.StopPlayer, encounterToBeTriggered.delayBeforePlayerStopping));
+
     }
 
 
-    private void AppearEncounter(EncountersTemplate encounterToBeTriggered)
+    IEnumerator DelayBeforeStoppingMovement(bool stopPlayer, float duration)
     {
-        SetPlayerMovement(encounterToBeTriggered.StopPlayer);
-        SpawnGfxObject(encounterToBeTriggered);
+        float timeElapsed = 0.0f;
+
+        while (timeElapsed < duration)
+        {
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        SetPlayerMovement(stopPlayer);
     }
 
 
-    private void AssaultEncounter(EncountersTemplate encounterToBeTriggered)
+    //set if player stops moving or not
+    public void SetPlayerMovement(bool movementState)
     {
-        SetPlayerMovement(encounterToBeTriggered.StopPlayer);
-        GameObject instance = SpawnGfxObject(encounterToBeTriggered);
-        TriggerAnimation(encounterToBeTriggered, instance);
+        SetMovement.Invoke(movementState);
     }
 
 
@@ -50,21 +65,14 @@ public class EncounterController : MonoBehaviour
     {
         Vector3 cameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
 
-        return Instantiate(triggeredEncounter.EnconterTarget,
+        return Instantiate(triggeredEncounter.EncounterGfxObject,
             new Vector3(cameraPosition.x + triggeredEncounter.SpawnOffset.x, cameraPosition.y + triggeredEncounter.SpawnOffset.y),
             Quaternion.identity, GameObject.FindGameObjectWithTag("Encounters").transform);
     }
 
 
-    //set if player can move or not
-    public void SetPlayerMovement(bool movementState)
+    private void TriggerAnimation(string animationName, GameObject gfxObject)
     {
-        SetMovement.Invoke(movementState);
-    }
-
-
-    private void TriggerAnimation(EncountersTemplate triggeredEncounter, GameObject gfxObject)
-    {
-        gfxObject.GetComponentInChildren<Animator>().Play(triggeredEncounter.AnimationToPlay, 0);
+        gfxObject.GetComponentInChildren<Animator>().Play(animationName, 0);
     }
 }

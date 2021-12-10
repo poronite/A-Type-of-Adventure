@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: The warning
   LevelType: 0
-  TextToType: 'Enemy says: "I came to warn you. They''ll come looking for the orb,
-    you need to take it to the citadel, you need to take it to the order..." before
-    disappearing. X goes to bed, paying no attention to the words uttered by the
-    enemy.'
+  TextToType: 'A messenger appears and says: "I came to warn you. They''ll come looking
+    for the orb, you need to take it to the citadel, you need to take it to the order..."
+    before disappearing. X goes to bed, paying no attention to the words uttered
+    by the enemy.'
   NumChoices: 1
   WordKey:
   - enemy.

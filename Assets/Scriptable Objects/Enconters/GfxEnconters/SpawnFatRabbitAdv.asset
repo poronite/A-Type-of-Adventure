@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e1aaccb6227d6409cca00de46224ec, type: 3}
+  m_Name: SpawnFatRabbitAdv
+  m_EditorClassIdentifier: 
+  EncounterType: 1
+  StopPlayer: 1
+  delayBeforePlayerStopping: 3
+  EncounterGfxObject: {fileID: 3312547129988015813, guid: 35808220dad317f42af1075d3d4db0af,
+    type: 3}
+  SpawnOffset: {x: 12, y: 0, z: 0}
+  AnimationToPlay: 
