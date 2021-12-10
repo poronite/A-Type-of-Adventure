@@ -47,11 +47,11 @@ public class LevelController : MonoBehaviour
     SetPlayerMovement AllowPlayerMovement;
 
 
-    delegate void GraphicsDelegate();
-    GraphicsDelegate ShowLoadingScreen;
-    GraphicsDelegate ShowAdventure;
-    GraphicsDelegate ShowCombat;
-    //UIManagerDelegate ShowPuzzle;
+    delegate void LoadingScreenDelegate();
+    LoadingScreenDelegate ShowLoadingScreen;
+
+    delegate void GraphicsDelegate(string levelType);
+    GraphicsDelegate ChangeLevelGraphics;
 
 
     public void SetDelegatesLevel()
@@ -61,8 +61,7 @@ public class LevelController : MonoBehaviour
         AllowPlayerMovement += encountersController.SetPlayerMovement;
 
         ShowLoadingScreen += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateLoadingScreen;
-        ShowAdventure += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure;
-        ShowCombat += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateCombat;
+        ChangeLevelGraphics += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ChangeLevelGraphics;
     }
 
 
@@ -91,7 +90,7 @@ public class LevelController : MonoBehaviour
                 //Start adventure
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(textToType);
 
-                ShowAdventure.Invoke();
+                ChangeLevelGraphics.Invoke("Adventure");
 
                 break;
             case LevelType.Combat:
@@ -102,7 +101,7 @@ public class LevelController : MonoBehaviour
                 //Start combat
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().StartCombat(enemy, nextLevelAfterCombat);
 
-                ShowCombat.Invoke();
+                ChangeLevelGraphics.Invoke("Combat");
 
                 break;
             case LevelType.Puzzle:

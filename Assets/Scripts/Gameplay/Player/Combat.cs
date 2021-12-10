@@ -100,8 +100,8 @@ public class Combat : MonoBehaviour
     }
 
 
-    /// <summary>Set the next attack and dodge word for the player to choose.
-    /// The same word can't appear twice.</summary>
+    ///<summary>Set the next attack and dodge word for the player to choose.
+    ///The same word can't appear twice.</summary>
     private void SetWords()
     {
         //clear everything so the player can choose the next action

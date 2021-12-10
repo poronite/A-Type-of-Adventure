@@ -43,6 +43,8 @@ public class EnemyStats : MonoBehaviour
         Attack = enemyData.Attack;
         isBoss = enemyData.IsBoss;
 
+        GameObject.FindGameObjectWithTag("EnemyGfx").GetComponent<SpriteRenderer>().sprite = enemyData.Sprite;
+
         if (isBoss)
             AttackSpeed = 1.5f;
         else

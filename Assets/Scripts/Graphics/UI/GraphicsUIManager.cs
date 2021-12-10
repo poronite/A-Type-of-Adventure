@@ -21,12 +21,16 @@ public class GraphicsUIManager : MonoBehaviour
 
     public void ActivateLoadingScreen()
     {
-        LoadingScreen.SetActive(true); //for now it only does this
+        Adventure.SetActive(true); //everything gets activated in order to be able 
+        Combat.SetActive(true); //to change sprites while the game is loading
+
+        //for now it only does this
+        LoadingScreen.SetActive(true); 
     }
 
 
-    /// <summary>Deactivate loading screen, adventure, combat and puzzle graphics and UI.</summary>
-    public void DeactivateAll()
+    ///<summary>Change level graphics depending on level type.</summary>
+    public void ChangeLevelGraphics(string levelType)
     {
         ActivateLoadingScreen();
 
@@ -40,25 +44,21 @@ public class GraphicsUIManager : MonoBehaviour
 
         mainCamera.canMoveCamera = false;
 
-        Adventure.SetActive(false);
-        Combat.SetActive(false);
+        switch (levelType)
+        {
+            case "Adventure":
+                Combat.SetActive(false);
+                mainCamera.canMoveCamera = true; //activate camera
+                break;
+            case "Combat":
+                Adventure.SetActive(false);
+                break;
+            case "Puzzle":
+                break;
+            default:
+                break;
+        }
+
         LoadingScreen.SetActive(false);
-    }
-
-
-    /// <summary>Change to Adventure graphics and UI.</summary>
-    public void ActivateAdventure()
-    {
-        DeactivateAll();
-        mainCamera.canMoveCamera = true; //activate camera
-        Adventure.SetActive(true);
-    }
-
-
-    /// <summary>Change to Combat graphics and UI.</summary>
-    public void ActivateCombat()
-    {
-        DeactivateAll();
-        Combat.SetActive(true);
     }
 }

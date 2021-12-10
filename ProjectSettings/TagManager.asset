@@ -19,6 +19,7 @@ TagManager:
   - Encounters
   - EncountersClone
   - EncountersController
+  - EnemyGfx
   layers:
   - Default
   - TransparentFX
