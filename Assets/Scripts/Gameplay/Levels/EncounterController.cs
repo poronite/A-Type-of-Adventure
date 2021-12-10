@@ -17,8 +17,11 @@ public class EncounterController : MonoBehaviour
 
     public void EnconterTriggered(EncountersTemplate encounterToBeTriggered)
     {
-        switch (encounterToBeTriggered.EnconterType)
+        switch (encounterToBeTriggered.EncounterType)
         {
+            case EncounterType.Appear:
+                AppearEncounter(encounterToBeTriggered);
+                break;
             case EncounterType.Assault:
                 AssaultEncounter(encounterToBeTriggered);
                 break;
@@ -28,10 +31,28 @@ public class EncounterController : MonoBehaviour
     }
 
 
+    private void AppearEncounter(EncountersTemplate encounterToBeTriggered)
+    {
+        SetPlayerMovement(encounterToBeTriggered.StopPlayer);
+        SpawnGfxObject(encounterToBeTriggered);
+    }
+
+
     private void AssaultEncounter(EncountersTemplate encounterToBeTriggered)
     {
-        SetPlayerMovement(true);
-        TriggerAnimation(encounterToBeTriggered);
+        SetPlayerMovement(encounterToBeTriggered.StopPlayer);
+        GameObject instance = SpawnGfxObject(encounterToBeTriggered);
+        TriggerAnimation(encounterToBeTriggered, instance);
+    }
+
+
+    private GameObject SpawnGfxObject(EncountersTemplate triggeredEncounter)
+    {
+        Vector3 cameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
+
+        return Instantiate(triggeredEncounter.EnconterTarget,
+            new Vector3(cameraPosition.x + triggeredEncounter.SpawnOffset.x, cameraPosition.y + triggeredEncounter.SpawnOffset.y),
+            Quaternion.identity, GameObject.FindGameObjectWithTag("Encounters").transform);
     }
 
 
@@ -42,14 +63,8 @@ public class EncounterController : MonoBehaviour
     }
 
 
-    private void TriggerAnimation(EncountersTemplate triggeredEncounter)
+    private void TriggerAnimation(EncountersTemplate triggeredEncounter, GameObject gfxObject)
     {
-        Vector3 cameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
-
-        GameObject instance = Instantiate(triggeredEncounter.EnconterTarget,
-            new Vector3(cameraPosition.x + triggeredEncounter.SpawnOffset.x, cameraPosition.y + triggeredEncounter.SpawnOffset.y),
-            Quaternion.identity, GameObject.FindGameObjectWithTag("Encounters").transform);
-
-        instance.GetComponentInChildren<Animator>().Play(triggeredEncounter.AnimationToPlay, 0);
+        gfxObject.GetComponentInChildren<Animator>().Play(triggeredEncounter.AnimationToPlay, 0);
     }
 }
