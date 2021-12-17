@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Adventure : MonoBehaviour
 {
+    private string playerName = string.Empty;
+
     ///<summary>Already written plot text.</summary>
     private StringBuilder writtenPlotText = new StringBuilder();
 
@@ -65,9 +67,37 @@ public class Adventure : MonoBehaviour
         //add a space at the end otherwise player won't be able to type the last word
         remainingPlotText = textToType;
 
+        if (playerName != string.Empty)
+        {
+            InsertNameIntoText();
+        }
+
         //GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure();
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Adventure;
         NextWordAdv();
+    }
+
+
+    public void SetPlayerName(string name)
+    {
+        playerName = name;
+        Debug.Log("replacing name");
+        InsertNameIntoText();
+    }
+
+    public void ResetName()
+    {
+        ClearOutputWordAdv.Invoke();
+    }
+    
+
+    public void InsertNameIntoText()
+    {
+        writtenPlotText = writtenPlotText.Replace("MCName", playerName);
+        UpdateWrittenTextAdv.Invoke(writtenPlotText.ToString());
+
+        remainingPlotText = remainingPlotText.Replace("MCName", playerName);
+        UpdateRemainingTextAdv.Invoke(remainingPlotText);
     }
 
 

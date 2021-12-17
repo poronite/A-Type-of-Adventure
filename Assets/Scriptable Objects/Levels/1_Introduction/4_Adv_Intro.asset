@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: In the middle of the night
   LevelType: 0
-  TextToType: In the middle of the night, X heard commotion outside, bandits were
-    raiding the farm. "Find the orb, quickly, or Lord Gillah will have our heads".
-    X quickly gets out of bed and grabs the decorative sword that was hanging on
-    the wall before going outside, in an attempt to fend them off.
+  TextToType: In the middle of the night, MCName heard commotion outside, bandits
+    were raiding the farm. "Find the orb, quickly, or Lord Gillah will have our heads".
+    MCName quickly gets out of bed and grabs the decorative sword that was hanging
+    on the wall before going outside, in an attempt to fend them off.
   NumChoices: 1
   WordKey:
   - off.

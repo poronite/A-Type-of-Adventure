@@ -20,6 +20,9 @@ public class Typing : MonoBehaviour
     //Variables
     public PlayerState CurrentPlayerState = PlayerState.Adventure;
 
+    ///<summary>Is player setting their name for the first time.</summary>
+    private bool isSettingName = false;
+
     ///<summary>Word that the player has to currently type.</summary>
     private string currentWord;
 
@@ -29,7 +32,7 @@ public class Typing : MonoBehaviour
     ///<summary>Index of the next character that needs to be typed by player.</summary>
     private int nextCharacterIndex = 0;
 
-    /// <summary>First letter of the action (attack or dodge) that the player chose.</summary>
+    ///<summary>First letter of the action (attack or dodge) that the player chose.</summary>
     private string firstLetterAction;
 
 
@@ -38,11 +41,18 @@ public class Typing : MonoBehaviour
     public UnityEvent Mistake;
 
     //Delegates
+
+    delegate void SetPlayerName(string name);
+    SetPlayerName SetName;
+
+    delegate void ClearName();
+    ClearName ResetName;
+
     //Invoke the respective state script to output character to UI
     delegate void OutputCharacterDelegate(string character);
     OutputCharacterDelegate OutputCharacterAdv;
     OutputCharacterDelegate OutputCharacterCmb;
-    OutputCharacterDelegate OutputCharacterPzl;
+    //OutputCharacterDelegate OutputCharacterPzl;
 
     //when player has to decide between attack and dodge
     delegate void DecideAction(string character);
@@ -66,6 +76,9 @@ public class Typing : MonoBehaviour
     //Player game object will never be disabled so OnEnable is enough
     private void OnEnable()
     {
+        SetName = gameObject.GetComponent<PlayerStats>().SetName;
+        ResetName = gameObject.GetComponent<Adventure>().ResetName;
+
         OutputCharacterAdv += gameObject.GetComponent<Adventure>().AddCharacterUIAdv;
         OutputCharacterCmb += gameObject.GetComponent<Combat>().AddCharacterUICmb;
         //OutputCharacterPzl += gameObject.GetComponent<Puzzle>().AddCharacterUIPzl;
@@ -85,6 +98,13 @@ public class Typing : MonoBehaviour
         currentWord = word.TrimStart();
 
         Debug.Log(currentWord);
+
+        if (currentWord.TrimEnd() == "MCName")
+        {
+            isSettingName = true;
+            currentWord = string.Empty;
+            Debug.Log("Setting name");
+        }
 
         //This is so that the player doesn't have to type
         //the first letter of the action twice when typing the action chosen.
@@ -138,6 +158,12 @@ public class Typing : MonoBehaviour
         {
             switch (CurrentPlayerState)
             {
+                case PlayerState.Adventure:
+                    if (isSettingName)
+                    {
+                        AddCharacter(character);
+                    }
+                    break;
                 case PlayerState.Combat:
                     //store the first letter of the word of the action chosen
                     //in order to re use it so that the player doesn't have to type it again
@@ -169,14 +195,36 @@ public class Typing : MonoBehaviour
     ///<summary>If letter is correct, add this letter to outputWord.</summary>
     private void AddCharacter(string character)
     {
-        //Verify if character is supposed to be displayed as upper case and if so make it upper case.
-        if (IsCharacterUpperCase())
+        if (!isSettingName)
         {
-            character = character.ToUpper();
+            //don't do this if player is setting up their name
+            //Verify if character is supposed to be displayed as upper case and if so make it upper case.
+            if (IsCharacterUpperCase())
+            {
+                character = character.ToUpper();
+            }
         }
 
-        outputWord.Append(character);
-        nextCharacterIndex++;
+        if (CanAppendCharacter(character))
+        {
+            outputWord.Append(character);
+            nextCharacterIndex++;
+
+            //add letter to word in UI
+            switch (CurrentPlayerState)
+            {
+                case PlayerState.Adventure:
+                    OutputCharacterAdv.Invoke(character);
+                    break;
+                case PlayerState.Combat:
+                    OutputCharacterCmb.Invoke(character);
+                    break;
+                case PlayerState.Puzzle:
+                    break;
+                default:
+                    break;
+            }
+        }
 
         //TEMPORARY SOUND EFFECT
         typeSFX.Play();
@@ -186,25 +234,29 @@ public class Typing : MonoBehaviour
         switch (CurrentPlayerState)
         {
             case PlayerState.Adventure:
-                OutputCharacterAdv.Invoke(character);
-
-                if (IsWordComplete())
+                if (IsWordComplete(character))
                 {
-                    //Debug.Log($"outputWord: {outputWord}");
-
                     //TEMPORARY SOUND EFFECT
                     wordCompleteSFX.Play();
 
                     CompleteWordAdv.Invoke();
                 }
+                else if (HasSetupName(character))
+                {
+                    isSettingName = false;
+                    string name = outputWord.ToString();
+
+                    //TEMPORARY SOUND EFFECT
+                    wordCompleteSFX.Play();
+
+                    CompleteWordAdv.Invoke();
+
+                    SetName.Invoke(name);
+                }
                 break;
             case PlayerState.Combat:
-                OutputCharacterCmb.Invoke(character);
-
-                if (IsWordComplete())
+                if (IsWordComplete(character))
                 {
-                    //Debug.Log("Word Completed");
-
                     //TEMPORARY SOUND EFFECT
                     wordCompleteSFX.Play();
 
@@ -226,17 +278,41 @@ public class Typing : MonoBehaviour
     }
 
 
-    private bool IsWordComplete()
+    //return true when the player is typing normally or 
+    //when player hasn't typed a " " when setting up their name
+    //" " is used for the player to confirm their name
+    private bool CanAppendCharacter(string character)
+    {
+        return !isSettingName || (isSettingName && character != " " && outputWord.Length < 8);
+    }
+
+
+    //return true when player completes a word or types their name
+    private bool IsWordComplete(string character)
     {
         return outputWord.ToString() == currentWord;
     }
 
 
-    /// <summary>Delete last character typed by player (Puzzle state only).</summary>
+    //check if player wants to set their name
+    private bool HasSetupName(string character)
+    {
+        return isSettingName && character == " " && outputWord.Length >= 1;
+    }
+
+
+    ///<summary>Delete last character typed by player (Setting Name and Puzzle only).</summary>
     public void DeleteLetter()
     {
         switch (CurrentPlayerState)
-        {            
+        {
+            case PlayerState.Adventure:
+                if (isSettingName && outputWord.Length >= 1)
+                {
+                    ClearWords();
+                    ResetName.Invoke();
+                }
+                break;
             case PlayerState.Puzzle:
                 Debug.Log("Last character typed was deleted");
                 break;

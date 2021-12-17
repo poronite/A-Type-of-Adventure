@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: Start of a new adventure.
   LevelType: 0
-  TextToType: This is the story of X, a humble adventurer whose life is about to
-    be turned upside down. It's almost time for supper and X decides to pick up some
-    carrots to make soup. When they got there, they were surprised to see that all
-    their carrots had been stolen, next to it was a fat rabbit.
+  TextToType: This is the story of MCName a humble adventurer whose life is about
+    to be turned upside down. It's almost time for supper and MCName decides to pick
+    up some carrots to make soup. When they got there, they were surprised to see
+    that all their carrots had been stolen, next to it was a fat rabbit.
   NumChoices: 1
   WordKey:
   - rabbit.

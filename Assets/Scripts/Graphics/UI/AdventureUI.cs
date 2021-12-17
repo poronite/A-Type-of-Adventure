@@ -42,6 +42,7 @@ public class AdventureUI : MonoBehaviour
     public void ClearOutputWordUIAdv()
     {
         outputTextUIAdv.text = string.Empty;
+        ResetAdvUIElementsPosition();
     }
 
 

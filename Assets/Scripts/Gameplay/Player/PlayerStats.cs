@@ -4,6 +4,8 @@ using UnityEngine.Events;
 public class PlayerStats : MonoBehaviour
 {
     //Variables
+    private string playerName;
+
     [SerializeField]
     private int playerMaxHP, playerAttack;
 
@@ -28,11 +30,19 @@ public class PlayerStats : MonoBehaviour
     delegate void PlayerHPBarFill(string id, float fillAmount);
     PlayerHPBarFill UpdatePlayerHPBarFill;
 
+    delegate void SendNameToAdv(string name);
+    SendNameToAdv ReplaceWithName;
+
 
     //Unity events
     [SerializeField]
     private UnityEvent GameOver;
 
+
+    public string PlayerName
+    {
+        get => playerName;
+    }
 
     public int PlayerAttack
     {
@@ -53,12 +63,14 @@ public class PlayerStats : MonoBehaviour
 
     public void SetGeneralUIDelegates()
     {
+        ReplaceWithName = gameObject.GetComponent<Adventure>().SetPlayerName;
+
         GeneralUI UIUpdater = GameObject.FindGameObjectWithTag("GeneralUI").GetComponent<GeneralUI>();
 
-        UpdateTimeElapsedUI += UIUpdater.SetTimeElapsedUI;
-        UpdateMistakesUI += UIUpdater.SetMistakesUI;
+        UpdateTimeElapsedUI = UIUpdater.SetTimeElapsedUI;
+        UpdateMistakesUI = UIUpdater.SetMistakesUI;
 
-        UpdatePlayerHPBarFill += GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateHealthBarFillUI;
+        UpdatePlayerHPBarFill = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateHealthBarFillUI;
     }
 
 
@@ -80,6 +92,13 @@ public class PlayerStats : MonoBehaviour
     }
 
 
+    public void SetName(string name)
+    {
+        playerName = name;
+        ReplaceWithName.Invoke(name);
+    }
+
+
     public void TakeDamage(int damage)
     {
         if (!isPlayerDead)
@@ -96,7 +115,6 @@ public class PlayerStats : MonoBehaviour
                     Debug.Log($"Player took {damage} damage | {playerCurrentHP} HP left | {playerMaxHP} Max HP.");
                     UpdateHPBar();
                 }
-
             }
             else
             {

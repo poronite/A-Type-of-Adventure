@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: Looking for the orb
   LevelType: 0
-  TextToType: Now that they're gone, X decides to look for the orb. End for the demo.
+  TextToType: Now that they're gone, MCName decides to look for the orb. End for
+    the demo.
   NumChoices: 0
   WordKey: []
   LevelValue: []
