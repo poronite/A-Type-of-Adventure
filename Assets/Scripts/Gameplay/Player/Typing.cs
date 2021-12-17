@@ -290,7 +290,7 @@ public class Typing : MonoBehaviour
     //return true when player completes a word or types their name
     private bool IsWordComplete(string character)
     {
-        return outputWord.ToString() == currentWord;
+        return outputWord.ToString() == currentWord && !isSettingName;
     }
 
 
