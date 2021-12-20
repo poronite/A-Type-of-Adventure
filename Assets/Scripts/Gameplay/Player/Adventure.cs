@@ -59,6 +59,7 @@ public class Adventure : MonoBehaviour
         RefreshPlayerMovement = GameObject.FindGameObjectWithTag("PlayerGfx").GetComponent<PlayerMovementAdv>().RefreshPlayerMovementDuration;
     }
 
+
     public void StartAdventure(string textToType) //Start of a new game (Adventure)
     {
         //remove any white spaces that may cause problems

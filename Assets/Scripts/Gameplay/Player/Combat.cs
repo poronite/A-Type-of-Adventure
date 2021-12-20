@@ -89,12 +89,11 @@ public class Combat : MonoBehaviour
     }
 
 
-    public void StartCombat(EnemyTemplate enemy, LevelTemplate nextLevelAfterCombat) //Start of a new game (Adventure)
+    public void StartCombat(EnemyTemplate enemy, LevelTemplate nextLevelAfterCombat) //Start of a new game (Combat)
     {
         nextLevel = nextLevelAfterCombat;
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Combat;
         GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().SetupEnemy(enemy);
-        //GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateCombat();
         SetWords();
         Debug.Log("Started combat.");
     }

@@ -38,6 +38,8 @@ public class LevelController : MonoBehaviour
     //If level is of type Puzzle
     private string correctWord;
 
+    private Sprite questionBoard;
+
     private LevelTemplate nextLevelAfterPuzzle;
 
     delegate void TriggerEncontersDelegate(EncountersTemplate eventToBeTriggered);
@@ -107,9 +109,16 @@ public class LevelController : MonoBehaviour
             case LevelType.Puzzle:
 
                 correctWord = levelData.CorrectWord;
+
+                questionBoard = levelData.QuestionBoard;
+
                 nextLevelAfterPuzzle = levelData.NextLevelAfterPuzzle;
 
                 //Start puzzle
+
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Puzzle>().StartPuzzle(correctWord, questionBoard, nextLevelAfterPuzzle);
+
+                ChangeLevelGraphics.Invoke("Puzzle");
 
                 break;
             default:

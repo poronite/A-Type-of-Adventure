@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 //Change graphics and behaviour of camera 
 
@@ -17,15 +15,20 @@ public class GraphicsUIManager : MonoBehaviour
     private GameObject Combat;
 
     [SerializeField]
+    private GameObject Puzzle;
+
+    [SerializeField]
     private CameraMovement mainCamera;
 
     public void ActivateLoadingScreen()
     {
+        //for now it only does this
+        LoadingScreen.SetActive(true);
+
+
         Adventure.SetActive(true); //everything gets activated in order to be able 
         Combat.SetActive(true); //to change sprites while the game is loading
-
-        //for now it only does this
-        LoadingScreen.SetActive(true); 
+        Puzzle.SetActive(true);
     }
 
 
@@ -54,11 +57,17 @@ public class GraphicsUIManager : MonoBehaviour
                 Adventure.SetActive(false);
                 break;
             case "Puzzle":
+                Puzzle.SetActive(false);
                 break;
             default:
                 break;
         }
 
+        DeactivateLoadingScreen();
+    }
+
+    private void DeactivateLoadingScreen()
+    {
         LoadingScreen.SetActive(false);
     }
 }

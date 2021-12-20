@@ -39,5 +39,7 @@ public class LevelTemplate : ScriptableObject
     //Puzzle
     public string CorrectWord;
 
+    public Sprite QuestionBoard;
+
     public LevelTemplate NextLevelAfterPuzzle;
 }

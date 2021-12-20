@@ -27,6 +27,7 @@ public class Level_InspectorEditor : Editor
 
     //Puzzle
     SerializedProperty correctWord;
+    SerializedProperty questionBoard;
     SerializedProperty nextLevelAfterPuzzle;
 
 
@@ -51,6 +52,7 @@ public class Level_InspectorEditor : Editor
         nextLevelAfterCombat = serializedObject.FindProperty("NextLevelAfterCombat");
 
         correctWord = serializedObject.FindProperty("CorrectWord");
+        questionBoard = serializedObject.FindProperty("QuestionBoard");
         nextLevelAfterPuzzle = serializedObject.FindProperty("NextLevelAfterPuzzle");
     }
 
@@ -168,6 +170,10 @@ public class Level_InspectorEditor : Editor
                 EditorGUILayout.Space();
 
                 EditorGUILayout.PropertyField(correctWord, new GUIContent("Correct Word: "), true);
+
+                EditorGUILayout.Space();
+
+                EditorGUILayout.PropertyField(questionBoard, new GUIContent("Question Board: "), true);
 
                 EditorGUILayout.Space();
 

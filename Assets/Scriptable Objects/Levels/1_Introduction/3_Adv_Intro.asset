@@ -29,4 +29,5 @@ MonoBehaviour:
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   CorrectWord: 
+  QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}
