@@ -12,14 +12,15 @@ public class PlayerInput : MonoBehaviour
     delegate void InputDelegate(string input);
     InputDelegate SendInput;
 
-    //Unity events
-    public UnityEvent DeleteInput;
+    delegate void DeleteDelegate();
+    DeleteDelegate DeleteInput;
 
 
-    //Player game object will never be disabled so OnEnable is enough
+    //Player game object will not start disabled so OnEnable is enough
     private void OnEnable()
     {
-        SendInput += gameObject.GetComponent<Typing>().TypeCharacter;
+        SendInput = gameObject.GetComponent<Typing>().TypeCharacter;
+        DeleteInput = gameObject.GetComponent<Typing>().DeleteWord;
     }
 
 

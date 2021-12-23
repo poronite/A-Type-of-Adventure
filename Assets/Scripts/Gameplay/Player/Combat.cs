@@ -41,8 +41,8 @@ public class Combat : MonoBehaviour
     ClearDelegate ClearCurrentOutputWordCmb;
     ClearDelegate ClearAttackDodgeWordsCmb;
 
-    delegate void DisplayOutputWordDelegate(string character);
-    DisplayOutputWordDelegate DisplayNewOutputWordCmb;
+    delegate void OutputUIDelegate(string character);
+    OutputUIDelegate AddCharacterCmb;
 
     delegate void DisplayActionWordsDelegate(string attackWord, string dodgeWord);
     DisplayActionWordsDelegate DisplayNewAttackDodgeWordsCmb;
@@ -74,15 +74,15 @@ public class Combat : MonoBehaviour
 
     public void SetDelegatesCmb()
     {
-        SendNextWordCmb += gameObject.GetComponent<Typing>().NewWord;
-        AttackEnemy += GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().TakeDamage;
-        GoToNextLevel += GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().SetupLevel;
+        SendNextWordCmb = gameObject.GetComponent<Typing>().NewWord;
+        AttackEnemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().TakeDamage;
+        GoToNextLevel = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().SetupLevel;
 
         CombatUI CmbUIController = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>();
 
         ClearCurrentOutputWordCmb += CmbUIController.ClearCurrentOutputWordUICmb;
         ClearAttackDodgeWordsCmb += CmbUIController.ClearAttackDodgeWordsUICmb;
-        DisplayNewOutputWordCmb += CmbUIController.DisplayNewOutputWordUICmb;
+        AddCharacterCmb += CmbUIController.AddCharacterUICmb;
         DisplayNewAttackDodgeWordsCmb += CmbUIController.DisplayNewAttackDodgeWordsUICmb;
         DefineWordColorCmb += CmbUIController.DefineWordColorUICmb;
         DisplayNewCurrentWordCmb += CmbUIController.DisplayNewCurrentWordUICmb;
@@ -143,7 +143,7 @@ public class Combat : MonoBehaviour
     }
 
 
-    /// <summary>Send to Typing script the word that the player chose.</summary>
+    ///<summary>Send to Typing script the word that the player chose.</summary>
     public void SetChosenWordCmb(string character)
     {
         actionChosen = Actions.None;
@@ -162,8 +162,8 @@ public class Combat : MonoBehaviour
     }
 
 
-    /// <summary>Verify if character is equal to the words first letter.
-    /// Then decide player's action based on word chosen.</summary>
+    ///<summary>Verify if character is equal to the words first letter.
+    ///Then decide player's action based on word chosen.</summary>
     private string DecideAction(string character)
     {
         if (character == attackWordText[0].ToString().ToLower())
@@ -206,9 +206,9 @@ public class Combat : MonoBehaviour
         }
     }
 
-    public void AddCharacterUICmb(string character)
+    public void AddCharacterUI(string character)
     {
-        DisplayNewOutputWordCmb.Invoke(character);
+        AddCharacterCmb.Invoke(character);
     }
 
 

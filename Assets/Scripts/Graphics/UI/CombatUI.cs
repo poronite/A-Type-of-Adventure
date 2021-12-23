@@ -40,7 +40,7 @@ public class CombatUI : MonoBehaviour
 
     //Player
     ///<summary>Display output with new character added.</summary>
-    public void DisplayNewOutputWordUICmb(string character)
+    public void AddCharacterUICmb(string character)
     {
         outputTextUICmb.text += character;
     }

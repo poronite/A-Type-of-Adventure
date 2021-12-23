@@ -51,13 +51,16 @@ public class GraphicsUIManager : MonoBehaviour
         {
             case "Adventure":
                 Combat.SetActive(false);
+                Puzzle.SetActive(false);
                 mainCamera.canMoveCamera = true; //activate camera
                 break;
             case "Combat":
                 Adventure.SetActive(false);
+                Puzzle.SetActive(false);
                 break;
             case "Puzzle":
-                Puzzle.SetActive(false);
+                Adventure.SetActive(false);
+                Combat.SetActive(false);
                 break;
             default:
                 break;

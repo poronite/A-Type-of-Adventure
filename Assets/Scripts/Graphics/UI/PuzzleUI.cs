@@ -1,18 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PuzzleUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private TextMeshProUGUI outputWordUIPzl;
+
+    [SerializeField]
+    private Image questionBoardUIPzl;
+
+
+
+    public void DisplayQuestionBoardUIPzl(Sprite questionBoard)
     {
-        
+        questionBoardUIPzl.sprite = questionBoard;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void AddCharacterUIPzl(string character)
     {
-        
+        outputWordUIPzl.text += character;
+    }
+
+
+    public void DeleteWordUIPzl()
+    {
+        outputWordUIPzl.text = string.Empty;
     }
 }

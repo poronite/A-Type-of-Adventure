@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
   m_Name: PuzzleTest
   m_EditorClassIdentifier: 
-  LevelName: 
+  LevelName: Oogabooga
   LevelType: 2
   TextToType: 
   NumChoices: 0
@@ -23,6 +23,7 @@ MonoBehaviour:
   EventValue: []
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
-  CorrectWord: 
-  QuestionBoard: {fileID: 0}
-  NextLevelAfterPuzzle: {fileID: 0}
+  CorrectWord: bernardo
+  QuestionBoard: {fileID: 21300000, guid: e8ded26d871592d438992d0d2612db57, type: 3}
+  NextLevelAfterPuzzle: {fileID: 11400000, guid: 6e9cad772d7a7bb4b9d8f19d62c84b8c,
+    type: 2}

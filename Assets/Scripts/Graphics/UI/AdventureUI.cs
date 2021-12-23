@@ -31,7 +31,7 @@ public class AdventureUI : MonoBehaviour
 
 
     ///<summary>Display output with new character added.</summary>
-    public void DisplayNewOutputWordUIAdv(string character)
+    public void AddCharacterUIAdv(string character)
     {
         OffsetAdvUIElementsPosition(character);
         outputTextUIAdv.text += character;

@@ -45,14 +45,16 @@ public class Typing : MonoBehaviour
     delegate void SetPlayerName(string name);
     SetPlayerName SetName;
 
-    delegate void ClearName();
-    ClearName ResetName;
+    delegate void ClearWord();
+    ClearWord ResetName;
+    ClearWord ResetAnswerPzl;
+
 
     //Invoke the respective state script to output character to UI
     delegate void OutputCharacterDelegate(string character);
     OutputCharacterDelegate OutputCharacterAdv;
     OutputCharacterDelegate OutputCharacterCmb;
-    //OutputCharacterDelegate OutputCharacterPzl;
+    OutputCharacterDelegate OutputCharacterPzl;
 
     //when player has to decide between attack and dodge
     delegate void DecideAction(string character);
@@ -62,7 +64,7 @@ public class Typing : MonoBehaviour
     delegate void CompleteWordDelegate();
     CompleteWordDelegate CompleteWordAdv;
     CompleteWordDelegate CompleteWordCmb;
-    //CompleteWordDelegate CompleteWordPzl;
+    CompleteWordDelegate CompleteWordPzl;
 
 
 
@@ -78,16 +80,18 @@ public class Typing : MonoBehaviour
     {
         SetName = gameObject.GetComponent<PlayerStats>().SetName;
         ResetName = gameObject.GetComponent<Adventure>().ResetName;
+        ResetAnswerPzl = gameObject.GetComponent<Puzzle>().ResetAnswerPzl;
+        
 
-        OutputCharacterAdv += gameObject.GetComponent<Adventure>().AddCharacterUIAdv;
-        OutputCharacterCmb += gameObject.GetComponent<Combat>().AddCharacterUICmb;
-        //OutputCharacterPzl += gameObject.GetComponent<Puzzle>().AddCharacterUIPzl;
+        OutputCharacterAdv += gameObject.GetComponent<Adventure>().AddCharacterUI;
+        OutputCharacterCmb += gameObject.GetComponent<Combat>().AddCharacterUI;
+        OutputCharacterPzl += gameObject.GetComponent<Puzzle>().AddCharacterUI;
 
         SendCharacterCmb += gameObject.GetComponent<Combat>().SetChosenWordCmb;
 
         CompleteWordAdv += gameObject.GetComponent<Adventure>().CompleteWordAdv;
         CompleteWordCmb += gameObject.GetComponent<Combat>().CompleteWordCmb;
-        //CompleteWordPzl += gameObject.GetComponent<Puzzle>().CompleteWordPzl;
+        CompleteWordPzl += gameObject.GetComponent<Puzzle>().CompleteWordPzl;
     }
 
 
@@ -149,6 +153,7 @@ public class Typing : MonoBehaviour
                     }
                     break;
                 case PlayerState.Puzzle:
+                    AddCharacter(character);
                     break;
                 default:
                     break;
@@ -197,7 +202,7 @@ public class Typing : MonoBehaviour
     {
         if (!isSettingName)
         {
-            //don't do this if player is setting up their name
+            //don't do this if player is setting up their name or doing a puzzle
             //Verify if character is supposed to be displayed as upper case and if so make it upper case.
             if (IsCharacterUpperCase())
             {
@@ -220,6 +225,7 @@ public class Typing : MonoBehaviour
                     OutputCharacterCmb.Invoke(character);
                     break;
                 case PlayerState.Puzzle:
+                    OutputCharacterPzl.Invoke(character);
                     break;
                 default:
                     break;
@@ -265,6 +271,14 @@ public class Typing : MonoBehaviour
 
                 break;
             case PlayerState.Puzzle:
+                if (IsWordComplete(character))
+                {
+                    //TEMPORARY SOUND EFFECT
+                    wordCompleteSFX.Play();
+
+                    CompleteWordPzl.Invoke();
+                }
+
                 break;
             default:
                 break;
@@ -301,8 +315,8 @@ public class Typing : MonoBehaviour
     }
 
 
-    ///<summary>Delete last character typed by player (Setting Name and Puzzle only).</summary>
-    public void DeleteLetter()
+    ///<summary>Delete text typed by player (Setting Name and Puzzle only).</summary>
+    public void DeleteWord()
     {
         switch (CurrentPlayerState)
         {
@@ -314,7 +328,10 @@ public class Typing : MonoBehaviour
                 }
                 break;
             case PlayerState.Puzzle:
-                Debug.Log("Last character typed was deleted");
+                Debug.Log("Delete text typed.");
+                nextCharacterIndex = 0;
+                outputWord.Clear();
+                ResetAnswerPzl.Invoke();
                 break;
             default:
                 break;

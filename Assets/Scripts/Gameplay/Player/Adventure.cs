@@ -22,7 +22,7 @@ public class Adventure : MonoBehaviour
     WordDelegate SendNextWordAdv;
 
     delegate void OutputUIDelegate(string output);
-    OutputUIDelegate DisplayNewOutputWordAdv;
+    OutputUIDelegate AddCharacterAdv;
     OutputUIDelegate UpdateWrittenTextAdv;
     OutputUIDelegate UpdateRemainingTextAdv;
     OutputUIDelegate DisplayNewCurrentWordAdv;
@@ -42,19 +42,19 @@ public class Adventure : MonoBehaviour
     ///<summary>Adventure starts when Graphics scene is loaded.</summary>
     public void SetDelegatesAdv()
     {
-        SendNextWordAdv += gameObject.GetComponent<Typing>().NewWord;
+        SendNextWordAdv = gameObject.GetComponent<Typing>().NewWord;
 
         LevelController LevelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
-        ChangeToNewLevel += LevelController.ChooseNextLevel;
-        TriggerEnconter += LevelController.TriggerEnconter;
+        ChangeToNewLevel = LevelController.ChooseNextLevel;
+        TriggerEnconter = LevelController.TriggerEnconter;
 
         AdventureUI AdvUIController = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<AdventureUI>();
 
-        DisplayNewOutputWordAdv += AdvUIController.DisplayNewOutputWordUIAdv;
-        ClearOutputWordAdv += AdvUIController.ClearOutputWordUIAdv;
-        UpdateWrittenTextAdv += AdvUIController.UpdateWrittenTextUIAdv;
-        UpdateRemainingTextAdv += AdvUIController.UpdateRemainingTextUIAdv;
-        DisplayNewCurrentWordAdv += AdvUIController.DisplayNewCurrentWordUIAdv;
+        AddCharacterAdv = AdvUIController.AddCharacterUIAdv;
+        ClearOutputWordAdv = AdvUIController.ClearOutputWordUIAdv;
+        UpdateWrittenTextAdv = AdvUIController.UpdateWrittenTextUIAdv;
+        UpdateRemainingTextAdv = AdvUIController.UpdateRemainingTextUIAdv;
+        DisplayNewCurrentWordAdv = AdvUIController.DisplayNewCurrentWordUIAdv;
 
         RefreshPlayerMovement = GameObject.FindGameObjectWithTag("PlayerGfx").GetComponent<PlayerMovementAdv>().RefreshPlayerMovementDuration;
     }
@@ -184,8 +184,8 @@ public class Adventure : MonoBehaviour
 
 
     ///<summary>Send character to AdventureUI script to be added to the word being displayed</summary>
-    public void AddCharacterUIAdv(string character)
+    public void AddCharacterUI(string character)
     {
-        DisplayNewOutputWordAdv.Invoke(character);
+        AddCharacterAdv.Invoke(character);
     }
 }
