@@ -21,6 +21,9 @@ public class PlayerMovementAdv : MonoBehaviour
     //force player to stop
     private bool isPlayerStopped = false;
 
+    [SerializeField]
+    private Animator playerAnimator;
+
 
     private void Start()
     {
@@ -33,6 +36,11 @@ public class PlayerMovementAdv : MonoBehaviour
         remainingDuration = movementDuration;
 
         isMoving = true;
+
+        if (!isPlayerStopped)
+        {
+            playerAnimator.Play("Walk", 0);
+        }
     }
 
 
@@ -40,6 +48,11 @@ public class PlayerMovementAdv : MonoBehaviour
     public void SetPlayerMovement(bool movementState)
     {
         isPlayerStopped = movementState;
+
+        if (isPlayerStopped)
+        {
+            playerAnimator.Play("Idle", 0);
+        }
     }
 
 
@@ -58,6 +71,8 @@ public class PlayerMovementAdv : MonoBehaviour
             if (remainingDuration <= 0)
             {
                 isMoving = false;
+
+                playerAnimator.Play("Idle", 0);
             }
         }
     }
