@@ -48,6 +48,7 @@ public class Typing : MonoBehaviour
     delegate void ClearWord();
     ClearWord ResetName;
     ClearWord ResetAnswerPzl;
+    ClearWord ClearCurrentWordAdv;
 
 
     //Invoke the respective state script to output character to UI
@@ -66,6 +67,9 @@ public class Typing : MonoBehaviour
     CompleteWordDelegate CompleteWordCmb;
     CompleteWordDelegate CompleteWordPzl;
 
+    delegate void UpdateHint(string hint);
+    UpdateHint UpdateHintAdvUI;
+
 
 
     //TEMPORARY SFX
@@ -81,6 +85,7 @@ public class Typing : MonoBehaviour
         SetName = gameObject.GetComponent<PlayerStats>().SetName;
         ResetName = gameObject.GetComponent<Adventure>().ResetName;
         ResetAnswerPzl = gameObject.GetComponent<Puzzle>().ResetAnswerPzl;
+        ClearCurrentWordAdv = gameObject.GetComponent<Adventure>().ClearCurrentWord;
         
 
         OutputCharacterAdv += gameObject.GetComponent<Adventure>().AddCharacterUI;
@@ -92,6 +97,8 @@ public class Typing : MonoBehaviour
         CompleteWordAdv += gameObject.GetComponent<Adventure>().CompleteWordAdv;
         CompleteWordCmb += gameObject.GetComponent<Combat>().CompleteWordCmb;
         CompleteWordPzl += gameObject.GetComponent<Puzzle>().CompleteWordPzl;
+
+        UpdateHintAdvUI += gameObject.GetComponent<Adventure>().UpdateHintUI;
     }
 
 
@@ -107,6 +114,8 @@ public class Typing : MonoBehaviour
         {
             isSettingName = true;
             currentWord = string.Empty;
+            ClearCurrentWordAdv.Invoke();
+            UpdateHintAdvUI("Tip: Insert name of character and press Space Bar");
             Debug.Log("Setting name");
         }
 

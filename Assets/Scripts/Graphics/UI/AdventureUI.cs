@@ -24,6 +24,9 @@ public class AdventureUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI remainingTextUIAdv;
 
+    [SerializeField]
+    private TextMeshProUGUI hintTextUIAdv;
+
 
     [SerializeField]
     private RectTransform advUIElements;
@@ -43,6 +46,12 @@ public class AdventureUI : MonoBehaviour
     {
         outputTextUIAdv.text = string.Empty;
         ResetAdvUIElementsPosition();
+    }
+
+    
+    public void ClearCurrentWordUIAdv()
+    {
+        currentTextUIAdv.text = string.Empty;
     }
 
 
@@ -70,6 +79,12 @@ public class AdventureUI : MonoBehaviour
         currentTextUITransform.localPosition = new Vector2(0, 0);
         outputTextUITransform.sizeDelta = textSize;
         outputTextUITransform.localPosition = new Vector2(0, 0);
+    }
+
+
+    public void DisplayNewHintUIAdv(string hint)
+    {
+        hintTextUIAdv.text = hint;
     }
 
 

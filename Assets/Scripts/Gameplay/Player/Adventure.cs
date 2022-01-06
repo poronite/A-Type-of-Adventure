@@ -26,9 +26,11 @@ public class Adventure : MonoBehaviour
     OutputUIDelegate UpdateWrittenTextAdv;
     OutputUIDelegate UpdateRemainingTextAdv;
     OutputUIDelegate DisplayNewCurrentWordAdv;
+    OutputUIDelegate DisplayNewHintAdv;
 
     delegate void ClearUIDelegate();
     ClearUIDelegate ClearOutputWordAdv;
+    ClearUIDelegate ClearCurrentWordAdv;
 
     delegate void LevelEnconterDelegate(string word);
     LevelEnconterDelegate ChangeToNewLevel;
@@ -52,9 +54,11 @@ public class Adventure : MonoBehaviour
 
         AddCharacterAdv = AdvUIController.AddCharacterUIAdv;
         ClearOutputWordAdv = AdvUIController.ClearOutputWordUIAdv;
+        ClearCurrentWordAdv = AdvUIController.ClearCurrentWordUIAdv;
         UpdateWrittenTextAdv = AdvUIController.UpdateWrittenTextUIAdv;
         UpdateRemainingTextAdv = AdvUIController.UpdateRemainingTextUIAdv;
         DisplayNewCurrentWordAdv = AdvUIController.DisplayNewCurrentWordUIAdv;
+        DisplayNewHintAdv = AdvUIController.DisplayNewHintUIAdv;
 
         RefreshPlayerMovement = GameObject.FindGameObjectWithTag("PlayerGfx").GetComponent<PlayerMovementAdv>().RefreshPlayerMovementDuration;
     }
@@ -82,9 +86,11 @@ public class Adventure : MonoBehaviour
     public void SetPlayerName(string name)
     {
         playerName = name;
+        UpdateHintUI(string.Empty);
         Debug.Log("replacing name");
         InsertNameIntoText();
     }
+
 
     public void ResetName()
     {
@@ -161,10 +167,11 @@ public class Adventure : MonoBehaviour
 
         Debug.Log($"|{nextWord}| |{remainingPlotText}|");
 
-        SendNextWordAdv(nextWord);
-
         UpdateRemainingTextAdv.Invoke(remainingPlotText);
         DisplayNewCurrentWordAdv.Invoke(nextWord);
+
+        SendNextWordAdv(nextWord);
+        
         ClearOutputWordAdv.Invoke();
     }
 
@@ -187,5 +194,17 @@ public class Adventure : MonoBehaviour
     public void AddCharacterUI(string character)
     {
         AddCharacterAdv.Invoke(character);
+    }
+
+
+    public void UpdateHintUI(string hint)
+    {
+        DisplayNewHintAdv.Invoke(hint);
+    }
+
+
+    public void ClearCurrentWord()
+    {
+        ClearCurrentWordAdv.Invoke();
     }
 }
