@@ -25,4 +25,5 @@ MonoBehaviour:
   NextLevelAfterCombat: {fileID: 11400000, guid: 23bfaebf083e54f4886e44afe0541cbf,
     type: 2}
   CorrectWord: 
+  QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}

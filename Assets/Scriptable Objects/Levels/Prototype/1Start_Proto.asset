@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: StartExample
   LevelType: 0
-  TextToType: Once upon a time, the hero was on a journey to defeat the Demon King
-    until a thief appeared...
+  TextToType: Once upon a time, the hero was on a journey until a thief appeared...
   NumChoices: 1
   WordKey:
   - appeared...
@@ -29,4 +28,5 @@ MonoBehaviour:
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   CorrectWord: 
+  QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}

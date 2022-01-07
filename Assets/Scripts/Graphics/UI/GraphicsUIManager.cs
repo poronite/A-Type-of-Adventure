@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 //Change graphics and behaviour of camera 
 
 public class GraphicsUIManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject LoadingScreen;
+    private CanvasGroup LoadingScreen;
 
     //Graphics and UI divided by sections
     [SerializeField]
@@ -20,11 +21,9 @@ public class GraphicsUIManager : MonoBehaviour
     [SerializeField]
     private CameraMovement mainCamera;
 
-    public void ActivateLoadingScreen()
+    public IEnumerator ActivateLoadingScreen()
     {
-        //for now it only does this
-        LoadingScreen.SetActive(true);
-
+        yield return StartCoroutine(FadeLoadingScreen(1, 0.5f, LoadingScreen));
 
         Adventure.SetActive(true); //everything gets activated in order to be able 
         Combat.SetActive(true); //to change sprites while the game is loading
@@ -32,11 +31,32 @@ public class GraphicsUIManager : MonoBehaviour
     }
 
 
-    ///<summary>Change level graphics depending on level type.</summary>
-    public void ChangeLevelGraphics(string levelType)
+    private IEnumerator DeactivateLoadingScreen()
     {
-        ActivateLoadingScreen();
+        yield return StartCoroutine(FadeLoadingScreen(0, 0.5f, LoadingScreen));
+    }
 
+
+    IEnumerator FadeLoadingScreen(float targetValue, float duration, CanvasGroup uiElement)
+    {
+        float startValue = uiElement.alpha;
+        float time = 0f;
+
+        while (time < duration)
+        {            
+            uiElement.alpha = Mathf.Lerp(startValue, targetValue, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        //this is here to guarantee that the alpha is 1 (or 0) instead of a very close float value
+        uiElement.alpha = targetValue;
+    }
+
+
+    ///<summary>Change level graphics depending on level type.</summary>
+    public IEnumerator ChangeLevelGraphics(string levelType)
+    {
         //if last level was adventure reset positions
         //so that when the player returns from a combat or puzzle
         //the layers are ready to move
@@ -66,11 +86,6 @@ public class GraphicsUIManager : MonoBehaviour
                 break;
         }
 
-        DeactivateLoadingScreen();
-    }
-
-    private void DeactivateLoadingScreen()
-    {
-        LoadingScreen.SetActive(false);
+        yield return StartCoroutine(DeactivateLoadingScreen());
     }
 }

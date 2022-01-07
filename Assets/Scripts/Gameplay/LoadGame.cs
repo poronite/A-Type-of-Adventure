@@ -54,6 +54,6 @@ public class LoadGame : MonoBehaviour
 
 
         //Start Game
-        GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().SetupLevel(firstLevel);
+        GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().ChangeLevel(firstLevel);
     }
 }

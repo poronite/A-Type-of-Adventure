@@ -49,10 +49,10 @@ public class LevelController : MonoBehaviour
     SetPlayerMovement AllowPlayerMovement;
 
 
-    delegate void LoadingScreenDelegate();
+    delegate IEnumerator LoadingScreenDelegate();
     LoadingScreenDelegate ShowLoadingScreen;
 
-    delegate void GraphicsDelegate(string levelType);
+    delegate IEnumerator GraphicsDelegate(string levelType);
     GraphicsDelegate ChangeLevelGraphics;
 
 
@@ -67,9 +67,17 @@ public class LevelController : MonoBehaviour
     }
 
 
-    public void SetupLevel(LevelTemplate levelToLoad)
+    public void ChangeLevel(LevelTemplate levelToLoad)
     {
-        ShowLoadingScreen.Invoke();
+        StartCoroutine(SetupLevel(levelToLoad));
+    }
+
+
+    IEnumerator SetupLevel(LevelTemplate levelToLoad)
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Typing>().CurrentPlayerState = PlayerState.Loading;
+
+        yield return StartCoroutine(ShowLoadingScreen.Invoke());
 
         DestroyGraphicsEventClones();
         AllowPlayerMovement(false);
@@ -92,7 +100,7 @@ public class LevelController : MonoBehaviour
                 //Start adventure
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(textToType);
 
-                ChangeLevelGraphics.Invoke("Adventure");
+                yield return StartCoroutine(ChangeLevelGraphics.Invoke("Adventure"));
 
                 break;
             case LevelType.Combat:
@@ -103,7 +111,7 @@ public class LevelController : MonoBehaviour
                 //Start combat
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().StartCombat(enemy, nextLevelAfterCombat);
 
-                ChangeLevelGraphics.Invoke("Combat");
+                yield return StartCoroutine(ChangeLevelGraphics.Invoke("Combat"));
 
                 break;
             case LevelType.Puzzle:
@@ -118,7 +126,7 @@ public class LevelController : MonoBehaviour
 
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Puzzle>().StartPuzzle(correctWord, questionBoard, nextLevelAfterPuzzle);
 
-                ChangeLevelGraphics.Invoke("Puzzle");
+                yield return StartCoroutine(ChangeLevelGraphics.Invoke("Puzzle"));
 
                 break;
             default:
@@ -162,7 +170,7 @@ public class LevelController : MonoBehaviour
     {
         if (choices.ContainsKey(word))
         {
-            SetupLevel(choices[word]);
+            ChangeLevel(choices[word]);
         }
     }
 

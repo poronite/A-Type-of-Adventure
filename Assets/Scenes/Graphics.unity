@@ -4032,7 +4032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a900ddac14dc0e49be01a4cb030db52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadingScreen: {fileID: 1235185033}
+  LoadingScreen: {fileID: 1819188323}
   Adventure: {fileID: 182019168}
   Combat: {fileID: 350824310}
   Puzzle: {fileID: 1523808042}
@@ -4048,6 +4048,7 @@ GameObject:
   - component: {fileID: 1819188326}
   - component: {fileID: 1819188325}
   - component: {fileID: 1819188324}
+  - component: {fileID: 1819188323}
   m_Layer: 5
   m_Name: Loading Screen Canvas
   m_TagString: LoadingScreen
@@ -4055,6 +4056,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!225 &1819188323
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819188322}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &1819188324
 MonoBehaviour:
   m_ObjectHideFlags: 0

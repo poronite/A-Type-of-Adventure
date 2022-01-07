@@ -37,7 +37,7 @@ public class Puzzle : MonoBehaviour
         DeleteWordPzl = PzlUIController.DeleteWordUIPzl;
 
         SendAnswerPzl = gameObject.GetComponent<Typing>().NewWord;
-        GoToNextLevel = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().SetupLevel;
+        GoToNextLevel = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().ChangeLevel;
     }
 
 

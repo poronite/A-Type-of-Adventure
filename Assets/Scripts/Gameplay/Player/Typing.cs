@@ -12,7 +12,8 @@ public enum PlayerState
     Combat,
     Puzzle,
     Dead,
-    CombatWon
+    CombatWon,
+    Loading
 }
 
 public class Typing : MonoBehaviour

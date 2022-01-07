@@ -76,7 +76,7 @@ public class Combat : MonoBehaviour
     {
         SendNextWordCmb = gameObject.GetComponent<Typing>().NewWord;
         AttackEnemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().TakeDamage;
-        GoToNextLevel = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().SetupLevel;
+        GoToNextLevel = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().ChangeLevel;
 
         CombatUI CmbUIController = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>();
 
