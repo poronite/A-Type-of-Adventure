@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31e1aaccb6227d6409cca00de46224ec, type: 3}
-  m_Name: SpawnFatRabbitAdv
+  m_Name: CutsceneA1
   m_EditorClassIdentifier: 
   EncounterType: 1
-  StopPlayer: 1
-  delayBeforePlayerStopping: 3
-  EncounterGfxObject: {fileID: 3312547129988015813, guid: 35808220dad317f42af1075d3d4db0af,
+  EndOfCutscene: 0
+  TransitionDuration: 2
+  NewCutscene: 1
+  CutscenePrefab: {fileID: 2677075902325405461, guid: d7a1f1be889d1314b8274031dc499891,
     type: 3}
-  SpawnOffset: {x: 12, y: 0, z: 0}
-  AnimationToPlay: 

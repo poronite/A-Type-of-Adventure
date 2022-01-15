@@ -22,12 +22,12 @@ public class LevelTemplate : ScriptableObject
     public string TextToType;
 
     public int NumChoices;
-    public List<string> WordKey;
+    public List<int> WordKey;
     public List<LevelTemplate> LevelValue;
 
-    public int NumEvents;
-    public List<string> EventWordKey;
-    public List<EncountersTemplate> EventValue;
+    public int NumEncounters;
+    public List<int> EncounterWordKey;
+    public List<EncountersTemplate> EncounterValue;
 
 
     //Combat

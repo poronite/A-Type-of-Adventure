@@ -17,9 +17,9 @@ public class Level_InspectorEditor : Editor
     SerializedProperty wordKey;
     SerializedProperty levelValue;
     //graphics events
-    SerializedProperty numEvents;
-    SerializedProperty eventWordKey;
-    SerializedProperty eventValue;
+    SerializedProperty numEncounters;
+    SerializedProperty encounterWordKey;
+    SerializedProperty encounterValue;
 
     //Combat
     SerializedProperty enemy;
@@ -44,9 +44,9 @@ public class Level_InspectorEditor : Editor
         wordKey = serializedObject.FindProperty("WordKey");
         levelValue = serializedObject.FindProperty("LevelValue");
 
-        numEvents = serializedObject.FindProperty("NumEvents");
-        eventWordKey = serializedObject.FindProperty("EventWordKey");
-        eventValue = serializedObject.FindProperty("EventValue");
+        numEncounters = serializedObject.FindProperty("NumEncounters");
+        encounterWordKey = serializedObject.FindProperty("EncounterWordKey");
+        encounterValue = serializedObject.FindProperty("EncounterValue");
 
         enemy = serializedObject.FindProperty("Enemy");
         nextLevelAfterCombat = serializedObject.FindProperty("NextLevelAfterCombat");
@@ -119,25 +119,25 @@ public class Level_InspectorEditor : Editor
                 EditorGUILayout.Space();
 
                 //events
-                EditorGUILayout.PropertyField(numEvents, new GUIContent("Events: "), true);
+                EditorGUILayout.PropertyField(numEncounters, new GUIContent("Events: "), true);
 
                 //prevent unnecessary errors
-                if (level.NumEvents < 0)
+                if (level.NumEncounters < 0)
                 {
-                    level.NumEvents = 0;
+                    level.NumEncounters = 0;
                 }
 
-                eventWordKey.arraySize = level.NumEvents;
-                eventValue.arraySize = level.NumEvents;
+                encounterWordKey.arraySize = level.NumEncounters;
+                encounterValue.arraySize = level.NumEncounters;
 
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
 
                 EditorGUILayout.BeginVertical();
-                for (int i = 0; i < level.NumEvents; i++)
+                for (int i = 0; i < level.NumEncounters; i++)
                 {
-                    var eventWord = eventWordKey.GetArrayElementAtIndex(i);
-                    var eventLevel = eventValue.GetArrayElementAtIndex(i);
+                    var eventWord = encounterWordKey.GetArrayElementAtIndex(i);
+                    var eventLevel = encounterValue.GetArrayElementAtIndex(i);
 
                     EditorGUILayout.Space();
 

@@ -19,14 +19,14 @@ public class LevelController : MonoBehaviour
     private string textToType;
 
     //choices
-    private List<string> wordKey;
+    private List<int> wordKey;
     private List<LevelTemplate> levelValue;
-    private Dictionary<string, LevelTemplate> choices = new Dictionary<string, LevelTemplate>();
+    private Dictionary<int, LevelTemplate> choices = new Dictionary<int, LevelTemplate>();
 
-    //events (for example recover player hp or trigger an animation etc...)
-    private List<string> eventWordKey;
+    //events (for example recover player hp or trigger a cutscene etc...)
+    private List<int> eventWordKey;
     private List<EncountersTemplate> eventValue;
-    private Dictionary<string, EncountersTemplate> events = new Dictionary<string, EncountersTemplate>();
+    private Dictionary<int, EncountersTemplate> events = new Dictionary<int, EncountersTemplate>();
 
 
     //If level is of type Combat
@@ -45,9 +45,6 @@ public class LevelController : MonoBehaviour
     delegate void TriggerEncontersDelegate(EncountersTemplate eventToBeTriggered);
     TriggerEncontersDelegate TriggerEncounters;
 
-    delegate void SetPlayerMovement(bool movementState);
-    SetPlayerMovement AllowPlayerMovement;
-
 
     delegate IEnumerator LoadingScreenDelegate();
     LoadingScreenDelegate ShowLoadingScreen;
@@ -59,8 +56,7 @@ public class LevelController : MonoBehaviour
     public void SetDelegatesLevel()
     {
         EncounterController encountersController = GameObject.FindGameObjectWithTag("EncountersController").GetComponent<EncounterController>();
-        TriggerEncounters += encountersController.EnconterTriggered;
-        AllowPlayerMovement += encountersController.SetPlayerMovement;
+        TriggerEncounters += encountersController.EncounterTriggered;
 
         ShowLoadingScreen += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateLoadingScreen;
         ChangeLevelGraphics += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ChangeLevelGraphics;
@@ -80,7 +76,6 @@ public class LevelController : MonoBehaviour
         yield return StartCoroutine(ShowLoadingScreen.Invoke());
 
         DestroyGraphicsEventClones();
-        AllowPlayerMovement(false);
 
         levelData = levelToLoad;
 
@@ -142,7 +137,7 @@ public class LevelController : MonoBehaviour
             wordKey = levelData.WordKey;
             levelValue = levelData.LevelValue;
 
-            choices = new Dictionary<string, LevelTemplate>();
+            choices = new Dictionary<int, LevelTemplate>();
 
             for (int i = 0; i < wordKey.Count; i++)
             {
@@ -150,12 +145,12 @@ public class LevelController : MonoBehaviour
             }
         }
 
-        if (levelData.NumEvents >= 1)
+        if (levelData.NumEncounters >= 1)
         {
-            eventWordKey = levelData.EventWordKey;
-            eventValue = levelData.EventValue;
+            eventWordKey = levelData.EncounterWordKey;
+            eventValue = levelData.EncounterValue;
 
-            events = new Dictionary<string, EncountersTemplate>();
+            events = new Dictionary<int, EncountersTemplate>();
 
             for (int i = 0; i < eventWordKey.Count; i++)
             {
@@ -166,7 +161,7 @@ public class LevelController : MonoBehaviour
 
 
     ///<summary>Choose the next level based on the word typed by the player while adventuring.</summary>
-    public void ChooseNextLevel(string word)
+    public void ChooseNextLevel(int word)
     {
         if (choices.ContainsKey(word))
         {
@@ -176,7 +171,7 @@ public class LevelController : MonoBehaviour
 
 
     ///<summary>Trigger a event based on the word typed by the player while adventuring.</summary>
-    public void TriggerEnconter(string word)
+    public void TriggerEnconter(int word)
     {
         if (events.ContainsKey(word))
         {

@@ -16,11 +16,13 @@ TagManager:
   - LevelController
   - GraphicsEventClone
   - PlayerGfx
-  - Encounters
-  - EncountersClone
-  - EncountersController
   - EnemyGfx
   - PuzzleGfxUI
+  - Cutscenes
+  - Cutscene
+  - CutsceneLoadingScreen
+  - EncountersController
+  - CutsceneBackground
   layers:
   - Default
   - TransparentFX

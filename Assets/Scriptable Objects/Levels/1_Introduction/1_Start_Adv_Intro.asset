@@ -19,15 +19,16 @@ MonoBehaviour:
     up some carrots to make soup. When they got there, they were surprised to see
     that all their carrots had been stolen, next to it was a fat rabbit.
   NumChoices: 1
-  WordKey:
-  - rabbit.
+  WordKey: 39000000
   LevelValue:
   - {fileID: 11400000, guid: a8abacd5dc4c9b140aa5cdd19cbed6e7, type: 2}
-  NumEvents: 1
-  EventWordKey:
-  - stolen,
-  EventValue:
-  - {fileID: 11400000, guid: e3e6761b4901dbe45a84a6fe7463786a, type: 2}
+  NumEncounters: 4
+  EncounterWordKey: 00000000120000002200000039000000
+  EncounterValue:
+  - {fileID: 11400000, guid: fb5402e3ef0c3bf40a75bad3087c1f0e, type: 2}
+  - {fileID: 11400000, guid: 3461ce24e6396a04b93f6e2b4e54b5a3, type: 2}
+  - {fileID: 11400000, guid: 33279106ebea73b4a84de33a80c46f19, type: 2}
+  - {fileID: 11400000, guid: b45bb0affbb247d45ab496f6d6475431, type: 2}
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   CorrectWord: 

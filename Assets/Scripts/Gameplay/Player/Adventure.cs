@@ -14,6 +14,9 @@ public class Adventure : MonoBehaviour
     ///<summary>Still not written plot text.</summary>
     private string remainingPlotText;
 
+    //number of words written in current level
+    private int numWordsWritten = 0;
+
     ///<summary>Next word to be written.</summary>
     private string nextWord;
 
@@ -32,9 +35,9 @@ public class Adventure : MonoBehaviour
     ClearUIDelegate ClearOutputWordAdv;
     ClearUIDelegate ClearCurrentWordAdv;
 
-    delegate void LevelEnconterDelegate(string word);
+    delegate void LevelEnconterDelegate(int word);
     LevelEnconterDelegate ChangeToNewLevel;
-    LevelEnconterDelegate TriggerEnconter;
+    LevelEnconterDelegate TriggerEncounter;
 
     delegate void RefreshMovement();
     RefreshMovement RefreshPlayerMovement;
@@ -48,7 +51,7 @@ public class Adventure : MonoBehaviour
 
         LevelController LevelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
         ChangeToNewLevel = LevelController.ChooseNextLevel;
-        TriggerEnconter = LevelController.TriggerEnconter;
+        TriggerEncounter = LevelController.TriggerEnconter;
 
         AdventureUI AdvUIController = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<AdventureUI>();
 
@@ -66,6 +69,9 @@ public class Adventure : MonoBehaviour
 
     public void StartAdventure(string textToType) //Start of a new game (Adventure)
     {
+        numWordsWritten = 0;
+        TriggerEncounter.Invoke(numWordsWritten);
+
         //remove any white spaces that may cause problems
         textToType = textToType.Trim();
 
@@ -110,6 +116,8 @@ public class Adventure : MonoBehaviour
 
     public void CompleteWordAdv()
     {
+        numWordsWritten += 1;
+
         //make the player sprite move for a few seconds
         RefreshPlayerMovement.Invoke();
 
@@ -121,7 +129,7 @@ public class Adventure : MonoBehaviour
 
         UpdateWrittenTextAdv.Invoke(writtenPlotText.ToString());
 
-        TriggerEnconter.Invoke(nextWord.Trim());
+        TriggerEncounter.Invoke(numWordsWritten);
 
         if (!IsPlotSegmentComplete())
         {
@@ -135,7 +143,7 @@ public class Adventure : MonoBehaviour
             ClearOutputWordAdv.Invoke();
             SendNextWordAdv(string.Empty);
 
-            ChangeToNewLevel.Invoke(nextWord.Trim());
+            ChangeToNewLevel.Invoke(numWordsWritten);
         }
     }
 
