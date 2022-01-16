@@ -19,7 +19,7 @@ MonoBehaviour:
     MCName quickly gets out of bed and grabs the decorative sword that was hanging
     on the wall before going outside, in an attempt to fend them off.
   NumChoices: 1
-  WordKey: 00000000
+  WordKey: 35000000
   LevelValue:
   - {fileID: 11400000, guid: 6c3d8d6aa9b822c408597f24f19dee06, type: 2}
   NumEncounters: 0

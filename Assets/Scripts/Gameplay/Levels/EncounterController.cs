@@ -112,18 +112,20 @@ public class EncounterController : MonoBehaviour
 
         float time = 0f;
 
+        Vector3 middleofScreen = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+
         while (time < transitionDuration)
         {
             if (currentStripe == 0)
             {
-                comicStripes[currentStripe].position = Vector3.Lerp(comicStripes[currentStripe].position, Vector3.zero, (time / transitionDuration));
+                comicStripes[currentStripe].position = Vector3.Lerp(comicStripes[currentStripe].position, middleofScreen, (time / transitionDuration));
             }
 
             if (currentStripe > 0 && currentStripe < comicStripes.Length)
             {
                 comicStripes[currentStripe - 1].position = Vector3.Lerp(comicStripes[currentStripe - 1].position, -previousStripeNewPosition, (time / transitionDuration));
 
-                comicStripes[currentStripe].position = Vector3.Lerp(comicStripes[currentStripe].position, Vector3.zero, (time / transitionDuration));
+                comicStripes[currentStripe].position = Vector3.Lerp(comicStripes[currentStripe].position, middleofScreen, (time / transitionDuration));
                 
             }
 
@@ -139,14 +141,14 @@ public class EncounterController : MonoBehaviour
 
         if (currentStripe == 0)
         {
-            comicStripes[currentStripe].position = Vector3.zero;
+            comicStripes[currentStripe].position = middleofScreen;
         }
 
         if (currentStripe > 0 && currentStripe < comicStripes.Length - 1)
         {
             comicStripes[currentStripe - 1].position = -previousStripeNewPosition;
 
-            comicStripes[currentStripe].position = Vector3.zero;
+            comicStripes[currentStripe].position = middleofScreen;
 
         }
 

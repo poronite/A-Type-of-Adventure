@@ -19,7 +19,7 @@ MonoBehaviour:
     before disappearing. MCName goes to bed, paying no attention to the words uttered
     by the enemy.'
   NumChoices: 1
-  WordKey: 00000000
+  WordKey: 30000000
   LevelValue:
   - {fileID: 11400000, guid: 929e6e01573652442b0b99fd2b867358, type: 2}
   NumEncounters: 0

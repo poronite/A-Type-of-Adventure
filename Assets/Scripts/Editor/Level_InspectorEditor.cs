@@ -98,19 +98,33 @@ public class Level_InspectorEditor : Editor
                 wordKey.arraySize = level.NumChoices;
                 levelValue.arraySize = level.NumChoices;
 
+                string[] words = level.TextToType.Split(' ');
+
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
 
                 EditorGUILayout.BeginVertical();
                 for (int i = 0; i < level.NumChoices; i++)
                 {
-                    var choiceWord = wordKey.GetArrayElementAtIndex(i);
-                    var choiceLevel = levelValue.GetArrayElementAtIndex(i);
+                    SerializedProperty choiceWord = wordKey.GetArrayElementAtIndex(i);
+                    SerializedProperty choiceLevel = levelValue.GetArrayElementAtIndex(i);
 
                     EditorGUILayout.Space();
 
-                    EditorGUILayout.PropertyField(choiceWord, new GUIContent($"Required Word {i + 1}: "), true);
+                    EditorGUILayout.PropertyField(choiceWord, new GUIContent($"Required Word {i + 1} (Index): "), true);
+
+                    if (choiceWord.intValue - 1 > 0)
+                    {
+                        EditorGUILayout.LabelField($"Word: {words[choiceWord.intValue - 1]}");
+                    }
+                    else
+                    {
+                        EditorGUILayout.LabelField($"Word: {words[0]}");
+                    }
+
+                    
                     EditorGUILayout.PropertyField(choiceLevel, new GUIContent($"Chosen Level {i + 1}: "), true);
+                    
                     
                     EditorGUILayout.Space();
                 }
@@ -136,12 +150,22 @@ public class Level_InspectorEditor : Editor
                 EditorGUILayout.BeginVertical();
                 for (int i = 0; i < level.NumEncounters; i++)
                 {
-                    var eventWord = encounterWordKey.GetArrayElementAtIndex(i);
-                    var eventLevel = encounterValue.GetArrayElementAtIndex(i);
+                    SerializedProperty eventWord = encounterWordKey.GetArrayElementAtIndex(i);
+                    SerializedProperty eventLevel = encounterValue.GetArrayElementAtIndex(i);
 
                     EditorGUILayout.Space();
 
                     EditorGUILayout.PropertyField(eventWord, new GUIContent($"Required Word {i + 1}: "), true);
+
+                    if (eventWord.intValue - 1 > 0)
+                    {
+                        EditorGUILayout.LabelField($"Word: {words[eventWord.intValue - 1]}");
+                    }
+                    else
+                    {
+                        EditorGUILayout.LabelField($"Word: {words[0]}");
+                    }
+
                     EditorGUILayout.PropertyField(eventLevel, new GUIContent($"Event {i + 1}: "), true);
 
                     EditorGUILayout.Space();

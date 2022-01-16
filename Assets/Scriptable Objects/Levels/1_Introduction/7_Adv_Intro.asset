@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: Looking for the orb
   LevelType: 0
-  TextToType: Now that they're gone, MCName decides to look for the orb. End for
-    the demo.
-  NumChoices: 0
-  WordKey: []
-  LevelValue: []
-  NumEvents: 0
-  EventWordKey: []
-  EventValue: []
+  TextToType: Now that they're gone, MCName decides to look for the orb. End of the
+    demo.
+  NumChoices: 1
+  WordKey: 0f000000
+  LevelValue:
+  - {fileID: 11400000, guid: 6e9cad772d7a7bb4b9d8f19d62c84b8c, type: 2}
+  NumEncounters: 0
+  EncounterWordKey: 
+  EncounterValue: []
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   CorrectWord: 
+  QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}
