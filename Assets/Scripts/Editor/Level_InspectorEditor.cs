@@ -71,6 +71,14 @@ public class Level_InspectorEditor : Editor
         EditorGUILayout.Space();
         EditorGUILayout.Space();
 
+        //put this here because it was giving errors when changing level types
+        string[] words = { "Empty" };
+
+        if (level.TextToType != string.Empty)
+        {
+            words = level.TextToType.Split(' ');
+        }
+
         switch (level.LevelType)
         {
             case LevelType.Adventure:
@@ -98,7 +106,7 @@ public class Level_InspectorEditor : Editor
                 wordKey.arraySize = level.NumChoices;
                 levelValue.arraySize = level.NumChoices;
 
-                string[] words = level.TextToType.Split(' ');
+                
 
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
