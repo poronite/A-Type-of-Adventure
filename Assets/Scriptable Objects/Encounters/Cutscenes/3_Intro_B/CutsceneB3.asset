@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CutsceneB3
   m_EditorClassIdentifier: 
   EncounterType: 1
-  EndOfCutscene: 1
+  EndOfCutscene: 0
   TransitionDuration: 2
   NewCutscene: 0
   CutscenePrefab: {fileID: 0}

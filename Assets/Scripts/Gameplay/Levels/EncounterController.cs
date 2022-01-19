@@ -74,8 +74,9 @@ public class EncounterController : MonoBehaviour
     {
         StartCoroutine(FadeCutsceneLoadingScreen(1f, 1));
 
-        cutsceneBackground.enabled = false;
         Destroy(currentCutscene.gameObject);
+        cutsceneBackground.enabled = false;
+        
 
         StartCoroutine(FadeCutsceneLoadingScreen(1f, 0));
     }

@@ -22,11 +22,12 @@ MonoBehaviour:
   WordKey: 35000000
   LevelValue:
   - {fileID: 11400000, guid: 6c3d8d6aa9b822c408597f24f19dee06, type: 2}
-  NumEncounters: 2
-  EncounterWordKey: 0000000010000000
+  NumEncounters: 3
+  EncounterWordKey: 000000001000000035000000
   EncounterValue:
   - {fileID: 11400000, guid: 548813dcc126fc04987619bc970e3896, type: 2}
   - {fileID: 11400000, guid: 3b61d3fbb0bdec14d96348b6f9ecc78c, type: 2}
+  - {fileID: 11400000, guid: e46388f0e0149bf4a9c0b6175bec64c6, type: 2}
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   CorrectWord: 

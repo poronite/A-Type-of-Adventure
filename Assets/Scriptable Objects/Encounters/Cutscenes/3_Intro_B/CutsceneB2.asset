@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EncounterType: 1
   EndOfCutscene: 0
-  TransitionDuration: 2
-  NewCutscene: 0
-  CutscenePrefab: {fileID: 0}
+  TransitionDuration: 3
+  NewCutscene: 1
+  CutscenePrefab: {fileID: 2677075902325405461, guid: f30a46292397a5545a6c205ae1578214,
+    type: 3}
