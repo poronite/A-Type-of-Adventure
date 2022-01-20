@@ -51,7 +51,7 @@ public class Adventure : MonoBehaviour
 
         LevelController LevelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
         ChangeToNewLevel = LevelController.ChooseNextLevel;
-        TriggerEncounter = LevelController.TriggerEnconter;
+        TriggerEncounter = LevelController.TriggerEncounter;
 
         AdventureUI AdvUIController = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<AdventureUI>();
 

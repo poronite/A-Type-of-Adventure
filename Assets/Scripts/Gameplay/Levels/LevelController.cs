@@ -132,6 +132,8 @@ public class LevelController : MonoBehaviour
 
     private void CreateDictionaries()
     {
+        choices = new Dictionary<int, LevelTemplate>();
+
         if (levelData.NumChoices >= 1)
         {
             wordKey = levelData.WordKey;
@@ -144,6 +146,8 @@ public class LevelController : MonoBehaviour
                 choices.Add(wordKey[i], levelValue[i]);
             }
         }
+
+        events = new Dictionary<int, EncountersTemplate>();
 
         if (levelData.NumEncounters >= 1)
         {
@@ -171,7 +175,7 @@ public class LevelController : MonoBehaviour
 
 
     ///<summary>Trigger a event based on the word typed by the player while adventuring.</summary>
-    public void TriggerEnconter(int word)
+    public void TriggerEncounter(int word)
     {
         if (events.ContainsKey(word))
         {

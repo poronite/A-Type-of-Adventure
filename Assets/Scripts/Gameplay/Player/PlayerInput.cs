@@ -31,18 +31,22 @@ public class PlayerInput : MonoBehaviour
 
 
     private void CheckInput()
-    {        
+    {
+        
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             DeleteInput.Invoke();
         }
         else if (Input.anyKeyDown)
         {
-            string key = Input.inputString.ToLower();
-
-            if (IsAllowedInput(key))
+            if (!Input.GetKeyDown(KeyCode.Return))
             {
-                SendInput(key);
+                string key = Input.inputString.ToLower();
+
+                if (IsAllowedInput(key))
+                {
+                    SendInput(key);
+                }
             }
         }
     }
