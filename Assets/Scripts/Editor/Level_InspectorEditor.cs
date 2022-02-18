@@ -15,6 +15,8 @@ public class Level_InspectorEditor : Editor
     SerializedProperty textToType;
     //choices
     SerializedProperty possibleChoices;
+    SerializedProperty possibleOutcomes;
+
     SerializedProperty numChoices;
     SerializedProperty wordKey;
     SerializedProperty levelValue;
@@ -43,6 +45,8 @@ public class Level_InspectorEditor : Editor
         textToType = serializedObject.FindProperty("TextToType");
 
         possibleChoices = serializedObject.FindProperty("PossibleChoices");
+        possibleOutcomes = serializedObject.FindProperty("PossibleOutcomes");
+
         numChoices = serializedObject.FindProperty("NumChoices");
         wordKey = serializedObject.FindProperty("WordKey");
         levelValue = serializedObject.FindProperty("LevelValue");
@@ -127,25 +131,26 @@ public class Level_InspectorEditor : Editor
                         if (words[choiceWord.intValue - 1] == "*")
                         {
                             possibleChoices.arraySize = level.NumChoices;
+                            possibleOutcomes.arraySize = level.NumChoices;
 
                             SerializedProperty currentPossibleChoice = possibleChoices.GetArrayElementAtIndex(i);
+                            SerializedProperty currentPossibleOutcome = possibleOutcomes.GetArrayElementAtIndex(i);
 
-                            EditorGUILayout.PropertyField(currentPossibleChoice, new GUIContent($"Word: "), true);                            
+                            EditorGUILayout.PropertyField(currentPossibleChoice, new GUIContent($"Word: "), true);
+
+                            EditorGUILayout.PropertyField(currentPossibleOutcome, new GUIContent($"Level: "), true);
                         }
                         else
                         {
                             EditorGUILayout.LabelField($"Word: {words[choiceWord.intValue - 1]}");
-                        }                        
+                            EditorGUILayout.PropertyField(choiceLevel, new GUIContent($"Level {i + 1}: "), true);
+                        }
                     }
                     else
                     {
                         EditorGUILayout.LabelField($"Word: {words[0]}");
                     }
 
-                    
-                    EditorGUILayout.PropertyField(choiceLevel, new GUIContent($"Chosen Level {i + 1}: "), true);
-                    
-                    
                     EditorGUILayout.Space();
                 }
                 EditorGUILayout.EndVertical();

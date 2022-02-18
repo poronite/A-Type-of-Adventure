@@ -22,7 +22,7 @@ public class LevelTemplate : ScriptableObject
     public string TextToType;
 
     public List<string> PossibleChoices;
-    
+    public List<LevelTemplate> PossibleOutcomes;
 
 
     public int NumChoices;

@@ -18,6 +18,7 @@ MonoBehaviour:
     to be turned upside down. It's almost time for supper and MCName decides to pick
     up some carrots to make soup. When they got there, they were surprised to see
     that all their carrots had been stolen, next to it was a fat rabbit.
+  PossibleChoices: []
   NumChoices: 1
   WordKey: 39000000
   LevelValue:

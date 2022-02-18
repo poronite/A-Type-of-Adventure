@@ -18,6 +18,7 @@ MonoBehaviour:
     were raiding the farm. "Find the orb, quickly, or Lord Gillah will have our heads".
     MCName quickly gets out of bed and grabs the decorative sword that was hanging
     on the wall before going outside, in an attempt to fend them off.
+  PossibleChoices: []
   NumChoices: 1
   WordKey: 35000000
   LevelValue:

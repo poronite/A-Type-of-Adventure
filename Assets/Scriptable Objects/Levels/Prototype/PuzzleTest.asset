@@ -15,12 +15,14 @@ MonoBehaviour:
   LevelName: Oogabooga
   LevelType: 2
   TextToType: 
+  PossibleChoices: []
+  PossibleOutcomes: []
   NumChoices: 0
-  WordKey: []
+  WordKey: 
   LevelValue: []
-  NumEvents: 0
-  EventWordKey: []
-  EventValue: []
+  NumEncounters: 0
+  EncounterWordKey: 
+  EncounterValue: []
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   CorrectWord: bernardo

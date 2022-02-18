@@ -15,6 +15,7 @@ MonoBehaviour:
   LevelName: 'First battle '
   LevelType: 1
   TextToType: 
+  PossibleChoices: []
   NumChoices: 0
   WordKey: 
   LevelValue: []

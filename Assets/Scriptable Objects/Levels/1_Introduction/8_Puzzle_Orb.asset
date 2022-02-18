@@ -15,6 +15,7 @@ MonoBehaviour:
   LevelName: Color of the orb
   LevelType: 2
   TextToType: 
+  PossibleChoices: []
   NumChoices: 0
   WordKey: 
   LevelValue: []

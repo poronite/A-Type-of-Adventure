@@ -15,6 +15,7 @@ MonoBehaviour:
   LevelName: The battle against the bandits (Part 2)
   LevelType: 1
   TextToType: 
+  PossibleChoices: []
   NumChoices: 0
   WordKey: 
   LevelValue: []

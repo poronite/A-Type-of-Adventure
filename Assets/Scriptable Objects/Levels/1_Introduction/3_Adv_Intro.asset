@@ -18,6 +18,7 @@ MonoBehaviour:
     for the orb, you need to take it to the citadel, you need to take it to the order..."
     before disappearing. MCName goes to bed, paying no attention to the words uttered
     by the enemy.'
+  PossibleChoices: []
   NumChoices: 1
   WordKey: 30000000
   LevelValue:
