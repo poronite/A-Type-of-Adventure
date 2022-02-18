@@ -14,17 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: StartExample
   LevelType: 0
-  TextToType: Once upon a time, the hero was on a journey until a thief appeared...
-  NumChoices: 1
-  WordKey:
-  - appeared...
+  TextToType: Once upon a time, the hero was on a journey until a thief *
+  PossibleChoices:
+  - appeared
+  - disappeared
+  NumChoices: 2
+  WordKey: 0e0000000e000000
   LevelValue:
   - {fileID: 11400000, guid: 81d45d6c7264e7747ba96a2baa2bca5c, type: 2}
-  NumEvents: 1
-  EventWordKey:
-  - until
-  EventValue:
-  - {fileID: 11400000, guid: dc7fc2971edf6774197aaf9c53e79a02, type: 2}
+  - {fileID: 11400000, guid: 23bfaebf083e54f4886e44afe0541cbf, type: 2}
+  NumEncounters: 0
+  EncounterWordKey: 
+  EncounterValue: []
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   CorrectWord: 

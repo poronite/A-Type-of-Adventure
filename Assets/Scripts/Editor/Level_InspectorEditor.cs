@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(LevelTemplate))]
@@ -13,6 +14,7 @@ public class Level_InspectorEditor : Editor
     //Adventure
     SerializedProperty textToType;
     //choices
+    SerializedProperty possibleChoices;
     SerializedProperty numChoices;
     SerializedProperty wordKey;
     SerializedProperty levelValue;
@@ -40,6 +42,7 @@ public class Level_InspectorEditor : Editor
 
         textToType = serializedObject.FindProperty("TextToType");
 
+        possibleChoices = serializedObject.FindProperty("PossibleChoices");
         numChoices = serializedObject.FindProperty("NumChoices");
         wordKey = serializedObject.FindProperty("WordKey");
         levelValue = serializedObject.FindProperty("LevelValue");
@@ -95,7 +98,7 @@ public class Level_InspectorEditor : Editor
                 //Display dictionaries
 
                 //choices
-                EditorGUILayout.PropertyField(numChoices, new GUIContent("Choices: "), true);
+                EditorGUILayout.PropertyField(numChoices, new GUIContent("Next possible levels: "), true);
 
                 //prevent unnecessary errors
                 if (level.NumChoices < 0)
@@ -105,8 +108,6 @@ public class Level_InspectorEditor : Editor
 
                 wordKey.arraySize = level.NumChoices;
                 levelValue.arraySize = level.NumChoices;
-
-                
 
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
@@ -123,7 +124,18 @@ public class Level_InspectorEditor : Editor
 
                     if (choiceWord.intValue - 1 > 0)
                     {
-                        EditorGUILayout.LabelField($"Word: {words[choiceWord.intValue - 1]}");
+                        if (words[choiceWord.intValue - 1] == "*")
+                        {
+                            possibleChoices.arraySize = level.NumChoices;
+
+                            SerializedProperty currentPossibleChoice = possibleChoices.GetArrayElementAtIndex(i);
+
+                            EditorGUILayout.PropertyField(currentPossibleChoice, new GUIContent($"Word: "), true);                            
+                        }
+                        else
+                        {
+                            EditorGUILayout.LabelField($"Word: {words[choiceWord.intValue - 1]}");
+                        }                        
                     }
                     else
                     {

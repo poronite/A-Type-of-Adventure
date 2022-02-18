@@ -21,6 +21,10 @@ public class LevelTemplate : ScriptableObject
     [TextArea(3, 10)]
     public string TextToType;
 
+    public List<string> PossibleChoices;
+    
+
+
     public int NumChoices;
     public List<int> WordKey;
     public List<LevelTemplate> LevelValue;
