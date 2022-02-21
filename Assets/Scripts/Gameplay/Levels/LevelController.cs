@@ -18,6 +18,12 @@ public class LevelController : MonoBehaviour
     //If level is of type Adventure
     private string textToType;
 
+    //branching
+    private bool hasBranching;
+    private List<string> possibleChoices = new List<string>();
+    private List<LevelTemplate> possibleOutcomes = new List<LevelTemplate>();
+    private Dictionary<string, LevelTemplate> branches = new Dictionary<string, LevelTemplate>();
+
     //choices
     private List<int> wordKey;
     private List<LevelTemplate> levelValue;
@@ -90,6 +96,9 @@ public class LevelController : MonoBehaviour
 
                 textToType = levelData.TextToType;
 
+                //branching
+                CreateBranching();
+
                 CreateDictionaries();
 
                 //Start adventure
@@ -129,9 +138,37 @@ public class LevelController : MonoBehaviour
         }
     }
 
+    private void CreateBranching()
+    {
+        if (levelData.PossibleChoices.Count >= 1 && levelData.PossibleOutcomes.Count >= 1)
+        {
+            hasBranching = true;
+            possibleChoices = levelData.PossibleChoices;
+            possibleOutcomes = levelData.PossibleOutcomes;
+        }
+        else if (levelData.PossibleChoices.Count == 0 && levelData.PossibleOutcomes.Count == 0)
+        {
+            hasBranching = false;
+            possibleChoices = new List<string>();
+            possibleOutcomes = new List<LevelTemplate>();
+        }
+
+        Debug.Log($"Branching = {hasBranching}");
+    }
 
     private void CreateDictionaries()
     {
+        branches = new Dictionary<string, LevelTemplate>();
+
+        if (hasBranching)
+        {
+            for (int i = 0; i < possibleChoices.Count; i++)
+            {
+                branches.Add(possibleChoices[i], possibleOutcomes[i]);
+            }
+        }
+
+
         choices = new Dictionary<int, LevelTemplate>();
 
         if (levelData.NumChoices >= 1)
@@ -139,13 +176,12 @@ public class LevelController : MonoBehaviour
             wordKey = levelData.WordKey;
             levelValue = levelData.LevelValue;
 
-            choices = new Dictionary<int, LevelTemplate>();
-
             for (int i = 0; i < wordKey.Count; i++)
             {
                 choices.Add(wordKey[i], levelValue[i]);
             }
         }
+
 
         events = new Dictionary<int, EncountersTemplate>();
 
@@ -153,8 +189,6 @@ public class LevelController : MonoBehaviour
         {
             eventWordKey = levelData.EncounterWordKey;
             eventValue = levelData.EncounterValue;
-
-            events = new Dictionary<int, EncountersTemplate>();
 
             for (int i = 0; i < eventWordKey.Count; i++)
             {

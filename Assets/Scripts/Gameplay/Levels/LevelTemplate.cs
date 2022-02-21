@@ -21,6 +21,7 @@ public class LevelTemplate : ScriptableObject
     [TextArea(3, 10)]
     public string TextToType;
 
+    //branching
     public List<string> PossibleChoices;
     public List<LevelTemplate> PossibleOutcomes;
 
