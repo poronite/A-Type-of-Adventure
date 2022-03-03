@@ -13,23 +13,19 @@ public class LevelTemplate : ScriptableObject
 {
     //Common to all levels
     public string LevelName;
-
     public LevelType LevelType;
 
 
     //Adventure
     [TextArea(3, 10)]
     public string TextToType;
+    public LevelTemplate NextLevelAfterAdventure;
 
     //branching
     public List<string> PossibleChoices;
     public List<LevelTemplate> PossibleOutcomes;
 
-
-    public int NumChoices;
-    public List<int> WordKey;
-    public List<LevelTemplate> LevelValue;
-
+    //encounters
     public int NumEncounters;
     public List<int> EncounterWordKey;
     public List<EncountersTemplate> EncounterValue;
@@ -37,14 +33,11 @@ public class LevelTemplate : ScriptableObject
 
     //Combat
     public EnemyTemplate Enemy;
-
     public LevelTemplate NextLevelAfterCombat;
 
 
     //Puzzle
     public string CorrectWord;
-
     public Sprite QuestionBoard;
-
     public LevelTemplate NextLevelAfterPuzzle;
 }

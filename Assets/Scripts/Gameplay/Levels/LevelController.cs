@@ -9,16 +9,16 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     //Variables
-    //Common stats
     private LevelTemplate levelData;
 
+    //Common stats to all levels
     private string levelName;
-
     private LevelType levelType;
 
 
     //If level is of type Adventure
     private string textToType;
+    private LevelTemplate nextLevelAfterAdventure;
 
     //branching
     private bool hasBranching;
@@ -26,33 +26,27 @@ public class LevelController : MonoBehaviour
     private List<LevelTemplate> possibleOutcomes = new List<LevelTemplate>();
     private Dictionary<string, LevelTemplate> branches = new Dictionary<string, LevelTemplate>();
 
-    //choices
-    private List<int> wordKey;
-    private List<LevelTemplate> levelValue;
-    private Dictionary<int, LevelTemplate> choices = new Dictionary<int, LevelTemplate>();
-
-    //events (for example recover player hp or trigger a cutscene etc...)
-    private List<int> eventWordKey;
-    private List<EncountersTemplate> eventValue;
-    private Dictionary<int, EncountersTemplate> events = new Dictionary<int, EncountersTemplate>();
+    //encounters (for example recover player hp or trigger a cutscene etc...)
+    private List<int> encounterWordKey;
+    private List<EncountersTemplate> encounterValue;
+    private Dictionary<int, EncountersTemplate> encounters = new Dictionary<int, EncountersTemplate>();
 
 
     //If level is of type Combat
     private EnemyTemplate enemy;
-
     private LevelTemplate nextLevelAfterCombat;
 
 
     //If level is of type Puzzle
     private string correctWord;
-
     private Sprite questionBoard;
-
     private LevelTemplate nextLevelAfterPuzzle;
 
-    delegate void TriggerEncontersDelegate(EncountersTemplate eventToBeTriggered);
-    TriggerEncontersDelegate TriggerEncounters;
 
+
+    //Delegates
+    delegate void TriggerEncountersDelegate(EncountersTemplate eventToBeTriggered);
+    TriggerEncountersDelegate TriggerEncounters;
 
     delegate IEnumerator LoadingScreenDelegate();
     LoadingScreenDelegate ShowLoadingScreen;
@@ -61,6 +55,7 @@ public class LevelController : MonoBehaviour
     GraphicsDelegate ChangeLevelGraphics;
 
 
+    //Functions
     public void SetDelegatesLevel()
     {
         EncounterController encountersController = GameObject.FindGameObjectWithTag("EncountersController").GetComponent<EncounterController>();
@@ -88,9 +83,7 @@ public class LevelController : MonoBehaviour
         levelData = levelToLoad;
 
         levelName = levelData.LevelName;
-
         levelType = levelData.LevelType;
-
 
         switch (levelType)
         {
@@ -101,11 +94,16 @@ public class LevelController : MonoBehaviour
                 //branching
                 CreateBranching();
 
+                if (!hasBranching)
+                {
+                    nextLevelAfterAdventure = levelData.NextLevelAfterAdventure;
+                }
+
+                //create branching and encounter dictionaries
                 CreateDictionaries();
 
                 //Start adventure
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(textToType);
-
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Adventure"));
 
                 break;
@@ -116,22 +114,17 @@ public class LevelController : MonoBehaviour
 
                 //Start combat
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().StartCombat(enemy, nextLevelAfterCombat);
-
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Combat"));
 
                 break;
             case LevelType.Puzzle:
 
                 correctWord = levelData.CorrectWord;
-
                 questionBoard = levelData.QuestionBoard;
-
                 nextLevelAfterPuzzle = levelData.NextLevelAfterPuzzle;
 
                 //Start puzzle
-
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Puzzle>().StartPuzzle(correctWord, questionBoard, nextLevelAfterPuzzle);
-
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Puzzle"));
 
                 break;
@@ -170,51 +163,33 @@ public class LevelController : MonoBehaviour
             }
         }
 
-
-        choices = new Dictionary<int, LevelTemplate>();
-
-        if (levelData.NumChoices >= 1)
-        {
-            wordKey = levelData.WordKey;
-            levelValue = levelData.LevelValue;
-
-            for (int i = 0; i < wordKey.Count; i++)
-            {
-                choices.Add(wordKey[i], levelValue[i]);
-            }
-        }
-
-
-        events = new Dictionary<int, EncountersTemplate>();
+        encounters = new Dictionary<int, EncountersTemplate>();
 
         if (levelData.NumEncounters >= 1)
         {
-            eventWordKey = levelData.EncounterWordKey;
-            eventValue = levelData.EncounterValue;
+            encounterWordKey = levelData.EncounterWordKey;
+            encounterValue = levelData.EncounterValue;
 
-            for (int i = 0; i < eventWordKey.Count; i++)
+            for (int i = 0; i < encounterWordKey.Count; i++)
             {
-                events.Add(eventWordKey[i], eventValue[i]);
+                encounters.Add(encounterWordKey[i], encounterValue[i]);
             }
         }
     }
 
 
     ///<summary>Choose the next level based on the word typed by the player while adventuring.</summary>
-    public void ChooseNextLevel(int index, string word)
+    public void ChooseNextLevel(string word)
     {
-        if (hasBranching)
+        if (!hasBranching)
+        {
+            ChangeLevel(nextLevelAfterAdventure);
+        }
+        else if (hasBranching)
         {
             if (branches.ContainsKey(word))
             {
                 ChangeLevel(branches[word]);
-            }
-        }
-        else
-        {
-            if (choices.ContainsKey(index))
-            {
-                ChangeLevel(choices[index]);
             }
         }
     }
@@ -223,9 +198,9 @@ public class LevelController : MonoBehaviour
     ///<summary>Trigger a event based on the word typed by the player while adventuring.</summary>
     public void TriggerEncounter(int word)
     {
-        if (events.ContainsKey(word))
+        if (encounters.ContainsKey(word))
         {
-            TriggerEncounters.Invoke(events[word]);
+            TriggerEncounters.Invoke(encounters[word]);
         }
     }
 

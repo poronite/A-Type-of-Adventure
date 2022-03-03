@@ -5,6 +5,8 @@ using UnityEditor;
 [CustomEditor(typeof(LevelTemplate))]
 public class Level_InspectorEditor : Editor
 {
+    int branches = 2;
+
     LevelTemplate level;
 
     //Variables
@@ -13,14 +15,13 @@ public class Level_InspectorEditor : Editor
 
     //Adventure
     SerializedProperty textToType;
-    //choices
+    SerializedProperty nextLevelAfterAdventure;
+
+    //branching
     SerializedProperty possibleChoices;
     SerializedProperty possibleOutcomes;
 
-    SerializedProperty numChoices;
-    SerializedProperty wordKey;
-    SerializedProperty levelValue;
-    //graphics events
+    //encounters
     SerializedProperty numEncounters;
     SerializedProperty encounterWordKey;
     SerializedProperty encounterValue;
@@ -39,25 +40,27 @@ public class Level_InspectorEditor : Editor
     {
         level = (LevelTemplate)target;
 
+        //common to all levels
         levelName = serializedObject.FindProperty("LevelName");
         levelType = serializedObject.FindProperty("LevelType");
 
+        //adventure
         textToType = serializedObject.FindProperty("TextToType");
-
+        nextLevelAfterAdventure = serializedObject.FindProperty("NextLevelAfterAdventure");
+        //branching
         possibleChoices = serializedObject.FindProperty("PossibleChoices");
         possibleOutcomes = serializedObject.FindProperty("PossibleOutcomes");
 
-        numChoices = serializedObject.FindProperty("NumChoices");
-        wordKey = serializedObject.FindProperty("WordKey");
-        levelValue = serializedObject.FindProperty("LevelValue");
-
+        //encounters
         numEncounters = serializedObject.FindProperty("NumEncounters");
         encounterWordKey = serializedObject.FindProperty("EncounterWordKey");
         encounterValue = serializedObject.FindProperty("EncounterValue");
 
+        //combat
         enemy = serializedObject.FindProperty("Enemy");
         nextLevelAfterCombat = serializedObject.FindProperty("NextLevelAfterCombat");
 
+        //puzzle
         correctWord = serializedObject.FindProperty("CorrectWord");
         questionBoard = serializedObject.FindProperty("QuestionBoard");
         nextLevelAfterPuzzle = serializedObject.FindProperty("NextLevelAfterPuzzle");
@@ -93,71 +96,49 @@ public class Level_InspectorEditor : Editor
                 EditorGUILayout.LabelField("Adventure Variables:");
 
                 EditorGUILayout.Space();
+                EditorGUILayout.Space();
 
                 EditorGUILayout.PropertyField(textToType, new GUIContent("Text to Type: "), true);
 
                 EditorGUILayout.Space();
+                EditorGUILayout.Space();
+                EditorGUILayout.Space();
 
-
-                //Display dictionaries
-
-                //choices
-                EditorGUILayout.PropertyField(numChoices, new GUIContent("Next possible levels: "), true);
-
-                //prevent unnecessary errors
-                if (level.NumChoices < 0)
+                if (!(words[words.Length - 1] == "*"))
                 {
-                    level.NumChoices = 0;
+                    EditorGUILayout.PropertyField(nextLevelAfterAdventure, new GUIContent("Next Level: "), true);
                 }
-
-                wordKey.arraySize = level.NumChoices;
-                levelValue.arraySize = level.NumChoices;
-
-                EditorGUILayout.Space();
-                EditorGUILayout.Space();
-
-                EditorGUILayout.BeginVertical();
-                for (int i = 0; i < level.NumChoices; i++)
+                else if(words[words.Length - 1] == "*")
                 {
-                    SerializedProperty choiceWord = wordKey.GetArrayElementAtIndex(i);
-                    SerializedProperty choiceLevel = levelValue.GetArrayElementAtIndex(i);
+                    EditorGUILayout.LabelField("Branches:");
+
+                    EditorGUILayout.BeginVertical();
 
                     EditorGUILayout.Space();
 
-                    EditorGUILayout.PropertyField(choiceWord, new GUIContent($"Required Word {i + 1} (Index): "), true);
-
-                    if (choiceWord.intValue - 1 > 0)
+                    for (int i = 0; i < branches; i++)
                     {
-                        if (words[choiceWord.intValue - 1] == "*")
-                        {
-                            possibleChoices.arraySize = level.NumChoices;
-                            possibleOutcomes.arraySize = level.NumChoices;
+                        possibleChoices.arraySize = branches;
+                        possibleOutcomes.arraySize = branches;
 
-                            SerializedProperty currentPossibleChoice = possibleChoices.GetArrayElementAtIndex(i);
-                            SerializedProperty currentPossibleOutcome = possibleOutcomes.GetArrayElementAtIndex(i);
+                        SerializedProperty currentPossibleChoice = possibleChoices.GetArrayElementAtIndex(i);
+                        SerializedProperty currentPossibleOutcome = possibleOutcomes.GetArrayElementAtIndex(i);
 
-                            EditorGUILayout.PropertyField(currentPossibleChoice, new GUIContent($"Word: "), true);
+                        EditorGUILayout.LabelField($"Branch {i + 1}:");
 
-                            EditorGUILayout.PropertyField(currentPossibleOutcome, new GUIContent($"Level: "), true);
-                        }
-                        else
-                        {
-                            EditorGUILayout.LabelField($"Word: {words[choiceWord.intValue - 1]}");
-                            EditorGUILayout.PropertyField(choiceLevel, new GUIContent($"Level {i + 1}: "), true);
-                        }
-                    }
-                    else
-                    {
-                        EditorGUILayout.LabelField($"Word: {words[0]}");
+                        EditorGUILayout.PropertyField(currentPossibleChoice, new GUIContent($"   Word: "), true);
+                        EditorGUILayout.PropertyField(currentPossibleOutcome, new GUIContent($"   Level: "), true);
+
+                        EditorGUILayout.Space();
+                        EditorGUILayout.Space();
                     }
 
-                    EditorGUILayout.Space();
+                    EditorGUILayout.EndVertical(); 
                 }
-                EditorGUILayout.EndVertical();
 
                 EditorGUILayout.Space();
 
-                //events
+                //encounters
                 EditorGUILayout.PropertyField(numEncounters, new GUIContent("Events: "), true);
 
                 //prevent unnecessary errors
