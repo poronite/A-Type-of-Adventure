@@ -16,8 +16,8 @@ MonoBehaviour:
   LevelType: 0
   TextToType: Once upon a time, the hero was on a journey until a thief *
   PossibleChoices:
-  - appeared
-  - disappeared
+  - appeared.
+  - disappeared.
   PossibleOutcomes:
   - {fileID: 11400000, guid: 81d45d6c7264e7747ba96a2baa2bca5c, type: 2}
   - {fileID: 11400000, guid: a1081739a95808142b4c2eeaa5b92d5e, type: 2}

@@ -35,9 +35,11 @@ public class Adventure : MonoBehaviour
     ClearUIDelegate ClearOutputWordAdv;
     ClearUIDelegate ClearCurrentWordAdv;
 
-    delegate void LevelEnconterDelegate(int word);
-    LevelEnconterDelegate ChangeToNewLevel;
-    LevelEnconterDelegate TriggerEncounter;
+    delegate void LevelDelegate(int index, string word);
+    LevelDelegate ChangeToNewLevel;
+
+    delegate void EncounterDelegate(int word);
+    EncounterDelegate TriggerEncounter;
 
     delegate void RefreshMovement();
     RefreshMovement RefreshPlayerMovement;
@@ -143,7 +145,7 @@ public class Adventure : MonoBehaviour
             ClearOutputWordAdv.Invoke();
             SendNextWordAdv(string.Empty);
 
-            ChangeToNewLevel.Invoke(numWordsWritten);
+            ChangeToNewLevel.Invoke(numWordsWritten, nextWord);
         }
     }
 

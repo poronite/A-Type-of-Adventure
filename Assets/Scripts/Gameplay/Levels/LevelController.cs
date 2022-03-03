@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Script that creates the current level based on the stats from the scriptable object.
+//Note: choices dictionary is pretty much used when there's only 1 path
+//which makes the name choices sound wierd but I rather not change the name now
 
 public class LevelController : MonoBehaviour
 {
@@ -199,11 +201,21 @@ public class LevelController : MonoBehaviour
 
 
     ///<summary>Choose the next level based on the word typed by the player while adventuring.</summary>
-    public void ChooseNextLevel(int word)
+    public void ChooseNextLevel(int index, string word)
     {
-        if (choices.ContainsKey(word))
+        if (hasBranching)
         {
-            ChangeLevel(choices[word]);
+            if (branches.ContainsKey(word))
+            {
+                ChangeLevel(branches[word]);
+            }
+        }
+        else
+        {
+            if (choices.ContainsKey(index))
+            {
+                ChangeLevel(choices[index]);
+            }
         }
     }
 
