@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 34864127}
   m_Layer: 0
   m_Name: Layer3
-  m_TagString: Untagged
+  m_TagString: ParalaxLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 65091660}
   m_Layer: 0
   m_Name: Layer1
-  m_TagString: Untagged
+  m_TagString: ParalaxLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2277,7 +2277,7 @@ GameObject:
   - component: {fileID: 890494113}
   m_Layer: 0
   m_Name: Layer2
-  m_TagString: Untagged
+  m_TagString: ParalaxLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2497,7 +2497,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0bdb138951a25ec4bace06a67d1ebcb1, type: 3}
   - {fileID: 21300000, guid: 5610459e058aabb478ffa54f89880630, type: 3}
   - {fileID: 21300000, guid: 794a5c1c40b438f4ea9f6b632ca2d7d7, type: 3}
-  playerGfx: {fileID: 1080414705}
 --- !u!114 &936825013
 MonoBehaviour:
   m_ObjectHideFlags: 0

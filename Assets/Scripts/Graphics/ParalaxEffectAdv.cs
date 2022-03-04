@@ -8,8 +8,11 @@ using UnityEngine;
 
 public class ParalaxEffectAdv : MonoBehaviour
 {
-    [SerializeField]
+    private int numChildren = 3;
     private GameObject[] layers;
+    private GameObject[] layer3Children;
+    private GameObject[] layer2Children;
+    private GameObject[] layer1Children;
 
     [SerializeField] 
     private Sprite[] layer3Sprites;
@@ -20,7 +23,6 @@ public class ParalaxEffectAdv : MonoBehaviour
     [SerializeField]
     private Sprite[] layer1Sprites;
 
-    [SerializeField]
     private GameObject playerGfx;
     private Vector3 playerOriginalPosition;
 
@@ -33,15 +35,23 @@ public class ParalaxEffectAdv : MonoBehaviour
 
     private void Awake()
     {
+        mainCamera = gameObject.GetComponent<Camera>();
+        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
+
+        playerGfx = GameObject.FindGameObjectWithTag("PlayerGfx");
         playerOriginalPosition = playerGfx.transform.position;
 
         Debug.Log($"Original Position: {playerOriginalPosition.x}, {playerOriginalPosition.y}, {playerOriginalPosition.z}");
 
-        mainCamera = gameObject.GetComponent<Camera>();
-        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
+        layers = GameObject.FindGameObjectsWithTag("ParalaxLayer");
+
+        layer3Children = new GameObject[numChildren];
+        layer2Children = new GameObject[numChildren];
+        layer1Children = new GameObject[numChildren];
 
         foreach (GameObject obj in layers)
         {
+            Debug.Log("Layer: " + obj.name);
             LoadChildObjects(obj);
         }
 
@@ -52,43 +62,57 @@ public class ParalaxEffectAdv : MonoBehaviour
     private void LoadChildObjects(GameObject obj)
     {
         float objectWidth = obj.GetComponent<SpriteRenderer>().bounds.size.x;
-        //int childsNeeded = (int)Mathf.Ceil(screenBounds.x * 2 / objectWidth);
-        int childsNeeded = 3;
         GameObject clone = Instantiate(obj) as GameObject;
 
-        for (int i = 0; i < childsNeeded; i++)
+        for (int i = 0; i < numChildren; i++)
         {
             GameObject c = Instantiate(clone) as GameObject;
             c.transform.SetParent(obj.transform);
             c.transform.position = new Vector3(objectWidth * i, obj.transform.position.y, obj.transform.position.z);
+            c.name = obj.name + $" {i}";
 
-            //Debug.Log("Sprite Number: " + i);
-
-            c.name = obj.name; //change name temporary for the following switch case
-
-            switch (c.name)
+            switch (c.name.Split(' ')[0])
             {
                 case "Layer3":
-                    Debug.Log("Sprite Name: " + layer3Sprites[i].name);
-                    c.GetComponent<SpriteRenderer>().sprite = layer3Sprites[i];
+                    layer3Children[i] = c;
                     break;
                 case "Layer2":
-                    Debug.Log("Sprite Name: " + layer2Sprites[i].name);
-                    c.GetComponent<SpriteRenderer>().sprite = layer2Sprites[i];
+                    layer2Children[i] = c;
                     break;
                 case "Layer1":
-                    Debug.Log("Sprite Name: " + layer1Sprites[i].name);
-                    c.GetComponent<SpriteRenderer>().sprite = layer1Sprites[i];
+                    layer1Children[i] = c;
                     break;
                 default:
                     break;
             }
-
-            c.name = obj.name + $" {i}"; //give a distinct name to the object
         }
 
         Destroy(clone);
         Destroy(obj.GetComponent<SpriteRenderer>());
+    }
+    
+
+    public void ChangeField()
+    {
+        for (int i = 0; i < numChildren; i++)
+        {
+            string name = layers[i].name;
+
+            switch (name)
+            {
+                case "Layer3":
+                    layer3Children[i].GetComponent<SpriteRenderer>().sprite = layer3Sprites[i];
+                    break;
+                case "Layer2":
+                    layer2Children[i].GetComponent<SpriteRenderer>().sprite = layer2Sprites[i];
+                    break;
+                case "Layer1":
+                    layer1Children[i].GetComponent<SpriteRenderer>().sprite = layer1Sprites[i];
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
 

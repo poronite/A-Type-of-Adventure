@@ -16,7 +16,8 @@ MonoBehaviour:
   LevelType: 0
   FieldType: 0
   TextToType: After defeating the thief, the hero continued his journey.
-  NextLevelAfterAdventure: {fileID: 0}
+  NextLevelAfterAdventure: {fileID: 11400000, guid: ff24a7e71d6f8fd43bcf3232e2b07404,
+    type: 2}
   HasBranching: 0
   PossibleChoices: []
   PossibleOutcomes: []

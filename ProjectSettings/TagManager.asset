@@ -23,6 +23,7 @@ TagManager:
   - CutsceneLoadingScreen
   - EncountersController
   - CutsceneBackground
+  - ParalaxLayer
   layers:
   - Default
   - TransparentFX
