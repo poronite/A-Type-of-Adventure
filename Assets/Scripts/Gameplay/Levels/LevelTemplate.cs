@@ -8,18 +8,25 @@ public enum LevelType
     Puzzle
 }
 
+public enum FieldType
+{
+    Forest
+}
+
 [CreateAssetMenu(fileName = "New_Level", menuName = "New Level", order = 51)]
 public class LevelTemplate : ScriptableObject
 {
     //Common to all levels
     public string LevelName;
     public LevelType LevelType;
+    public FieldType FieldType;
 
 
     //Adventure
     [TextArea(3, 10)]
     public string TextToType;
     public LevelTemplate NextLevelAfterAdventure;
+    public bool HasBranching;
 
     //branching
     public List<string> PossibleChoices;

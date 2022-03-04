@@ -135,15 +135,15 @@ public class LevelController : MonoBehaviour
 
     private void CreateBranching()
     {
-        if (levelData.PossibleChoices.Count >= 1 && levelData.PossibleOutcomes.Count >= 1)
+        hasBranching = levelData.HasBranching;
+
+        if (hasBranching)
         {
-            hasBranching = true;
             possibleChoices = levelData.PossibleChoices;
             possibleOutcomes = levelData.PossibleOutcomes;
         }
-        else if (levelData.PossibleChoices.Count == 0 && levelData.PossibleOutcomes.Count == 0)
+        else
         {
-            hasBranching = false;
             possibleChoices = new List<string>();
             possibleOutcomes = new List<LevelTemplate>();
         }

@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: Start of a new adventure.
   LevelType: 0
+  FieldType: 0
   TextToType: This is the story of MCName a humble adventurer whose life is about
     to be turned upside down. It's almost time for supper and MCName decides to pick
     up some carrots to make soup. When they got there, they were surprised to see
     that all their carrots had been stolen, next to it was a fat rabbit.
   NextLevelAfterAdventure: {fileID: 0}
+  HasBranching: 0
   PossibleChoices: []
   PossibleOutcomes: []
   NumEncounters: 4

@@ -14,13 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: EndExample
   LevelType: 0
+  FieldType: 0
   TextToType: After defeating the thief, the hero continued his journey.
+  NextLevelAfterAdventure: {fileID: 0}
+  HasBranching: 0
   PossibleChoices: []
   PossibleOutcomes: []
-  NumChoices: 1
-  WordKey: 09000000
-  LevelValue:
-  - {fileID: 11400000, guid: fb62368ca68e020448315e0c6a2c73f0, type: 2}
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []

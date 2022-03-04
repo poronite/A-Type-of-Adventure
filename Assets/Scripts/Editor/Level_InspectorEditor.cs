@@ -12,6 +12,7 @@ public class Level_InspectorEditor : Editor
     //Variables
     SerializedProperty levelName;
     SerializedProperty levelType;
+    SerializedProperty fieldType;
 
     //Adventure
     SerializedProperty textToType;
@@ -43,6 +44,7 @@ public class Level_InspectorEditor : Editor
         //common to all levels
         levelName = serializedObject.FindProperty("LevelName");
         levelType = serializedObject.FindProperty("LevelType");
+        fieldType = serializedObject.FindProperty("FieldType");
 
         //adventure
         textToType = serializedObject.FindProperty("TextToType");
@@ -50,7 +52,6 @@ public class Level_InspectorEditor : Editor
         //branching
         possibleChoices = serializedObject.FindProperty("PossibleChoices");
         possibleOutcomes = serializedObject.FindProperty("PossibleOutcomes");
-
         //encounters
         numEncounters = serializedObject.FindProperty("NumEncounters");
         encounterWordKey = serializedObject.FindProperty("EncounterWordKey");
@@ -77,6 +78,9 @@ public class Level_InspectorEditor : Editor
         EditorGUILayout.PropertyField(levelType, new GUIContent("Level Type: "), true);
 
         EditorGUILayout.Space();
+
+        EditorGUILayout.PropertyField(fieldType, new GUIContent("Field Type: "), true);
+
         EditorGUILayout.Space();
         EditorGUILayout.Space();
         EditorGUILayout.Space();
@@ -106,10 +110,12 @@ public class Level_InspectorEditor : Editor
 
                 if (!(words[words.Length - 1] == "*"))
                 {
+                    level.HasBranching = false;
                     EditorGUILayout.PropertyField(nextLevelAfterAdventure, new GUIContent("Next Level: "), true);
                 }
                 else if(words[words.Length - 1] == "*")
                 {
+                    level.HasBranching = true;
                     EditorGUILayout.LabelField("Branches:");
 
                     EditorGUILayout.BeginVertical();

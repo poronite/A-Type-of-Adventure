@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: Oogabooga
   LevelType: 2
+  FieldType: 0
   TextToType: 
+  NextLevelAfterAdventure: {fileID: 0}
+  HasBranching: 0
   PossibleChoices: []
   PossibleOutcomes: []
-  NumChoices: 0
-  WordKey: 
-  LevelValue: []
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []

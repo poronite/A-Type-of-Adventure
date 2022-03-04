@@ -16,4 +16,4 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: d04ce8b718870654f8112b0e9100b168, type: 3}
   maxHP: 30
   attack: 2
-  isBoss: 1
+  isBoss: 0
