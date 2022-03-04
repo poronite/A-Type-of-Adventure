@@ -73,7 +73,7 @@ public class Puzzle : MonoBehaviour
     }
 
 
-    public void CompleteWordPzl()
+    public void CompleteWordPzl(string word)
     {
         GoToNextLevel.Invoke(nextLevel);
     }

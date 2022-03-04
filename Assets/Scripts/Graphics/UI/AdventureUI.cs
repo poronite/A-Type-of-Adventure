@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class AdventureUI : MonoBehaviour
 {
     //References
+    [SerializeField]
+    private RectTransform advUIElements;
+
     [SerializeField]
     private RectTransform currentTextUITransform;
 
@@ -27,9 +31,11 @@ public class AdventureUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI hintTextUIAdv;
 
+    [SerializeField]
+    private TextMeshProUGUI branchWord1UIAdv;
 
     [SerializeField]
-    private RectTransform advUIElements;
+    private TextMeshProUGUI branchWord2UIAdv;
 
 
 
@@ -102,5 +108,21 @@ public class AdventureUI : MonoBehaviour
     private void ResetAdvUIElementsPosition()
     {
         advUIElements.localPosition = new Vector3(0, advUIElements.localPosition.y, advUIElements.localPosition.z);
+    }
+
+
+    public void DisplayBranchingWordsUIAdv(List<string> words)
+    {
+        branchWord1UIAdv.text = words[0];
+        branchWord2UIAdv.text = words[1];
+    }
+
+
+    public void DisplayChosenBranchingWordUIAdv(string word)
+    {
+        branchWord1UIAdv.text = string.Empty;
+        branchWord2UIAdv.text = string.Empty;
+
+        currentTextUIAdv.text = word;
     }
 }

@@ -144,7 +144,7 @@ public class Combat : MonoBehaviour
 
 
     ///<summary>Send to Typing script the word that the player chose.</summary>
-    public void SetChosenWordCmb(string character)
+    public bool SetChosenWordCmb(string character)
     {
         actionChosen = Actions.None;
 
@@ -156,9 +156,11 @@ public class Combat : MonoBehaviour
             DisplayNewCurrentWordCmb.Invoke(actionChosen);
 
             ClearAttackDodgeWordsCmb.Invoke();
+            SendNextWordCmb.Invoke(decidedWord);
+            return true;
         }
 
-        SendNextWordCmb.Invoke(decidedWord);
+        return false;
     }
 
 
@@ -186,7 +188,7 @@ public class Combat : MonoBehaviour
     }
 
 
-    public void CompleteWordCmb()
+    public void CompleteWordCmb(string word)
     {
         //this is here because after defeating the enemy 
         //it was clearing the word that the player had to type

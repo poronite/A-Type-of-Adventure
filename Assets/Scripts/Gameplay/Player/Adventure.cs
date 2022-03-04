@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Collections.Generic;
 using UnityEngine;
 
 //This script will be used to manage everything involving Adventure: when typing the plot of the game.
@@ -20,9 +21,13 @@ public class Adventure : MonoBehaviour
     ///<summary>Next word to be written.</summary>
     private string nextWord;
 
+    //words used in branching for current adventure level
+    private List<string> branchingWords = new List<string>();
+
     //Delegates
     delegate void WordDelegate(string word);
     WordDelegate SendNextWordAdv;
+    WordDelegate DisplayChosenBranchingWord;
 
     delegate void OutputUIDelegate(string output);
     OutputUIDelegate AddCharacterAdv;
@@ -30,6 +35,7 @@ public class Adventure : MonoBehaviour
     OutputUIDelegate UpdateRemainingTextAdv;
     OutputUIDelegate DisplayNewCurrentWordAdv;
     OutputUIDelegate DisplayNewHintAdv;
+    OutputUIDelegate DisplayChosenBranchingWordAdv;
 
     delegate void ClearUIDelegate();
     ClearUIDelegate ClearOutputWordAdv;
@@ -40,6 +46,9 @@ public class Adventure : MonoBehaviour
 
     delegate void EncounterDelegate(int word);
     EncounterDelegate TriggerEncounter;
+
+    delegate void BranchingDelegate(List<string> words);
+    BranchingDelegate DisplayBranchingWordsAdv;
 
     delegate void RefreshMovement();
     RefreshMovement RefreshPlayerMovement;
@@ -56,7 +65,6 @@ public class Adventure : MonoBehaviour
         TriggerEncounter = LevelController.TriggerEncounter;
 
         AdventureUI AdvUIController = GameObject.FindGameObjectWithTag("AdventureGfxUI").GetComponent<AdventureUI>();
-
         AddCharacterAdv = AdvUIController.AddCharacterUIAdv;
         ClearOutputWordAdv = AdvUIController.ClearOutputWordUIAdv;
         ClearCurrentWordAdv = AdvUIController.ClearCurrentWordUIAdv;
@@ -64,18 +72,23 @@ public class Adventure : MonoBehaviour
         UpdateRemainingTextAdv = AdvUIController.UpdateRemainingTextUIAdv;
         DisplayNewCurrentWordAdv = AdvUIController.DisplayNewCurrentWordUIAdv;
         DisplayNewHintAdv = AdvUIController.DisplayNewHintUIAdv;
+        DisplayBranchingWordsAdv = AdvUIController.DisplayBranchingWordsUIAdv;
+        DisplayChosenBranchingWordAdv = AdvUIController.DisplayChosenBranchingWordUIAdv;
 
         RefreshPlayerMovement = GameObject.FindGameObjectWithTag("PlayerGfx").GetComponent<PlayerMovementAdv>().RefreshPlayerMovementDuration;
     }
 
 
-    public void StartAdventure(string textToType) //Start of a new game (Adventure)
+    public void StartAdventure(string textToType, List<string> words) //Start of a new game (Adventure)
     {
         numWordsWritten = 0;
         TriggerEncounter.Invoke(numWordsWritten);
 
         //remove any white spaces that may cause problems
         textToType = textToType.Trim();
+
+        //array for easy access to the branching words in case current adventure level has branching
+        branchingWords = words;
 
         //add a space at the end otherwise player won't be able to type the last word
         remainingPlotText = textToType;
@@ -116,7 +129,7 @@ public class Adventure : MonoBehaviour
     }
 
 
-    public void CompleteWordAdv()
+    public void CompleteWordAdv(string word)
     {
         numWordsWritten += 1;
 
@@ -124,7 +137,7 @@ public class Adventure : MonoBehaviour
         RefreshPlayerMovement.Invoke();
 
         //this is to add a space to the end of the last word in a level
-        nextWord = nextWord.Trim() + " ";
+        nextWord = word.Trim() + " ";
 
         //Every word ends with a blank space | Example: "time, " "hero "
         writtenPlotText.Append(nextWord);
@@ -145,7 +158,7 @@ public class Adventure : MonoBehaviour
             ClearOutputWordAdv.Invoke();
             SendNextWordAdv(string.Empty);
 
-            ChangeToNewLevel.Invoke(nextWord);
+            ChangeToNewLevel.Invoke(word);
         }
     }
 
@@ -177,10 +190,16 @@ public class Adventure : MonoBehaviour
 
         Debug.Log($"|{nextWord}| |{remainingPlotText}|");
 
+        //verify if next word contains a branching path
+        if (nextWord.Trim() == "*")
+        {
+            DisplayBranchingWordsAdv.Invoke(branchingWords);
+        }
+
         UpdateRemainingTextAdv.Invoke(remainingPlotText);
         DisplayNewCurrentWordAdv.Invoke(nextWord);
 
-        SendNextWordAdv(nextWord);
+        SendNextWordAdv(nextWord);        
         
         ClearOutputWordAdv.Invoke();
     }
@@ -216,5 +235,22 @@ public class Adventure : MonoBehaviour
     public void ClearCurrentWord()
     {
         ClearCurrentWordAdv.Invoke();
+    }
+
+
+    //branching
+    public bool SetBranchingWord(string character)
+    {
+        foreach (string word in branchingWords)
+        {
+            if (word[0].ToString() == character)
+            {
+                SendNextWordAdv(word);
+                DisplayChosenBranchingWordAdv.Invoke(word);
+                return true;
+            }
+        }
+
+        return false;
     }
 }

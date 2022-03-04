@@ -21,7 +21,7 @@ MonoBehaviour:
   - disappeared.
   PossibleOutcomes:
   - {fileID: 11400000, guid: 81d45d6c7264e7747ba96a2baa2bca5c, type: 2}
-  - {fileID: 11400000, guid: a1081739a95808142b4c2eeaa5b92d5e, type: 2}
+  - {fileID: 11400000, guid: 23bfaebf083e54f4886e44afe0541cbf, type: 2}
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []

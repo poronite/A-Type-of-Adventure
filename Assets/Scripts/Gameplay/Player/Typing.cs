@@ -24,6 +24,9 @@ public class Typing : MonoBehaviour
     ///<summary>Is player setting their name for the first time.</summary>
     private bool isSettingName = false;
 
+    //When on branching path
+    private bool onBranching = false;
+
     ///<summary>Word that the player has to currently type.</summary>
     private string currentWord;
 
@@ -58,12 +61,13 @@ public class Typing : MonoBehaviour
     OutputCharacterDelegate OutputCharacterCmb;
     OutputCharacterDelegate OutputCharacterPzl;
 
-    //when player has to decide between attack and dodge
-    delegate void DecideAction(string character);
-    DecideAction SendCharacterCmb;
+    //when player has to decide between attack and dodge or between branching words
+    delegate bool DecideWord(string character);
+    DecideWord DecideBranchingWordAdv;
+    DecideWord DecideActionWordCmb;
 
     //When word is complete
-    delegate void CompleteWordDelegate();
+    delegate void CompleteWordDelegate(string word);
     CompleteWordDelegate CompleteWordAdv;
     CompleteWordDelegate CompleteWordCmb;
     CompleteWordDelegate CompleteWordPzl;
@@ -83,23 +87,29 @@ public class Typing : MonoBehaviour
     //Player game object will never be disabled so OnEnable is enough
     private void OnEnable()
     {
-        SetName = gameObject.GetComponent<PlayerStats>().SetName;
-        ResetName = gameObject.GetComponent<Adventure>().ResetName;
-        ResetAnswerPzl = gameObject.GetComponent<Puzzle>().ResetAnswerPzl;
-        ClearCurrentWordAdv = gameObject.GetComponent<Adventure>().ClearCurrentWord;
-        
+        PlayerStats stats = gameObject.GetComponent<PlayerStats>();
+        Adventure advController = gameObject.GetComponent<Adventure>();
+        Combat cmbController = gameObject.GetComponent<Combat>();
+        Puzzle pzlController = gameObject.GetComponent<Puzzle>();
 
-        OutputCharacterAdv += gameObject.GetComponent<Adventure>().AddCharacterUI;
-        OutputCharacterCmb += gameObject.GetComponent<Combat>().AddCharacterUI;
-        OutputCharacterPzl += gameObject.GetComponent<Puzzle>().AddCharacterUI;
 
-        SendCharacterCmb += gameObject.GetComponent<Combat>().SetChosenWordCmb;
+        SetName = stats.SetName;
+        ResetName = advController.ResetName;
+        ResetAnswerPzl = pzlController.ResetAnswerPzl;
+        ClearCurrentWordAdv = advController.ClearCurrentWord;
 
-        CompleteWordAdv += gameObject.GetComponent<Adventure>().CompleteWordAdv;
-        CompleteWordCmb += gameObject.GetComponent<Combat>().CompleteWordCmb;
-        CompleteWordPzl += gameObject.GetComponent<Puzzle>().CompleteWordPzl;
+        OutputCharacterAdv = advController.AddCharacterUI;
+        OutputCharacterCmb = cmbController.AddCharacterUI;
+        OutputCharacterPzl = pzlController.AddCharacterUI;
 
-        UpdateHintAdvUI += gameObject.GetComponent<Adventure>().UpdateHintUI;
+        DecideBranchingWordAdv = advController.SetBranchingWord;
+        DecideActionWordCmb = cmbController.SetChosenWordCmb;
+
+        CompleteWordAdv = advController.CompleteWordAdv;
+        CompleteWordCmb = cmbController.CompleteWordCmb;
+        CompleteWordPzl = pzlController.CompleteWordPzl;
+
+        UpdateHintAdvUI = advController.UpdateHintUI;
     }
 
 
@@ -111,20 +121,23 @@ public class Typing : MonoBehaviour
 
         Debug.Log(currentWord);
 
-        if (currentWord.TrimEnd() == "MCName")
+        switch (currentWord.Trim())
         {
-            isSettingName = true;
-            currentWord = string.Empty;
-            ClearCurrentWordAdv.Invoke();
-            UpdateHintAdvUI("Tip: Insert name of character and press Space Bar");
-            Debug.Log("Setting name");
-        }
-
-        //This is so that the player doesn't have to type
-        //the first letter of the action twice when typing the action chosen.
-        if (CurrentPlayerState == PlayerState.Combat)
-        {
-            AddCharacter(firstLetterAction);
+            case "MCName":
+                isSettingName = true;
+                currentWord = string.Empty;
+                ClearCurrentWordAdv.Invoke();
+                UpdateHintAdvUI("Tip: Insert name of character and press Space Bar");
+                Debug.Log("Setting name");
+                break;
+            case "*":
+                onBranching = true;
+                currentWord = string.Empty;
+                ClearCurrentWordAdv.Invoke();
+                Debug.Log("On branching");
+                break;
+            default:
+                break;
         }
     }
 
@@ -178,12 +191,28 @@ public class Typing : MonoBehaviour
                     {
                         AddCharacter(character);
                     }
+                    if (onBranching)
+                    {
+                        bool branchingDecisionComplete = false;
+                        branchingDecisionComplete = DecideBranchingWordAdv.Invoke(character);
+
+                        if (branchingDecisionComplete)
+                        {
+                            onBranching = false;
+                            AddCharacter(character);
+                        }
+                        
+                    }
                     break;
                 case PlayerState.Combat:
-                    //store the first letter of the word of the action chosen
-                    //in order to re use it so that the player doesn't have to type it again
-                    firstLetterAction = character;
-                    SendCharacterCmb.Invoke(character);
+                    bool actionDecisionComplete = false;
+                    actionDecisionComplete = DecideActionWordCmb.Invoke(character);
+
+                    if (actionDecisionComplete)
+                    {
+                        AddCharacter(character);
+                    }
+                    
                     break;
                 default:
                     break;
@@ -255,7 +284,7 @@ public class Typing : MonoBehaviour
                     //TEMPORARY SOUND EFFECT
                     wordCompleteSFX.Play();
 
-                    CompleteWordAdv.Invoke();
+                    CompleteWordAdv.Invoke(outputWord.ToString());
                 }
                 else if (HasSetupName(character))
                 {
@@ -265,7 +294,7 @@ public class Typing : MonoBehaviour
                     //TEMPORARY SOUND EFFECT
                     wordCompleteSFX.Play();
 
-                    CompleteWordAdv.Invoke();
+                    CompleteWordAdv.Invoke(outputWord.ToString());
 
                     SetName.Invoke(name);
                 }
@@ -276,7 +305,7 @@ public class Typing : MonoBehaviour
                     //TEMPORARY SOUND EFFECT
                     wordCompleteSFX.Play();
 
-                    CompleteWordCmb.Invoke();
+                    CompleteWordCmb.Invoke(outputWord.ToString());
                 }
 
                 break;
@@ -286,7 +315,7 @@ public class Typing : MonoBehaviour
                     //TEMPORARY SOUND EFFECT
                     wordCompleteSFX.Play();
 
-                    CompleteWordPzl.Invoke();
+                    CompleteWordPzl.Invoke(outputWord.ToString());
                 }
 
                 break;

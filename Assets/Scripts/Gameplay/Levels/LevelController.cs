@@ -103,7 +103,7 @@ public class LevelController : MonoBehaviour
                 CreateDictionaries();
 
                 //Start adventure
-                GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(textToType);
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(textToType, possibleChoices);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Adventure"));
 
                 break;
@@ -180,13 +180,15 @@ public class LevelController : MonoBehaviour
 
     ///<summary>Choose the next level based on the word typed by the player while adventuring.</summary>
     public void ChooseNextLevel(string word)
-    {
+    {        
         if (!hasBranching)
         {
+            Debug.Log("One Path");
             ChangeLevel(nextLevelAfterAdventure);
         }
         else if (hasBranching)
         {
+            Debug.Log("Branched");
             if (branches.ContainsKey(word))
             {
                 ChangeLevel(branches[word]);

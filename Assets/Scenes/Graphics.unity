@@ -626,6 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307bc75d2fe71e143b117b0f19fb361f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  advUIElements: {fileID: 922763208}
   currentTextUITransform: {fileID: 695780631}
   outputTextUITransform: {fileID: 124555069}
   writtenTextUIAdv: {fileID: 1165209880}
@@ -633,7 +634,8 @@ MonoBehaviour:
   outputTextUIAdv: {fileID: 124555070}
   remainingTextUIAdv: {fileID: 278852974}
   hintTextUIAdv: {fileID: 1935407281}
-  advUIElements: {fileID: 922763208}
+  branchWord1UIAdv: {fileID: 1263793838}
+  branchWord2UIAdv: {fileID: 792079983}
 --- !u!1 &243920440
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &350824311
 Transform:
   m_ObjectHideFlags: 0
@@ -1977,7 +1979,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 557307acdb80f8f4ba805dc64cd9239e, type: 2}
   m_sharedMaterial: {fileID: 1249294242684021801, guid: 557307acdb80f8f4ba805dc64cd9239e,
@@ -3365,7 +3367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1235185034
 Transform:
   m_ObjectHideFlags: 0
@@ -3571,7 +3573,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 557307acdb80f8f4ba805dc64cd9239e, type: 2}
   m_sharedMaterial: {fileID: 1249294242684021801, guid: 557307acdb80f8f4ba805dc64cd9239e,
@@ -3996,7 +3998,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1523808043
 Transform:
   m_ObjectHideFlags: 0
