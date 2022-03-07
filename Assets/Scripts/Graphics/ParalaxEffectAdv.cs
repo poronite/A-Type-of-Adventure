@@ -14,14 +14,30 @@ public class ParalaxEffectAdv : MonoBehaviour
     private GameObject[] layer2Children;
     private GameObject[] layer1Children;
 
-    [SerializeField] 
     private Sprite[] layer3Sprites;
-
-    [SerializeField]
     private Sprite[] layer2Sprites;
+    private Sprite[] layer1Sprites;
 
     [SerializeField]
-    private Sprite[] layer1Sprites;
+    private Sprite[] plainsGroundSprites;
+    [SerializeField]
+    private Sprite[] plainsTreeSprites;
+    [SerializeField]
+    private Sprite[] plainsSkySprites;
+
+    [SerializeField]
+    private Sprite[] castleGroundSprites;
+    [SerializeField]
+    private Sprite[] castleWallSprites;
+    [SerializeField]
+    private Sprite[] castleSkySprites;
+
+    [SerializeField]
+    private Sprite[] magicForestGroundSprites;
+    [SerializeField]
+    private Sprite[] magicForestTreeSprites;
+    [SerializeField]
+    private Sprite[] magicForestSkySprites;
 
     private GameObject playerGfx;
     private Vector3 playerOriginalPosition;
@@ -87,27 +103,60 @@ public class ParalaxEffectAdv : MonoBehaviour
             }
         }
 
+        Debug.Log("layers ready");
+
         Destroy(clone);
         Destroy(obj.GetComponent<SpriteRenderer>());
     }
     
 
-    public void ChangeField()
+    public void ChangeField(FieldType type)
     {
+        Debug.Log("Change Field");
+
+        switch (type)
+        {
+            case FieldType.Plains:
+                layer1Sprites = plainsGroundSprites;
+                layer2Sprites = plainsTreeSprites;
+                layer3Sprites = plainsSkySprites;
+                break;
+            case FieldType.Castle:
+                layer1Sprites = castleGroundSprites;
+                layer2Sprites = castleWallSprites;
+                layer3Sprites = castleSkySprites;
+                break;
+            case FieldType.MagicForest:
+                layer1Sprites = magicForestGroundSprites;
+                layer2Sprites = magicForestTreeSprites;
+                layer3Sprites = magicForestSkySprites;
+                break;
+            default:
+                break;
+        }
+
+        foreach (GameObject layer in layer1Children)
+        {
+            Debug.Log($"Layer 1 child: {layer.name}");
+        }
+
+
         for (int i = 0; i < numChildren; i++)
         {
             string name = layers[i].name;
 
+            Debug.Log(name);
+
             switch (name)
             {
-                case "Layer3":
-                    layer3Children[i].GetComponent<SpriteRenderer>().sprite = layer3Sprites[i];
+                case "Layer1":
+                    layer1Children[i].GetComponent<SpriteRenderer>().sprite = layer1Sprites[i];
                     break;
                 case "Layer2":
                     layer2Children[i].GetComponent<SpriteRenderer>().sprite = layer2Sprites[i];
                     break;
-                case "Layer1":
-                    layer1Children[i].GetComponent<SpriteRenderer>().sprite = layer1Sprites[i];
+                case "Layer3":
+                    layer3Children[i].GetComponent<SpriteRenderer>().sprite = layer3Sprites[i];
                     break;
                 default:
                     break;

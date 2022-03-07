@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: StartExample
   LevelType: 0
+  FieldType: 0
   TextToType: Once upon a time, the hero was on a journey until a thief *
   NextLevelAfterAdventure: {fileID: 11400000, guid: 81d45d6c7264e7747ba96a2baa2bca5c,
     type: 2}

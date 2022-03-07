@@ -10,7 +10,9 @@ public enum LevelType
 
 public enum FieldType
 {
-    Forest
+    Plains,
+    Castle,
+    MagicForest
 }
 
 [CreateAssetMenu(fileName = "New_Level", menuName = "New Level", order = 51)]

@@ -14,6 +14,7 @@ public class LevelController : MonoBehaviour
     //Common stats to all levels
     private string levelName;
     private LevelType levelType;
+    private FieldType fieldType;
 
 
     //If level is of type Adventure
@@ -54,15 +55,19 @@ public class LevelController : MonoBehaviour
     delegate IEnumerator GraphicsDelegate(string levelType);
     GraphicsDelegate ChangeLevelGraphics;
 
+    delegate void FieldDelegate(FieldType type);
+    FieldDelegate ChangeField;
+
 
     //Functions
     public void SetDelegatesLevel()
     {
         EncounterController encountersController = GameObject.FindGameObjectWithTag("EncountersController").GetComponent<EncounterController>();
-        TriggerEncounters += encountersController.EncounterTriggered;
+        TriggerEncounters = encountersController.EncounterTriggered;
 
-        ShowLoadingScreen += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateLoadingScreen;
-        ChangeLevelGraphics += GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ChangeLevelGraphics;
+        ShowLoadingScreen = GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateLoadingScreen;
+        ChangeLevelGraphics = GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ChangeLevelGraphics;
+        ChangeField = FindObjectOfType<ParalaxEffectAdv>().GetComponent<ParalaxEffectAdv>().ChangeField;
     }
 
 
@@ -84,6 +89,7 @@ public class LevelController : MonoBehaviour
 
         levelName = levelData.LevelName;
         levelType = levelData.LevelType;
+        fieldType = levelData.FieldType;
 
         switch (levelType)
         {
@@ -101,6 +107,8 @@ public class LevelController : MonoBehaviour
 
                 //create branching and encounter dictionaries
                 CreateDictionaries();
+
+                ChangeField.Invoke(fieldType);
 
                 //Start adventure
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(textToType, possibleChoices);
