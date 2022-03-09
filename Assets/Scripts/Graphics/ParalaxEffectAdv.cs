@@ -8,14 +8,17 @@ using UnityEngine;
 
 public class ParalaxEffectAdv : MonoBehaviour
 {
+    //paralax layer related variables
     private int numChildren = 3;
+
     private GameObject[] layers;
+
     private GameObject[] layer3Children;
     private GameObject[] layer2Children;
     private GameObject[] layer1Children;
-
-    private Sprite[] layer3Sprites;
-    private Sprite[] layer2Sprites;
+    
+    private Sprite[] layer3Sprites;    
+    private Sprite[] layer2Sprites;    
     private Sprite[] layer1Sprites;
 
     [SerializeField]
@@ -39,6 +42,8 @@ public class ParalaxEffectAdv : MonoBehaviour
     [SerializeField]
     private Sprite[] magicForestSkySprites;
 
+
+    //camera and player related variables and references
     private GameObject playerGfx;
     private Vector3 playerOriginalPosition;
 
@@ -57,7 +62,7 @@ public class ParalaxEffectAdv : MonoBehaviour
         playerGfx = GameObject.FindGameObjectWithTag("PlayerGfx");
         playerOriginalPosition = playerGfx.transform.position;
 
-        Debug.Log($"Original Position: {playerOriginalPosition.x}, {playerOriginalPosition.y}, {playerOriginalPosition.z}");
+        //Debug.Log($"Original Position: {playerOriginalPosition.x}, {playerOriginalPosition.y}, {playerOriginalPosition.z}");
 
         layers = GameObject.FindGameObjectsWithTag("ParalaxLayer");
 
@@ -65,9 +70,13 @@ public class ParalaxEffectAdv : MonoBehaviour
         layer2Children = new GameObject[numChildren];
         layer1Children = new GameObject[numChildren];
 
+        layer3Sprites = new Sprite[numChildren];
+        layer2Sprites = new Sprite[numChildren];
+        layer1Sprites = new Sprite[numChildren];
+
         foreach (GameObject obj in layers)
         {
-            Debug.Log("Layer: " + obj.name);
+            //Debug.Log("Layer: " + obj.name);
             LoadChildObjects(obj);
         }
 
@@ -103,7 +112,7 @@ public class ParalaxEffectAdv : MonoBehaviour
             }
         }
 
-        Debug.Log("layers ready");
+        //Debug.Log("Layers ready");
 
         Destroy(clone);
         Destroy(obj.GetComponent<SpriteRenderer>());
@@ -112,7 +121,7 @@ public class ParalaxEffectAdv : MonoBehaviour
 
     public void ChangeField(FieldType type)
     {
-        Debug.Log("Change Field");
+        //Debug.Log("Change Field");
 
         switch (type)
         {
@@ -135,32 +144,31 @@ public class ParalaxEffectAdv : MonoBehaviour
                 break;
         }
 
-        foreach (GameObject layer in layer1Children)
+
+        for (int i = 0; i < layers.Length; i++)
         {
-            Debug.Log($"Layer 1 child: {layer.name}");
-        }
+            string layerParentName = layers[i].name;
 
-
-        for (int i = 0; i < numChildren; i++)
-        {
-            string name = layers[i].name;
-
-            Debug.Log(name);
-
-            switch (name)
+            for (int j = 0; j < numChildren; j++)
             {
-                case "Layer1":
-                    layer1Children[i].GetComponent<SpriteRenderer>().sprite = layer1Sprites[i];
-                    break;
-                case "Layer2":
-                    layer2Children[i].GetComponent<SpriteRenderer>().sprite = layer2Sprites[i];
-                    break;
-                case "Layer3":
-                    layer3Children[i].GetComponent<SpriteRenderer>().sprite = layer3Sprites[i];
-                    break;
-                default:
-                    break;
+                //Debug.Log($"Layer Parent: {layerParentName}");
+
+                switch (layerParentName)
+                {
+                    case "Layer1":
+                        layer1Children[j].GetComponent<SpriteRenderer>().sprite = layer1Sprites[j];
+                        break;
+                    case "Layer2":
+                        layer2Children[j].GetComponent<SpriteRenderer>().sprite = layer2Sprites[j];
+                        break;
+                    case "Layer3":
+                        layer3Children[j].GetComponent<SpriteRenderer>().sprite = layer3Sprites[j];
+                        break;
+                    default:
+                        break;
+                }
             }
+            
         }
     }
 
