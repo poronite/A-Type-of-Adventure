@@ -56,7 +56,8 @@ public class LevelController : MonoBehaviour
     GraphicsDelegate ChangeLevelGraphics;
 
     delegate void FieldDelegate(FieldType type);
-    FieldDelegate ChangeField;
+    FieldDelegate ChangeFieldNonParalax;
+    FieldDelegate ChangeFieldParalax;
 
 
     //Functions
@@ -67,7 +68,10 @@ public class LevelController : MonoBehaviour
 
         ShowLoadingScreen = GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateLoadingScreen;
         ChangeLevelGraphics = GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ChangeLevelGraphics;
-        ChangeField = FindObjectOfType<ParalaxEffectAdv>().GetComponent<ParalaxEffectAdv>().ChangeField;
+
+        BackgroundManager backgroundManager = FindObjectOfType<BackgroundManager>().GetComponent<BackgroundManager>();
+        ChangeFieldNonParalax = backgroundManager.ChangeFieldNonParalax;
+        ChangeFieldParalax = backgroundManager.ChangeFieldParalax;
     }
 
 
@@ -108,7 +112,7 @@ public class LevelController : MonoBehaviour
                 //create branching and encounter dictionaries
                 CreateDictionaries();
 
-                ChangeField.Invoke(fieldType);
+                ChangeFieldParalax.Invoke(fieldType);
 
                 //Start adventure
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(textToType, possibleChoices);
@@ -120,6 +124,8 @@ public class LevelController : MonoBehaviour
                 enemy = levelData.Enemy;
                 nextLevelAfterCombat = levelData.NextLevelAfterCombat;
 
+                ChangeFieldNonParalax.Invoke(fieldType);
+
                 //Start combat
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().StartCombat(enemy, nextLevelAfterCombat);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Combat"));
@@ -130,6 +136,8 @@ public class LevelController : MonoBehaviour
                 correctWord = levelData.CorrectWord;
                 questionBoard = levelData.QuestionBoard;
                 nextLevelAfterPuzzle = levelData.NextLevelAfterPuzzle;
+
+                ChangeFieldNonParalax.Invoke(fieldType);
 
                 //Start puzzle
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Puzzle>().StartPuzzle(correctWord, questionBoard, nextLevelAfterPuzzle);

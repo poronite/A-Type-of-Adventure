@@ -6,8 +6,28 @@ using UnityEngine;
 //with a few changes to make it fitting for the game
 
 
-public class ParalaxEffectAdv : MonoBehaviour
+public class BackgroundManager : MonoBehaviour
 {
+    //non paralax background related variables
+    [SerializeField]
+    private SpriteRenderer backgroundCmb;
+    [SerializeField]
+    private SpriteRenderer backgroundPzl;
+
+    [SerializeField]
+    private Sprite plainsBackgroundCmb;
+    [SerializeField]
+    private Sprite plainsBackgroundPzl;
+    [SerializeField]
+    private Sprite castleBackgroundCmb;
+    [SerializeField]
+    private Sprite castleBackgroundPzl;
+    [SerializeField]
+    private Sprite magicForestBackgroundCmb;
+    [SerializeField]
+    private Sprite magicForestBackgroundPzl;
+
+
     //paralax layer related variables
     private int numChildren = 3;
 
@@ -118,8 +138,30 @@ public class ParalaxEffectAdv : MonoBehaviour
         Destroy(obj.GetComponent<SpriteRenderer>());
     }
     
+    
+    public void ChangeFieldNonParalax(FieldType type)
+    {
+        switch (type)
+        {
+            case FieldType.Plains:
+                backgroundCmb.sprite = plainsBackgroundCmb;
+                backgroundPzl.sprite = plainsBackgroundPzl;
+                break;
+            case FieldType.Castle:
+                backgroundCmb.sprite = castleBackgroundCmb;
+                backgroundPzl.sprite = castleBackgroundPzl;
+                break;
+            case FieldType.MagicForest:
+                backgroundCmb.sprite = magicForestBackgroundCmb;
+                backgroundPzl.sprite = magicForestBackgroundPzl;
+                break;
+            default:
+                break;
+        }
+    }
 
-    public void ChangeField(FieldType type)
+
+    public void ChangeFieldParalax(FieldType type)
     {
         //Debug.Log("Change Field");
 

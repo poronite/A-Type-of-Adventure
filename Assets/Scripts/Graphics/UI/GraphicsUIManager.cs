@@ -62,7 +62,7 @@ public class GraphicsUIManager : MonoBehaviour
         //the layers are ready to move
         if (Adventure.activeSelf) 
         {
-            mainCamera.GetComponent<ParalaxEffectAdv>().ResetPositions();
+            mainCamera.GetComponent<BackgroundManager>().ResetPositions();
         }
 
         mainCamera.canMoveCamera = false;
