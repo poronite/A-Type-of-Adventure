@@ -18,6 +18,8 @@ public class EnemyStats : MonoBehaviour
 
     private bool isBoss;
 
+    public bool BossPhaseHappened;
+
     public bool IsEnemyDead;
 
 
@@ -31,8 +33,8 @@ public class EnemyStats : MonoBehaviour
 
     public void SetDelegatesEnemyStats()
     {
-        UpdateEnemyHPBarFill += GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateHealthBarFillUI;
-        TriggerVictory += GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().WinCombat;
+        UpdateEnemyHPBarFill = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateHealthBarFillUI;
+        TriggerVictory = GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().WinCombat;
     }
 
 
@@ -61,6 +63,12 @@ public class EnemyStats : MonoBehaviour
         if (!IsEnemyDead)
         {
             enemyCurrentHP -= damage;
+
+            //trigger boss special phase
+            if (enemyCurrentHP <= enemyMaxHP / 2 && !BossPhaseHappened)
+            {
+                //aaaaaaa
+            }
 
             if (enemyCurrentHP <= 0)
             {

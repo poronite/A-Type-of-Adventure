@@ -28,6 +28,12 @@ public class CombatUI : MonoBehaviour
     private TextMeshProUGUI outputTextUICmb;
 
     [SerializeField]
+    private TextMeshProUGUI currentTextBossPhase;
+
+    [SerializeField]
+    private TextMeshProUGUI outputTextBossPhase;
+
+    [SerializeField]
     private Image enemyAttackWordFill;
 
     [SerializeField]
@@ -43,6 +49,11 @@ public class CombatUI : MonoBehaviour
     public void AddCharacterUICmb(string character)
     {
         outputTextUICmb.text += character;
+    }
+
+    public void AddCharacterBossPhaseUICmb(string character)
+    {
+        outputTextBossPhase.text += character;
     }
 
 

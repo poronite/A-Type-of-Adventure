@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour
 
     private float timeSinceLastAttack;
 
+    private string letters = "abcdefghijklmnopqrstuvwxyz";
+
+    [SerializeField]
+    private int numberCharBossWord;
+
 
     //delegates
     delegate void DealDamageDelegate(int damage);
@@ -23,8 +28,7 @@ public class Enemy : MonoBehaviour
 
     
 
-
-
+    //functions
     private void Start()
     {
         stats = gameObject.GetComponent<EnemyStats>();
@@ -82,5 +86,19 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         ReadyAttack();
+    }
+
+
+    //Trigger boss special phase
+    public string StartBossPhase()
+    {
+        string finalWord = string.Empty;
+
+        for (int i = 0; i < numberCharBossWord; i++)
+        {
+            finalWord += letters[Random.Range(0, letters.Length)];
+        }
+
+        return finalWord;
     }
 }
