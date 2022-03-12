@@ -62,6 +62,8 @@ public class CombatUI : MonoBehaviour
     {
         currentTextUICmb.text = string.Empty;
         outputTextUICmb.text = string.Empty;
+        currentTextBossPhase.text = string.Empty;
+        outputTextBossPhase.text = string.Empty;
     }
 
 
@@ -117,8 +119,15 @@ public class CombatUI : MonoBehaviour
     }
 
 
+    public void DisplayCurrentBossPhaseWordUICmb(string word)
+    {
+        ClearAttackDodgeWordsUICmb();
+        currentTextBossPhase.text = word;
+    }
+
+
     //Enemy
-    /// <summary>Increase enemy's attack word fill based on time elapsed since last attack.</summary>
+    ///<summary>Increase enemy's attack word fill based on time elapsed since last attack.</summary>
     public void UpdateEnemyAttackWordFillUI(float fillAmount)
     {
         enemyAttackWordFill.fillAmount = fillAmount;

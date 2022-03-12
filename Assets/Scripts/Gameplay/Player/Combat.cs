@@ -18,6 +18,8 @@ public class Combat : MonoBehaviour
 
     private Actions actionChosen;
 
+    private bool onBossPhase = false;
+
     private List<string> attackWordsList = new List<string> { "Punch", "Kick", "Tackle", "Slash"};
     private string attackWordText = string.Empty;
     private string previousAttackWord = string.Empty; //so that the same word doesn't appear twice in a row
@@ -32,6 +34,7 @@ public class Combat : MonoBehaviour
     //Delegates
     delegate void WordDelegate(string word);
     WordDelegate SendNextWordCmb;
+    WordDelegate DisplayCurrentBossPhaseWordCmb;
 
     delegate void AttackDelegate(int damage);
     AttackDelegate AttackEnemy;
@@ -43,6 +46,7 @@ public class Combat : MonoBehaviour
 
     delegate void OutputUIDelegate(string character);
     OutputUIDelegate AddCharacterCmb;
+    OutputUIDelegate AddCharacterBossPhaseCmb;
 
     delegate void DisplayActionWordsDelegate(string attackWord, string dodgeWord);
     DisplayActionWordsDelegate DisplayNewAttackDodgeWordsCmb;
@@ -80,12 +84,14 @@ public class Combat : MonoBehaviour
 
         CombatUI CmbUIController = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>();
 
-        ClearCurrentOutputWordCmb += CmbUIController.ClearCurrentOutputWordUICmb;
-        ClearAttackDodgeWordsCmb += CmbUIController.ClearAttackDodgeWordsUICmb;
-        AddCharacterCmb += CmbUIController.AddCharacterUICmb;
-        DisplayNewAttackDodgeWordsCmb += CmbUIController.DisplayNewAttackDodgeWordsUICmb;
-        DefineWordColorCmb += CmbUIController.DefineWordColorUICmb;
-        DisplayNewCurrentWordCmb += CmbUIController.DisplayNewCurrentWordUICmb;
+        ClearCurrentOutputWordCmb = CmbUIController.ClearCurrentOutputWordUICmb;
+        ClearAttackDodgeWordsCmb = CmbUIController.ClearAttackDodgeWordsUICmb;
+        AddCharacterCmb = CmbUIController.AddCharacterUICmb;
+        AddCharacterBossPhaseCmb = CmbUIController.AddCharacterBossPhaseUICmb;
+        DisplayNewAttackDodgeWordsCmb = CmbUIController.DisplayNewAttackDodgeWordsUICmb;
+        DefineWordColorCmb = CmbUIController.DefineWordColorUICmb;
+        DisplayNewCurrentWordCmb = CmbUIController.DisplayNewCurrentWordUICmb;
+        DisplayCurrentBossPhaseWordCmb = CmbUIController.DisplayCurrentBossPhaseWordUICmb;
     }
 
 
@@ -139,7 +145,7 @@ public class Combat : MonoBehaviour
 
 
         DisplayNewAttackDodgeWordsCmb.Invoke(attackWordText, dodgeWordText);
-        Debug.Log($"Choose the next word: {attackWordText} or {dodgeWordText}");
+        //Debug.Log($"Choose the next word: {attackWordText} or {dodgeWordText}");
     }
 
 
@@ -170,13 +176,13 @@ public class Combat : MonoBehaviour
     {
         if (character == attackWordText[0].ToString().ToLower())
         {
-            Debug.Log("Chose to attack.");
+            //Debug.Log("Chose to attack.");
             actionChosen = Actions.Attack;
             return attackWordText;
         }    
         else if (character == dodgeWordText[0].ToString().ToLower())
         {
-            Debug.Log("Chose to dodge.");
+            //Debug.Log("Chose to dodge.");
             actionChosen = Actions.Dodge;
             return dodgeWordText;
         }
@@ -193,38 +199,68 @@ public class Combat : MonoBehaviour
         //this is here because after defeating the enemy 
         //it was clearing the word that the player had to type
         //making it impossible to continue the game
-        SetWords(); 
+        SetWords();
 
-        switch (actionChosen)
+        if (!onBossPhase)
         {
-            case Actions.Attack:
-                Attack();
-                break;
-            case Actions.Dodge:
-                Dodge();
-                break;
-            default:
-                break;
+            switch (actionChosen)
+            {
+                case Actions.Attack:
+                    Attack();
+                    break;
+                case Actions.Dodge:
+                    Dodge();
+                    break;
+                default:
+                    break;
+            }
         }
+        else
+        {
+            DeactivateBossPhase();
+        }
+        
     }
 
     public void AddCharacterUI(string character)
     {
-        AddCharacterCmb.Invoke(character);
+        if (!onBossPhase)
+        {
+            AddCharacterCmb.Invoke(character);
+        }
+        else
+        {
+            AddCharacterBossPhaseCmb.Invoke(character);
+        }
     }
 
 
     private void Attack()
     {
-        Debug.Log("Attacked");
+        //Debug.Log("Attacked");
         AttackEnemy.Invoke(stats.PlayerAttack);
     }
 
 
     private void Dodge()
     {
-        Debug.Log("Dodged");
+        //Debug.Log("Dodged");
         ActivateDodge.Invoke();
+    }
+
+
+    public void ActivateBossPhase(string word)
+    {
+        onBossPhase = true;
+        SendNextWordCmb.Invoke(word);
+        DisplayCurrentBossPhaseWordCmb.Invoke(word);
+    }
+
+
+    private void DeactivateBossPhase()
+    {
+        onBossPhase = false;
+        SetWords();
     }
 
 

@@ -27,6 +27,9 @@ public class EnemyStats : MonoBehaviour
     delegate void EnemyHPBarFill(string id, float fillAmount);
     EnemyHPBarFill UpdateEnemyHPBarFill;
 
+    delegate void BossPhase(string word);
+    BossPhase ActivateBossPhase;
+
     delegate void EndCombat();
     EndCombat TriggerVictory;
 
@@ -34,7 +37,11 @@ public class EnemyStats : MonoBehaviour
     public void SetDelegatesEnemyStats()
     {
         UpdateEnemyHPBarFill = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateHealthBarFillUI;
-        TriggerVictory = GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().WinCombat;
+
+        Combat cmbController = GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>();
+        ActivateBossPhase = cmbController.ActivateBossPhase;
+        TriggerVictory = cmbController.WinCombat;
+
     }
 
 
@@ -64,11 +71,16 @@ public class EnemyStats : MonoBehaviour
         {
             enemyCurrentHP -= damage;
 
-            //trigger boss special phase
-            if (enemyCurrentHP <= enemyMaxHP / 2 && !BossPhaseHappened)
+            if (isBoss)
             {
-                //aaaaaaa
+                //trigger boss special phase
+                if (enemyCurrentHP <= enemyMaxHP / 2 && !BossPhaseHappened)
+                {
+                    BossPhaseHappened = true;
+                    ActivateBossPhase.Invoke(gameObject.GetComponent<Enemy>().StartBossPhase());
+                }
             }
+            
 
             if (enemyCurrentHP <= 0)
             {

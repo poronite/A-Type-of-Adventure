@@ -36,9 +36,6 @@ public class Typing : MonoBehaviour
     ///<summary>Index of the next character that needs to be typed by player.</summary>
     private int nextCharacterIndex = 0;
 
-    ///<summary>First letter of the action (attack or dodge) that the player chose.</summary>
-    private string firstLetterAction;
-
 
     //Unity events
     public UnityEvent AddTime;
@@ -155,7 +152,7 @@ public class Typing : MonoBehaviour
     ///Puzzle: Always add character.</summary>
     public void TypeCharacter(string character)
     {
-        Debug.Log("Attempt to type character: " + character);
+        //Debug.Log("Attempt to type character: " + character);
 
         if (CurrentWordExist())
         {
@@ -274,7 +271,7 @@ public class Typing : MonoBehaviour
         //TEMPORARY SOUND EFFECT
         typeSFX.Play();
 
-        Debug.Log($"Character typed: {character} | {outputWord}");
+        //Debug.Log($"Character typed: {character} | {outputWord}");
 
         switch (CurrentPlayerState)
         {
@@ -367,7 +364,7 @@ public class Typing : MonoBehaviour
                 }
                 break;
             case PlayerState.Puzzle:
-                Debug.Log("Delete text typed.");
+                //Debug.Log("Delete text typed.");
                 nextCharacterIndex = 0;
                 outputWord.Clear();
                 ResetAnswerPzl.Invoke();

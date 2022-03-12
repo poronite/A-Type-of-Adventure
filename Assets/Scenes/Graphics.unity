@@ -596,7 +596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &182019169
 Transform:
   m_ObjectHideFlags: 0
@@ -1273,6 +1273,8 @@ MonoBehaviour:
   dodgeWordTextUICmb: {fileID: 350634608}
   currentTextUICmb: {fileID: 1197461613}
   outputTextUICmb: {fileID: 1467528922}
+  currentTextBossPhase: {fileID: 342750087}
+  outputTextBossPhase: {fileID: 456488124}
   enemyAttackWordFill: {fileID: 834988407}
   playerHealthBarFill: {fileID: 2001477524}
   enemyHealthBarFill: {fileID: 2044735938}
@@ -3668,7 +3670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1235185034
 Transform:
   m_ObjectHideFlags: 0
@@ -4300,7 +4302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1523808043
 Transform:
   m_ObjectHideFlags: 0
