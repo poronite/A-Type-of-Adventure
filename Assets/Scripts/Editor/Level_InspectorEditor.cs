@@ -88,7 +88,7 @@ public class Level_InspectorEditor : Editor
         //put this here because it was giving errors when changing level types
         string[] words = { "Empty" };
 
-        if (level.TextToType.Length == 0)
+        if (level.TextToType.Length != 0)
         {
             words = level.TextToType.Split(' ');
         }

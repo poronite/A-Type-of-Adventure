@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: FightExample
   LevelType: 1
+  FieldType: 0
   TextToType: 
   NextLevelAfterAdventure: {fileID: 0}
+  HasBranching: 0
   PossibleChoices: []
   PossibleOutcomes: []
   NumEncounters: 0
