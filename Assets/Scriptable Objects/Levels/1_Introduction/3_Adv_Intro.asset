@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: The warning
   LevelType: 0
+  FieldType: 0
   TextToType: 'A messenger appears and says: "I came to warn you. They''ll come looking
     for the orb, you need to take it to the citadel, you need to take it to the order..."
     before disappearing. MCName goes to bed, paying no attention to the words uttered
     by the enemy.'
+  NextLevelAfterAdventure: {fileID: 11400000, guid: 929e6e01573652442b0b99fd2b867358,
+    type: 2}
+  HasBranching: 0
   PossibleChoices: []
-  NumChoices: 1
-  WordKey: 30000000
-  LevelValue:
-  - {fileID: 11400000, guid: 929e6e01573652442b0b99fd2b867358, type: 2}
+  PossibleOutcomes: []
   NumEncounters: 3
   EncounterWordKey: 000000002300000030000000
   EncounterValue:

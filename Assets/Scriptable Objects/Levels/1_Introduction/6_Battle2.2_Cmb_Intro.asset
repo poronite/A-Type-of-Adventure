@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: The battle against the bandits (Part 2)
   LevelType: 1
+  FieldType: 0
   TextToType: 
+  NextLevelAfterAdventure: {fileID: 0}
+  HasBranching: 0
   PossibleChoices: []
-  NumChoices: 0
-  WordKey: 
-  LevelValue: []
+  PossibleOutcomes: []
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []

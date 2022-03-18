@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: In the middle of the night
   LevelType: 0
+  FieldType: 0
   TextToType: In the middle of the night, MCName heard commotion outside, bandits
     were raiding the farm. "Find the orb, quickly, or Lord Gillah will have our heads".
     MCName quickly gets out of bed and grabs the decorative sword that was hanging
     on the wall before going outside, in an attempt to fend them off.
+  NextLevelAfterAdventure: {fileID: 11400000, guid: 6c3d8d6aa9b822c408597f24f19dee06,
+    type: 2}
+  HasBranching: 0
   PossibleChoices: []
-  NumChoices: 1
-  WordKey: 35000000
-  LevelValue:
-  - {fileID: 11400000, guid: 6c3d8d6aa9b822c408597f24f19dee06, type: 2}
+  PossibleOutcomes: []
   NumEncounters: 3
   EncounterWordKey: 000000001000000035000000
   EncounterValue:

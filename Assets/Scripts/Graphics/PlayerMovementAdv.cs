@@ -11,12 +11,17 @@ public class PlayerMovementAdv : MonoBehaviour
     private float playerspeed;
 
     [SerializeField]
+    private float accelerationDuration;
+
+    [SerializeField]
     private float movementDuration;
+
+    private float accelerationProgress = 0.0f;
 
     private float remainingDuration;
 
     //if player is currently moving 
-    private bool isMoving = true;
+    private bool isMoving = false;
 
     //force player to stop
     private bool isPlayerStopped = false;
@@ -35,11 +40,10 @@ public class PlayerMovementAdv : MonoBehaviour
     {
         remainingDuration = movementDuration;
 
-        isMoving = true;
-
-        if (!isPlayerStopped)
+        //if already moving don't trigger coroutine again or it will overlap!
+        if (!isMoving) 
         {
-            playerAnimator.Play("Walk", 0);
+            StartCoroutine(SmoothMovementChange(1f));
         }
     }
 
@@ -49,37 +53,69 @@ public class PlayerMovementAdv : MonoBehaviour
     {
         isPlayerStopped = movementState;
 
-        if (isPlayerStopped)
+        if (!isPlayerStopped)
         {
-            playerAnimator.Play("Idle", 0);
+            StartCoroutine(SmoothMovementChange(1.0f));
+        }
+        else if (isPlayerStopped)
+        {
+            StartCoroutine(SmoothMovementChange(0.0f));
         }
     }
 
 
     private void MovePlayer()
     {
-        if (isMoving && !isPlayerStopped)
+        Vector2 position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+        
+        position.x += playerspeed * accelerationProgress * Time.deltaTime;
+        
+        gameObject.transform.position = position;
+
+        playerAnimator.SetFloat("Movement", accelerationProgress);
+
+        Debug.Log("Movement progress: " + playerAnimator.GetFloat("Movement"));
+    }
+
+
+    IEnumerator SmoothMovementChange(float targetValue)
+    {
+        float time = 0.0f;
+
+        while (time < accelerationDuration)
         {
-            remainingDuration -= Time.deltaTime;
+            accelerationProgress = Mathf.Lerp(accelerationProgress, targetValue, time / accelerationDuration);
+            MovePlayer();
+            time += Time.deltaTime;
+            yield return null;
+        }
 
-            Vector2 position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+        accelerationProgress = targetValue;
 
-            position.x += playerspeed * Time.deltaTime;
-
-            gameObject.transform.position = position;
-
-            if (remainingDuration <= 0)
-            {
-                isMoving = false;
-
-                playerAnimator.Play("Idle", 0);
-            }
+        if (accelerationProgress >= 1.0)
+        {
+            isMoving = true;
         }
     }
 
 
     private void Update()
     {
-        MovePlayer();
+        if (isMoving && !isPlayerStopped)
+        {
+            remainingDuration -= Time.deltaTime;
+
+            MovePlayer();
+
+            if (remainingDuration <= 0)
+            {
+                //if already in idle don't trigger coroutine again or it will overlap!
+                if (isMoving)
+                {
+                    isMoving = false;
+                    StartCoroutine(SmoothMovementChange(0.0f));
+                }
+            }
+        }
     }
 }

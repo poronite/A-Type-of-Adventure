@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: Looking for the orb
   LevelType: 0
+  FieldType: 0
   TextToType: Now that they're gone, MCName decides to look for the orb.
+  NextLevelAfterAdventure: {fileID: 11400000, guid: 66acb3cc9cd4bbd4b9730d7bc591bcaf,
+    type: 2}
+  HasBranching: 0
   PossibleChoices: []
   PossibleOutcomes: []
-  NumChoices: 1
-  WordKey: 0b000000
-  LevelValue:
-  - {fileID: 11400000, guid: 66acb3cc9cd4bbd4b9730d7bc591bcaf, type: 2}
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []

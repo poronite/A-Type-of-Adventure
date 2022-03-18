@@ -3148,6 +3148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerspeed: 5
+  accelerationDuration: 1.5
   movementDuration: 1.5
   playerAnimator: {fileID: 467675639}
 --- !u!1 &1116969829
