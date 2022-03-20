@@ -42,7 +42,13 @@ public class LevelTemplate : ScriptableObject
 
     //Combat
     public EnemyTemplate Enemy;
+
+    //only for common enemies
     public LevelTemplate NextLevelAfterCombat;
+
+    //if enemy is a Boss
+    public LevelTemplate NextLevelAfterKillingBoss;
+    public LevelTemplate NextLevelAfterSparingBoss;
 
 
     //Puzzle

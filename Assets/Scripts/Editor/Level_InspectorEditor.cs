@@ -29,7 +29,13 @@ public class Level_InspectorEditor : Editor
 
     //Combat
     SerializedProperty enemy;
+
+    //if common enemy
     SerializedProperty nextLevelAfterCombat;
+
+    //if Boss
+    SerializedProperty nextLevelAfterKillingBoss;
+    SerializedProperty nextLevelAfterSparingBoss;
 
     //Puzzle
     SerializedProperty correctWord;
@@ -59,7 +65,11 @@ public class Level_InspectorEditor : Editor
 
         //combat
         enemy = serializedObject.FindProperty("Enemy");
+        //common enemy
         nextLevelAfterCombat = serializedObject.FindProperty("NextLevelAfterCombat");
+        //Boss
+        nextLevelAfterKillingBoss = serializedObject.FindProperty("NextLevelAfterKillingBoss");
+        nextLevelAfterSparingBoss = serializedObject.FindProperty("NextLevelAfterSparingBoss");
 
         //puzzle
         correctWord = serializedObject.FindProperty("CorrectWord");
@@ -197,7 +207,29 @@ public class Level_InspectorEditor : Editor
 
                 EditorGUILayout.Space();
 
-                EditorGUILayout.PropertyField(nextLevelAfterCombat, new GUIContent("Next Level: "), true);
+                if (level.Enemy != null)
+                {
+                    //common enemy
+                    if (!level.Enemy.IsBoss)
+                    {
+                        EditorGUILayout.PropertyField(nextLevelAfterCombat, new GUIContent("Next Level: "), true);
+                    }
+                    else //Boss
+                    {
+                        EditorGUILayout.LabelField("Next Level:");
+
+                        EditorGUILayout.Space();
+
+                        EditorGUILayout.BeginVertical();
+                        EditorGUILayout.PropertyField(nextLevelAfterKillingBoss, new GUIContent("  Kill: "), true);
+
+                        EditorGUILayout.Space();
+
+                        EditorGUILayout.PropertyField(nextLevelAfterSparingBoss, new GUIContent("  Spare: "), true);
+                        EditorGUILayout.EndVertical();
+                    }
+                }
+                
                 break;
             case LevelType.Puzzle:
 
