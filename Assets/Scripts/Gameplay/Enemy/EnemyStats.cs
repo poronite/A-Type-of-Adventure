@@ -31,6 +31,7 @@ public class EnemyStats : MonoBehaviour
     BossPhase ActivateBossPhase;
 
     delegate void EndCombat();
+    EndCombat ActivateKillSpareChoice;
     EndCombat TriggerVictory;
 
 
@@ -40,8 +41,8 @@ public class EnemyStats : MonoBehaviour
 
         Combat cmbController = GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>();
         ActivateBossPhase = cmbController.ActivateBossPhase;
+        ActivateKillSpareChoice = cmbController.ActivateKillSpareChoice;
         TriggerVictory = cmbController.WinCombat;
-
     }
 
 
@@ -100,9 +101,16 @@ public class EnemyStats : MonoBehaviour
         enemyCurrentHP = 0;
         UpdateHPBar();
         IsEnemyDead = true;
-        TriggerVictory.Invoke();
-        //player win
-        Debug.Log("Enemy Died");
+
+        if (!isBoss) //player win
+        {
+            TriggerVictory.Invoke();
+            //Debug.Log("Enemy Died");
+        }
+        else //trigger kill/spare choice
+        {
+            ActivateKillSpareChoice.Invoke();
+        }
     }
 
 

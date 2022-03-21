@@ -127,7 +127,7 @@ public class LevelController : MonoBehaviour
                 ChangeFieldNonParalax.Invoke(fieldType);
 
                 //Start combat
-                GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().StartCombat(enemy, nextLevelAfterCombat);
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().StartCombat(enemy, levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Combat"));
 
                 break;

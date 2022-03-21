@@ -26,6 +26,8 @@ MonoBehaviour:
   Enemy: {fileID: 11400000, guid: 4f358eaaf0a3ea74297b1b07446dcd3f, type: 2}
   NextLevelAfterCombat: {fileID: 11400000, guid: 23bfaebf083e54f4886e44afe0541cbf,
     type: 2}
+  NextLevelAfterKillingBoss: {fileID: 0}
+  NextLevelAfterSparingBoss: {fileID: 0}
   CorrectWord: 
   QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}

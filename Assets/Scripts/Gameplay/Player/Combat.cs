@@ -12,13 +12,20 @@ public enum Actions
     Dodge
 }
 
+public enum Phase
+{
+    Normal,
+    BossPhase,
+    KillSparePhase
+}
+
 public class Combat : MonoBehaviour
 {
     private PlayerStats stats;
 
     private Actions actionChosen;
 
-    private bool onBossPhase = false;
+    private Phase currentPhase = Phase.Normal;
 
     private List<string> attackWordsList = new List<string> { "Punch", "Kick", "Tackle", "Slash"};
     private string attackWordText = string.Empty;
@@ -28,7 +35,12 @@ public class Combat : MonoBehaviour
     private string dodgeWordText = string.Empty;
     private string previousDodgeWord = string.Empty; //so that the same word doesn't appear twice in a row
 
+    //normal enemy
     private LevelTemplate nextLevel; //next level after player wins the combat
+
+    //boss
+    private LevelTemplate nextLevelAfterKillingBoss;
+    private LevelTemplate nextLevelAfterSparingBoss;
 
 
     //Delegates
@@ -95,58 +107,80 @@ public class Combat : MonoBehaviour
     }
 
 
-    public void StartCombat(EnemyTemplate enemy, LevelTemplate nextLevelAfterCombat) //Start of a new game (Combat)
+    public void StartCombat(EnemyTemplate enemy, LevelTemplate currentLevel) //Start of a new game (Combat)
     {
-        nextLevel = nextLevelAfterCombat;
+        if (!enemy.IsBoss) //normal enemy
+        {
+            nextLevel = currentLevel.NextLevelAfterCombat;
+        }
+        else //boss
+        {
+            nextLevelAfterKillingBoss = currentLevel.NextLevelAfterKillingBoss;
+            nextLevelAfterSparingBoss = currentLevel.NextLevelAfterSparingBoss;
+        }
+
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Combat;
+        currentPhase = Phase.Normal;
         GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().SetupEnemy(enemy);
-        SetWords();
+        GenerateActionWords();
         Debug.Log("Started combat.");
     }
 
 
-    ///<summary>Set the next attack and dodge word for the player to choose.
+    ///<summary>Generate the next attack and dodge word for the player to choose.
     ///The same word can't appear twice.</summary>
-    private void SetWords()
+    private void GenerateActionWords()
     {
-        //clear everything so the player can choose the next action
-        ClearWord.Invoke();
-        ClearCurrentOutputWordCmb.Invoke();
-
-
         int index;
+        string attackWord;
+        string dodgeWord;
 
         //attack
         //choose the new attack word
         index = Random.Range(0, attackWordsList.Count - 1);
-        attackWordText = attackWordsList[index];
+        attackWord = attackWordsList[index];
 
         //add previous word back to the list
         if (previousAttackWord != string.Empty)
             attackWordsList.Add(previousAttackWord);
 
         //remove the new attack word from the list 
-        previousAttackWord = attackWordText;
+        previousAttackWord = attackWord;
         attackWordsList.Remove(previousAttackWord);
 
 
         //dodge
         //choose the new dodge word
         index = Random.Range(0, dodgeWordsList.Count - 1);
-        dodgeWordText = dodgeWordsList[index];
+        dodgeWord = dodgeWordsList[index];
 
         //add previous word back to the list
         if (previousDodgeWord != string.Empty)
             dodgeWordsList.Add(previousDodgeWord);
 
         //remove the new dodge word from the list 
-        previousDodgeWord = dodgeWordText;
+        previousDodgeWord = dodgeWord;
         dodgeWordsList.Remove(previousDodgeWord);
 
+        SetWords(attackWord, dodgeWord);
+    }
 
-        DisplayNewAttackDodgeWordsCmb.Invoke(attackWordText, dodgeWordText);
+
+    //split the SetWords function into 2
+    //so that I can use this function to manually set kill/spare words
+    private void SetWords(string attackWord, string dodgeWord)
+    {
+        //clear everything so the player can choose the next action
+        ClearWord.Invoke();
+        ClearCurrentOutputWordCmb.Invoke();
+
+        attackWordText = attackWord;
+        dodgeWordText = dodgeWord;
+
+        DisplayNewAttackDodgeWordsCmb.Invoke(attackWord, dodgeWord);
         //Debug.Log($"Choose the next word: {attackWordText} or {dodgeWordText}");
     }
+
 
 
     ///<summary>Send to Typing script the word that the player chose.</summary>
@@ -199,38 +233,47 @@ public class Combat : MonoBehaviour
         //this is here because after defeating the enemy 
         //it was clearing the word that the player had to type
         //making it impossible to continue the game
-        SetWords();
+        GenerateActionWords();
 
-        if (!onBossPhase)
+        switch (currentPhase)
         {
-            switch (actionChosen)
-            {
-                case Actions.Attack:
-                    Attack();
-                    break;
-                case Actions.Dodge:
-                    Dodge();
-                    break;
-                default:
-                    break;
-            }
-        }
-        else
-        {
-            DeactivateBossPhase();
-        }
-        
+            case Phase.Normal:
+                switch (actionChosen)
+                {
+                    case Actions.Attack:
+                        Attack();
+                        break;
+                    case Actions.Dodge:
+                        Dodge();
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case Phase.BossPhase:
+                DeactivateBossPhase();
+                break;
+            case Phase.KillSparePhase:
+                WinCombat();
+                break;
+            default:
+                break;
+        }        
     }
 
     public void AddCharacterUI(string character)
     {
-        if (!onBossPhase)
+        switch (currentPhase)
         {
-            AddCharacterCmb.Invoke(character);
-        }
-        else
-        {
-            AddCharacterBossPhaseCmb.Invoke(character);
+            case Phase.Normal:
+            case Phase.KillSparePhase:
+                AddCharacterCmb.Invoke(character);
+                break;
+            case Phase.BossPhase:
+                AddCharacterBossPhaseCmb.Invoke(character);
+                break;
+            default:
+                break;
         }
     }
 
@@ -251,7 +294,7 @@ public class Combat : MonoBehaviour
 
     public void ActivateBossPhase(string word)
     {
-        onBossPhase = true;
+        currentPhase = Phase.BossPhase;
         SendNextWordCmb.Invoke(word);
         DisplayCurrentBossPhaseWordCmb.Invoke(word);
     }
@@ -259,14 +302,46 @@ public class Combat : MonoBehaviour
 
     private void DeactivateBossPhase()
     {
-        onBossPhase = false;
-        SetWords();
+        currentPhase = Phase.Normal;
+        GenerateActionWords();
+    }
+
+
+    public void ActivateKillSpareChoice()
+    {
+        currentPhase = Phase.KillSparePhase;
+        SetWords("Kill", "Spare");
     }
 
 
     public void WinCombat()
     {
         WinFight.Invoke();
-        GoToNextLevel.Invoke(nextLevel);
+
+        switch (currentPhase)
+        {
+            case Phase.Normal: //win against normal enemy
+
+                GoToNextLevel.Invoke(nextLevel);
+
+                break;
+            case Phase.KillSparePhase: //after choosing to kill/spare boss
+
+                switch (actionChosen)
+                {
+                    case Actions.Attack: //kill
+                        GoToNextLevel.Invoke(nextLevelAfterKillingBoss);
+                        break;
+                    case Actions.Dodge: //spare
+                        GoToNextLevel.Invoke(nextLevelAfterSparingBoss);
+                        break;
+                    default:
+                        break;
+                }
+
+                break;
+            default:
+                break;
+        }
     }
 }
