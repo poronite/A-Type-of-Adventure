@@ -44,6 +44,9 @@ public class Combat : MonoBehaviour
 
 
     //Delegates
+    delegate void ClearDelegate();
+    ClearDelegate ClearWord;
+
     delegate void WordDelegate(string word);
     WordDelegate SendNextWordCmb;
     WordDelegate DisplayCurrentBossPhaseWordCmb;
@@ -51,10 +54,17 @@ public class Combat : MonoBehaviour
     delegate void AttackDelegate(int damage);
     AttackDelegate AttackEnemy;
 
+    delegate void DodgeDelegate();
+    DodgeDelegate ActivateDodge;
+
+    delegate void CombatEndDelegate();
+    CombatEndDelegate WinFight;
+
+
     //UI Delegates
-    delegate void ClearDelegate();
-    ClearDelegate ClearCurrentOutputWordCmb;
-    ClearDelegate ClearAttackDodgeWordsCmb;
+    delegate void ClearUIDelegate();
+    ClearUIDelegate ClearCurrentOutputWordCmb;
+    ClearUIDelegate ClearAttackDodgeWordsCmb;
 
     delegate void OutputUIDelegate(string character);
     OutputUIDelegate AddCharacterCmb;
@@ -71,16 +81,6 @@ public class Combat : MonoBehaviour
     ChangeLevelDelegate GoToNextLevel;
 
 
-    //Unity Events
-    [SerializeField]
-    private UnityEvent ActivateDodge;
-
-    [SerializeField]
-    private UnityEvent ClearWord;
-
-    [SerializeField]
-    private UnityEvent WinFight;
-
 
     private void Start()
     {
@@ -90,12 +90,16 @@ public class Combat : MonoBehaviour
 
     public void SetDelegatesCmb()
     {
-        SendNextWordCmb = gameObject.GetComponent<Typing>().NewWord;
         AttackEnemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().TakeDamage;
+        ActivateDodge = gameObject.GetComponent<PlayerStats>().ActivateDodge;
         GoToNextLevel = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().ChangeLevel;
 
-        CombatUI CmbUIController = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>();
+        Typing typingController = gameObject.GetComponent<Typing>();
+        SendNextWordCmb = typingController.NewWord;
+        ClearWord = typingController.ClearWords;
+        WinFight = typingController.Victory;
 
+        CombatUI CmbUIController = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>();
         ClearCurrentOutputWordCmb = CmbUIController.ClearCurrentOutputWordUICmb;
         ClearAttackDodgeWordsCmb = CmbUIController.ClearAttackDodgeWordsUICmb;
         AddCharacterCmb = CmbUIController.AddCharacterUICmb;

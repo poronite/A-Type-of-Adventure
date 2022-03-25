@@ -23,20 +23,18 @@ public class PlayerStats : MonoBehaviour
 
 
     //Delegates
+    delegate void NoHP();
+    NoHP GameOver;
+
+    delegate void SendNameToAdv(string name);
+    SendNameToAdv ReplaceWithName;
+
     delegate void UpdateInfoUIDelegate(int info);
     UpdateInfoUIDelegate UpdateTimeElapsedUI;
     UpdateInfoUIDelegate UpdateMistakesUI;
 
     delegate void PlayerHPBarFill(string id, float fillAmount);
     PlayerHPBarFill UpdatePlayerHPBarFill;
-
-    delegate void SendNameToAdv(string name);
-    SendNameToAdv ReplaceWithName;
-
-
-    //Unity events
-    [SerializeField]
-    private UnityEvent GameOver;
 
 
     public string PlayerName
@@ -61,12 +59,13 @@ public class PlayerStats : MonoBehaviour
     }
 
 
-    public void SetGeneralUIDelegates()
+    public void SetDelegatesPlayerStats()
     {
+        GameOver = gameObject.GetComponent<Typing>().GameOver;
+
         ReplaceWithName = gameObject.GetComponent<Adventure>().SetPlayerName;
 
         GeneralUI UIUpdater = GameObject.FindGameObjectWithTag("GeneralUI").GetComponent<GeneralUI>();
-
         UpdateTimeElapsedUI = UIUpdater.SetTimeElapsedUI;
         UpdateMistakesUI = UIUpdater.SetMistakesUI;
 

@@ -34,7 +34,7 @@ public class LoadGame : MonoBehaviour
         //setup delegates
         //player
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerStats>().SetGeneralUIDelegates();
+        player.GetComponent<PlayerStats>().SetDelegatesPlayerStats();
         player.GetComponent<Adventure>().SetDelegatesAdv();
         player.GetComponent<Combat>().SetDelegatesCmb();
         player.GetComponent<Puzzle>().SetDelegatesPzl();

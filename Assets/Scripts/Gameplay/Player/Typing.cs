@@ -4,15 +4,17 @@ using UnityEngine.Events;
 
 //This class will receive input from PlayerInput class and will type or delete a letter on the OutputWord string.
 //It will also contain the PlayerState so that it can decide what to do with the input received.
-//It can be called the hub of the player's actions in the game.
+//It can be considered as the hub of the player's actions in the game.
 
 public enum PlayerState
 {
     Adventure,
     Combat,
     Puzzle,
+    Challenge,
     Dead,
-    CombatWon,
+    CombatComplete,
+    ChallengeComplete,
     Loading
 }
 
@@ -37,11 +39,11 @@ public class Typing : MonoBehaviour
     private int nextCharacterIndex = 0;
 
 
-    //Unity events
-    public UnityEvent AddTime;
-    public UnityEvent Mistake;
 
     //Delegates
+    delegate void GameplayStatsDelegate();
+    GameplayStatsDelegate AddTime;
+    GameplayStatsDelegate Mistake;
 
     delegate void SetPlayerName(string name);
     SetPlayerName SetName;
@@ -57,6 +59,7 @@ public class Typing : MonoBehaviour
     OutputCharacterDelegate OutputCharacterAdv;
     OutputCharacterDelegate OutputCharacterCmb;
     OutputCharacterDelegate OutputCharacterPzl;
+    OutputCharacterDelegate OutputCharacterChl;
 
     //when player has to decide between attack and dodge or between branching words
     delegate bool DecideWord(string character);
@@ -68,6 +71,7 @@ public class Typing : MonoBehaviour
     CompleteWordDelegate CompleteWordAdv;
     CompleteWordDelegate CompleteWordCmb;
     CompleteWordDelegate CompleteWordPzl;
+    CompleteWordDelegate CompleteWordChl;
 
     delegate void UpdateHint(string hint);
     UpdateHint UpdateHintAdvUI;
@@ -88,7 +92,10 @@ public class Typing : MonoBehaviour
         Adventure advController = gameObject.GetComponent<Adventure>();
         Combat cmbController = gameObject.GetComponent<Combat>();
         Puzzle pzlController = gameObject.GetComponent<Puzzle>();
+        Challenge chlController = gameObject.GetComponent<Challenge>();
 
+        AddTime = stats.AddTimeElapsed;
+        Mistake = stats.AddMistake;
 
         SetName = stats.SetName;
         ResetName = advController.ResetName;
@@ -98,6 +105,7 @@ public class Typing : MonoBehaviour
         OutputCharacterAdv = advController.AddCharacterUI;
         OutputCharacterCmb = cmbController.AddCharacterUI;
         OutputCharacterPzl = pzlController.AddCharacterUI;
+        //OutputCharacterChl = chlController.AddCharacterUI;
 
         DecideBranchingWordAdv = advController.SetBranchingWord;
         DecideActionWordCmb = cmbController.SetChosenWordCmb;
@@ -105,6 +113,7 @@ public class Typing : MonoBehaviour
         CompleteWordAdv = advController.CompleteWordAdv;
         CompleteWordCmb = cmbController.CompleteWordCmb;
         CompleteWordPzl = pzlController.CompleteWordPzl;
+        //OutputCharacterChl = chlController.CompleteWordChl;
 
         UpdateHintAdvUI = advController.UpdateHintUI;
     }
@@ -154,12 +163,13 @@ public class Typing : MonoBehaviour
     {
         //Debug.Log("Attempt to type character: " + character);
 
-        if (CurrentWordExist())
+        if (CurrentWordExist()) //when current word is fixed
         {
             switch (CurrentPlayerState)
             {
                 case PlayerState.Adventure:
                 case PlayerState.Combat:
+                case PlayerState.Challenge:
                     if (IsCharacterCorrect(character))
                     {
                         AddCharacter(character);
@@ -179,7 +189,7 @@ public class Typing : MonoBehaviour
                     break;
             }
         }
-        else
+        else //when choosing a word
         {
             switch (CurrentPlayerState)
             {
@@ -263,6 +273,9 @@ public class Typing : MonoBehaviour
                 case PlayerState.Puzzle:
                     OutputCharacterPzl.Invoke(character);
                     break;
+                case PlayerState.Challenge:
+                    OutputCharacterChl.Invoke(character);
+                    break;
                 default:
                     break;
             }
@@ -296,6 +309,7 @@ public class Typing : MonoBehaviour
                     SetName.Invoke(name);
                 }
                 break;
+
             case PlayerState.Combat:
                 if (IsWordComplete(character))
                 {
@@ -306,6 +320,7 @@ public class Typing : MonoBehaviour
                 }
 
                 break;
+
             case PlayerState.Puzzle:
                 if (IsWordComplete(character))
                 {
@@ -315,6 +330,16 @@ public class Typing : MonoBehaviour
                     CompleteWordPzl.Invoke(outputWord.ToString());
                 }
 
+                break;
+
+            case PlayerState.Challenge:
+                if (IsWordComplete(character))
+                {
+                    //TEMPORARY SOUND EFFECT
+                    wordCompleteSFX.Play();
+
+                    CompleteWordChl.Invoke(outputWord.ToString());
+                }
                 break;
             default:
                 break;
@@ -356,7 +381,7 @@ public class Typing : MonoBehaviour
     {
         switch (CurrentPlayerState)
         {
-            case PlayerState.Adventure:
+            case PlayerState.Adventure: //setting name only
                 if (isSettingName && outputWord.Length >= 1)
                 {
                     ClearWords();
@@ -382,6 +407,7 @@ public class Typing : MonoBehaviour
             case PlayerState.Adventure:
             case PlayerState.Combat:
             case PlayerState.Puzzle:
+            case PlayerState.Challenge:
                 AddTime.Invoke();
                 break;
             default:
@@ -398,7 +424,7 @@ public class Typing : MonoBehaviour
 
     public void Victory()
     {
-        CurrentPlayerState = PlayerState.CombatWon;
+        CurrentPlayerState = PlayerState.CombatComplete;
     }
 
 
