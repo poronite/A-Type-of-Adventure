@@ -41,11 +41,12 @@ public class Puzzle : MonoBehaviour
     }
 
 
-    public void StartPuzzle(string correctWordPzl, Sprite questionBoardPzl, LevelTemplate nextLevelPzl)
+    public void StartPuzzle(LevelTemplate currentLevel)
     {
-        nextLevel = nextLevelPzl;
-        correctWord = correctWordPzl.ToLower();
-        questionBoard = questionBoardPzl;
+        correctWord = currentLevel.CorrectWord.ToLower();
+        questionBoard = currentLevel.QuestionBoard;
+        nextLevel = currentLevel.NextLevelAfterPuzzle;
+
         ResetAnswerPzl();
         SendAnswerPzl.Invoke(correctWord);
         DisplayQuestionBoardUI();

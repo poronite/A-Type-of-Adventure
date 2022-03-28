@@ -121,26 +121,19 @@ public class LevelController : MonoBehaviour
                 break;
             case LevelType.Combat:
 
-                enemy = levelData.Enemy;
-                nextLevelAfterCombat = levelData.NextLevelAfterCombat;
-
                 ChangeFieldNonParalax.Invoke(fieldType);
 
                 //Start combat
-                GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().StartCombat(enemy, levelData);
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().StartCombat(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Combat"));
 
                 break;
             case LevelType.Puzzle:
 
-                correctWord = levelData.CorrectWord;
-                questionBoard = levelData.QuestionBoard;
-                nextLevelAfterPuzzle = levelData.NextLevelAfterPuzzle;
-
                 ChangeFieldNonParalax.Invoke(fieldType);
 
                 //Start puzzle
-                GameObject.FindGameObjectWithTag("Player").GetComponent<Puzzle>().StartPuzzle(correctWord, questionBoard, nextLevelAfterPuzzle);
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Puzzle>().StartPuzzle(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Puzzle"));
 
                 break;

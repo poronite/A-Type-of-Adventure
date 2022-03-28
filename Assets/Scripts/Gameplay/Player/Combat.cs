@@ -111,8 +111,10 @@ public class Combat : MonoBehaviour
     }
 
 
-    public void StartCombat(EnemyTemplate enemy, LevelTemplate currentLevel) //Start of a new game (Combat)
+    public void StartCombat(LevelTemplate currentLevel) //Start of a new game (Combat)
     {
+        EnemyTemplate enemy = currentLevel.Enemy;
+
         if (!enemy.IsBoss) //normal enemy
         {
             nextLevel = currentLevel.NextLevelAfterCombat;

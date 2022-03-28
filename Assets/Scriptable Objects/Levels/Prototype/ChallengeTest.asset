@@ -10,17 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
-  m_Name: 3End_Proto
+  m_Name: ChallengeTest
   m_EditorClassIdentifier: 
-  LevelName: EndExample
-  LevelType: 0
+  LevelName: Challenge Test
+  LevelType: 3
   FieldType: 0
-  TextToType: After defeating the thief, the hero continued his journey.
-  NextLevelAfterAdventure: {fileID: 11400000, guid: ff24a7e71d6f8fd43bcf3232e2b07404,
-    type: 2}
+  TextToType: 
+  NextLevelAfterAdventure: {fileID: 0}
   HasBranching: 0
-  PossibleChoices: []
-  PossibleOutcomes: []
+  PossibleChoices:
+  - 
+  - 
+  PossibleOutcomes:
+  - {fileID: 0}
+  - {fileID: 0}
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []
@@ -31,6 +34,6 @@ MonoBehaviour:
   CorrectWord: 
   QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}
+  StartingEnergy: 0
   EnergyLostPerSecond: 0
   EnergyGainedPerWord: 0
-  StartingEnergy: 0

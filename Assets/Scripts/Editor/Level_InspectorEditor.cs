@@ -17,11 +17,9 @@ public class Level_InspectorEditor : Editor
     //Adventure
     SerializedProperty textToType;
     SerializedProperty nextLevelAfterAdventure;
-
     //branching
     SerializedProperty possibleChoices;
     SerializedProperty possibleOutcomes;
-
     //encounters
     SerializedProperty numEncounters;
     SerializedProperty encounterWordKey;
@@ -29,10 +27,8 @@ public class Level_InspectorEditor : Editor
 
     //Combat
     SerializedProperty enemy;
-
     //if common enemy
     SerializedProperty nextLevelAfterCombat;
-
     //if Boss
     SerializedProperty nextLevelAfterKillingBoss;
     SerializedProperty nextLevelAfterSparingBoss;
@@ -41,6 +37,12 @@ public class Level_InspectorEditor : Editor
     SerializedProperty correctWord;
     SerializedProperty questionBoard;
     SerializedProperty nextLevelAfterPuzzle;
+
+    //Challenge
+    SerializedProperty startingEnergy;
+    SerializedProperty energyLostPerSecond;
+    SerializedProperty energyGainedPerWord;
+
 
 
     private void OnEnable()
@@ -75,6 +77,11 @@ public class Level_InspectorEditor : Editor
         correctWord = serializedObject.FindProperty("CorrectWord");
         questionBoard = serializedObject.FindProperty("QuestionBoard");
         nextLevelAfterPuzzle = serializedObject.FindProperty("NextLevelAfterPuzzle");
+
+        //challenge
+        startingEnergy = serializedObject.FindProperty("StartingEnergy");
+        energyLostPerSecond = serializedObject.FindProperty("EnergyLostPerSecond");
+        energyGainedPerWord = serializedObject.FindProperty("EnergyGainedPerWord");
     }
 
     public override void OnInspectorGUI()
@@ -98,7 +105,7 @@ public class Level_InspectorEditor : Editor
         //put this here because it was giving errors when changing level types
         string[] words = { "Empty" };
 
-        if (level.TextToType.Length != 0)
+        if (level.TextToType.Length > 0)
         {
             words = level.TextToType.Split(' ');
         }
@@ -246,6 +253,25 @@ public class Level_InspectorEditor : Editor
                 EditorGUILayout.Space();
 
                 EditorGUILayout.PropertyField(nextLevelAfterPuzzle, new GUIContent("Next Level: "), true);
+
+                break;
+            case LevelType.Challenge:
+
+                EditorGUILayout.LabelField("Challenge Variables:");
+
+                EditorGUILayout.Space();
+
+                EditorGUILayout.Slider(startingEnergy, 0f, 100f, new GUIContent("Starting Energy: "));
+                //EditorGUILayout.PropertyField(startingEnergy, new GUIContent("Starting Energy: "), true);
+
+                EditorGUILayout.Space();
+
+                EditorGUILayout.PropertyField(energyLostPerSecond, new GUIContent("Energy Lost Per Second: "), true);
+
+                EditorGUILayout.Space();
+
+                EditorGUILayout.PropertyField(energyGainedPerWord, new GUIContent("Energy Gained Per Word: "), true);
+
                 break;
             default:
                 break;

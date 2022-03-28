@@ -8,18 +8,23 @@ using UnityEngine;
 
 public class Challenge : MonoBehaviour
 {
+    //variables
     private float energyLostPerSecond;
     private float energyGainedPerWord;
     private float currentEnergy;
 
 
+    //delegates
+    
+
+
 
     public void SetDelegatesChl()
     {
-        LevelController LevelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
+        LevelController levelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
 
 
-        ChallengeUI ChlUIController = GameObject.FindGameObjectWithTag("ChallengeGfxUI").GetComponent<ChallengeUI>();
+        ChallengeUI chlUIController = GameObject.FindGameObjectWithTag("ChallengeGfxUI").GetComponent<ChallengeUI>();
     }
 
 
@@ -50,7 +55,7 @@ public class Challenge : MonoBehaviour
 
     public void AddEnergy()
     {
-        currentEnergy += energyGainedPerWord;
+        currentEnergy = Mathf.Clamp(currentEnergy + energyGainedPerWord, 0f, 100f);
         //update UI bar
         //currentEnergy / 100 = energy to send to UI
     }

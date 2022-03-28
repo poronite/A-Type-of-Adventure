@@ -27,7 +27,6 @@ public class Adventure : MonoBehaviour
     //Delegates
     delegate void WordDelegate(string word);
     WordDelegate SendNextWordAdv;
-    WordDelegate DisplayChosenBranchingWord;
 
     delegate void OutputUIDelegate(string output);
     OutputUIDelegate AddCharacterAdv;

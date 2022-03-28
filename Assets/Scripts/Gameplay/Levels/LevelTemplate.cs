@@ -5,7 +5,8 @@ public enum LevelType
 {
     Adventure,
     Combat,
-    Puzzle
+    Puzzle,
+    Challenge
 }
 
 public enum FieldType
@@ -55,4 +56,10 @@ public class LevelTemplate : ScriptableObject
     public string CorrectWord;
     public Sprite QuestionBoard;
     public LevelTemplate NextLevelAfterPuzzle;
+
+
+    //Challenge
+    public float StartingEnergy;
+    public float EnergyLostPerSecond;
+    public float EnergyGainedPerWord;
 }
