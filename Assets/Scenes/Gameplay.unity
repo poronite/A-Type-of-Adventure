@@ -617,6 +617,7 @@ GameObject:
   - component: {fileID: 1764022995}
   - component: {fileID: 1764022996}
   - component: {fileID: 1764022997}
+  - component: {fileID: 1764022998}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -651,34 +652,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentPlayerState: 0
-  AddTime:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1764022994}
-        m_MethodName: AddTimeElapsed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  Mistake:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1764022994}
-        m_MethodName: AddMistake
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   typeSFX: {fileID: 2005887815}
   mistakeSFX: {fileID: 1731950561}
   wordCompleteSFX: {fileID: 864734070}
@@ -708,20 +681,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMaxHP: 70
   playerAttack: 5
-  GameOver:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1764022992}
-        m_MethodName: GameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1764022995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,48 +705,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6f97a4e60c322438d38e2baa05df81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivateDodge:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1764022994}
-        m_MethodName: ActivateDodge
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  ClearWord:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1764022992}
-        m_MethodName: ClearWords
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  WinFight:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1764022992}
-        m_MethodName: Victory
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1764022997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,6 +715,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c977791f662e6449ade08c5f9a39e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1764022998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764022990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad1b700f6930b84fbb83a95aea9e011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2005887813
