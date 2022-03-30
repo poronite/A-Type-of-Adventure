@@ -3044,7 +3044,7 @@ GameObject:
   - component: {fileID: 976748701}
   m_Layer: 0
   m_Name: Challenge
-  m_TagString: Untagged
+  m_TagString: ChallengeGfxUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5293,6 +5293,7 @@ MonoBehaviour:
   Adventure: {fileID: 182019168}
   Combat: {fileID: 350824310}
   Puzzle: {fileID: 1523808042}
+  Challenge: {fileID: 0}
   mainCamera: {fileID: 936825013}
 --- !u!1 &1819188322
 GameObject:

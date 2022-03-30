@@ -62,4 +62,5 @@ public class LevelTemplate : ScriptableObject
     public float StartingEnergy;
     public float EnergyLostPerSecond;
     public float EnergyGainedPerWord;
+    public LevelTemplate NextLevelAfterChallenge;
 }

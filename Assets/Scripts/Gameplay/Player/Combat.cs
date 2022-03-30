@@ -128,14 +128,14 @@ public class Combat : MonoBehaviour
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Combat;
         currentPhase = Phase.Normal;
         GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().SetupEnemy(enemy);
-        GenerateActionWords();
+        GenerateActionWordsCmb();
         Debug.Log("Started combat.");
     }
 
 
     ///<summary>Generate the next attack and dodge word for the player to choose.
     ///The same word can't appear twice.</summary>
-    private void GenerateActionWords()
+    private void GenerateActionWordsCmb()
     {
         int index;
         string attackWord;
@@ -239,7 +239,7 @@ public class Combat : MonoBehaviour
         //this is here because after defeating the enemy 
         //it was clearing the word that the player had to type
         //making it impossible to continue the game
-        GenerateActionWords();
+        GenerateActionWordsCmb();
 
         switch (currentPhase)
         {
@@ -309,7 +309,7 @@ public class Combat : MonoBehaviour
     private void DeactivateBossPhase()
     {
         currentPhase = Phase.Normal;
-        GenerateActionWords();
+        GenerateActionWordsCmb();
     }
 
 

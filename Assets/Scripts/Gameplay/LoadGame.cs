@@ -38,6 +38,7 @@ public class LoadGame : MonoBehaviour
         player.GetComponent<Adventure>().SetDelegatesAdv();
         player.GetComponent<Combat>().SetDelegatesCmb();
         player.GetComponent<Puzzle>().SetDelegatesPzl();
+        player.GetComponent<Challenge>().SetDelegatesChl();
 
         //enemy
         GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");

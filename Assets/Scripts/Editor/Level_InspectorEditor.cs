@@ -42,6 +42,7 @@ public class Level_InspectorEditor : Editor
     SerializedProperty startingEnergy;
     SerializedProperty energyLostPerSecond;
     SerializedProperty energyGainedPerWord;
+    SerializedProperty nextLevelAfterChallenge;
 
 
 
@@ -82,6 +83,7 @@ public class Level_InspectorEditor : Editor
         startingEnergy = serializedObject.FindProperty("StartingEnergy");
         energyLostPerSecond = serializedObject.FindProperty("EnergyLostPerSecond");
         energyGainedPerWord = serializedObject.FindProperty("EnergyGainedPerWord");
+        nextLevelAfterChallenge = serializedObject.FindProperty("NextLevelAfterChallenge");
     }
 
     public override void OnInspectorGUI()
@@ -271,6 +273,10 @@ public class Level_InspectorEditor : Editor
                 EditorGUILayout.Space();
 
                 EditorGUILayout.PropertyField(energyGainedPerWord, new GUIContent("Energy Gained Per Word: "), true);
+
+                EditorGUILayout.Space();
+
+                EditorGUILayout.PropertyField(nextLevelAfterChallenge, new GUIContent("Next Level: "), true);
 
                 break;
             default:

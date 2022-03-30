@@ -105,7 +105,7 @@ public class Typing : MonoBehaviour
         OutputCharacterAdv = advController.AddCharacterUI;
         OutputCharacterCmb = cmbController.AddCharacterUI;
         OutputCharacterPzl = pzlController.AddCharacterUI;
-        //OutputCharacterChl = chlController.AddCharacterUI;
+        OutputCharacterChl = chlController.AddCharacterUI;
 
         DecideBranchingWordAdv = advController.SetBranchingWord;
         DecideActionWordCmb = cmbController.SetChosenWordCmb;
@@ -113,7 +113,7 @@ public class Typing : MonoBehaviour
         CompleteWordAdv = advController.CompleteWordAdv;
         CompleteWordCmb = cmbController.CompleteWordCmb;
         CompleteWordPzl = pzlController.CompleteWordPzl;
-        //OutputCharacterChl = chlController.CompleteWordChl;
+        OutputCharacterChl = chlController.CompleteWordChl;
 
         UpdateHintAdvUI = advController.UpdateHintUI;
     }

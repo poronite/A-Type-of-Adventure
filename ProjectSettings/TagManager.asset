@@ -24,6 +24,7 @@ TagManager:
   - EncountersController
   - CutsceneBackground
   - ParalaxLayer
+  - ChallengeGfxUI
   layers:
   - Default
   - TransparentFX

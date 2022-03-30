@@ -19,6 +19,9 @@ public class GraphicsUIManager : MonoBehaviour
     private GameObject Puzzle;
 
     [SerializeField]
+    private GameObject Challenge;
+
+    [SerializeField]
     private CameraMovement mainCamera;
 
     public IEnumerator ActivateLoadingScreen()
@@ -28,6 +31,7 @@ public class GraphicsUIManager : MonoBehaviour
         Adventure.SetActive(true); //everything gets activated in order to be able 
         Combat.SetActive(true); //to change sprites while the game is loading
         Puzzle.SetActive(true);
+        Challenge.SetActive(true);
     }
 
 
@@ -72,15 +76,23 @@ public class GraphicsUIManager : MonoBehaviour
             case "Adventure":
                 Combat.SetActive(false);
                 Puzzle.SetActive(false);
+                Challenge.SetActive(false);
                 mainCamera.canMoveCamera = true; //activate camera
                 break;
             case "Combat":
                 Adventure.SetActive(false);
                 Puzzle.SetActive(false);
+                Challenge.SetActive(false);
                 break;
             case "Puzzle":
                 Adventure.SetActive(false);
                 Combat.SetActive(false);
+                Challenge.SetActive(false);
+                break;
+            case "Challenge":
+                Adventure.SetActive(false);
+                Combat.SetActive(false);
+                Puzzle.SetActive(false);
                 break;
             default:
                 break;

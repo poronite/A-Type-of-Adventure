@@ -16,11 +16,6 @@ public class LevelController : MonoBehaviour
     private LevelType levelType;
     private FieldType fieldType;
 
-
-    //If level is of type Adventure
-    private string textToType;
-    private LevelTemplate nextLevelAfterAdventure;
-
     //branching
     private bool hasBranching;
     private List<string> possibleChoices = new List<string>();
@@ -31,17 +26,6 @@ public class LevelController : MonoBehaviour
     private List<int> encounterWordKey;
     private List<EncountersTemplate> encounterValue;
     private Dictionary<int, EncountersTemplate> encounters = new Dictionary<int, EncountersTemplate>();
-
-
-    //If level is of type Combat
-    private EnemyTemplate enemy;
-    private LevelTemplate nextLevelAfterCombat;
-
-
-    //If level is of type Puzzle
-    private string correctWord;
-    private Sprite questionBoard;
-    private LevelTemplate nextLevelAfterPuzzle;
 
 
 
@@ -99,15 +83,8 @@ public class LevelController : MonoBehaviour
         {
             case LevelType.Adventure:
 
-                textToType = levelData.TextToType;
-
                 //branching
                 CreateBranching();
-
-                if (!hasBranching)
-                {
-                    nextLevelAfterAdventure = levelData.NextLevelAfterAdventure;
-                }
 
                 //create branching and encounter dictionaries
                 CreateDictionaries();
@@ -115,7 +92,7 @@ public class LevelController : MonoBehaviour
                 ChangeFieldParalax.Invoke(fieldType);
 
                 //Start adventure
-                GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(textToType, possibleChoices);
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Adventure"));
 
                 break;
@@ -135,6 +112,15 @@ public class LevelController : MonoBehaviour
                 //Start puzzle
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Puzzle>().StartPuzzle(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Puzzle"));
+
+                break;
+            case LevelType.Challenge:
+
+                ChangeFieldNonParalax.Invoke(fieldType);
+
+                //Start challenge
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Challenge>().StartChallenge(levelData);
+                yield return StartCoroutine(ChangeLevelGraphics.Invoke("Challenge"));
 
                 break;
             default:
@@ -193,7 +179,7 @@ public class LevelController : MonoBehaviour
         if (!hasBranching)
         {
             Debug.Log("One Path");
-            ChangeLevel(nextLevelAfterAdventure);
+            ChangeLevel(levelData.NextLevelAfterAdventure);
         }
         else if (hasBranching)
         {

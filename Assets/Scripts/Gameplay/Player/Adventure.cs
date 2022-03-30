@@ -78,26 +78,22 @@ public class Adventure : MonoBehaviour
     }
 
 
-    public void StartAdventure(string textToType, List<string> words) //Start of a new game (Adventure)
+    public void StartAdventure(LevelTemplate level) //Start of a new game (Adventure)
     {
         numWordsWritten = 0;
         TriggerEncounter.Invoke(numWordsWritten);
 
         //remove any white spaces that may cause problems
-        textToType = textToType.Trim();
+        remainingPlotText = level.TextToType.Trim();
 
         //array for easy access to the branching words in case current adventure level has branching
-        branchingWords = words;
-
-        //add a space at the end otherwise player won't be able to type the last word
-        remainingPlotText = textToType;
+        branchingWords = level.PossibleChoices;
 
         if (playerName != string.Empty)
         {
             InsertNameIntoText();
         }
 
-        //GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateAdventure();
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Adventure;
         NextWordAdv();
     }

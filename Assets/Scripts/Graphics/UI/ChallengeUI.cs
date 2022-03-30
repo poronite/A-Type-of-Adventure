@@ -41,6 +41,6 @@ public class ChallengeUI : MonoBehaviour
 
     public void UpdateProgressBarFillUIChl(float fillAmount)
     {
-        progressBarFillUIChl.fillAmount = fillAmount;
+        progressBarFillUIChl.fillAmount = fillAmount / 100;
     }
 }
