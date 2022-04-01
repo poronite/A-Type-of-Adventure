@@ -33,6 +33,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b45bb0affbb247d45ab496f6d6475431, type: 2}
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
+  NextLevelAfterKillingBoss: {fileID: 0}
+  NextLevelAfterSparingBoss: {fileID: 0}
   CorrectWord: 
   QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}
+  StartingEnergy: 0
+  EnergyLostPerSecond: 0
+  EnergyGainedPerWord: 0
+  NextLevelAfterChallenge: {fileID: 0}

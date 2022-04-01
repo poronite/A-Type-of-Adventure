@@ -27,12 +27,6 @@ public class ChallengeUI : MonoBehaviour
     }
 
 
-    public void ClearCurrentWordUIChl()
-    {
-        currentWordUIChl.text = string.Empty;
-    }
-
-
     public void ClearOutputWordUIChl()
     {
         outputWordUIChl.text = string.Empty;

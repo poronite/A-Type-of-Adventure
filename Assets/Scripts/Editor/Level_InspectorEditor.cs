@@ -42,6 +42,8 @@ public class Level_InspectorEditor : Editor
     SerializedProperty startingEnergy;
     SerializedProperty energyLostPerSecond;
     SerializedProperty energyGainedPerWord;
+    SerializedProperty wordListSize;
+    SerializedProperty wordList;
     SerializedProperty nextLevelAfterChallenge;
 
 
@@ -83,6 +85,8 @@ public class Level_InspectorEditor : Editor
         startingEnergy = serializedObject.FindProperty("StartingEnergy");
         energyLostPerSecond = serializedObject.FindProperty("EnergyLostPerSecond");
         energyGainedPerWord = serializedObject.FindProperty("EnergyGainedPerWord");
+        wordListSize = serializedObject.FindProperty("WordListSize");
+        wordList = serializedObject.FindProperty("WordList");
         nextLevelAfterChallenge = serializedObject.FindProperty("NextLevelAfterChallenge");
     }
 
@@ -274,6 +278,34 @@ public class Level_InspectorEditor : Editor
 
                 EditorGUILayout.PropertyField(energyGainedPerWord, new GUIContent("Energy Gained Per Word: "), true);
 
+                EditorGUILayout.Space();
+
+                //words that can appear on this challenge
+                EditorGUILayout.PropertyField(wordListSize, new GUIContent("Word List Size: "), true);
+                
+                //prevent unnecessary errors
+                if (level.WordListSize < 0)
+                {
+                    level.WordListSize = 0;
+                }
+                
+                wordList.arraySize = level.WordListSize;
+                
+                EditorGUILayout.Space();
+                
+                EditorGUILayout.BeginVertical();
+                for (int i = 0; i < level.WordListSize; i++)
+                {
+                    SerializedProperty word = wordList.GetArrayElementAtIndex(i);
+                
+                    EditorGUILayout.Space();
+                
+                    EditorGUILayout.PropertyField(word, new GUIContent($"Word {i + 1}: "), true);                               
+                
+                    EditorGUILayout.Space();
+                }
+                EditorGUILayout.EndVertical();
+                
                 EditorGUILayout.Space();
 
                 EditorGUILayout.PropertyField(nextLevelAfterChallenge, new GUIContent("Next Level: "), true);

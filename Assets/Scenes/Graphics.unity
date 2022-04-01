@@ -361,7 +361,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -596,7 +596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &182019169
 Transform:
   m_ObjectHideFlags: 0
@@ -971,8 +971,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278540915
+  m_fontColor: {r: 0.4528302, g: 0.35126075, b: 0.019223915, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1368,7 +1368,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &350824311
 Transform:
   m_ObjectHideFlags: 0
@@ -3935,7 +3935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1235185034
 Transform:
   m_ObjectHideFlags: 0
@@ -4483,8 +4483,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278229192
+  m_fontColor: {r: 0.7830189, g: 0.5951347, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4865,7 +4865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1523808043
 Transform:
   m_ObjectHideFlags: 0
@@ -5293,7 +5293,7 @@ MonoBehaviour:
   Adventure: {fileID: 182019168}
   Combat: {fileID: 350824310}
   Puzzle: {fileID: 1523808042}
-  Challenge: {fileID: 0}
+  Challenge: {fileID: 976748699}
   mainCamera: {fileID: 936825013}
 --- !u!1 &1819188322
 GameObject:

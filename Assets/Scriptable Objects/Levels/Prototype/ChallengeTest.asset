@@ -34,6 +34,15 @@ MonoBehaviour:
   CorrectWord: 
   QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}
-  StartingEnergy: 0
-  EnergyLostPerSecond: 0
-  EnergyGainedPerWord: 0
+  StartingEnergy: 50
+  EnergyLostPerSecond: 2
+  EnergyGainedPerWord: 10
+  WordListSize: 5
+  WordList:
+  - yikes
+  - nigga
+  - oof
+  - bernardo
+  - bruh
+  NextLevelAfterChallenge: {fileID: 11400000, guid: 6e9cad772d7a7bb4b9d8f19d62c84b8c,
+    type: 2}

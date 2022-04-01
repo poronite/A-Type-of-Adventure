@@ -113,7 +113,7 @@ public class Typing : MonoBehaviour
         CompleteWordAdv = advController.CompleteWordAdv;
         CompleteWordCmb = cmbController.CompleteWordCmb;
         CompleteWordPzl = pzlController.CompleteWordPzl;
-        OutputCharacterChl = chlController.CompleteWordChl;
+        CompleteWordChl = chlController.CompleteWordChl;
 
         UpdateHintAdvUI = advController.UpdateHintUI;
     }

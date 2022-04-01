@@ -23,8 +23,15 @@ public class Challenge : MonoBehaviour
 
     private LevelTemplate nextLevel;
 
+    private List<string> currentLevelWordList = new List<string>();
+
+    private string lastWordUsed;
+
 
     //delegates
+    delegate void WordDelegate(string word);
+    WordDelegate SendNextWordChl;
+
     delegate void ChangeLevelDelegate(LevelTemplate level);
     ChangeLevelDelegate GoToNextLevel;
 
@@ -35,7 +42,6 @@ public class Challenge : MonoBehaviour
     DisplayWordDelegate DisplayNewCurrentWordChl;
 
     delegate void ClearWordDelegate();
-    ClearWordDelegate ClearCurrentWordChl;
     ClearWordDelegate ClearOutputWordChl;
 
     delegate void UpdateFillDelegate(float fill);
@@ -46,13 +52,14 @@ public class Challenge : MonoBehaviour
 
     public void SetDelegatesChl()
     {
+        SendNextWordChl = gameObject.GetComponent<Typing>().NewWord;
+
         LevelController levelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
         GoToNextLevel = levelController.ChangeLevel;
 
         ChallengeUI chlUIController = GameObject.FindGameObjectWithTag("ChallengeGfxUI").GetComponent<ChallengeUI>();
         AddCharacterChl = chlUIController.AddCharacterUIChl;
         DisplayNewCurrentWordChl = chlUIController.DisplayNewCurrentWordUIChl;
-        ClearCurrentWordChl = chlUIController.ClearCurrentWordUIChl;
         ClearOutputWordChl = chlUIController.ClearOutputWordUIChl;
         UpdateProgressBarFillChl = chlUIController.UpdateProgressBarFillUIChl;
     }
@@ -60,7 +67,15 @@ public class Challenge : MonoBehaviour
 
     public void StartChallenge(LevelTemplate currentLevel)
     {
+        currentEnergy = currentLevel.StartingEnergy;
+        energyLostPerSecond = currentLevel.EnergyLostPerSecond;
+        energyGainedPerWord = currentLevel.EnergyGainedPerWord;
+        currentLevelWordList = currentLevel.WordList;
         nextLevel = currentLevel.NextLevelAfterChallenge;
+
+        NewWordChl();
+
+        gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Challenge;
 
         stopReducingEnergy = false;
     }
@@ -80,7 +95,7 @@ public class Challenge : MonoBehaviour
     {
         currentEnergy = Mathf.Clamp(currentEnergy - energyLostPerSecond * Time.deltaTime, 0f, 100f);
         UpdateProgressBarFillChl.Invoke(currentEnergy);
-        EnergyBarEmpty();
+        //EnergyBarEmpty();
     }
 
 
@@ -97,7 +112,6 @@ public class Challenge : MonoBehaviour
         float targetEnergy = Mathf.Clamp(currentEnergy + energyGainedPerWord, 0f, 100f);
         float time = 0f;
         
-
         while (time < increaseFillDuration)
         {
             currentEnergy = Mathf.Lerp(currentEnergy, targetEnergy, time / increaseFillDuration);
@@ -109,19 +123,47 @@ public class Challenge : MonoBehaviour
         currentEnergy = targetEnergy;
         UpdateProgressBarFillChl.Invoke(currentEnergy);
 
-        //verify winning condition
-        EnergyBarComplete();
+        NewWordChl();
 
-        //allow progress bar to empty again
-        stopReducingEnergy = false;
-        
+        //verify winning condition
+        if (!EnergyBarComplete()) //if hasn't completed challenge keep the game going
+        {
+            //allow progress bar to empty again
+            stopReducingEnergy = false;
+        }
+
         yield return null;
     }
 
 
-    private void GenerateWordChl()
+    private void NewWordChl() 
     {
+        string word = GenerateWordChl(currentLevelWordList, lastWordUsed);
+        DisplayNewCurrentWordChl.Invoke(word);
+        ClearOutputWordChl.Invoke();
+        SendNextWordChl.Invoke(word);
+        lastWordUsed = word;
+    }
 
+
+    private string GenerateWordChl(List<string> wordList, string lastGeneratedWord)
+    {
+        int newWordIndex;
+
+        //if I don't make a clone the function will end up removing the words from the original list lol
+        List<string> wordListClone = new List<string>(wordList);
+
+        //reset random
+        Random.InitState((int)Time.time);
+
+        //remove last used word
+        if (lastGeneratedWord != string.Empty)
+            wordListClone.Remove(lastGeneratedWord);
+
+        //select new word to generate
+        newWordIndex = Random.Range(0, wordListClone.Count - 1);
+
+        return wordListClone[newWordIndex];
     }
 
 
@@ -136,15 +178,18 @@ public class Challenge : MonoBehaviour
 
 
     //complete challenge
-    private void EnergyBarComplete()
+    private bool EnergyBarComplete()
     {
         if (currentEnergy >= 100f)
         {
             //win
             stopReducingEnergy = true;
+            gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.ChallengeComplete;
             Debug.Log("Energy Filled. Win");
             GoToNextLevel.Invoke(nextLevel);
+            return true;
         }
+        return false;
     }
 
 

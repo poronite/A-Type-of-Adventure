@@ -29,11 +29,9 @@ public class Combat : MonoBehaviour
 
     private List<string> attackWordsList = new List<string> { "Punch", "Kick", "Tackle", "Slash"};
     private string attackWordText = string.Empty;
-    private string previousAttackWord = string.Empty; //so that the same word doesn't appear twice in a row
 
     private List<string> dodgeWordsList = new List<string> { "Roll", "Dash", "Crouch", "Jump"};
     private string dodgeWordText = string.Empty;
-    private string previousDodgeWord = string.Empty; //so that the same word doesn't appear twice in a row
 
     //normal enemy
     private LevelTemplate nextLevel; //next level after player wins the combat
@@ -137,38 +135,38 @@ public class Combat : MonoBehaviour
     ///The same word can't appear twice.</summary>
     private void GenerateActionWordsCmb()
     {
-        int index;
         string attackWord;
         string dodgeWord;
 
         //attack
-        //choose the new attack word
-        index = Random.Range(0, attackWordsList.Count - 1);
-        attackWord = attackWordsList[index];
-
-        //add previous word back to the list
-        if (previousAttackWord != string.Empty)
-            attackWordsList.Add(previousAttackWord);
-
-        //remove the new attack word from the list 
-        previousAttackWord = attackWord;
-        attackWordsList.Remove(previousAttackWord);
-
+        attackWord = GenerateWordCmb(attackWordsList, attackWordText);
 
         //dodge
-        //choose the new dodge word
-        index = Random.Range(0, dodgeWordsList.Count - 1);
-        dodgeWord = dodgeWordsList[index];
+        dodgeWord = GenerateWordCmb(dodgeWordsList, dodgeWordText);
 
-        //add previous word back to the list
-        if (previousDodgeWord != string.Empty)
-            dodgeWordsList.Add(previousDodgeWord);
-
-        //remove the new dodge word from the list 
-        previousDodgeWord = dodgeWord;
-        dodgeWordsList.Remove(previousDodgeWord);
 
         SetWords(attackWord, dodgeWord);
+    }
+
+    //remove last used word and generate a new word
+    private string GenerateWordCmb(List<string> wordList, string lastGeneratedWord)
+    {
+        int newWordIndex;
+
+        //if I don't make a clone the function will end up removing the words from the original list lol
+        List<string> wordListClone = new List<string>(wordList); 
+
+        //reset random
+        Random.InitState((int)Time.time);
+
+        //remove last used word
+        if (lastGeneratedWord != string.Empty)
+            wordListClone.Remove(lastGeneratedWord);
+
+        //select new word to generate
+        newWordIndex = Random.Range(0, wordListClone.Count - 1);
+
+        return wordListClone[newWordIndex];
     }
 
 
