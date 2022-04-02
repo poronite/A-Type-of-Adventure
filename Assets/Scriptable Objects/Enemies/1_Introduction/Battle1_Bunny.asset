@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40644ac68cebcb944b0a89f8c0568c9f, type: 3}
-  m_Name: Battle1_Rabbit
+  m_Name: Battle1_Bunny
   m_EditorClassIdentifier: 
-  name: Fat Rabbit
-  sprite: {fileID: 21300000, guid: d04ce8b718870654f8112b0e9100b168, type: 3}
-  maxHP: 30
-  attack: 2
-  isBoss: 0
+  Name: Bunny
+  Sprite: {fileID: 21300000, guid: d04ce8b718870654f8112b0e9100b168, type: 3}
+  Icon: {fileID: 21300000, guid: 904cb8cac51fec04a89ef09b0ce6a487, type: 3}
+  IsBoss: 0

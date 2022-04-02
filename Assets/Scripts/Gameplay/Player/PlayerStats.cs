@@ -6,8 +6,7 @@ public class PlayerStats : MonoBehaviour
     //Variables
     private string playerName;
 
-    [SerializeField]
-    private int playerMaxHP, playerAttack;
+    private int playerMaxHP = 4, playerAttack = 1;
 
     private int playerCurrentHP;
 
@@ -36,21 +35,6 @@ public class PlayerStats : MonoBehaviour
     delegate void PlayerHPBarFill(string id, float fillAmount);
     PlayerHPBarFill UpdatePlayerHPBarFill;
 
-
-    public string PlayerName
-    {
-        get => playerName;
-    }
-
-    public int PlayerAttack
-    {
-        get => playerAttack;
-    }
-
-    public bool IsPlayerDead
-    {
-        get => isPlayerDead;
-    }
 
 
     private void Start()

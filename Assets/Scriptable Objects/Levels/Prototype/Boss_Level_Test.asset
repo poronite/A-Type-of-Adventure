@@ -33,6 +33,9 @@ MonoBehaviour:
   CorrectWord: 
   QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}
+  StartingEnergy: 0
   EnergyLostPerSecond: 0
   EnergyGainedPerWord: 0
-  StartingEnergy: 0
+  WordListSize: 0
+  WordList: []
+  NextLevelAfterChallenge: {fileID: 0}

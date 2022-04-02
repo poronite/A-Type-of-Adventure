@@ -25,6 +25,7 @@ TagManager:
   - CutsceneBackground
   - ParalaxLayer
   - ChallengeGfxUI
+  - EnemyIcon
   layers:
   - Default
   - TransparentFX

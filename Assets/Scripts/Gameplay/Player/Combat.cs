@@ -111,6 +111,7 @@ public class Combat : MonoBehaviour
 
     public void StartCombat(LevelTemplate currentLevel) //Start of a new game (Combat)
     {
+        stats.RecoverFullHP();
         EnemyTemplate enemy = currentLevel.Enemy;
 
         if (!enemy.IsBoss) //normal enemy
@@ -285,7 +286,7 @@ public class Combat : MonoBehaviour
     private void Attack()
     {
         //Debug.Log("Attacked");
-        AttackEnemy.Invoke(stats.PlayerAttack);
+        AttackEnemy.Invoke(1);
     }
 
 

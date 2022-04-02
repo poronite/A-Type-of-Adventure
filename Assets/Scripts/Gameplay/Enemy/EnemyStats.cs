@@ -8,11 +8,11 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour
 {
     //Variables
-    private int enemyMaxHP;
+    private int enemyMaxHP = 4;
 
     private int enemyCurrentHP;
 
-    public int Attack;
+    public int attack = 1;
 
     public float AttackSpeed; //duration that the enemy takes to attack
 
@@ -21,6 +21,8 @@ public class EnemyStats : MonoBehaviour
     public bool BossPhaseHappened;
 
     public bool IsEnemyDead;
+
+
 
 
     //delegates
@@ -48,17 +50,15 @@ public class EnemyStats : MonoBehaviour
 
     public void SetupEnemy(EnemyTemplate enemyData)
     {
-        enemyMaxHP = enemyData.MaxHP;
         enemyCurrentHP = enemyMaxHP;
-        Attack = enemyData.Attack;
         isBoss = enemyData.IsBoss;
 
         GameObject.FindGameObjectWithTag("EnemyGfx").GetComponent<SpriteRenderer>().sprite = enemyData.Sprite;
 
         if (isBoss)
-            AttackSpeed = 1.5f;
+            AttackSpeed = 2f;
         else
-            AttackSpeed = 3.5f;
+            AttackSpeed = 4f;
 
         IsEnemyDead = false;
 

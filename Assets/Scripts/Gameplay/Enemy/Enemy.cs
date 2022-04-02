@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
     {
         if (!IsEnemyDead())
         {
-            DealDamage.Invoke(stats.Attack);
+            DealDamage.Invoke(1); //enemy only deals 1 damage now
         }
     }
     // ↑

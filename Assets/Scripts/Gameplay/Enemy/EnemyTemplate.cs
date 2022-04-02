@@ -7,44 +7,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New_Enemy_Stats", menuName = "New Enemy", order = 52)]
 public class EnemyTemplate : ScriptableObject
 {
-    [SerializeField]
-    private new string name;
+    public string Name;
 
-    [SerializeField]
-    private Sprite sprite;
+    public Sprite Sprite;
 
-    [SerializeField]
-    private int maxHP;
+    public Sprite Icon;
 
-    [SerializeField]
-    private int attack;
-
-    [SerializeField]
-    private bool isBoss;
-
-
-    public string Name
-    {
-        get => name;
-    }
-
-    public Sprite Sprite
-    {
-        get => sprite;
-    }
-
-    public int MaxHP
-    {
-        get => maxHP;
-    }
-
-    public int Attack
-    {
-        get => attack;
-    }
-
-    public bool IsBoss
-    {
-        get => isBoss;
-    }
+    public bool IsBoss;
 }
