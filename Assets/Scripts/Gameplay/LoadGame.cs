@@ -28,7 +28,7 @@ public class LoadGame : MonoBehaviour
     }
 
 
-    /// <summary>Setup essential things like delegates and start the game.</summary>
+    ///<summary>Setup essential things like delegates and start the game.</summary>
     private void SetupStartGame()
     {
         //setup delegates
@@ -46,11 +46,11 @@ public class LoadGame : MonoBehaviour
         enemy.GetComponent<EnemyStats>().SetDelegatesEnemyStats();
 
         //level
-        GameObject levelController = GameObject.FindGameObjectWithTag("LevelController");
-        levelController.GetComponent<LevelController>().SetDelegatesLevel();
+        LevelController levelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
+        levelController.SetDelegatesLevel();
 
 
         //Start Game
-        GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().ChangeLevel(firstLevel);
+        levelController.ChangeLevel(firstLevel);
     }
 }

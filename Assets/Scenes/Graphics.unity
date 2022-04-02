@@ -1864,12 +1864,12 @@ GameObject:
   - component: {fileID: 512190423}
   - component: {fileID: 512190424}
   m_Layer: 0
-  m_Name: GeneralUI
+  m_Name: GeneralUI (unused)
   m_TagString: GeneralUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &512190423
 Transform:
   m_ObjectHideFlags: 0

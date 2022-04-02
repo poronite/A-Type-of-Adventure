@@ -29,9 +29,9 @@ public class PlayerStats : MonoBehaviour
     delegate void SendNameToAdv(string name);
     SendNameToAdv ReplaceWithName;
 
-    delegate void UpdateInfoUIDelegate(int info);
-    UpdateInfoUIDelegate UpdateTimeElapsedUI;
-    UpdateInfoUIDelegate UpdateMistakesUI;
+    //delegate void UpdateInfoUIDelegate(int info);
+    //UpdateInfoUIDelegate UpdateTimeElapsedUI;
+    //UpdateInfoUIDelegate UpdateMistakesUI;
 
     delegate void PlayerHPBarFill(string id, float fillAmount);
     PlayerHPBarFill UpdatePlayerHPBarFill;
@@ -65,9 +65,9 @@ public class PlayerStats : MonoBehaviour
 
         ReplaceWithName = gameObject.GetComponent<Adventure>().SetPlayerName;
 
-        GeneralUI UIUpdater = GameObject.FindGameObjectWithTag("GeneralUI").GetComponent<GeneralUI>();
-        UpdateTimeElapsedUI = UIUpdater.SetTimeElapsedUI;
-        UpdateMistakesUI = UIUpdater.SetMistakesUI;
+        //GeneralUI UIUpdater = GameObject.FindGameObjectWithTag("GeneralUI").GetComponent<GeneralUI>();
+        //UpdateTimeElapsedUI = UIUpdater.SetTimeElapsedUI;
+        //UpdateMistakesUI = UIUpdater.SetMistakesUI;
 
         UpdatePlayerHPBarFill = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateHealthBarFillUI;
     }
@@ -78,7 +78,7 @@ public class PlayerStats : MonoBehaviour
     {
         numMistakes++;
 
-        UpdateMistakesUI(numMistakes);
+        //UpdateMistakesUI(numMistakes);
     }
 
 
@@ -87,7 +87,7 @@ public class PlayerStats : MonoBehaviour
     {
         timeElapsedSeconds += Time.deltaTime;
 
-        UpdateTimeElapsedUI((int)timeElapsedSeconds);
+        //UpdateTimeElapsedUI((int)timeElapsedSeconds);
     }
 
 
