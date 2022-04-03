@@ -42,6 +42,8 @@ public class Level_InspectorEditor : Editor
     SerializedProperty startingEnergy;
     SerializedProperty energyLostPerSecond;
     SerializedProperty energyGainedPerWord;
+    SerializedProperty challengeBoard;
+    SerializedProperty challengeBoardFill;
     SerializedProperty wordListSize;
     SerializedProperty wordList;
     SerializedProperty nextLevelAfterChallenge;
@@ -85,6 +87,8 @@ public class Level_InspectorEditor : Editor
         startingEnergy = serializedObject.FindProperty("StartingEnergy");
         energyLostPerSecond = serializedObject.FindProperty("EnergyLostPerSecond");
         energyGainedPerWord = serializedObject.FindProperty("EnergyGainedPerWord");
+        challengeBoard = serializedObject.FindProperty("ChallengeBoard");
+        challengeBoardFill = serializedObject.FindProperty("ChallengeBoardFill");
         wordListSize = serializedObject.FindProperty("WordListSize");
         wordList = serializedObject.FindProperty("WordList");
         nextLevelAfterChallenge = serializedObject.FindProperty("NextLevelAfterChallenge");
@@ -111,9 +115,14 @@ public class Level_InspectorEditor : Editor
         //put this here because it was giving errors when changing level types
         string[] words = { "Empty" };
 
-        if (level.TextToType.Length > 0)
+
+        //to deal with the errors once and for all
+        if (level.TextToType != null)
         {
-            words = level.TextToType.Split(' ');
+            if (level.TextToType.Length > 0)
+            {
+                words = level.TextToType.Split(' ');
+            }
         }
 
         switch (level.LevelType)
@@ -190,7 +199,7 @@ public class Level_InspectorEditor : Editor
 
                     EditorGUILayout.Space();
 
-                    EditorGUILayout.PropertyField(eventWord, new GUIContent($"Required Word {i + 1}: "), true);
+                    EditorGUILayout.PropertyField(eventWord, new GUIContent($"Required Word {i + 1}: "), true);                    
 
                     if (eventWord.intValue - 1 > 0)
                     {
@@ -277,6 +286,14 @@ public class Level_InspectorEditor : Editor
                 EditorGUILayout.Space();
 
                 EditorGUILayout.PropertyField(energyGainedPerWord, new GUIContent("Energy Gained Per Word: "), true);
+
+                EditorGUILayout.Space();
+
+                EditorGUILayout.PropertyField(challengeBoard, new GUIContent("Challenge Board: "), true);
+
+                EditorGUILayout.Space();
+
+                EditorGUILayout.PropertyField(challengeBoardFill, new GUIContent("Challenge Board Fill: "), true);
 
                 EditorGUILayout.Space();
 

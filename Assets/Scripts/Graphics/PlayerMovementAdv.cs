@@ -74,7 +74,7 @@ public class PlayerMovementAdv : MonoBehaviour
 
         playerAnimator.SetFloat("Movement", accelerationProgress);
 
-        Debug.Log("Movement progress: " + playerAnimator.GetFloat("Movement"));
+        //Debug.Log("Movement progress: " + playerAnimator.GetFloat("Movement"));
     }
 
 

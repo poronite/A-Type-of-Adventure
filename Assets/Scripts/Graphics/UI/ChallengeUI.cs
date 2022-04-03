@@ -11,8 +11,18 @@ public class ChallengeUI : MonoBehaviour
     private TextMeshProUGUI outputWordUIChl;
 
     [SerializeField]
+    private Image challengeBoardUIChl;
+
+    [SerializeField]
     private Image progressBarFillUIChl;
 
+
+    
+    public void SetChallengeBoardUIChl(Sprite challengeBoard, Sprite fill)
+    {
+        challengeBoardUIChl.sprite = challengeBoard;
+        progressBarFillUIChl.sprite = fill;
+    }
 
 
     public void AddCharacterUIChl(string character)

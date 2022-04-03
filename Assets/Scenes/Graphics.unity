@@ -1145,9 +1145,9 @@ RectTransform:
   m_Father: {fileID: 1292199178}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -450, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 750, y: 150}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &312499316
@@ -2306,16 +2306,16 @@ RectTransform:
   m_GameObject: {fileID: 693596221}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2100869357}
   m_Father: {fileID: 1292199178}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 400, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 960, y: -440}
+  m_SizeDelta: {x: 960, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &693596223
 MonoBehaviour:
@@ -2330,13 +2330,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.5660378, b: 0.32887325, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c6cef10ea3f9cdc49a1fc032c4806265, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3212,7 +3212,7 @@ MonoBehaviour:
     type: 3}
   castleBackgroundChl: {fileID: 21300000, guid: cedba090d58258d4b9ad6eb45ce9f7a5,
     type: 3}
-  magicForestBackgroundCmb: {fileID: 21300000, guid: 91a4527c8ca94c4468457075a91c1c17,
+  magicForestBackgroundCmb: {fileID: 21300000, guid: abd876daca10d9240858624e59e2ab47,
     type: 3}
   magicForestBackgroundPzl: {fileID: 21300000, guid: cedba090d58258d4b9ad6eb45ce9f7a5,
     type: 3}
@@ -3243,17 +3243,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4430917808d88da48beef5a91050c32f, type: 3}
   - {fileID: 21300000, guid: 8879c61ebfa726545bb13e65f0fa8c26, type: 3}
   magicForestGroundSprites:
-  - {fileID: 21300000, guid: 0bdb138951a25ec4bace06a67d1ebcb1, type: 3}
-  - {fileID: 21300000, guid: 5610459e058aabb478ffa54f89880630, type: 3}
-  - {fileID: 21300000, guid: 794a5c1c40b438f4ea9f6b632ca2d7d7, type: 3}
+  - {fileID: 21300000, guid: 40871a2ecccdcdb4996d70286ca503fb, type: 3}
+  - {fileID: 21300000, guid: f48cf027e14783749bfa9d04fbd3a764, type: 3}
+  - {fileID: 21300000, guid: 43ce87732f20a4044a71da956f33bdc5, type: 3}
   magicForestTreeSprites:
-  - {fileID: 21300000, guid: 05e7d2fb8c333d84ead53f639af59c1e, type: 3}
-  - {fileID: 21300000, guid: a7b39d5c3e9c3a443968cdd8ef032de1, type: 3}
-  - {fileID: 21300000, guid: 510a3b449804e094995b30e1e7e64f3b, type: 3}
+  - {fileID: 21300000, guid: f0ac1ca752677ed4e8e9ad673a3b1f36, type: 3}
+  - {fileID: 21300000, guid: 9af1d07a75f66a343a2a93dda54af6cf, type: 3}
+  - {fileID: 21300000, guid: 32b3932295f11a4458bc5f030d6a8c40, type: 3}
   magicForestSkySprites:
-  - {fileID: 21300000, guid: dc8b6815e0ffc0749a230ebe8c35472f, type: 3}
-  - {fileID: 21300000, guid: 4430917808d88da48beef5a91050c32f, type: 3}
-  - {fileID: 21300000, guid: 8879c61ebfa726545bb13e65f0fa8c26, type: 3}
+  - {fileID: 21300000, guid: f9fc32154b66fb54e98109bb612037d1, type: 3}
+  - {fileID: 21300000, guid: ddba46de52461da46ad359b92a3d4ba4, type: 3}
+  - {fileID: 21300000, guid: f7221e5c96a6b654ab36e2e4cbc660f2, type: 3}
 --- !u!114 &936825013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3316,6 +3316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWordUIChl: {fileID: 312499316}
   outputWordUIChl: {fileID: 1407455661}
+  challengeBoardUIChl: {fileID: 0}
   progressBarFillUIChl: {fileID: 2100869358}
 --- !u!1 &983134339
 GameObject:
@@ -4552,9 +4553,9 @@ RectTransform:
   m_Father: {fileID: 1292199178}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -450, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 750, y: 150}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1407455661
@@ -5940,7 +5941,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 960, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2100869358
 MonoBehaviour:
@@ -5955,18 +5956,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.5399337, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c6cef10ea3f9cdc49a1fc032c4806265, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.434
+  m_FillAmount: 0.473
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

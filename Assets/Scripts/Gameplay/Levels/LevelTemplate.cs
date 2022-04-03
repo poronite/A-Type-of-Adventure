@@ -62,6 +62,8 @@ public class LevelTemplate : ScriptableObject
     public float StartingEnergy;
     public float EnergyLostPerSecond;
     public float EnergyGainedPerWord;
+    public Sprite ChallengeBoard;
+    public Sprite ChallengeBoardFill;
     public int WordListSize;
     public List<string> WordList;
     public LevelTemplate NextLevelAfterChallenge;

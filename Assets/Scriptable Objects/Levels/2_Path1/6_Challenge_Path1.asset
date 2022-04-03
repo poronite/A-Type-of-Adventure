@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
+  m_Name: 6_Challenge_Path1
+  m_EditorClassIdentifier: 
+  LevelName: 
+  LevelType: 3
+  FieldType: 2
+  TextToType: 
+  NextLevelAfterAdventure: {fileID: 0}
+  HasBranching: 0
+  PossibleChoices: []
+  PossibleOutcomes: []
+  NumEncounters: 0
+  EncounterWordKey: 
+  EncounterValue: []
+  Enemy: {fileID: 0}
+  NextLevelAfterCombat: {fileID: 0}
+  NextLevelAfterKillingBoss: {fileID: 0}
+  NextLevelAfterSparingBoss: {fileID: 0}
+  CorrectWord: 
+  QuestionBoard: {fileID: 0}
+  NextLevelAfterPuzzle: {fileID: 0}
+  StartingEnergy: 50
+  EnergyLostPerSecond: 3
+  EnergyGainedPerWord: 10
+  ChallengeBoard: {fileID: 21300000, guid: f95a67bf7192d8d4fbbeed418a076b92, type: 3}
+  ChallengeBoardFill: {fileID: 21300000, guid: d6efc632558fa60458e9015fa0e00cef, type: 3}
+  WordListSize: 9
+  WordList:
+  - flos
+  - iter
+  - arcis
+  - sequor
+  - aurum
+  - signum
+  - silva
+  - destinatio
+  - haeream
+  NextLevelAfterChallenge: {fileID: 11400000, guid: 53e53758672a7304d83f678e646ad17d,
+    type: 2}

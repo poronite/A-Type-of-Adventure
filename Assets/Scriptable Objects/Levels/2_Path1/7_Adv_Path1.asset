@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
+  m_Name: 7_Adv_Path1
+  m_EditorClassIdentifier: 
+  LevelName: 
+  LevelType: 0
+  FieldType: 2
+  TextToType: This inscription tells MCName that a golden flower will signal that
+    they are nearing the end of the forest and that soon they will be able to see
+    the citadel from afar. Not much time had passed since they left the inscripted
+    wall but the golden flower was already in sight and soon enough they left the
+    forest and the citadel could be spotted in the distance. When MCName got to the
+    gates of the citadel, they realized they were closed, a guard pops her head over
+    the wall and asks what business MCName has in that place. They showed her the
+    orb and she quickly requested the password, which was the answer to the riddle.
+  NextLevelAfterAdventure: {fileID: 11400000, guid: 8682219da296226458ccc85659ae8bab,
+    type: 2}
+  HasBranching: 0
+  PossibleChoices: []
+  PossibleOutcomes: []
+  NumEncounters: 4
+  EncounterWordKey: 00000000200000004300000074000000
+  EncounterValue:
+  - {fileID: 11400000, guid: 4ac96d28ab8b3704b899920bbfda582f, type: 2}
+  - {fileID: 11400000, guid: b293975e7f2a625409cad5bd90f4da56, type: 2}
+  - {fileID: 11400000, guid: 6a1acb6b23fb8b149905753d29cf95e9, type: 2}
+  - {fileID: 11400000, guid: c9ab02db5924335408d953d158721c9b, type: 2}
+  Enemy: {fileID: 0}
+  NextLevelAfterCombat: {fileID: 0}
+  NextLevelAfterKillingBoss: {fileID: 0}
+  NextLevelAfterSparingBoss: {fileID: 0}
+  CorrectWord: 
+  QuestionBoard: {fileID: 0}
+  NextLevelAfterPuzzle: {fileID: 0}
+  StartingEnergy: 0
+  EnergyLostPerSecond: 0
+  EnergyGainedPerWord: 0
+  ChallengeBoard: {fileID: 0}
+  ChallengeBoardFill: {fileID: 0}
+  WordListSize: 0
+  WordList: []
+  NextLevelAfterChallenge: {fileID: 0}

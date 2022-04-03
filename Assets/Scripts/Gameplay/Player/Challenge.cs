@@ -35,6 +35,9 @@ public class Challenge : MonoBehaviour
     delegate void ChangeLevelDelegate(LevelTemplate level);
     ChangeLevelDelegate GoToNextLevel;
 
+    delegate void SetChallengeBoard(Sprite board, Sprite fill);
+    SetChallengeBoard SetChallengeBoardChl;
+
     delegate void AddCharacterDelegate(string character);
     AddCharacterDelegate AddCharacterChl;
 
@@ -58,6 +61,7 @@ public class Challenge : MonoBehaviour
         GoToNextLevel = levelController.ChangeLevel;
 
         ChallengeUI chlUIController = GameObject.FindGameObjectWithTag("ChallengeGfxUI").GetComponent<ChallengeUI>();
+        SetChallengeBoardChl = chlUIController.SetChallengeBoardUIChl;
         AddCharacterChl = chlUIController.AddCharacterUIChl;
         DisplayNewCurrentWordChl = chlUIController.DisplayNewCurrentWordUIChl;
         ClearOutputWordChl = chlUIController.ClearOutputWordUIChl;
@@ -72,6 +76,8 @@ public class Challenge : MonoBehaviour
         energyGainedPerWord = currentLevel.EnergyGainedPerWord;
         currentLevelWordList = currentLevel.WordList;
         nextLevel = currentLevel.NextLevelAfterChallenge;
+
+        SetChallengeBoardChl.Invoke(currentLevel.ChallengeBoard, currentLevel.ChallengeBoardFill);
 
         NewWordChl();
 
