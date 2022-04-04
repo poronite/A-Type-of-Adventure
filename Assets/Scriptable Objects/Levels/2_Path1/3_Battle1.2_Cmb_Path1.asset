@@ -23,7 +23,7 @@ MonoBehaviour:
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []
-  Enemy: {fileID: 11400000, guid: 1742cda674afeff4387140da825b844d, type: 2}
+  Enemy: {fileID: 11400000, guid: 7e5289fb619a2d844aad537113f1a6dd, type: 2}
   NextLevelAfterCombat: {fileID: 11400000, guid: 16a2fab78e5e7ad429bcb13a86566852,
     type: 2}
   NextLevelAfterKillingBoss: {fileID: 0}
