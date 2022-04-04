@@ -3316,7 +3316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWordUIChl: {fileID: 312499316}
   outputWordUIChl: {fileID: 1407455661}
-  challengeBoardUIChl: {fileID: 0}
+  challengeBoardUIChl: {fileID: 693596223}
   progressBarFillUIChl: {fileID: 2100869358}
 --- !u!1 &983134339
 GameObject:

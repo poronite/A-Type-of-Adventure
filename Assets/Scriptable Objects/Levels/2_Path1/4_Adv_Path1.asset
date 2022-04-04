@@ -24,7 +24,7 @@ MonoBehaviour:
     As MCName tells them about their journey, they soon understand how important
     it is for them to get to the citadel and help them get on the right track to
     get to the said destination.
-  NextLevelAfterAdventure: {fileID: 11400000, guid: 6e9cad772d7a7bb4b9d8f19d62c84b8c,
+  NextLevelAfterAdventure: {fileID: 11400000, guid: dbaf5932c5c903d42816247412e7bd05,
     type: 2}
   HasBranching: 0
   PossibleChoices: []

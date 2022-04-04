@@ -41,6 +41,8 @@ MonoBehaviour:
   StartingEnergy: 0
   EnergyLostPerSecond: 0
   EnergyGainedPerWord: 0
+  ChallengeBoard: {fileID: 0}
+  ChallengeBoardFill: {fileID: 0}
   WordListSize: 0
   WordList: []
   NextLevelAfterChallenge: {fileID: 0}

@@ -17,7 +17,7 @@ MonoBehaviour:
   FieldType: 2
   TextToType: MCName continues walking on the same path to get to the destination.
     The path ends and MCName is met with a large boulder with a strange inscription.
-  NextLevelAfterAdventure: {fileID: 11400000, guid: 6e9cad772d7a7bb4b9d8f19d62c84b8c,
+  NextLevelAfterAdventure: {fileID: 11400000, guid: 22384ab25cafcb8489387716cdfbf6ed,
     type: 2}
   HasBranching: 0
   PossibleChoices: []

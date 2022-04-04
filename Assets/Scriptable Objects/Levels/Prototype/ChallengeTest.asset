@@ -37,6 +37,8 @@ MonoBehaviour:
   StartingEnergy: 50
   EnergyLostPerSecond: 2
   EnergyGainedPerWord: 10
+  ChallengeBoard: {fileID: 0}
+  ChallengeBoardFill: {fileID: 0}
   WordListSize: 5
   WordList:
   - yikes
