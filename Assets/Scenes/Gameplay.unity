@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TypingController: {fileID: 1764022992}
-  numberCharBossWord: 30
+  numberCharBossWord: 20
 --- !u!114 &827458984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,7 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cac45bb7e14af5468221c44e11fcb72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstLevel: {fileID: 11400000, guid: 6e9cad772d7a7bb4b9d8f19d62c84b8c, type: 2}
+  firstLevel: {fileID: 11400000, guid: fb62368ca68e020448315e0c6a2c73f0, type: 2}
 --- !u!1 &1731950559
 GameObject:
   m_ObjectHideFlags: 0
