@@ -5,6 +5,13 @@ using UnityEngine;
 //script that will move the player graphics for 5s when the player clicks.
 //the duration is refreshed to 5s even if there's still remaining seconds left
 
+enum MovementState
+{
+    Idle,
+    Move,
+    Stopped
+}
+
 public class PlayerMovementAdv : MonoBehaviour
 {
     [SerializeField]
@@ -16,15 +23,13 @@ public class PlayerMovementAdv : MonoBehaviour
     [SerializeField]
     private float movementDuration;
 
+    private MovementState moveState = MovementState.Idle;
+
     private float accelerationProgress = 0.0f;
 
     private float remainingDuration;
 
-    //if player is currently moving 
-    private bool isMoving = false;
-
-    //force player to stop
-    private bool isPlayerStopped = false;
+    private Coroutine movementCoroutine = null;
 
     [SerializeField]
     private Animator playerAnimator;
@@ -41,25 +46,11 @@ public class PlayerMovementAdv : MonoBehaviour
         remainingDuration = movementDuration;
 
         //if already moving don't trigger coroutine again or it will overlap!
-        if (!isMoving) 
+        if (moveState == MovementState.Idle)
         {
-            StartCoroutine(SmoothMovementChange(1f));
-        }
-    }
-
-
-    //set if player can move or not regardless if player has typed a word
-    public void SetPlayerMovement(bool movementState)
-    {
-        isPlayerStopped = movementState;
-
-        if (!isPlayerStopped)
-        {
-            StartCoroutine(SmoothMovementChange(1.0f));
-        }
-        else if (isPlayerStopped)
-        {
-            StartCoroutine(SmoothMovementChange(0.0f));
+            isMovementCoroutineRunning();
+            moveState = MovementState.Move;
+            movementCoroutine = StartCoroutine(SmoothMovementChange());
         }
     }
 
@@ -78,9 +69,22 @@ public class PlayerMovementAdv : MonoBehaviour
     }
 
 
-    IEnumerator SmoothMovementChange(float targetValue)
+    IEnumerator SmoothMovementChange()
     {
         float time = 0.0f;
+        float targetValue = 0.0f;
+
+        switch (moveState)
+        {
+            case MovementState.Idle:
+                targetValue = 0.0f;
+                break;
+            case MovementState.Move:
+                targetValue = 1.0f;
+                break;
+            default:
+                break;
+        }
 
         while (time < accelerationDuration)
         {
@@ -92,16 +96,22 @@ public class PlayerMovementAdv : MonoBehaviour
 
         accelerationProgress = targetValue;
 
-        if (accelerationProgress >= 1.0)
+        movementCoroutine = null;
+    }
+
+
+    private void isMovementCoroutineRunning()
+    {
+        if (movementCoroutine != null)
         {
-            isMoving = true;
+            StopCoroutine(movementCoroutine);
         }
     }
 
 
     private void Update()
     {
-        if (isMoving && !isPlayerStopped)
+        if (moveState == MovementState.Move)
         {
             remainingDuration -= Time.deltaTime;
 
@@ -109,12 +119,9 @@ public class PlayerMovementAdv : MonoBehaviour
 
             if (remainingDuration <= 0)
             {
-                //if already in idle don't trigger coroutine again or it will overlap!
-                if (isMoving)
-                {
-                    isMoving = false;
-                    StartCoroutine(SmoothMovementChange(0.0f));
-                }
+                isMovementCoroutineRunning();
+                moveState = MovementState.Idle;
+                movementCoroutine = StartCoroutine(SmoothMovementChange());
             }
         }
     }

@@ -27,6 +27,7 @@ public class Challenge : MonoBehaviour
 
     private string lastWordUsed;
 
+    private Coroutine increaseEnergyCoroutine = null;
 
     //delegates
     delegate void WordDelegate(string word);
@@ -107,7 +108,12 @@ public class Challenge : MonoBehaviour
 
     public void CompleteWordChl(string word)
     {
-        StartCoroutine(IncreaseEnergy());
+        if (increaseEnergyCoroutine != null)
+        {
+            StopCoroutine(increaseEnergyCoroutine);
+        }
+
+        increaseEnergyCoroutine = StartCoroutine(IncreaseEnergy());
     }
 
     IEnumerator IncreaseEnergy()
@@ -144,32 +150,11 @@ public class Challenge : MonoBehaviour
 
     private void NewWordChl() 
     {
-        string word = GenerateWordChl(currentLevelWordList, lastWordUsed);
+        string word = ATOA_Utilities.GenerateWord(currentLevelWordList, lastWordUsed);
         DisplayNewCurrentWordChl.Invoke(word);
         ClearOutputWordChl.Invoke();
         SendNextWordChl.Invoke(word);
         lastWordUsed = word;
-    }
-
-
-    private string GenerateWordChl(List<string> wordList, string lastGeneratedWord)
-    {
-        int newWordIndex;
-
-        //if I don't make a clone the function will end up removing the words from the original list lol
-        List<string> wordListClone = new List<string>(wordList);
-
-        //reset random
-        Random.InitState((int)Time.time);
-
-        //remove last used word
-        if (lastGeneratedWord != string.Empty)
-            wordListClone.Remove(lastGeneratedWord);
-
-        //select new word to generate
-        newWordIndex = Random.Range(0, wordListClone.Count - 1);
-
-        return wordListClone[newWordIndex];
     }
 
 

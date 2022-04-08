@@ -127,7 +127,6 @@ public class EncounterController : MonoBehaviour
                 comicStripes[currentStripe - 1].position = Vector3.Lerp(comicStripes[currentStripe - 1].position, -previousStripeNewPosition, (time / transitionDuration));
 
                 comicStripes[currentStripe].position = Vector3.Lerp(comicStripes[currentStripe].position, middleofScreen, (time / transitionDuration));
-                
             }
 
             if (currentStripe == comicStripes.Length)

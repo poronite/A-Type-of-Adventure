@@ -24,7 +24,7 @@ MonoBehaviour:
   - go through the Goblin Village to the volcano.
   PossibleOutcomes:
   - {fileID: 11400000, guid: 871177cbdc846124dbea295c666c6d12, type: 2}
-  - {fileID: 11400000, guid: a8abacd5dc4c9b140aa5cdd19cbed6e7, type: 2}
+  - {fileID: 11400000, guid: 6e9cad772d7a7bb4b9d8f19d62c84b8c, type: 2}
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []

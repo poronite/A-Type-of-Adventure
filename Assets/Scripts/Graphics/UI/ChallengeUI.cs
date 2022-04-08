@@ -4,6 +4,14 @@ using TMPro;
 
 public class ChallengeUI : MonoBehaviour
 {
+    //References
+    [SerializeField]
+    private RectTransform currentTextUITransform;
+
+    [SerializeField]
+    private RectTransform outputTextUITransform;
+
+
     [SerializeField]
     private TextMeshProUGUI currentWordUIChl;
 
@@ -34,6 +42,14 @@ public class ChallengeUI : MonoBehaviour
     public void DisplayNewCurrentWordUIChl(string word)
     {
         currentWordUIChl.text = word;
+
+        Vector2 textPosition = currentTextUITransform.localPosition;
+        Vector2 textSize = currentWordUIChl.GetPreferredValues(word);
+
+        currentTextUITransform.sizeDelta = textSize;
+        currentTextUITransform.localPosition = textPosition;
+        outputTextUITransform.sizeDelta = textSize;
+        outputTextUITransform.localPosition = textPosition;
     }
 
 

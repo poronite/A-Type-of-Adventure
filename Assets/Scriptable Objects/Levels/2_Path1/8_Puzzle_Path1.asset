@@ -28,7 +28,7 @@ MonoBehaviour:
   NextLevelAfterKillingBoss: {fileID: 0}
   NextLevelAfterSparingBoss: {fileID: 0}
   CorrectWord: silence
-  QuestionBoard: {fileID: 21300000, guid: 9bae466777a10334894146d88202dcda, type: 3}
+  QuestionBoard: {fileID: 21300000, guid: 68eab3871a36beb44990bd2e3e84a604, type: 3}
   NextLevelAfterPuzzle: {fileID: 11400000, guid: 94fcebf5eb8ae224c82c2d07d16cf439,
     type: 2}
   StartingEnergy: 0
