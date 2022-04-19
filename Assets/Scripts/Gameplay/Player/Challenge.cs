@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ATOA;
 
 //This minigame consists of a progress bar that lowers it's percentage over time.
 //A word will appear on the screen and if the player completes that word the progress bar is filled by a certain amount.
@@ -149,7 +150,7 @@ public class Challenge : MonoBehaviour
 
 
     private void NewWordChl() 
-    {
+    {   
         string word = ATOA_Utilities.GenerateWord(currentLevelWordList, lastWordUsed);
         DisplayNewCurrentWordChl.Invoke(word);
         ClearOutputWordChl.Invoke();
