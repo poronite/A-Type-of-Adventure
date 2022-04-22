@@ -154,11 +154,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: constantia SDF
+  m_Name: constantia SDF 1
   m_EditorClassIdentifier: 
-  hashCode: -1138580441
+  hashCode: 1331449398
   material: {fileID: -251853448383263519}
-  materialHashCode: 13635751
+  materialHashCode: -254025386
   m_Version: 1.1.0
   m_SourceFontFileGUID: dfe5202e9c44ca149abde0b3ce13a872
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: dfe5202e9c44ca149abde0b3ce13a872,
