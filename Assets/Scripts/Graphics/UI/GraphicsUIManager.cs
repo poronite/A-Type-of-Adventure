@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using ATOA;
 
 //Change graphics and behaviour of camera 
 
@@ -26,7 +27,7 @@ public class GraphicsUIManager : MonoBehaviour
 
     public IEnumerator ActivateLoadingScreen()
     {
-        yield return StartCoroutine(FadeLoadingScreen(1, 0.5f, LoadingScreen));
+        yield return StartCoroutine(ATOA_Utilities.FadeLoadingScreen(1, 0.5f, LoadingScreen));
 
         Adventure.SetActive(true); //everything gets activated in order to be able 
         Combat.SetActive(true); //to change sprites while the game is loading
@@ -37,24 +38,7 @@ public class GraphicsUIManager : MonoBehaviour
 
     private IEnumerator DeactivateLoadingScreen()
     {
-        yield return StartCoroutine(FadeLoadingScreen(0, 0.5f, LoadingScreen));
-    }
-
-
-    IEnumerator FadeLoadingScreen(float targetValue, float duration, CanvasGroup uiElement)
-    {
-        float startValue = uiElement.alpha;
-        float time = 0f;
-
-        while (time < duration)
-        {            
-            uiElement.alpha = Mathf.Lerp(startValue, targetValue, time / duration);
-            time += Time.deltaTime;
-            yield return null;
-        }
-
-        //this is here to guarantee that the alpha is 1 (or 0) instead of a very close float value
-        uiElement.alpha = targetValue;
+        yield return StartCoroutine(ATOA_Utilities.FadeLoadingScreen(0, 0.5f, LoadingScreen));
     }
 
 

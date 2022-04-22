@@ -1,10 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ATOA
 {
     public static class ATOA_Utilities
     {
+        public static IEnumerator FadeLoadingScreen(float targetValue, float duration, CanvasGroup uiElement)
+        {
+            float startValue = uiElement.alpha;
+            float time = 0f;
+
+            while (time < duration)
+            {
+                uiElement.alpha = Mathf.Lerp(startValue, targetValue, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            //this is here to guarantee that the alpha is 1 (or 0) instead of a very close float value
+            uiElement.alpha = targetValue;
+        }
+
         //remove last used word and generate a new word
         public static string GenerateWord(List<string> wordList, string lastGeneratedWord)
         {
