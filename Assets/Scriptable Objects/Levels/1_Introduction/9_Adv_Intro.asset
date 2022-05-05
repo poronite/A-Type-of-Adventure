@@ -16,12 +16,12 @@ MonoBehaviour:
   LevelType: 0
   FieldType: 0
   TextToType: MCName found the orb, but now it's time to decide what to do with it.
-    *
+    Go through the *
   NextLevelAfterAdventure: {fileID: 0}
   HasBranching: 1
   PossibleChoices:
-  - go through the Enchanted Forest to the citadel.
-  - go through the Goblin Village to the volcano.
+  - enchanted forest to the citadel.
+  - goblin village to the volcano.
   PossibleOutcomes:
   - {fileID: 11400000, guid: 871177cbdc846124dbea295c666c6d12, type: 2}
   - {fileID: 11400000, guid: 6e9cad772d7a7bb4b9d8f19d62c84b8c, type: 2}

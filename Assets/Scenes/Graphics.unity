@@ -5293,6 +5293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadingScreen: {fileID: 1819188323}
   Adventure: {fileID: 182019168}
+  AdventureTextBar: {fileID: 615091133}
   Combat: {fileID: 350824310}
   Puzzle: {fileID: 1523808042}
   Challenge: {fileID: 976748699}
