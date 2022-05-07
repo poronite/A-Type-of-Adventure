@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1636183177390784704}
   m_Layer: 0
-  m_Name: Cutscene B
+  m_Name: Cutscene B_1
   m_TagString: Cutscene
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a582b1fb74c38f1449104e6795091d68, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 39bb3bdccc37e794b9f64639d3694c05, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

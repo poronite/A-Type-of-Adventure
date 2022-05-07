@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31e1aaccb6227d6409cca00de46224ec, type: 3}
-  m_Name: CutsceneB1_Cut
+  m_Name: CutsceneB2_Cut
   m_EditorClassIdentifier: 
   EncounterType: 1
+  FieldType: 0
   EndOfCutscene: 1
   TransitionDuration: 0
   NewCutscene: 0
