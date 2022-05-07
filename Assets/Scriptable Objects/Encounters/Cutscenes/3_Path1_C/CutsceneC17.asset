@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CutsceneC17
   m_EditorClassIdentifier: 
   EncounterType: 1
+  FieldType: 1
   EndOfCutscene: 0
   TransitionDuration: 3
   NewCutscene: 1

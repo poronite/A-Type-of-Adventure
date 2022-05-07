@@ -10,12 +10,20 @@ public class EncounterController : MonoBehaviour
     private Image cutsceneBackground; 
     private Transform cutsceneParent;
     private Transform currentCutscene;
+    private FieldType cutsceneFieldType;
 
     private RectTransform[] comicStripes;
 
     private int currentStripe;
     private Vector3 previousStripePosition;
     private float transitionDuration;
+
+    [SerializeField]
+    private Sprite forestBackground;
+    [SerializeField]
+    private Sprite magicForestBackground;
+    [SerializeField]
+    private Sprite castleBackground;
 
     public void EncounterTriggered(EncountersTemplate encounter)
     {
@@ -54,6 +62,21 @@ public class EncounterController : MonoBehaviour
         cutsceneBackground = GameObject.FindGameObjectWithTag("CutsceneBackground").GetComponent<Image>();
 
         StartCoroutine(FadeCutsceneLoadingScreen(1f, 1));
+
+        switch (cutsceneFieldType)
+        {
+            case FieldType.Plains:
+                cutsceneBackground.sprite = forestBackground;
+                break;
+            case FieldType.Castle:
+                cutsceneBackground.sprite = castleBackground;
+                break;
+            case FieldType.MagicForest:
+                cutsceneBackground.sprite = magicForestBackground;
+                break;
+            default:
+                break;
+        }
 
         currentStripe = -1;
 

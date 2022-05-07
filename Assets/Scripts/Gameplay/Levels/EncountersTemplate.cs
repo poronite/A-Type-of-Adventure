@@ -18,6 +18,8 @@ public class EncountersTemplate : ScriptableObject
     //both
     public EncounterType EncounterType;
 
+    public FieldType FieldType;
+
     //gameplay
     //insert here gameplay stuff
 

@@ -164,6 +164,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 247887415d2e3ea479b5e375d526e6b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forestBackground: {fileID: 21300000, guid: 74df02e78184007468d651637593a16a, type: 3}
+  magicForestBackground: {fileID: 21300000, guid: 28c446514efbfc843bac26dc1d45be3b,
+    type: 3}
+  castleBackground: {fileID: 21300000, guid: 74df02e78184007468d651637593a16a, type: 3}
 --- !u!1 &451469498
 GameObject:
   m_ObjectHideFlags: 0
