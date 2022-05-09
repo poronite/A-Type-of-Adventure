@@ -48,6 +48,9 @@ public class EncounterController : MonoBehaviour
                     cutsceneParent = GameObject.FindGameObjectWithTag("Cutscenes").transform;
 
                     currentCutscene = Instantiate(encounter.CutscenePrefab, cutsceneParent, false).transform;
+
+                    cutsceneFieldType = encounter.FieldType;
+
                     SetCutscene();
                 }
 
