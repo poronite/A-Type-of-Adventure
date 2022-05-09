@@ -18,12 +18,15 @@ public class EncounterController : MonoBehaviour
     private Vector3 previousStripePosition;
     private float transitionDuration;
 
+    private AudioController audioController;
+
     [SerializeField]
     private Sprite forestBackground;
     [SerializeField]
     private Sprite magicForestBackground;
     [SerializeField]
     private Sprite castleBackground;
+
 
     public void EncounterTriggered(EncountersTemplate encounter)
     {
@@ -58,8 +61,11 @@ public class EncounterController : MonoBehaviour
 
     private void SetCutscene()
     {
-        cutsceneLoadingScreen = GameObject.FindGameObjectWithTag("CutsceneLoadingScreen").GetComponent<CanvasGroup>();
-        cutsceneBackground = GameObject.FindGameObjectWithTag("CutsceneBackground").GetComponent<Image>();
+        if (cutsceneLoadingScreen == null)
+            cutsceneLoadingScreen = GameObject.FindGameObjectWithTag("CutsceneLoadingScreen").GetComponent<CanvasGroup>();
+
+        if (cutsceneBackground == null)
+            cutsceneBackground = GameObject.FindGameObjectWithTag("CutsceneBackground").GetComponent<Image>();
 
         StartCoroutine(FadeCutsceneLoadingScreen(1f, 1));
 
@@ -123,6 +129,11 @@ public class EncounterController : MonoBehaviour
     private void ChangeStripe()
     {
         currentStripe += 1;
+
+        if (audioController == null)
+            audioController = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>();
+
+        audioController.TriggerSFX(AudioName.CutsceneChange);
 
         StartCoroutine(MoveStripe(previousStripePosition));
 

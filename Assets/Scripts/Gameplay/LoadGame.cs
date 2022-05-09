@@ -16,7 +16,7 @@ public class LoadGame : MonoBehaviour
 
     IEnumerator LoadGraphicsScene()
     {
-        AsyncOperation loadedLevel = SceneManager.LoadSceneAsync("Graphics", LoadSceneMode.Additive);
+        AsyncOperation loadedLevel = SceneManager.LoadSceneAsync("Graphics_Audio", LoadSceneMode.Additive);
 
         while (!loadedLevel.isDone)
         {
@@ -35,6 +35,7 @@ public class LoadGame : MonoBehaviour
         //player
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerStats>().SetDelegatesPlayerStats();
+        player.GetComponent<Typing>().SetDelegatesTyping();
         player.GetComponent<Adventure>().SetDelegatesAdv();
         player.GetComponent<Combat>().SetDelegatesCmb();
         player.GetComponent<Puzzle>().SetDelegatesPzl();

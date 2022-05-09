@@ -76,17 +76,12 @@ public class Typing : MonoBehaviour
     delegate void UpdateHint(string hint);
     UpdateHint UpdateHintAdvUI;
 
-
-
-    //TEMPORARY SFX
-    [SerializeField]
-    private AudioSource typeSFX, mistakeSFX, wordCompleteSFX;
+    delegate void TriggerAudio(AudioName audioName);
+    TriggerAudio TriggerSFX;
 
 
 
-
-    //Player game object will never be disabled so OnEnable is enough
-    private void OnEnable()
+    public void SetDelegatesTyping()
     {
         PlayerStats stats = gameObject.GetComponent<PlayerStats>();
         Adventure advController = gameObject.GetComponent<Adventure>();
@@ -116,6 +111,8 @@ public class Typing : MonoBehaviour
         CompleteWordChl = chlController.CompleteWordChl;
 
         UpdateHintAdvUI = advController.UpdateHintUI;
+
+        TriggerSFX = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>().TriggerSFX;
     }
 
 
@@ -178,8 +175,7 @@ public class Typing : MonoBehaviour
                     {
                         Mistake.Invoke();
 
-                        //TEMPORARY SOUND EFFECT
-                        mistakeSFX.Play();
+                        TriggerSFX(AudioName.Mistake);
                     }
                     break;
                 case PlayerState.Puzzle:
@@ -281,8 +277,7 @@ public class Typing : MonoBehaviour
             }
         }
 
-        //TEMPORARY SOUND EFFECT
-        typeSFX.Play();
+        TriggerSFX(AudioName.TypewriterKey);
 
         //Debug.Log($"Character typed: {character} | {outputWord}");
 
@@ -291,8 +286,7 @@ public class Typing : MonoBehaviour
             case PlayerState.Adventure:
                 if (IsWordComplete(character))
                 {
-                    //TEMPORARY SOUND EFFECT
-                    wordCompleteSFX.Play();
+                    TriggerSFX(AudioName.CompleteWord);
 
                     CompleteWordAdv.Invoke(outputWord.ToString());
                 }
@@ -301,8 +295,7 @@ public class Typing : MonoBehaviour
                     isSettingName = false;
                     string name = outputWord.ToString();
 
-                    //TEMPORARY SOUND EFFECT
-                    wordCompleteSFX.Play();
+                    TriggerSFX(AudioName.CompleteWord);
 
                     CompleteWordAdv.Invoke(outputWord.ToString());
 
@@ -313,8 +306,7 @@ public class Typing : MonoBehaviour
             case PlayerState.Combat:
                 if (IsWordComplete(character))
                 {
-                    //TEMPORARY SOUND EFFECT
-                    wordCompleteSFX.Play();
+                    TriggerSFX(AudioName.CompleteWord);
 
                     CompleteWordCmb.Invoke(outputWord.ToString());
                 }
@@ -324,8 +316,7 @@ public class Typing : MonoBehaviour
             case PlayerState.Puzzle:
                 if (IsWordComplete(character))
                 {
-                    //TEMPORARY SOUND EFFECT
-                    wordCompleteSFX.Play();
+                    TriggerSFX(AudioName.CompleteWord);
 
                     CompleteWordPzl.Invoke(outputWord.ToString());
                 }
@@ -335,8 +326,7 @@ public class Typing : MonoBehaviour
             case PlayerState.Challenge:
                 if (IsWordComplete(character))
                 {
-                    //TEMPORARY SOUND EFFECT
-                    wordCompleteSFX.Play();
+                    TriggerSFX(AudioName.CompleteWord);
 
                     CompleteWordChl.Invoke(outputWord.ToString());
                 }
