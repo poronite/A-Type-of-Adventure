@@ -6,7 +6,7 @@ public class PlayerStats : MonoBehaviour
     //Variables
     private string playerName;
 
-    private int playerMaxHP = 4, playerAttack = 1;
+    private int playerMaxHP = 4;
 
     private int playerCurrentHP;
 
@@ -78,7 +78,7 @@ public class PlayerStats : MonoBehaviour
     public void SetName(string name)
     {
         playerName = name;
-        ReplaceWithName.Invoke(name);
+        ReplaceWithName.Invoke(playerName);
     }
 
 

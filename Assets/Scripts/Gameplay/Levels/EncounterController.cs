@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class EncounterController : MonoBehaviour
 {
+    private Image spriteToDisplay;
+
     private CanvasGroup cutsceneLoadingScreen;
 
     private Image cutsceneBackground; 
@@ -32,7 +34,22 @@ public class EncounterController : MonoBehaviour
     {
         switch (encounter.EncounterType)
         {
-            case EncounterType.Gameplay:
+            case EncounterType.Image:
+                if (spriteToDisplay == null)
+                    spriteToDisplay = GameObject.FindGameObjectWithTag("ImageToDisplay").GetComponent<Image>();
+
+                if (encounter.DisplayImage)
+                {
+                    spriteToDisplay.sprite = encounter.ImageToDisplay;
+
+                    spriteToDisplay.enabled = true;
+                }
+                else
+                {
+                    spriteToDisplay.enabled = false;
+
+                    spriteToDisplay.sprite = null;
+                }
                 break;
             case EncounterType.Cutscene:
 

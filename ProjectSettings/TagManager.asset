@@ -26,6 +26,7 @@ TagManager:
   - ParalaxLayer
   - ChallengeGfxUI
   - EnemyIcon
+  - ImageToDisplay
   layers:
   - Default
   - TransparentFX

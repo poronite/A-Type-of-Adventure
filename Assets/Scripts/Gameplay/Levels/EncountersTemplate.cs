@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
 //encounters that are triggered when the player types a certain word
-//there are several types of encounters:
-//Gameplay encounter: trigger a function that affects the player gameplay like restoring the player's hp
+//there are 2 types of encounters:
+//Image encounter: show an image on screen
 //Cutscene encounter: display a cutscene
 
 
 public enum EncounterType
 {
-    Gameplay,
+    Image,
     Cutscene
 }
 
@@ -20,8 +20,11 @@ public class EncountersTemplate : ScriptableObject
 
     public FieldType FieldType;
 
-    //gameplay
-    //insert here gameplay stuff
+    //image
+    //image to display
+    public bool DisplayImage;
+
+    public Sprite ImageToDisplay;
 
     //cutscene
     //to signal when to end the cutscene and return to adventure
