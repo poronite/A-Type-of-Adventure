@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Video;
 
 //encounters that are triggered when the player types a certain word
 //there are 2 types of encounters:
@@ -18,8 +19,6 @@ public class EncountersTemplate : ScriptableObject
     //both
     public EncounterType EncounterType;
 
-    public FieldType FieldType;
-
     //image
     //image to display
     public bool DisplayImage;
@@ -27,15 +26,12 @@ public class EncountersTemplate : ScriptableObject
     public Sprite ImageToDisplay;
 
     //cutscene
+    //video to play
+    public VideoClip cutsceneVideo;
+
+    //loop version to play after previous video
+    public VideoClip cutsceneVideoLoop;
+
     //to signal when to end the cutscene and return to adventure
     public bool EndOfCutscene;
-
-    //duration of the transition between stripes
-    public float TransitionDuration;
-
-    //is this encounter a new cutscene or a continuation from a previous cutscene
-    public bool NewCutscene;
-
-    //if cutscene is new, instantiate new cutscene
-    public GameObject CutscenePrefab;
 }

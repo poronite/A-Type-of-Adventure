@@ -27,6 +27,7 @@ TagManager:
   - ChallengeGfxUI
   - EnemyIcon
   - ImageToDisplay
+  - CutsceneManager
   layers:
   - Default
   - TransparentFX

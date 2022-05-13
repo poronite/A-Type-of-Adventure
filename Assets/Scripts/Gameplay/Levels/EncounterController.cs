@@ -2,25 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class EncounterController : MonoBehaviour
 {
     private Image spriteToDisplay;
-
-    private CanvasGroup cutsceneLoadingScreen;
-
-    private Image cutsceneBackground; 
-    private Transform cutsceneParent;
-    private Transform currentCutscene;
-    private FieldType cutsceneFieldType;
-
-    private RectTransform[] comicStripes;
-
-    private int currentStripe;
-    private Vector3 previousStripePosition;
-    private float transitionDuration;
-
-    private AudioController audioController;
 
     [SerializeField]
     private Sprite forestBackground;
@@ -28,6 +14,26 @@ public class EncounterController : MonoBehaviour
     private Sprite magicForestBackground;
     [SerializeField]
     private Sprite castleBackground;
+
+    delegate IEnumerator PlayVideoDelegate(VideoClip video, VideoClip videoloop);
+    PlayVideoDelegate PlayVideo;
+
+    delegate IEnumerator StopVideoDelegate();
+    StopVideoDelegate StopVideo;
+
+    delegate void AudioDelegate(AudioName name);
+    AudioDelegate TriggerSFX;
+
+
+    public void SetDelegatesEncounters()
+    {
+        CutsceneManager cutsceneManager = GameObject.FindGameObjectWithTag("CutsceneManager").GetComponent<CutsceneManager>();
+        PlayVideo = cutsceneManager.PlayVideo;
+        StopVideo = cutsceneManager.StopVideo;
+
+        AudioController audioController = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>();
+        TriggerSFX = audioController.TriggerSFX;
+    }
 
 
     public void EncounterTriggered(EncountersTemplate encounter)
@@ -53,162 +59,21 @@ public class EncounterController : MonoBehaviour
                 break;
             case EncounterType.Cutscene:
 
+                TriggerSFX.Invoke(AudioName.CutsceneChange);
+
                 if (encounter.EndOfCutscene)
                 {
-                    EndCutscene();
+                    StartCoroutine(StopVideo.Invoke());
                     break;
                 }
-                transitionDuration = encounter.TransitionDuration;
-
-                if (encounter.NewCutscene)
+                else
                 {
-                    cutsceneParent = GameObject.FindGameObjectWithTag("Cutscenes").transform;
-
-                    currentCutscene = Instantiate(encounter.CutscenePrefab, cutsceneParent, false).transform;
-
-                    cutsceneFieldType = encounter.FieldType;
-
-                    SetCutscene();
+                    StartCoroutine(PlayVideo.Invoke(encounter.cutsceneVideo, encounter.cutsceneVideoLoop));
                 }
 
-                ChangeStripe();
                 break;
             default:
                 break;
-        }
-    }
-
-
-    private void SetCutscene()
-    {
-        if (cutsceneLoadingScreen == null)
-            cutsceneLoadingScreen = GameObject.FindGameObjectWithTag("CutsceneLoadingScreen").GetComponent<CanvasGroup>();
-
-        if (cutsceneBackground == null)
-            cutsceneBackground = GameObject.FindGameObjectWithTag("CutsceneBackground").GetComponent<Image>();
-
-        StartCoroutine(FadeCutsceneLoadingScreen(1f, 1));
-
-        switch (cutsceneFieldType)
-        {
-            case FieldType.Plains:
-                cutsceneBackground.sprite = forestBackground;
-                break;
-            case FieldType.Castle:
-                cutsceneBackground.sprite = castleBackground;
-                break;
-            case FieldType.MagicForest:
-                cutsceneBackground.sprite = magicForestBackground;
-                break;
-            default:
-                break;
-        }
-
-        currentStripe = -1;
-
-        comicStripes = new RectTransform[currentCutscene.childCount];
-
-        for (int i = 0; i < currentCutscene.childCount; i++)
-        {
-            comicStripes[i] = currentCutscene.GetChild(i).GetComponent<RectTransform>();
-        }
-
-        cutsceneBackground.enabled = true;
-
-        StartCoroutine(FadeCutsceneLoadingScreen(1f, 0));
-    }
-
-
-    private void EndCutscene()
-    {
-        StartCoroutine(FadeCutsceneLoadingScreen(1f, 1));
-
-        Destroy(currentCutscene.gameObject);
-        cutsceneBackground.enabled = false;
-        
-
-        StartCoroutine(FadeCutsceneLoadingScreen(1f, 0));
-    }
-
-
-    IEnumerator FadeCutsceneLoadingScreen(float duration, float finalAlpha)
-    {
-        float time = 0f;
-
-        while (time < duration)
-        {
-            cutsceneLoadingScreen.alpha = Mathf.Lerp(cutsceneLoadingScreen.alpha, finalAlpha, time/duration);
-            time += Time.deltaTime;
-            yield return null;
-        }
-
-        cutsceneLoadingScreen.alpha = finalAlpha;
-    }
-
-
-    private void ChangeStripe()
-    {
-        currentStripe += 1;
-
-        if (audioController == null)
-            audioController = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>();
-
-        audioController.TriggerSFX(AudioName.CutsceneChange);
-
-        StartCoroutine(MoveStripe(previousStripePosition));
-
-        previousStripePosition = comicStripes[currentStripe].transform.position;
-    }
-
-
-    IEnumerator MoveStripe(Vector3 previousStripeNewPosition)
-    {
-        Debug.Log(currentStripe);
-
-        float time = 0f;
-
-        Vector3 middleofScreen = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-
-        while (time < transitionDuration)
-        {
-            if (currentStripe == 0)
-            {
-                comicStripes[currentStripe].position = Vector3.Lerp(comicStripes[currentStripe].position, middleofScreen, (time / transitionDuration));
-            }
-
-            if (currentStripe > 0 && currentStripe < comicStripes.Length)
-            {
-                comicStripes[currentStripe - 1].position = Vector3.Lerp(comicStripes[currentStripe - 1].position, -previousStripeNewPosition, (time / transitionDuration));
-
-                comicStripes[currentStripe].position = Vector3.Lerp(comicStripes[currentStripe].position, middleofScreen, (time / transitionDuration));
-            }
-
-            if (currentStripe == comicStripes.Length)
-            {
-                comicStripes[currentStripe - 1].position = Vector3.Lerp(comicStripes[currentStripe - 1].position, -previousStripeNewPosition, (time / transitionDuration));
-            }
-
-            time += Time.deltaTime;
-
-            yield return null;
-        }
-
-        if (currentStripe == 0)
-        {
-            comicStripes[currentStripe].position = middleofScreen;
-        }
-
-        if (currentStripe > 0 && currentStripe < comicStripes.Length - 1)
-        {
-            comicStripes[currentStripe - 1].position = -previousStripeNewPosition;
-
-            comicStripes[currentStripe].position = middleofScreen;
-
-        }
-
-        if (currentStripe == comicStripes.Length - 1)
-        {
-            comicStripes[currentStripe - 1].position = -previousStripeNewPosition;
         }
     }
 }
