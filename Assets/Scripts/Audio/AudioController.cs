@@ -70,7 +70,7 @@ public class AudioController : MonoBehaviour
         completeWord_instance = RuntimeManager.CreateInstance(completeWord_eventReference);
         mistake_instance = RuntimeManager.CreateInstance(mistake_eventReference);
         cutsceneChange_instance = RuntimeManager.CreateInstance(cutsceneChange_eventReference);
-        cutsceneChange_instance = RuntimeManager.CreateInstance(cutsceneEnd_eventReference);
+        cutsceneEnd_instance = RuntimeManager.CreateInstance(cutsceneEnd_eventReference);
 
         normalStateSnapshotInstance = RuntimeManager.CreateInstance(normalStateSnapshotReference);
         lowHealthStateSnapshotInstance = RuntimeManager.CreateInstance(lowHealthStateSnapshotReference);

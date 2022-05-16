@@ -6,7 +6,16 @@ using UnityEngine.Video;
 public class CutsceneManager : MonoBehaviour
 {
     [SerializeField]
+    private float fadeInDuration = 0.5f;
+
+    [SerializeField]
+    private float fadeOutDuration = 0.5f;
+
+    [SerializeField]
     private VideoPlayer cutsceneVideoPlayer;
+
+    [SerializeField]
+    private VideoPlayer cutsceneVideoPlayerLoop;
 
     [SerializeField]
     private CanvasGroup cutsceneLoadingScreen;
@@ -27,16 +36,24 @@ public class CutsceneManager : MonoBehaviour
     //play cutscene
     public IEnumerator PlayVideo(VideoClip videoClip, VideoClip videoClipLoop)
     {
-        yield return StartCoroutine(FadeCutsceneLoadingScreen(1f, 1));
+        yield return StartCoroutine(FadeCutsceneLoadingScreen(fadeInDuration, 1));
 
         cutsceneVideo = videoClip;
-        cutsceneVideoLoop = videoClipLoop;
-
         cutsceneVideoPlayer.clip = cutsceneVideo;
+        cutsceneVideoPlayer.Prepare();
+
+        cutsceneVideoLoop = videoClipLoop;
+        cutsceneVideoPlayerLoop.clip = cutsceneVideoLoop;
+        cutsceneVideoPlayerLoop.Prepare();
+
+        while (!cutsceneVideoPlayer.isPrepared && !cutsceneVideoPlayerLoop.isPrepared)
+        {
+            yield return null;
+        }
 
         cutsceneVideoPlayer.Play();
 
-        yield return StartCoroutine(FadeCutsceneLoadingScreen(1f, 0));
+        yield return StartCoroutine(FadeCutsceneLoadingScreen(fadeOutDuration, 0));
     }
 
 
@@ -47,31 +64,27 @@ public class CutsceneManager : MonoBehaviour
         {
             Debug.Log("Looping video");
 
-            StartCoroutine(LoopVideoCoroutine());
+            LoopVideo();
         }
     }
 
-    private IEnumerator LoopVideoCoroutine()
+    private void LoopVideo()
     {
-        yield return StartCoroutine(FadeCutsceneLoadingScreen(0.3f, 1));
-
-        cutsceneVideoPlayer.clip = cutsceneVideoLoop;
-
-        cutsceneVideoPlayer.Play();
-
-        yield return StartCoroutine(FadeCutsceneLoadingScreen(0.3f, 0));
+        cutsceneVideoPlayerLoop.Play();
     }
 
 
     public IEnumerator StopVideo()
     {
-        yield return StartCoroutine(FadeCutsceneLoadingScreen(1f, 1));
+        yield return StartCoroutine(FadeCutsceneLoadingScreen(fadeInDuration, 1));
 
         cutsceneVideoPlayer.Stop();
+        cutsceneVideoPlayerLoop.Stop();
 
         cutsceneVideoPlayer.clip = null;
+        cutsceneVideoPlayerLoop.clip = null;
 
-        yield return StartCoroutine(FadeCutsceneLoadingScreen(1f, 0));
+        yield return StartCoroutine(FadeCutsceneLoadingScreen(fadeOutDuration, 0));
     }
 
     IEnumerator FadeCutsceneLoadingScreen(float duration, float finalAlpha)
