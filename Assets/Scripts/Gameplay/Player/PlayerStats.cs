@@ -35,6 +35,9 @@ public class PlayerStats : MonoBehaviour
     delegate void PlayerHPBarFill(string id, float fillAmount);
     PlayerHPBarFill UpdatePlayerHPBarFill;
 
+    delegate void SnapshotDelegate(SnapshotName snapshotName);
+    SnapshotDelegate ChangeSnapshot;
+
 
 
     private void Start()
@@ -54,6 +57,8 @@ public class PlayerStats : MonoBehaviour
         //UpdateMistakesUI = UIUpdater.SetMistakesUI;
 
         UpdatePlayerHPBarFill = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateHealthBarFillUI;
+
+        ChangeSnapshot = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>().ChangeSnapshot;
     }
 
 
@@ -89,6 +94,7 @@ public class PlayerStats : MonoBehaviour
             if (!isPlayerDodging)
             {
                 playerCurrentHP -= damage;
+
                 if (playerCurrentHP <= 0)
                 {
                     PlayerDies();
@@ -97,6 +103,15 @@ public class PlayerStats : MonoBehaviour
                 {
                     Debug.Log($"Player took {damage} damage | {playerCurrentHP} HP left | {playerMaxHP} Max HP.");
                     UpdateHPBar();
+
+                    if (playerCurrentHP == 1)
+                    {
+                        ChangeSnapshot.Invoke(SnapshotName.LowHealth);
+                    }
+                    else
+                    {
+                        ChangeSnapshot.Invoke(SnapshotName.Normal);
+                    }
                 }
             }
             else

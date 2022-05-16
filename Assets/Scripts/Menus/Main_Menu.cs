@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using FMOD.Studio;
+using FMODUnity;
 using ATOA;
 
 public class Main_Menu : MonoBehaviour
@@ -28,9 +30,21 @@ public class Main_Menu : MonoBehaviour
     private GameObject lastSelectedUIMainMenu;
 
 
+    //snapshot
+    [SerializeField]
+    private EventReference normalStateSnapshotReference;
+
+    private EventInstance normalStateSnapshotInstance;
+
+
+
     private void Start()
     {
         lastSelectedUIMainMenu = playButton.gameObject;
+
+        normalStateSnapshotInstance = RuntimeManager.CreateInstance(normalStateSnapshotReference);
+
+        normalStateSnapshotInstance.start();
     }
 
     public void Play()
@@ -60,6 +74,14 @@ public class Main_Menu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+
+    private void OnDestroy()
+    {
+        normalStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
+        normalStateSnapshotInstance.release();
     }
 
 

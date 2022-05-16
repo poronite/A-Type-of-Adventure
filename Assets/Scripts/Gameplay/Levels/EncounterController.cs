@@ -59,15 +59,19 @@ public class EncounterController : MonoBehaviour
                 break;
             case EncounterType.Cutscene:
 
-                TriggerSFX.Invoke(AudioName.CutsceneChange);
+                
 
                 if (encounter.EndOfCutscene)
                 {
+                    TriggerSFX.Invoke(AudioName.CutsceneEnd);
+
                     StartCoroutine(StopVideo.Invoke());
                     break;
                 }
                 else
                 {
+                    TriggerSFX.Invoke(AudioName.CutsceneChange);
+
                     StartCoroutine(PlayVideo.Invoke(encounter.cutsceneVideo, encounter.cutsceneVideoLoop));
                 }
 

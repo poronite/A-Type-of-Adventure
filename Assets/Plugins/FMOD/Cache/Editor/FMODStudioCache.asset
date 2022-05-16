@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3765441767079699382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/NormalState
+  m_EditorClassIdentifier: 
+  Path: snapshot:/NormalState
+  Guid:
+    Data1: -789093229
+    Data2: 1134318354
+    Data3: 1953665446
+    Data4: 606007803
+  Banks:
+  - {fileID: 3024559311083072851}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-2826507814393982478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Combat/Roll
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Combat/Roll
+  Guid:
+    Data1: -164683791
+    Data2: 1214052421
+    Data3: 1173104562
+    Data4: -1408276334
+  Banks:
+  - {fileID: 3024559311083072851}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1859402901081445360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18,6 +72,33 @@ MonoBehaviour:
     Data2: 1261278126
     Data3: -1173892171
     Data4: 953190481
+  Banks:
+  - {fileID: 3024559311083072851}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1134443622030999321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/Gameplay/Cutscene End
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/Gameplay/Cutscene End
+  Guid:
+    Data1: 1535215860
+    Data2: 1095900179
+    Data3: 1889082499
+    Data4: -623391425
   Banks:
   - {fileID: 3024559311083072851}
   IsStream: 0
@@ -76,12 +157,18 @@ MonoBehaviour:
   - {fileID: -1859402901081445360}
   - {fileID: -543853196333455098}
   - {fileID: 321015067445133914}
+  - {fileID: 2654836226946607743}
+  - {fileID: 7394243472716659370}
+  - {fileID: -2826507814393982478}
+  - {fileID: -1134443622030999321}
+  - {fileID: -3765441767079699382}
+  - {fileID: 4969004078665755644}
   EditorParameters: []
   MasterBanks:
   - {fileID: 3024559311083072851}
   StringsBanks:
   - {fileID: 9099667204612770276}
-  cacheTime: 637876987625982592
+  cacheTime: 637883010046905095
   cacheVersion: 10
 --- !u!114 &168708697234499999
 MonoBehaviour:
@@ -164,6 +251,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &2654836226946607743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Combat/Crouch
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Combat/Crouch
+  Guid:
+    Data1: 536721457
+    Data2: 1308124301
+    Data3: 1788598172
+    Data4: -350941377
+  Banks:
+  - {fileID: 3024559311083072851}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &3024559311083072851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,10 +293,10 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637876987625952437
+  lastModified: 637883010046875117
   FileSizes:
   - Name: Desktop
-    Value: 15758304
+    Value: 15783008
   Exists: 1
 --- !u!114 &3104814620535279890
 MonoBehaviour:
@@ -211,6 +325,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &4969004078665755644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/LowHealthState
+  m_EditorClassIdentifier: 
+  Path: snapshot:/LowHealthState
+  Guid:
+    Data1: -1565529923
+    Data2: 1081976100
+    Data3: -1993189998
+    Data4: -1436704213
+  Banks:
+  - {fileID: 3024559311083072851}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &7394243472716659370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Combat/Dash
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Combat/Dash
+  Guid:
+    Data1: 1104648603
+    Data2: 1322000434
+    Data3: -1388652634
+    Data4: -338674438
+  Banks:
+  - {fileID: 3024559311083072851}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &9099667204612770276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,8 +394,8 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637876987625982592
+  lastModified: 637883010046905095
   FileSizes:
   - Name: Desktop
-    Value: 1130
+    Value: 1422
   Exists: 1

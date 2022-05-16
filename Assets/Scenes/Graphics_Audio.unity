@@ -725,6 +725,27 @@ MonoBehaviour:
       Data3: -358956412
       Data4: 331831480
     Path: event:/SFX/UI/Gameplay/Cutscene Change
+  cutsceneEnd_eventReference:
+    Guid:
+      Data1: 1535215860
+      Data2: 1095900179
+      Data3: 1889082499
+      Data4: -623391425
+    Path: event:/SFX/UI/Gameplay/Cutscene End
+  normalStateSnapshotReference:
+    Guid:
+      Data1: -789093229
+      Data2: 1134318354
+      Data3: 1953665446
+      Data4: 606007803
+    Path: snapshot:/NormalState
+  lowHealthStateSnapshotReference:
+    Guid:
+      Data1: -1565529923
+      Data2: 1081976100
+      Data3: -1993189998
+      Data4: -1436704213
+    Path: snapshot:/LowHealthState
 --- !u!1 &182019168
 GameObject:
   m_ObjectHideFlags: 0

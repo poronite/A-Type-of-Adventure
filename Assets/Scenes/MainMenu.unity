@@ -4343,6 +4343,13 @@ MonoBehaviour:
   fadeIn: {fileID: 1683232221}
   pointer: {fileID: 1822733375}
   input: {fileID: 972902047}
+  normalStateSnapshotReference:
+    Guid:
+      Data1: -789093229
+      Data2: 1134318354
+      Data3: 1953665446
+      Data4: 606007803
+    Path: snapshot:/NormalState
 --- !u!114 &1928524969
 MonoBehaviour:
   m_ObjectHideFlags: 0
