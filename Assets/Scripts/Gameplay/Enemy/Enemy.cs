@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
     delegate void EnemyAttackWordFill(float fillAmount);
     EnemyAttackWordFill UpdateEnemyAttackWordFill;
 
+    private Animator enemyAnimator;
+
     
 
     //functions
@@ -39,10 +41,12 @@ public class Enemy : MonoBehaviour
     {
         DealDamage += GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().TakeDamage;
         UpdateEnemyAttackWordFill += GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateEnemyAttackWordFillUI;
+
+        enemyAnimator = GameObject.Find("EnemyAnimation").GetComponent<Animator>();
     }
 
 
-    private void Attack()
+    public void Attack()
     {
         if (!IsEnemyDead())
         {
@@ -54,7 +58,7 @@ public class Enemy : MonoBehaviour
     {
         if (timeSinceLastAttack >= stats.AttackSpeed)
         {
-            Attack();
+            enemyAnimator.SetTrigger("Attack");
             timeSinceLastAttack = 0;
         }
     }

@@ -12,8 +12,6 @@ public class EnemyStats : MonoBehaviour
 
     private int enemyCurrentHP;
 
-    public int attack = 1;
-
     public float AttackSpeed; //duration that the enemy takes to attack
 
     private bool isBoss;

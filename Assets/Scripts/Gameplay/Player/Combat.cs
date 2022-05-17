@@ -78,6 +78,8 @@ public class Combat : MonoBehaviour
     delegate void ChangeLevelDelegate(LevelTemplate level);
     ChangeLevelDelegate GoToNextLevel;
 
+    private Animator playerAnimator;
+
 
 
     private void Start()
@@ -106,6 +108,8 @@ public class Combat : MonoBehaviour
         DefineWordColorCmb = CmbUIController.DefineWordColorUICmb;
         DisplayNewCurrentWordCmb = CmbUIController.DisplayNewCurrentWordUICmb;
         DisplayCurrentBossPhaseWordCmb = CmbUIController.DisplayCurrentBossPhaseWordUICmb;
+
+        playerAnimator = GameObject.Find("PlayerAnimation").GetComponent<Animator>();
     }
 
 
@@ -225,10 +229,11 @@ public class Combat : MonoBehaviour
                 switch (actionChosen)
                 {
                     case Actions.Attack:
-                        Attack();
+                        //Attack(); //trigger animation
+                        playerAnimator.SetTrigger("Attack");
                         break;
                     case Actions.Dodge:
-                        Dodge();
+                        Dodge(); //trigger animation
                         break;
                     default:
                         break;
@@ -262,7 +267,7 @@ public class Combat : MonoBehaviour
     }
 
 
-    private void Attack()
+    public void Attack()
     {
         //Debug.Log("Attacked");
         AttackEnemy.Invoke(1);

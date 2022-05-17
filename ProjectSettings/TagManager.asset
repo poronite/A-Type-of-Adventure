@@ -28,6 +28,7 @@ TagManager:
   - EnemyIcon
   - ImageToDisplay
   - CutsceneManager
+  - MCGfx
   layers:
   - Default
   - TransparentFX
