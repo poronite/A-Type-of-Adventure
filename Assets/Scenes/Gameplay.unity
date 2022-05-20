@@ -392,6 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865e426beceec2849b6681a8ef338c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsPlayerDodging: 0
 --- !u!114 &1764022995
 MonoBehaviour:
   m_ObjectHideFlags: 0

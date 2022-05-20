@@ -64,11 +64,11 @@ public class EnemyStats : MonoBehaviour
     }
 
 
-    public void TakeDamage(int damage)
+    public void TakeDamage()
     {
         if (!IsEnemyDead)
         {
-            enemyCurrentHP -= damage;
+            enemyCurrentHP -= 1;
 
             if (isBoss)
             {
@@ -87,7 +87,7 @@ public class EnemyStats : MonoBehaviour
             }
             else
             {
-                Debug.Log($"Enemy took {damage} damage | {enemyCurrentHP} HP left.");
+                Debug.Log($"Enemy took 1 damage | {enemyCurrentHP} HP left.");
                 UpdateHPBar();
             }
         }

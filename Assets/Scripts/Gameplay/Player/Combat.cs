@@ -49,7 +49,7 @@ public class Combat : MonoBehaviour
     WordDelegate SendNextWordCmb;
     WordDelegate DisplayCurrentBossPhaseWordCmb;
 
-    delegate void AttackDelegate(int damage);
+    delegate void AttackDelegate();
     AttackDelegate AttackEnemy;
 
     delegate void DodgeDelegate();
@@ -109,7 +109,7 @@ public class Combat : MonoBehaviour
         DisplayNewCurrentWordCmb = CmbUIController.DisplayNewCurrentWordUICmb;
         DisplayCurrentBossPhaseWordCmb = CmbUIController.DisplayCurrentBossPhaseWordUICmb;
 
-        playerAnimator = GameObject.Find("PlayerAnimation").GetComponent<Animator>();
+        playerAnimator = GameObject.Find("PlayerAttackAnimation").GetComponent<Animator>();
     }
 
 
@@ -270,7 +270,7 @@ public class Combat : MonoBehaviour
     public void Attack()
     {
         //Debug.Log("Attacked");
-        AttackEnemy.Invoke(1);
+        AttackEnemy.Invoke();
     }
 
 

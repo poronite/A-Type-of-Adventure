@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
 
 
     //delegates
-    delegate void DealDamageDelegate(int damage);
+    delegate void DealDamageDelegate();
     DealDamageDelegate DealDamage;
 
     delegate void EnemyAttackWordFill(float fillAmount);
@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
         DealDamage += GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().TakeDamage;
         UpdateEnemyAttackWordFill += GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateEnemyAttackWordFillUI;
 
-        enemyAnimator = GameObject.Find("EnemyAnimation").GetComponent<Animator>();
+        enemyAnimator = GameObject.Find("EnemyAttackAnimation").GetComponent<Animator>();
     }
 
 
@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
     {
         if (!IsEnemyDead())
         {
-            DealDamage.Invoke(1); //enemy only deals 1 damage now
+            DealDamage.Invoke(); //enemy only deals 1 damage now
         }
     }
     // ↑

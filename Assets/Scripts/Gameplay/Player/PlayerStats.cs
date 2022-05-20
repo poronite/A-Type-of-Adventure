@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
 
     private int playerCurrentHP;
 
-    private bool isPlayerDodging;
+    public bool IsPlayerDodging;
 
     private bool isPlayerDead;
 
@@ -87,37 +87,29 @@ public class PlayerStats : MonoBehaviour
     }
 
 
-    public void TakeDamage(int damage)
+    public void TakeDamage()
     {
         if (!isPlayerDead)
         {
-            if (!isPlayerDodging)
+            playerCurrentHP -= 1;
+
+            if (playerCurrentHP <= 0)
             {
-                playerCurrentHP -= damage;
-
-                if (playerCurrentHP <= 0)
-                {
-                    PlayerDies();
-                }
-                else
-                {
-                    Debug.Log($"Player took {damage} damage | {playerCurrentHP} HP left | {playerMaxHP} Max HP.");
-                    UpdateHPBar();
-
-                    if (playerCurrentHP == 1)
-                    {
-                        ChangeSnapshot.Invoke(SnapshotName.LowHealth);
-                    }
-                    else
-                    {
-                        ChangeSnapshot.Invoke(SnapshotName.Normal);
-                    }
-                }
+                PlayerDies();
             }
             else
             {
-                Debug.Log("Dodged the enemy attack.");
-                isPlayerDodging = false;
+                Debug.Log($"Player took 1 damage | {playerCurrentHP} HP left | {playerMaxHP} Max HP.");
+                UpdateHPBar();
+
+                if (playerCurrentHP == 1)
+                {
+                    ChangeSnapshot.Invoke(SnapshotName.LowHealth);
+                }
+                else
+                {
+                    ChangeSnapshot.Invoke(SnapshotName.Normal);
+                }
             }
         }
     }
@@ -135,7 +127,7 @@ public class PlayerStats : MonoBehaviour
 
     public void ActivateDodge()
     {
-        isPlayerDodging = true;
+        IsPlayerDodging = true;
     }
 
 

@@ -6,11 +6,17 @@ public class CombatAnimations : MonoBehaviour
 {
     private Combat player;
 
+    private PlayerStats playerStats;
+
     private Enemy enemy;
+
+    [SerializeField]
+    private Animator mcAnimator;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>();
+        playerStats = player.gameObject.GetComponent<PlayerStats>();
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
     }
 
@@ -22,7 +28,16 @@ public class CombatAnimations : MonoBehaviour
                 player.Attack();
                 break;
             case "Enemy":
-                enemy.Attack();
+                if (!playerStats.IsPlayerDodging)
+                {
+                    enemy.Attack();
+                    mcAnimator.SetTrigger("TakeDamage");
+                }
+                else
+                {
+                    playerStats.IsPlayerDodging = false;
+                    //trigger dodge animation
+                }
                 break;
             default:
                 break;

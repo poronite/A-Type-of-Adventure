@@ -3833,6 +3833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1128699906}
   - component: {fileID: 1128699907}
+  - component: {fileID: 1128699908}
   m_Layer: 0
   m_Name: MC
   m_TagString: MCGfx
@@ -3905,6 +3906,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1128699908
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128699905}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 518a6103cc39f31419d9abca41ed10cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1163559132
 GameObject:
   m_ObjectHideFlags: 0
@@ -4298,7 +4318,7 @@ GameObject:
   - component: {fileID: 1248151339}
   - component: {fileID: 1248151341}
   m_Layer: 0
-  m_Name: PlayerAnimation
+  m_Name: PlayerAttackAnimation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4399,6 +4419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ac8db9671ad114a90ecccce08949a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mcAnimator: {fileID: 1128699908}
 --- !u!1 &1263793836
 GameObject:
   m_ObjectHideFlags: 0
@@ -6040,7 +6061,7 @@ GameObject:
   - component: {fileID: 2006027614}
   - component: {fileID: 2006027616}
   m_Layer: 0
-  m_Name: EnemyAnimation
+  m_Name: EnemyAttackAnimation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6141,6 +6162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ac8db9671ad114a90ecccce08949a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mcAnimator: {fileID: 1128699908}
 --- !u!1 &2100869356
 GameObject:
   m_ObjectHideFlags: 0

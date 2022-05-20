@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CutsceneC2
   m_EditorClassIdentifier: 
   EncounterType: 1
-  FieldType: 2
+  DisplayImage: 0
+  ImageToDisplay: {fileID: 0}
+  cutsceneVideo: {fileID: 32900000, guid: 05290890772d1f942838f88f6a0cce7f, type: 3}
+  cutsceneVideoLoop: {fileID: 0}
   EndOfCutscene: 0
-  TransitionDuration: 3
-  NewCutscene: 0
-  CutscenePrefab: {fileID: 0}
