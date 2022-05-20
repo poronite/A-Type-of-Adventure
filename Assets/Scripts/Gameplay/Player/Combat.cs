@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using ATOA;
 
 //This script will be used to manage everything involving Combat: when fighting against an enemy.
@@ -80,6 +81,7 @@ public class Combat : MonoBehaviour
 
     private Animator playerAnimator;
 
+    private PostProcessVolume globalVolume;
 
 
     private void Start()
@@ -110,6 +112,8 @@ public class Combat : MonoBehaviour
         DisplayCurrentBossPhaseWordCmb = CmbUIController.DisplayCurrentBossPhaseWordUICmb;
 
         playerAnimator = GameObject.Find("PlayerAttackAnimation").GetComponent<Animator>();
+
+        globalVolume = FindObjectOfType<PostProcessVolume>();
     }
 
 
@@ -243,7 +247,7 @@ public class Combat : MonoBehaviour
                 DeactivateBossPhase();
                 break;
             case Phase.KillSparePhase:
-                WinCombat();
+                StartCoroutine(WinCombat());
                 break;
             default:
                 break;
@@ -303,9 +307,22 @@ public class Combat : MonoBehaviour
     }
 
 
-    public void WinCombat()
+    public IEnumerator WinCombat()
     {
         WinFight.Invoke();
+
+        //time 
+        //if vignette is inactive just wait 2 seconds
+        if (globalVolume.profile.TryGetSettings(out Vignette effect) && !effect.active)
+        {
+            yield return new WaitForSeconds(2f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(ATOA_Utilities.VignetteLerp(globalVolume, 2f, false, 0f));
+        }
+
 
         switch (currentPhase)
         {
@@ -332,5 +349,7 @@ public class Combat : MonoBehaviour
             default:
                 break;
         }
+
+        yield return null;
     }
 }

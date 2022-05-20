@@ -30,8 +30,10 @@ public class EnemyStats : MonoBehaviour
     delegate void BossPhase(string word);
     BossPhase ActivateBossPhase;
 
-    delegate void EndCombat();
-    EndCombat ActivateKillSpareChoice;
+    delegate void ActivateWords();
+    ActivateWords ActivateKillSpareChoice;
+
+    delegate IEnumerator EndCombat();
     EndCombat TriggerVictory;
 
 
@@ -102,7 +104,7 @@ public class EnemyStats : MonoBehaviour
 
         if (!isBoss) //player win
         {
-            TriggerVictory.Invoke();
+            StartCoroutine(TriggerVictory.Invoke());
             //Debug.Log("Enemy Died");
         }
         else //trigger kill/spare choice

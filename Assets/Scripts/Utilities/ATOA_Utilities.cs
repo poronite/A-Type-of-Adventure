@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace ATOA
 {
@@ -41,6 +42,38 @@ namespace ATOA
             newWordIndex = Random.Range(0, wordListClone.Count - 1);
 
             return wordListClone[newWordIndex];
+        }
+
+        public static IEnumerator VignetteLerp(PostProcessVolume volume, float duration, bool active, float finalIntensity)
+        {
+            if (volume.profile.TryGetSettings(out Vignette effect))
+            {
+                Debug.Log("vignette found");
+            }
+            
+            effect.intensity.overrideState = true;
+
+            float time = 0f;
+
+            //if vignette is to be activated activate here
+            if (active)
+                effect.enabled.value = true;
+
+            //change vignette intensity over time
+            while (time < duration)
+            {
+                effect.intensity.value = Mathf.Lerp(effect.intensity.value, finalIntensity, time / duration);
+
+                Debug.Log("Vignette Intensity: " + effect.intensity.value);
+
+                time += Time.deltaTime;
+
+                yield return null;
+            }
+
+            //if vignette is to be deactivated deactivate here
+            if (!active)
+                effect.enabled.value = false;
         }
     }
 }

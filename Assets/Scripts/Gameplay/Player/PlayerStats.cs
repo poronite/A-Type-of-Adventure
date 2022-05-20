@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.Rendering.PostProcessing;
+using ATOA;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class PlayerStats : MonoBehaviour
 
     ///<summary>Time elapsed since start of the game. (Adventure, Combat and Puzzle states only).</summary>
     private float timeElapsedSeconds;
+
+    private PostProcessVolume globalVolume;
 
 
     //Delegates
@@ -42,6 +45,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
+        
         RecoverFullHP();
     }
 
@@ -59,6 +63,10 @@ public class PlayerStats : MonoBehaviour
         UpdatePlayerHPBarFill = GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateHealthBarFillUI;
 
         ChangeSnapshot = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>().ChangeSnapshot;
+
+        globalVolume = FindObjectOfType<PostProcessVolume>();
+
+        Debug.Log(globalVolume.name);
     }
 
 
@@ -102,8 +110,26 @@ public class PlayerStats : MonoBehaviour
                 Debug.Log($"Player took 1 damage | {playerCurrentHP} HP left | {playerMaxHP} Max HP.");
                 UpdateHPBar();
 
+                switch (playerCurrentHP)
+                {
+                    case 4:
+                    case 3:
+                        ChangeSnapshot.Invoke(SnapshotName.Normal);
+                        break;
+                    case 2:
+                        StartCoroutine(ATOA_Utilities.VignetteLerp(globalVolume, 2f, true, 0.15f));
+                        break;
+                    case 1:
+                        StartCoroutine(ATOA_Utilities.VignetteLerp(globalVolume, 2f, true, 0.3f));
+                        ChangeSnapshot.Invoke(SnapshotName.LowHealth);
+                        break;
+                    default:
+                        break;
+                }
+
                 if (playerCurrentHP == 1)
                 {
+                    StartCoroutine(ATOA_Utilities.VignetteLerp(globalVolume, 2f, true, 0.3f));
                     ChangeSnapshot.Invoke(SnapshotName.LowHealth);
                 }
                 else
