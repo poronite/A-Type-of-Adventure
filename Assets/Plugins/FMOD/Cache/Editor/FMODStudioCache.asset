@@ -1,5 +1,133 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8060518622800215252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/AMB/River
+  m_EditorClassIdentifier: 
+  Path: event:/AMB/River
+  Guid:
+    Data1: -1093392915
+    Data2: 1288530570
+    Data3: -1178951034
+    Data4: 2113208560
+  Banks:
+  - {fileID: -5665928389814972670}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7493945633466290173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/AMB/Crickets
+  m_EditorClassIdentifier: 
+  Path: event:/AMB/Crickets
+  Guid:
+    Data1: 1340429037
+    Data2: 1082271500
+    Data3: -649341793
+    Data4: -1055962048
+  Banks:
+  - {fileID: -5665928389814972670}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7299356898222155560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/AMB/Birds
+  m_EditorClassIdentifier: 
+  Path: event:/AMB/Birds
+  Guid:
+    Data1: -1652429353
+    Data2: 1203945829
+    Data3: 1202145953
+    Data4: 1327102106
+  Banks:
+  - {fileID: -5665928389814972670}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5665928389814972670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio Projects/A Type of Adventure FMOD Studio Project/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637888430126326283
+  FileSizes:
+  - Name: Desktop
+    Value: 16578688
+  Exists: 1
+--- !u!114 &-5270406580327061982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/AMB/Bushes
+  m_EditorClassIdentifier: 
+  Path: event:/AMB/Bushes
+  Guid:
+    Data1: 2104781595
+    Data2: 1191411762
+    Data3: -212893285
+    Data4: 602149860
+  Banks:
+  - {fileID: -5665928389814972670}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-3765441767079699382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19,7 +147,7 @@ MonoBehaviour:
     Data3: 1953665446
     Data4: 606007803
   Banks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -46,7 +174,7 @@ MonoBehaviour:
     Data3: 1173104562
     Data4: -1408276334
   Banks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -73,7 +201,7 @@ MonoBehaviour:
     Data3: -1173892171
     Data4: 953190481
   Banks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -81,6 +209,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-1245031783719647047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio Projects/A Type of Adventure FMOD Studio Project/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637888430126356387
+  FileSizes:
+  - Name: Desktop
+    Value: 1632
+  Exists: 1
 --- !u!114 &-1134443622030999321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,7 +248,7 @@ MonoBehaviour:
     Data3: 1889082499
     Data4: -623391425
   Banks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -127,7 +275,7 @@ MonoBehaviour:
     Data3: 291422365
     Data4: 2072623643
   Banks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -148,8 +296,8 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 9099667204612770276}
-  - {fileID: 3024559311083072851}
+  - {fileID: -1245031783719647047}
+  - {fileID: -5665928389814972670}
   EditorEvents:
   - {fileID: 1223475959931507001}
   - {fileID: 3104814620535279890}
@@ -163,12 +311,17 @@ MonoBehaviour:
   - {fileID: -1134443622030999321}
   - {fileID: -3765441767079699382}
   - {fileID: 4969004078665755644}
+  - {fileID: -5270406580327061982}
+  - {fileID: 8374376634323932345}
+  - {fileID: -7299356898222155560}
+  - {fileID: -8060518622800215252}
+  - {fileID: -7493945633466290173}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   StringsBanks:
-  - {fileID: 9099667204612770276}
-  cacheTime: 637883040141855882
+  - {fileID: -1245031783719647047}
+  cacheTime: 637888430126356387
   cacheVersion: 10
 --- !u!114 &168708697234499999
 MonoBehaviour:
@@ -189,7 +342,7 @@ MonoBehaviour:
     Data3: 1544441219
     Data4: 210055324
   Banks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -216,7 +369,7 @@ MonoBehaviour:
     Data3: -358956412
     Data4: 331831480
   Banks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -243,7 +396,7 @@ MonoBehaviour:
     Data3: -235060079
     Data4: -1495828643
   Banks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -270,7 +423,7 @@ MonoBehaviour:
     Data3: 1788598172
     Data4: -350941377
   Banks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -278,26 +431,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &3024559311083072851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 637883040141835867
-  FileSizes:
-  - Name: Desktop
-    Value: 15783008
-  Exists: 1
 --- !u!114 &3104814620535279890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +450,7 @@ MonoBehaviour:
     Data3: -2043552065
     Data4: 1462083065
   Banks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -344,7 +477,7 @@ MonoBehaviour:
     Data3: -1993189998
     Data4: -1436704213
   Banks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -371,7 +504,7 @@ MonoBehaviour:
     Data3: -1388652634
     Data4: -338674438
   Banks:
-  - {fileID: 3024559311083072851}
+  - {fileID: -5665928389814972670}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -379,7 +512,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &9099667204612770276
+--- !u!114 &8374376634323932345
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -388,14 +521,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/AMB/Wind
   m_EditorClassIdentifier: 
-  Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637883040141855882
-  FileSizes:
-  - Name: Desktop
-    Value: 1422
-  Exists: 1
+  Path: event:/AMB/Wind
+  Guid:
+    Data1: -34728010
+    Data2: 1265869705
+    Data3: -198540636
+    Data4: 663551506
+  Banks:
+  - {fileID: -5665928389814972670}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
