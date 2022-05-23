@@ -23,6 +23,7 @@ public enum SnapshotName
 public class AudioController : MonoBehaviour
 {
     //Events
+    //SFX
     //Audio references
     [SerializeField] 
     private EventReference typewriterKey_eventReference;
@@ -39,7 +40,6 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     private EventReference cutsceneEnd_eventReference;
 
-
     //Audio event instances
     EventInstance typewriterKey_instance;
     EventInstance completeWord_instance;
@@ -47,6 +47,22 @@ public class AudioController : MonoBehaviour
     EventInstance cutsceneChange_instance;
     EventInstance cutsceneEnd_instance;
 
+
+    //AMB
+    //Audio references
+    [SerializeField]
+    private EventReference plains_eventReference;
+
+    [SerializeField]
+    private EventReference magicForest_eventReference;
+
+    [SerializeField]
+    private EventReference castle_eventReference;
+
+    //Audio event instances
+    EventInstance plains_instance;
+    EventInstance magicForest_instance;
+    EventInstance castle_instance;
 
 
     //Snapshots
@@ -71,6 +87,10 @@ public class AudioController : MonoBehaviour
         mistake_instance = RuntimeManager.CreateInstance(mistake_eventReference);
         cutsceneChange_instance = RuntimeManager.CreateInstance(cutsceneChange_eventReference);
         cutsceneEnd_instance = RuntimeManager.CreateInstance(cutsceneEnd_eventReference);
+
+        plains_instance = RuntimeManager.CreateInstance(plains_eventReference);
+        magicForest_instance = RuntimeManager.CreateInstance(magicForest_eventReference);
+        castle_instance = RuntimeManager.CreateInstance(castle_eventReference);
 
         normalStateSnapshotInstance = RuntimeManager.CreateInstance(normalStateSnapshotReference);
         lowHealthStateSnapshotInstance = RuntimeManager.CreateInstance(lowHealthStateSnapshotReference);
@@ -101,14 +121,39 @@ public class AudioController : MonoBehaviour
         }
     }
 
+    public void ChangeAMB(FieldType field)
+    {
+        plains_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        magicForest_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        castle_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+
+        switch (field)
+        {
+            case FieldType.Plains:
+                plains_instance.start();
+                break;
+            case FieldType.MagicForest:
+                magicForest_instance.start();
+                break;
+            case FieldType.Castle:
+                castle_instance.start();
+                break;
+            default:
+                break;
+        }
+    }
+
     public void ChangeSnapshot(SnapshotName snapshotName)
     {
         switch (snapshotName)
         {
             case SnapshotName.Normal:
+                lowHealthStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 normalStateSnapshotInstance.start();
                 break;
             case SnapshotName.LowHealth:
+                normalStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 lowHealthStateSnapshotInstance.start();
                 break;
             default:
@@ -128,6 +173,10 @@ public class AudioController : MonoBehaviour
         mistake_instance.release();
         cutsceneChange_instance.release();
         cutsceneEnd_instance.release();
+
+        plains_instance.release();
+        magicForest_instance.release();
+        castle_instance.release();
        
         normalStateSnapshotInstance.release();
         lowHealthStateSnapshotInstance.release();

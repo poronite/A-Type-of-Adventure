@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: 
   LevelType: 0
-  FieldType: 2
+  FieldType: 1
   TextToType: Upon defeating the slimes, MCName travels deeper into the forest in
     search of said citadel. Somehow, MCName gets lost inside the forest until two
     demi-human forest dwellers approach them. MCName gets scared at first but doesn't

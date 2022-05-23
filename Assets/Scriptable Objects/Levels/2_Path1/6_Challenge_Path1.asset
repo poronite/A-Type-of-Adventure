@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: 
   LevelType: 3
-  FieldType: 2
+  FieldType: 1
   TextToType: 
   NextLevelAfterAdventure: {fileID: 0}
   HasBranching: 0

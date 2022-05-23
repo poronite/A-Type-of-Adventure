@@ -732,6 +732,27 @@ MonoBehaviour:
       Data3: 1889082499
       Data4: -623391425
     Path: event:/SFX/UI/Gameplay/Cutscene End
+  plains_eventReference:
+    Guid:
+      Data1: 553753818
+      Data2: 1222735035
+      Data3: -1122227032
+      Data4: 1488411266
+    Path: event:/AMB/Plains
+  magicForest_eventReference:
+    Guid:
+      Data1: -1637956339
+      Data2: 1300405318
+      Data3: 1310873515
+      Data4: 1573967261
+    Path: event:/AMB/Magic Forest
+  castle_eventReference:
+    Guid:
+      Data1: -1830006630
+      Data2: 1127054686
+      Data3: 1036471177
+      Data4: -1603059309
+    Path: event:/AMB/Castle
   normalStateSnapshotReference:
     Guid:
       Data1: -789093229

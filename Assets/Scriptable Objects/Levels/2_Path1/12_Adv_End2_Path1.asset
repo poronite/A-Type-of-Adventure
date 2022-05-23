@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: 
   LevelType: 0
-  FieldType: 0
+  FieldType: 2
   TextToType: Gillah's reign of terror comes to an end and MCName is invited to become
     one of the knights. The End.
   NextLevelAfterAdventure: {fileID: 0}

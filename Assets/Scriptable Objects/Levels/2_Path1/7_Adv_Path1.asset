@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: 
   LevelType: 0
-  FieldType: 2
+  FieldType: 1
   TextToType: This inscription tells MCName that a golden flower will signal that
     they are nearing the end of the forest and that soon they will be able to see
     the citadel from afar. Not much time had passed since they left the inscripted

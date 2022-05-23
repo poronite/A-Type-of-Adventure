@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: 
   LevelType: 0
-  FieldType: 2
+  FieldType: 1
   TextToType: MCName continues walking on the same path to get to the destination.
     The path ends and MCName is met with a large boulder with a strange inscription.
   NextLevelAfterAdventure: {fileID: 11400000, guid: 22384ab25cafcb8489387716cdfbf6ed,

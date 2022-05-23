@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: 
   LevelType: 0
-  FieldType: 1
+  FieldType: 2
   TextToType: After the guard gets the right answer, the gates open and MCName walks
     in. Inside the citadel, a hooded figure approaches them. It's the messenger who
     told them to bring the orb to the order, she calls out for the other members

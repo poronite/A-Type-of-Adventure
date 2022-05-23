@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: 
   LevelType: 0
-  FieldType: 2
+  FieldType: 1
   TextToType: To get to the citadel it was required to traverse the Enchanted Forest.
     MCName walked a long way just to get to the forest but there is where the danger
     resides. This forest is home to a multitude of creatures, not all of them friendly.
