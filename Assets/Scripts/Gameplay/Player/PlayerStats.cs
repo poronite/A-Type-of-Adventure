@@ -24,6 +24,15 @@ public class PlayerStats : MonoBehaviour
     private PostProcessVolume globalVolume;
 
 
+    public int PlayerCurrentHP
+    {
+        get
+        {
+            return playerCurrentHP;
+        }
+    }
+
+
     //Delegates
     delegate void NoHP();
     NoHP GameOver;
@@ -45,7 +54,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
-        
         RecoverFullHP();
     }
 

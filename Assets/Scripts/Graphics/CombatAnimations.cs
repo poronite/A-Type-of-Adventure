@@ -32,11 +32,16 @@ public class CombatAnimations : MonoBehaviour
                 {
                     enemy.Attack();
                     mcAnimator.SetTrigger("TakeDamage");
+
+                    if (playerStats.PlayerCurrentHP == 0)
+                    {
+                        mcAnimator.SetBool("Death", true);
+                    }
                 }
                 else
                 {
                     playerStats.IsPlayerDodging = false;
-                    //trigger dodge animation
+                    mcAnimator.SetTrigger("Dodge");
                 }
                 break;
             default:
