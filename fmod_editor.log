@@ -7,13 +7,61 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.67ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001B6B5FD2D98 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001B6B5FCEEC8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] PlaybackSystem::init                     : done
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
+[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 3
+[LOG] SoundI::release                          :  (000001B6B665E0D8)
+[LOG] SoundI::release                          :     Typewriter_Key_SFX (000001B7017B5418)
+[LOG] SoundI::release                          :  (000001B694370628)
+[LOG] SoundI::release                          :     Complete_Word_SFX (000001B69C446948)
+[LOG] SoundI::release                          :  (000001B694370068)
+[LOG] SoundI::release                          :     Mistake_SFX (000001B69C4462C8)
+[LOG] SoundI::release                          :  (000001B694370348)
+[LOG] SoundI::release                          :     Cutscene_Change_SFX (000001B691EBBF28)
+[LOG] SoundI::release                          :  (000001B69436FC18)
+[LOG] SoundI::release                          :     Cutscene_End_SFX (000001B69C445DE8)
+[LOG] SoundI::release                          :  (000001B6B665DF68)
+[LOG] SoundI::release                          :     Bushes1_AMB (000001B7017B4F38)
+[LOG] SoundI::release                          :  (000001B6B665E248)
+[LOG] SoundI::release                          :     Bushes2_AMB (000001B7017B55B8)
+[LOG] SoundI::release                          :  (000001B6943701D8)
+[LOG] SoundI::release                          :     Bird_Chips1_AMB (000001B691EBBBE8)
+[LOG] SoundI::release                          :  (000001B694370798)
+[LOG] SoundI::release                          :     River_AMB (000001B69C446128)
+[LOG] SoundI::release                          :  (000001B69436FEF8)
+[LOG] SoundI::release                          :     Bird_Chips2_AMB (000001B691EBC0C8)
+[LOG] SoundI::release                          :  (000001B69436FD88)
+[LOG] SoundI::release                          :     Wind_AMB (000001B6B5F140D8)
+[LOG] SoundI::release                          :  (000001B6943704B8)
+[LOG] SoundI::release                          :     Crickets1_AMB (000001B69C446468)
+[LOG] SoundI::release                          :  (000001B694370908)
+[LOG] SoundI::release                          :     Crickets2_AMB (000001B691EBC268)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
+[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 3
+[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 3
+[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
 [LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
 [LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 3

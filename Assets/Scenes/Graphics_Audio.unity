@@ -741,10 +741,10 @@ MonoBehaviour:
     Path: event:/AMB/Plains
   magicForest_eventReference:
     Guid:
-      Data1: -1637956339
-      Data2: 1300405318
-      Data3: 1310873515
-      Data4: 1573967261
+      Data1: 1817668302
+      Data2: 1084455671
+      Data3: 915951026
+      Data4: 501619212
     Path: event:/AMB/Magic Forest
   castle_eventReference:
     Guid:
