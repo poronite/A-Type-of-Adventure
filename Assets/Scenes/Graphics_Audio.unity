@@ -4550,6 +4550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mcAnimator: {fileID: 1128699908}
+  enemyAnimator: {fileID: 1526835254}
 --- !u!1 &1263793836
 GameObject:
   m_ObjectHideFlags: 0
@@ -5371,6 +5372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1526835252}
   - component: {fileID: 1526835253}
+  - component: {fileID: 1526835254}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: EnemyGfx
@@ -5443,6 +5445,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1526835254
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526835251}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6afe17c8dbb8d5f46bc3b57f49d8fa3a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1531878045
 GameObject:
   m_ObjectHideFlags: 0
@@ -6293,6 +6314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mcAnimator: {fileID: 1128699908}
+  enemyAnimator: {fileID: 1526835254}
 --- !u!1 &2100869356
 GameObject:
   m_ObjectHideFlags: 0

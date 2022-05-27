@@ -13,6 +13,9 @@ public class CombatAnimations : MonoBehaviour
     [SerializeField]
     private Animator mcAnimator;
 
+    [SerializeField]
+    private Animator enemyAnimator;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>();
@@ -26,6 +29,7 @@ public class CombatAnimations : MonoBehaviour
         {
             case "MC":
                 player.Attack();
+                enemyAnimator.SetTrigger("TakeDamage");
                 break;
             case "Enemy":
                 if (!playerStats.IsPlayerDodging)

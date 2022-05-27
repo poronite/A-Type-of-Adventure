@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Script that manages enemy stats.
 //When battle starts it gets the enemy's stats from the enemy scriptable object
@@ -54,6 +55,7 @@ public class EnemyStats : MonoBehaviour
         isBoss = enemyData.IsBoss;
 
         GameObject.FindGameObjectWithTag("EnemyGfx").GetComponent<SpriteRenderer>().sprite = enemyData.Sprite;
+        GameObject.FindGameObjectWithTag("EnemyIcon").GetComponent<Image>().sprite = enemyData.Icon;
 
         if (isBoss)
             AttackSpeed = 3f;
