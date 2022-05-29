@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Slime
   Sprite: {fileID: 21300000, guid: 41e6915e43fa10f4e8975cca9a1a65a6, type: 3}
-  Icon: {fileID: 21300000, guid: 904cb8cac51fec04a89ef09b0ce6a487, type: 3}
+  Icon: {fileID: 21300000, guid: 837213ba595e33a4583aefbcbbd307ce, type: 3}
   IsBoss: 0
