@@ -45,7 +45,7 @@ public class CombatAnimations : MonoBehaviour
                 else
                 {
                     playerStats.IsPlayerDodging = false;
-                    mcAnimator.SetTrigger("Dodge");
+                    mcAnimator.SetTrigger(player.LastDodgeWord);
                 }
                 break;
             default:

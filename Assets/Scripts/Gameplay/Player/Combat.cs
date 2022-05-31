@@ -33,6 +33,8 @@ public class Combat : MonoBehaviour
 
     private List<string> dodgeWordsList = new List<string> { "Roll", "Dash", "Crouch", "Jump"};
     private string dodgeWordText = string.Empty;
+    [HideInInspector]
+    public string LastDodgeWord = string.Empty;
 
     //normal enemy
     private LevelTemplate nextLevel; //next level after player wins the combat
@@ -233,10 +235,11 @@ public class Combat : MonoBehaviour
                 switch (actionChosen)
                 {
                     case Actions.Attack:
-                        //Attack(); //trigger animation
-                        playerAnimator.SetTrigger("Attack");
+                        //trigger animation
+                        playerAnimator.SetTrigger(word);
                         break;
                     case Actions.Dodge:
+                        LastDodgeWord = word;
                         Dodge(); //trigger animation
                         break;
                     default:
