@@ -39,7 +39,7 @@ namespace ATOA
                 wordListClone.Remove(lastGeneratedWord);
 
             //select new word to generate
-            newWordIndex = Random.Range(0, wordListClone.Count - 1);
+            newWordIndex = Random.Range(0, wordListClone.Count);
 
             return wordListClone[newWordIndex];
         }

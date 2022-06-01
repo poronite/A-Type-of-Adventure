@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
         DealDamage += GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().TakeDamage;
         UpdateEnemyAttackWordFill += GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateEnemyAttackWordFillUI;
 
-        enemyAnimator = GameObject.Find("EnemyAttackAnimation").GetComponent<Animator>();
+        enemyAnimator = GameObject.Find("Enemy_Combat").GetComponent<Animator>();
     }
 
 

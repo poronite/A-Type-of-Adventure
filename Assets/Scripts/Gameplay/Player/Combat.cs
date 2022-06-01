@@ -31,7 +31,7 @@ public class Combat : MonoBehaviour
     private List<string> attackWordsList = new List<string> { "Punch", "Kick", "Tackle", "Slash"};
     private string attackWordText = string.Empty;
 
-    private List<string> dodgeWordsList = new List<string> { "Roll", "Dash", "Crouch", "Jump"};
+    private List<string> dodgeWordsList = new List<string> { "Roll", "Dash", "Crouch", "Block"};
     private string dodgeWordText = string.Empty;
     [HideInInspector]
     public string LastDodgeWord = string.Empty;
@@ -113,7 +113,7 @@ public class Combat : MonoBehaviour
         DisplayNewCurrentWordCmb = CmbUIController.DisplayNewCurrentWordUICmb;
         DisplayCurrentBossPhaseWordCmb = CmbUIController.DisplayCurrentBossPhaseWordUICmb;
 
-        playerAnimator = GameObject.Find("PlayerAttackAnimation").GetComponent<Animator>();
+        playerAnimator = GameObject.Find("MC_Combat").GetComponent<Animator>();
 
         globalVolume = FindObjectOfType<PostProcessVolume>();
     }

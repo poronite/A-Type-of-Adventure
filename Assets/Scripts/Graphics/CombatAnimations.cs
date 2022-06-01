@@ -28,8 +28,8 @@ public class CombatAnimations : MonoBehaviour
         switch (attacker)
         {
             case "MC":
-                player.Attack();
                 enemyAnimator.SetTrigger("TakeDamage");
+                player.Attack();
                 break;
             case "Enemy":
                 if (!playerStats.IsPlayerDodging)
