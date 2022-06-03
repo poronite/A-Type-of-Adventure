@@ -49,9 +49,7 @@ namespace ATOA
             if (volume.profile.TryGetSettings(out Vignette effect))
             {
                 Debug.Log("vignette found");
-            }
-            
-            effect.intensity.overrideState = true;
+            }           
 
             float time = 0f;
 

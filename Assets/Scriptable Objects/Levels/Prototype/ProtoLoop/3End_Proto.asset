@@ -16,7 +16,7 @@ MonoBehaviour:
   LevelType: 0
   FieldType: 0
   TextToType: After defeating the thief, the hero continued his journey.
-  NextLevelAfterAdventure: {fileID: 11400000, guid: ff24a7e71d6f8fd43bcf3232e2b07404,
+  NextLevelAfterAdventure: {fileID: 11400000, guid: fb62368ca68e020448315e0c6a2c73f0,
     type: 2}
   HasBranching: 0
   PossibleChoices: []
@@ -31,6 +31,11 @@ MonoBehaviour:
   CorrectWord: 
   QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}
+  StartingEnergy: 0
   EnergyLostPerSecond: 0
   EnergyGainedPerWord: 0
-  StartingEnergy: 0
+  ChallengeBoard: {fileID: 0}
+  ChallengeBoardFill: {fileID: 0}
+  WordListSize: 0
+  WordList: []
+  NextLevelAfterChallenge: {fileID: 0}

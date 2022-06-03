@@ -10,32 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
-  m_Name: Boss_Level_Test
+  m_Name: 2OtherLevel
   m_EditorClassIdentifier: 
-  LevelName: Boss Battle Test
-  LevelType: 1
+  LevelName: 
+  LevelType: 0
   FieldType: 0
-  TextToType: 
-  NextLevelAfterAdventure: {fileID: 0}
+  TextToType: Another fight coming again.
+  NextLevelAfterAdventure: {fileID: 11400000, guid: 76aed3ab5db91514dbfacf34c87cd1c6,
+    type: 2}
   HasBranching: 0
   PossibleChoices: []
   PossibleOutcomes: []
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []
-  Enemy: {fileID: 11400000, guid: 3d7694be6b4a683449d6c83d55962bc4, type: 2}
-  NextLevelAfterCombat: {fileID: 11400000, guid: fb62368ca68e020448315e0c6a2c73f0,
-    type: 2}
-  NextLevelAfterKillingBoss: {fileID: 11400000, guid: fb62368ca68e020448315e0c6a2c73f0,
-    type: 2}
-  NextLevelAfterSparingBoss: {fileID: 11400000, guid: 81d45d6c7264e7747ba96a2baa2bca5c,
-    type: 2}
+  Enemy: {fileID: 0}
+  NextLevelAfterCombat: {fileID: 0}
+  NextLevelAfterKillingBoss: {fileID: 0}
+  NextLevelAfterSparingBoss: {fileID: 0}
   CorrectWord: 
   QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}
   StartingEnergy: 0
   EnergyLostPerSecond: 0
   EnergyGainedPerWord: 0
+  ChallengeBoard: {fileID: 0}
+  ChallengeBoardFill: {fileID: 0}
   WordListSize: 0
   WordList: []
   NextLevelAfterChallenge: {fileID: 0}

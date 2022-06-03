@@ -10,41 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
-  m_Name: ChallengeTest
+  m_Name: 1Combat
   m_EditorClassIdentifier: 
-  LevelName: Challenge Test
-  LevelType: 3
+  LevelName: 
+  LevelType: 1
   FieldType: 0
   TextToType: 
   NextLevelAfterAdventure: {fileID: 0}
   HasBranching: 0
-  PossibleChoices:
-  - 
-  - 
-  PossibleOutcomes:
-  - {fileID: 0}
-  - {fileID: 0}
+  PossibleChoices: []
+  PossibleOutcomes: []
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []
-  Enemy: {fileID: 0}
-  NextLevelAfterCombat: {fileID: 0}
+  Enemy: {fileID: 11400000, guid: c28dba7546acdd141bf9a62c43d26b71, type: 2}
+  NextLevelAfterCombat: {fileID: 11400000, guid: 92044ae8db927ee4395cafa0bf810c12,
+    type: 2}
   NextLevelAfterKillingBoss: {fileID: 0}
   NextLevelAfterSparingBoss: {fileID: 0}
   CorrectWord: 
   QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}
-  StartingEnergy: 50
-  EnergyLostPerSecond: 2
-  EnergyGainedPerWord: 10
+  StartingEnergy: 0
+  EnergyLostPerSecond: 0
+  EnergyGainedPerWord: 0
   ChallengeBoard: {fileID: 0}
   ChallengeBoardFill: {fileID: 0}
-  WordListSize: 5
-  WordList:
-  - yikes
-  - nigga
-  - oof
-  - bernardo
-  - bruh
-  NextLevelAfterChallenge: {fileID: 11400000, guid: 6e9cad772d7a7bb4b9d8f19d62c84b8c,
-    type: 2}
+  WordListSize: 0
+  WordList: []
+  NextLevelAfterChallenge: {fileID: 0}

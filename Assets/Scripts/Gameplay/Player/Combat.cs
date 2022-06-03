@@ -55,9 +55,6 @@ public class Combat : MonoBehaviour
     delegate void AttackDelegate();
     AttackDelegate AttackEnemy;
 
-    delegate void DodgeDelegate();
-    DodgeDelegate ActivateDodge;
-
     delegate void CombatEndDelegate();
     CombatEndDelegate WinFight;
 
@@ -95,7 +92,6 @@ public class Combat : MonoBehaviour
     public void SetDelegatesCmb()
     {
         AttackEnemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().TakeDamage;
-        ActivateDodge = gameObject.GetComponent<PlayerStats>().ActivateDodge;
         GoToNextLevel = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().ChangeLevel;
 
         Typing typingController = gameObject.GetComponent<Typing>();
@@ -121,7 +117,6 @@ public class Combat : MonoBehaviour
 
     public void StartCombat(LevelTemplate currentLevel) //Start of a new game (Combat)
     {
-        stats.RecoverFullHP();
         EnemyTemplate enemy = currentLevel.Enemy;
 
         if (!enemy.IsBoss) //normal enemy
@@ -130,6 +125,7 @@ public class Combat : MonoBehaviour
         }
         else //boss
         {
+            nextLevel = null;
             nextLevelAfterKillingBoss = currentLevel.NextLevelAfterKillingBoss;
             nextLevelAfterSparingBoss = currentLevel.NextLevelAfterSparingBoss;
         }
@@ -284,7 +280,7 @@ public class Combat : MonoBehaviour
     private void Dodge()
     {
         //Debug.Log("Dodged");
-        ActivateDodge.Invoke();
+        stats.IsPlayerDodging = true;
     }
 
 
@@ -312,18 +308,34 @@ public class Combat : MonoBehaviour
 
     public IEnumerator WinCombat()
     {
+        stats.IsPlayerDodging = false;
+
         WinFight.Invoke();
 
-        //time 
-        //if vignette is inactive just wait 2 seconds
-        if (globalVolume.profile.TryGetSettings(out Vignette effect) && !effect.active)
+        //boss doesn't have next level
+        //if next level is level after boss (nextLevel != null)
+        //if next level is not combat
+        //recover hp and update graphics
+        if (nextLevel != null && nextLevel.LevelType == LevelType.Combat)
         {
-            yield return new WaitForSeconds(2f);
+            //do nothing oof
         }
         else
         {
-            yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(ATOA_Utilities.VignetteLerp(globalVolume, 2f, false, 0f));
+            stats.RecoverFullHP();
+
+            if (globalVolume.profile.TryGetSettings(out Vignette effect) && !effect.active)
+            {
+                yield return new WaitForSeconds(1f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.5f);
+                yield return StartCoroutine(ATOA_Utilities.VignetteLerp(globalVolume, 2f, false, 0f));
+                stats.UpdateSoundFilter(SnapshotName.Normal);
+            }
+
+            stats.UpdateHPUI();
         }
 
 

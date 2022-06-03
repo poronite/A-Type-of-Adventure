@@ -10,28 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
-  m_Name: 1Start_Proto
+  m_Name: 2Fight_Proto
   m_EditorClassIdentifier: 
-  LevelName: StartExample
-  LevelType: 0
+  LevelName: FightExample
+  LevelType: 1
   FieldType: 0
-  TextToType: Once upon a time, the hero was on a journey until a thief *
-  NextLevelAfterAdventure: {fileID: 11400000, guid: 81d45d6c7264e7747ba96a2baa2bca5c,
-    type: 2}
-  HasBranching: 1
-  PossibleChoices:
-  - appeared.
-  - disappeared.
-  PossibleOutcomes:
-  - {fileID: 11400000, guid: 81d45d6c7264e7747ba96a2baa2bca5c, type: 2}
-  - {fileID: 11400000, guid: 23bfaebf083e54f4886e44afe0541cbf, type: 2}
+  TextToType: 
+  NextLevelAfterAdventure: {fileID: 0}
+  HasBranching: 0
+  PossibleChoices: []
+  PossibleOutcomes: []
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []
-  Enemy: {fileID: 0}
-  NextLevelAfterCombat: {fileID: 0}
+  Enemy: {fileID: 11400000, guid: 4f358eaaf0a3ea74297b1b07446dcd3f, type: 2}
+  NextLevelAfterCombat: {fileID: 11400000, guid: 23bfaebf083e54f4886e44afe0541cbf,
+    type: 2}
   NextLevelAfterKillingBoss: {fileID: 0}
   NextLevelAfterSparingBoss: {fileID: 0}
   CorrectWord: 
   QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}
+  StartingEnergy: 0
+  EnergyLostPerSecond: 0
+  EnergyGainedPerWord: 0
+  ChallengeBoard: {fileID: 0}
+  ChallengeBoardFill: {fileID: 0}
+  WordListSize: 0
+  WordList: []
+  NextLevelAfterChallenge: {fileID: 0}

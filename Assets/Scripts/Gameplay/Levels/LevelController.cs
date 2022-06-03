@@ -11,6 +11,8 @@ public class LevelController : MonoBehaviour
     //Variables
     private LevelTemplate levelData;
 
+    private GameObject player;
+
     //Common stats to all levels
     private string levelName;
     private LevelType levelType;
@@ -47,6 +49,8 @@ public class LevelController : MonoBehaviour
     //Functions
     public void SetDelegatesLevel()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         EncounterController encountersController = GameObject.FindGameObjectWithTag("EncountersController").GetComponent<EncounterController>();
         TriggerEncounters = encountersController.EncounterTriggered;
 
@@ -92,7 +96,7 @@ public class LevelController : MonoBehaviour
                 ChangeFieldParalax.Invoke(fieldType);
 
                 //Start adventure
-                GameObject.FindGameObjectWithTag("Player").GetComponent<Adventure>().StartAdventure(levelData);
+                player.GetComponent<Adventure>().StartAdventure(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Adventure"));
 
                 break;
@@ -101,7 +105,7 @@ public class LevelController : MonoBehaviour
                 ChangeFieldNonParalax.Invoke(fieldType);
 
                 //Start combat
-                GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>().StartCombat(levelData);
+                player.GetComponent<Combat>().StartCombat(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Combat"));
 
                 break;
@@ -110,7 +114,7 @@ public class LevelController : MonoBehaviour
                 ChangeFieldNonParalax.Invoke(fieldType);
 
                 //Start puzzle
-                GameObject.FindGameObjectWithTag("Player").GetComponent<Puzzle>().StartPuzzle(levelData);
+                player.GetComponent<Puzzle>().StartPuzzle(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Puzzle"));
 
                 break;
@@ -119,7 +123,7 @@ public class LevelController : MonoBehaviour
                 ChangeFieldNonParalax.Invoke(fieldType);
 
                 //Start challenge
-                GameObject.FindGameObjectWithTag("Player").GetComponent<Challenge>().StartChallenge(levelData);
+                player.GetComponent<Challenge>().StartChallenge(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Challenge"));
 
                 break;
