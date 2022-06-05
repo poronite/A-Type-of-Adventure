@@ -15,7 +15,7 @@ public class EnemyStats : MonoBehaviour
 
     public float AttackSpeed; //duration that the enemy takes to attack
 
-    private bool isBoss;
+    public bool IsBoss;
 
     public bool BossPhaseHappened;
 
@@ -52,12 +52,12 @@ public class EnemyStats : MonoBehaviour
     public void SetupEnemy(EnemyTemplate enemyData)
     {
         enemyCurrentHP = enemyMaxHP;
-        isBoss = enemyData.IsBoss;
+        IsBoss = enemyData.IsBoss;
 
         GameObject.FindGameObjectWithTag("EnemyGfx").GetComponent<SpriteRenderer>().sprite = enemyData.Sprite;
         GameObject.FindGameObjectWithTag("EnemyIcon").GetComponent<Image>().sprite = enemyData.Icon;
 
-        if (isBoss)
+        if (IsBoss)
             AttackSpeed = 3f;
         else
             AttackSpeed = 4f;
@@ -74,7 +74,7 @@ public class EnemyStats : MonoBehaviour
         {
             enemyCurrentHP -= 1;
 
-            if (isBoss)
+            if (IsBoss)
             {
                 //trigger boss special phase
                 if (enemyCurrentHP <= enemyMaxHP / 2 && !BossPhaseHappened)
@@ -104,7 +104,7 @@ public class EnemyStats : MonoBehaviour
         UpdateHPBar();
         IsEnemyDead = true;
 
-        if (!isBoss) //player win
+        if (!IsBoss) //player win
         {
             StartCoroutine(TriggerVictory.Invoke());
             //Debug.Log("Enemy Died");

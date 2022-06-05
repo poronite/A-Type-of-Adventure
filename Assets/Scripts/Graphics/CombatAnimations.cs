@@ -10,6 +10,8 @@ public class CombatAnimations : MonoBehaviour
 
     private Enemy enemy;
 
+    private EnemyStats enemyStats;
+
     [SerializeField]
     private Animator mcAnimator;
 
@@ -21,6 +23,7 @@ public class CombatAnimations : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Combat>();
         playerStats = player.gameObject.GetComponent<PlayerStats>();
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
+        enemyStats = enemy.gameObject.GetComponent<EnemyStats>();
     }
 
     public void TriggerAttack(string attacker)
@@ -28,8 +31,17 @@ public class CombatAnimations : MonoBehaviour
         switch (attacker)
         {
             case "MC":
-                enemyAnimator.SetTrigger("TakeDamage");
                 player.Attack();
+                enemyAnimator.SetTrigger("TakeDamage");
+
+                if (!enemyStats.IsBoss)
+                {
+                    enemyAnimator.SetBool("Death", enemyStats.IsEnemyDead);
+                }
+                else
+                {
+                    enemyAnimator.SetBool("Death", false); //boss doesn't have death animation
+                }
                 break;
             case "Enemy":
                 if (!playerStats.IsPlayerDodging)
@@ -41,6 +53,10 @@ public class CombatAnimations : MonoBehaviour
                     {
                         mcAnimator.SetBool("Death", true);
                     }
+                    else
+                    {
+                        mcAnimator.SetBool("Death", false);
+                    }
                 }
                 else
                 {
@@ -51,5 +67,10 @@ public class CombatAnimations : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void ResetEnemyPosition()
+    {
+        enemyAnimator.Play("Idle", 0);
     }
 }

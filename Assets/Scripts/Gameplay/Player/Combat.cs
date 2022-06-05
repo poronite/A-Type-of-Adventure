@@ -80,6 +80,8 @@ public class Combat : MonoBehaviour
 
     private Animator playerAnimator;
 
+    private CombatAnimations combatAnimator;
+
     private PostProcessVolume globalVolume;
 
 
@@ -111,6 +113,8 @@ public class Combat : MonoBehaviour
 
         playerAnimator = GameObject.Find("MC_Combat").GetComponent<Animator>();
 
+        combatAnimator = playerAnimator.GetComponent<CombatAnimations>();
+
         globalVolume = FindObjectOfType<PostProcessVolume>();
     }
 
@@ -133,6 +137,7 @@ public class Combat : MonoBehaviour
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Combat;
         currentPhase = Phase.Normal;
         GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().SetupEnemy(enemy);
+        combatAnimator.ResetEnemyPosition();
         GenerateActionWordsCmb();
         Debug.Log("Started combat.");
     }
@@ -318,7 +323,7 @@ public class Combat : MonoBehaviour
         //recover hp and update graphics
         if (nextLevel != null && nextLevel.LevelType == LevelType.Combat)
         {
-            //do nothing oof
+            yield return new WaitForSeconds(1f);
         }
         else
         {
