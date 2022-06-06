@@ -32,7 +32,6 @@ public class PlayerInput : MonoBehaviour
 
     private void CheckInput()
     {
-        
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             DeleteInput.Invoke();
@@ -41,7 +40,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (!Input.GetKeyDown(KeyCode.Return))
             {
-                string key = Input.inputString.ToLower();
+                string key = Input.inputString;
 
                 if (IsAllowedInput(key))
                 {

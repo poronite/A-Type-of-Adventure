@@ -16,19 +16,19 @@ MonoBehaviour:
   LevelType: 0
   FieldType: 0
   TextToType: MCName found the orb, but now it's time to decide what to do with it.
-    Go through the *
-  NextLevelAfterAdventure: {fileID: 0}
-  HasBranching: 1
+    Go through the enchanted forest.
+  NextLevelAfterAdventure: {fileID: 11400000, guid: 871177cbdc846124dbea295c666c6d12,
+    type: 2}
+  HasBranching: 0
   PossibleChoices:
   - enchanted forest.
   - goblin village.
   PossibleOutcomes:
   - {fileID: 11400000, guid: 871177cbdc846124dbea295c666c6d12, type: 2}
   - {fileID: 11400000, guid: 6e9cad772d7a7bb4b9d8f19d62c84b8c, type: 2}
-  NumEncounters: 1
-  EncounterWordKey: 13000000
-  EncounterValue:
-  - {fileID: 0}
+  NumEncounters: 0
+  EncounterWordKey: 
+  EncounterValue: []
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   NextLevelAfterKillingBoss: {fileID: 0}

@@ -113,7 +113,7 @@ public class Combat : MonoBehaviour
 
         playerAnimator = GameObject.Find("MC_Combat").GetComponent<Animator>();
 
-        combatAnimator = playerAnimator.GetComponent<CombatAnimations>();
+        combatAnimator = playerAnimator.gameObject.GetComponent<CombatAnimations>();
 
         globalVolume = FindObjectOfType<PostProcessVolume>();
     }

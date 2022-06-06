@@ -71,6 +71,8 @@ public class CutsceneManager : MonoBehaviour
     private void LoopVideo()
     {
         cutsceneVideoPlayerLoop.Play();
+
+        cutsceneVideoPlayer.Stop();
     }
 
 

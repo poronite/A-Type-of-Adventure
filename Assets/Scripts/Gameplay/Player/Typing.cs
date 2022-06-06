@@ -244,9 +244,9 @@ public class Typing : MonoBehaviour
     {
         if (!isSettingName)
         {
-            //don't do this if player is setting up their name or doing a puzzle
-            //Verify if character is supposed to be displayed as upper case and if so make it upper case.
-            if (IsCharacterUpperCase())
+            //don't do this if player is setting up their name
+            //Verify if character is supposed to be displayed as lower case and if so make it upper case.
+            if (IsCharacterLowerCase())
             {
                 character = character.ToUpper();
             }
@@ -337,9 +337,9 @@ public class Typing : MonoBehaviour
     }
 
     
-    private bool IsCharacterUpperCase()
+    private bool IsCharacterLowerCase()
     {
-        return char.IsUpper(currentWord[nextCharacterIndex]);
+        return char.IsLower(currentWord[nextCharacterIndex]);
     }
 
 
