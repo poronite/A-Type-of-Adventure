@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
         if (timeSinceLastAttack >= stats.AttackSpeed)
         {
             enemyAnimator.SetTrigger("Attack");
-            timeSinceLastAttack = 0;
+            ResetAttackProgress();
         }
     }
     // ↑
@@ -84,6 +84,18 @@ public class Enemy : MonoBehaviour
     private bool IsOnCombat()
     {
         return TypingController.CurrentPlayerState == PlayerState.Combat;
+    }
+
+    
+    //trigger the dodge when the player dodges
+    public void ForceDodge()
+    {
+        timeSinceLastAttack = stats.AttackSpeed;
+    } 
+
+    public void ResetAttackProgress()
+    {
+        timeSinceLastAttack = 0;
     }
 
 

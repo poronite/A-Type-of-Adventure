@@ -24,6 +24,8 @@ public class Combat : MonoBehaviour
 {
     private PlayerStats stats;
 
+    private Enemy enemyController;
+
     private Actions actionChosen;
 
     private Phase currentPhase = Phase.Normal;
@@ -87,7 +89,21 @@ public class Combat : MonoBehaviour
 
     private void Start()
     {
+        SetReferences();
+    }
+
+
+    private void SetReferences()
+    {
         stats = gameObject.GetComponent<PlayerStats>();
+
+        enemyController = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
+
+        playerAnimator = GameObject.Find("MC_Combat").GetComponent<Animator>();
+
+        combatAnimator = playerAnimator.gameObject.GetComponent<CombatAnimations>();
+
+        globalVolume = FindObjectOfType<PostProcessVolume>();
     }
 
 
@@ -110,12 +126,6 @@ public class Combat : MonoBehaviour
         DefineWordColorCmb = CmbUIController.DefineWordColorUICmb;
         DisplayNewCurrentWordCmb = CmbUIController.DisplayNewCurrentWordUICmb;
         DisplayCurrentBossPhaseWordCmb = CmbUIController.DisplayCurrentBossPhaseWordUICmb;
-
-        playerAnimator = GameObject.Find("MC_Combat").GetComponent<Animator>();
-
-        combatAnimator = playerAnimator.gameObject.GetComponent<CombatAnimations>();
-
-        globalVolume = FindObjectOfType<PostProcessVolume>();
     }
 
 
@@ -136,7 +146,8 @@ public class Combat : MonoBehaviour
 
         gameObject.GetComponent<Typing>().CurrentPlayerState = PlayerState.Combat;
         currentPhase = Phase.Normal;
-        GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>().SetupEnemy(enemy);
+        enemyController.gameObject.GetComponent<EnemyStats>().SetupEnemy(enemy);
+        enemyController.ResetAttackProgress();
         combatAnimator.ResetEnemyPosition();
         GenerateActionWordsCmb();
         Debug.Log("Started combat.");
@@ -286,6 +297,7 @@ public class Combat : MonoBehaviour
     {
         //Debug.Log("Dodged");
         stats.IsPlayerDodging = true;
+        enemyController.ForceDodge();
     }
 
 

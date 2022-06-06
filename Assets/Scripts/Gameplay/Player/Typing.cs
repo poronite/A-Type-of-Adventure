@@ -235,7 +235,7 @@ public class Typing : MonoBehaviour
     /// <summary>Verify if letter received from PlayerInput matches the one to be typed (Adventure and Combat state only).</summary>
     private bool IsCharacterCorrect(string character)
     {
-        return character == currentWord[nextCharacterIndex].ToString().ToLower(); //Always lower case
+        return character.ToUpper() == currentWord[nextCharacterIndex].ToString().ToUpper();
     }
 
 
@@ -247,6 +247,10 @@ public class Typing : MonoBehaviour
             //don't do this if player is setting up their name
             //Verify if character is supposed to be displayed as lower case and if so make it upper case.
             if (IsCharacterLowerCase())
+            {
+                character = character.ToLower();
+            }
+            else
             {
                 character = character.ToUpper();
             }
