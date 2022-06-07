@@ -87,13 +87,7 @@ public class Combat : MonoBehaviour
     private PostProcessVolume globalVolume;
 
 
-    private void Start()
-    {
-        SetReferences();
-    }
-
-
-    private void SetReferences()
+    public void SetReferences()
     {
         stats = gameObject.GetComponent<PlayerStats>();
 

@@ -37,6 +37,7 @@ public class LoadGame : MonoBehaviour
         player.GetComponent<PlayerStats>().SetDelegatesPlayerStats();
         player.GetComponent<Typing>().SetDelegatesTyping();
         player.GetComponent<Adventure>().SetDelegatesAdv();
+        player.GetComponent<Combat>().SetReferences();
         player.GetComponent<Combat>().SetDelegatesCmb();
         player.GetComponent<Puzzle>().SetDelegatesPzl();
         player.GetComponent<Challenge>().SetDelegatesChl();

@@ -100,7 +100,7 @@ public class PlayerStats : MonoBehaviour
     }
 
 
-    //Invoked by UnityEvent in Typing script when player does a mistake
+    //When player does a mistake
     public void AddMistake()
     {
         numMistakes++;
@@ -109,7 +109,7 @@ public class PlayerStats : MonoBehaviour
     }
 
 
-    //Invoked by UnityEvent in Typing script every Update
+    //Invoked Typing script every Update
     public void AddTimeElapsed()
     {
         timeElapsedSeconds += Time.deltaTime;

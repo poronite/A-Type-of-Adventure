@@ -123,7 +123,7 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637901148559868440
+  lastModified: 637901376757101093
   FileSizes:
   - Name: Desktop
     Value: 16591424
@@ -270,7 +270,7 @@ MonoBehaviour:
   - {fileID: -2471981782142384683}
   StringsBanks:
   - {fileID: 8510983333597803202}
-  cacheTime: 637901148559938475
+  cacheTime: 637901376757181352
   cacheVersion: 10
 --- !u!114 &168708697234499999
 MonoBehaviour:
@@ -503,7 +503,7 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637901148559938475
+  lastModified: 637901376757181352
   FileSizes:
   - Name: Desktop
     Value: 1636
