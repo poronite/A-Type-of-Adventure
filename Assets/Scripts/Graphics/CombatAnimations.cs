@@ -69,8 +69,15 @@ public class CombatAnimations : MonoBehaviour
         }
     }
 
+    public void ResetPlayerPosition()
+    {
+        mcAnimator.gameObject.transform.GetChild(0).localPosition = Vector3.zero;
+        mcAnimator.Play("Idle", 0);
+    }
+
     public void ResetEnemyPosition()
     {
+        enemyAnimator.gameObject.transform.GetChild(0).localPosition = Vector3.zero;
         enemyAnimator.Play("Idle", 0);
     }
 }

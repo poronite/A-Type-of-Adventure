@@ -291,7 +291,7 @@ public class Combat : MonoBehaviour
     {
         //Debug.Log("Dodged");
         stats.IsPlayerDodging = true;
-        enemyController.ForceDodge();
+        enemyController.ForceDodge(LastDodgeWord);
     }
 
 

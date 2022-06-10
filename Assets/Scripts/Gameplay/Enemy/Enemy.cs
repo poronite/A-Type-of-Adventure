@@ -28,6 +28,10 @@ public class Enemy : MonoBehaviour
 
     private Animator enemyAnimator;
 
+    private CombatAnimations combatAnimation;
+
+    private string playerDodgeWord;
+
     
 
     //functions
@@ -43,6 +47,8 @@ public class Enemy : MonoBehaviour
         UpdateEnemyAttackWordFill += GameObject.FindGameObjectWithTag("CombatGfxUI").GetComponent<CombatUI>().UpdateEnemyAttackWordFillUI;
 
         enemyAnimator = GameObject.Find("Enemy_Combat").GetComponent<Animator>();
+
+        combatAnimation = enemyAnimator.gameObject.GetComponent<CombatAnimations>();
     }
 
 
@@ -58,7 +64,16 @@ public class Enemy : MonoBehaviour
     {
         if (timeSinceLastAttack >= stats.AttackSpeed)
         {
-            enemyAnimator.SetTrigger("Attack");
+            //trigger the attack before the player dodge
+            if (playerDodgeWord != "Block")
+            {
+                enemyAnimator.SetTrigger("Attack");
+            }
+            else //trigger the dodge instantly if word is Block
+            {
+                combatAnimation.TriggerAttack("Enemy");
+            }
+            
             ResetAttackProgress();
         }
     }
@@ -88,10 +103,11 @@ public class Enemy : MonoBehaviour
 
     
     //trigger the dodge when the player dodges
-    public void ForceDodge()
+    public void ForceDodge(string dodgeWord)
     {
+        playerDodgeWord = dodgeWord;
         timeSinceLastAttack = stats.AttackSpeed;
-    } 
+    }
 
     public void ResetAttackProgress()
     {
