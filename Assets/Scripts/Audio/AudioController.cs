@@ -136,7 +136,7 @@ public class AudioController : MonoBehaviour
             case FieldType.MagicForest:
                 magicForest_instance.start();
                 break;
-            case FieldType.Castle:
+            case FieldType.Citadel:
                 castle_instance.start();
                 break;
             default:

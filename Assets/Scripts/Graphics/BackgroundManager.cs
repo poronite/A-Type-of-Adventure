@@ -24,19 +24,18 @@ public class BackgroundManager : MonoBehaviour
     private Sprite plainsBackgroundChl;
 
     [SerializeField]
-    private Sprite castleBackgroundCmb;
-    [SerializeField]
-    private Sprite castleBackgroundPzl;
-    [SerializeField]
-    private Sprite castleBackgroundChl;
-
-    [SerializeField]
     private Sprite magicForestBackgroundCmb;
     [SerializeField]
     private Sprite magicForestBackgroundPzl;
     [SerializeField]
     private Sprite magicForestBackgroundChl;
 
+    [SerializeField]
+    private Sprite citadelBackgroundCmb;
+    [SerializeField]
+    private Sprite citadelBackgroundPzl;
+    [SerializeField]
+    private Sprite citadelBackgroundChl;
 
     //paralax layer related variables
     private int numChildren = 3;
@@ -59,18 +58,18 @@ public class BackgroundManager : MonoBehaviour
     private Sprite[] plainsSkySprites;
 
     [SerializeField]
-    private Sprite[] castleGroundSprites;
-    [SerializeField]
-    private Sprite[] castleWallSprites;
-    [SerializeField]
-    private Sprite[] castleSkySprites;
-
-    [SerializeField]
     private Sprite[] magicForestGroundSprites;
     [SerializeField]
     private Sprite[] magicForestTreeSprites;
     [SerializeField]
     private Sprite[] magicForestSkySprites;
+
+    [SerializeField]
+    private Sprite[] citadelGroundSprites;
+    [SerializeField]
+    private Sprite[] citadelWallSprites;
+    [SerializeField]
+    private Sprite[] citadelSkySprites;
 
 
     //camera and player related variables and references
@@ -158,15 +157,15 @@ public class BackgroundManager : MonoBehaviour
                 backgroundPzl.sprite = plainsBackgroundPzl;
                 backgroundChl.sprite = plainsBackgroundChl;
                 break;
-            case FieldType.Castle:
-                backgroundCmb.sprite = castleBackgroundCmb;
-                backgroundPzl.sprite = castleBackgroundPzl;
-                backgroundChl.sprite = castleBackgroundChl;
-                break;
             case FieldType.MagicForest:
                 backgroundCmb.sprite = magicForestBackgroundCmb;
                 backgroundPzl.sprite = magicForestBackgroundPzl;
                 backgroundChl.sprite = magicForestBackgroundChl;
+                break;
+            case FieldType.Citadel:
+                backgroundCmb.sprite = citadelBackgroundCmb;
+                backgroundPzl.sprite = citadelBackgroundPzl;
+                backgroundChl.sprite = citadelBackgroundChl;
                 break;
             default:
                 break;
@@ -185,15 +184,15 @@ public class BackgroundManager : MonoBehaviour
                 layer2Sprites = plainsTreeSprites;
                 layer3Sprites = plainsSkySprites;
                 break;
-            case FieldType.Castle:
-                layer1Sprites = castleGroundSprites;
-                layer2Sprites = castleWallSprites;
-                layer3Sprites = castleSkySprites;
-                break;
             case FieldType.MagicForest:
                 layer1Sprites = magicForestGroundSprites;
                 layer2Sprites = magicForestTreeSprites;
                 layer3Sprites = magicForestSkySprites;
+                break;
+            case FieldType.Citadel:
+                layer1Sprites = citadelGroundSprites;
+                layer2Sprites = citadelWallSprites;
+                layer3Sprites = citadelSkySprites;
                 break;
             default:
                 break;

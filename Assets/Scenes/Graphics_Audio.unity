@@ -2140,7 +2140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 587235571}
   - component: {fileID: 587235572}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PostProcessing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3456,7 +3456,7 @@ Camera:
   m_GameObject: {fileID: 936825008}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.09046001, g: 0.21698111, b: 0.06857421, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -3482,7 +3482,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetEye: 0
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
@@ -3525,17 +3525,17 @@ MonoBehaviour:
     type: 3}
   plainsBackgroundChl: {fileID: 21300000, guid: cedba090d58258d4b9ad6eb45ce9f7a5,
     type: 3}
-  castleBackgroundCmb: {fileID: 21300000, guid: 91a4527c8ca94c4468457075a91c1c17,
-    type: 3}
-  castleBackgroundPzl: {fileID: 21300000, guid: cedba090d58258d4b9ad6eb45ce9f7a5,
-    type: 3}
-  castleBackgroundChl: {fileID: 21300000, guid: cedba090d58258d4b9ad6eb45ce9f7a5,
-    type: 3}
   magicForestBackgroundCmb: {fileID: 21300000, guid: abd876daca10d9240858624e59e2ab47,
     type: 3}
-  magicForestBackgroundPzl: {fileID: 21300000, guid: cedba090d58258d4b9ad6eb45ce9f7a5,
+  magicForestBackgroundPzl: {fileID: 21300000, guid: 88d10ec487301b04bb448ea00fd94339,
     type: 3}
-  magicForestBackgroundChl: {fileID: 21300000, guid: cedba090d58258d4b9ad6eb45ce9f7a5,
+  magicForestBackgroundChl: {fileID: 21300000, guid: 88d10ec487301b04bb448ea00fd94339,
+    type: 3}
+  citadelBackgroundCmb: {fileID: 21300000, guid: ba4a0c8644acd004c872f4b81748bcc2,
+    type: 3}
+  citadelBackgroundPzl: {fileID: 21300000, guid: ba4a0c8644acd004c872f4b81748bcc2,
+    type: 3}
+  citadelBackgroundChl: {fileID: 21300000, guid: ba4a0c8644acd004c872f4b81748bcc2,
     type: 3}
   plainsGroundSprites:
   - {fileID: 21300000, guid: 0bdb138951a25ec4bace06a67d1ebcb1, type: 3}
@@ -3546,18 +3546,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a7b39d5c3e9c3a443968cdd8ef032de1, type: 3}
   - {fileID: 21300000, guid: 510a3b449804e094995b30e1e7e64f3b, type: 3}
   plainsSkySprites:
-  - {fileID: 21300000, guid: dc8b6815e0ffc0749a230ebe8c35472f, type: 3}
-  - {fileID: 21300000, guid: 4430917808d88da48beef5a91050c32f, type: 3}
-  - {fileID: 21300000, guid: 8879c61ebfa726545bb13e65f0fa8c26, type: 3}
-  castleGroundSprites:
-  - {fileID: 21300000, guid: 0bdb138951a25ec4bace06a67d1ebcb1, type: 3}
-  - {fileID: 21300000, guid: 5610459e058aabb478ffa54f89880630, type: 3}
-  - {fileID: 21300000, guid: 794a5c1c40b438f4ea9f6b632ca2d7d7, type: 3}
-  castleWallSprites:
-  - {fileID: 21300000, guid: 05e7d2fb8c333d84ead53f639af59c1e, type: 3}
-  - {fileID: 21300000, guid: a7b39d5c3e9c3a443968cdd8ef032de1, type: 3}
-  - {fileID: 21300000, guid: 510a3b449804e094995b30e1e7e64f3b, type: 3}
-  castleSkySprites:
   - {fileID: 21300000, guid: dc8b6815e0ffc0749a230ebe8c35472f, type: 3}
   - {fileID: 21300000, guid: 4430917808d88da48beef5a91050c32f, type: 3}
   - {fileID: 21300000, guid: 8879c61ebfa726545bb13e65f0fa8c26, type: 3}
@@ -3573,6 +3561,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f9fc32154b66fb54e98109bb612037d1, type: 3}
   - {fileID: 21300000, guid: ddba46de52461da46ad359b92a3d4ba4, type: 3}
   - {fileID: 21300000, guid: f7221e5c96a6b654ab36e2e4cbc660f2, type: 3}
+  citadelGroundSprites:
+  - {fileID: 21300000, guid: 0bdb138951a25ec4bace06a67d1ebcb1, type: 3}
+  - {fileID: 21300000, guid: 5610459e058aabb478ffa54f89880630, type: 3}
+  - {fileID: 21300000, guid: 794a5c1c40b438f4ea9f6b632ca2d7d7, type: 3}
+  citadelWallSprites:
+  - {fileID: 21300000, guid: 05e7d2fb8c333d84ead53f639af59c1e, type: 3}
+  - {fileID: 21300000, guid: a7b39d5c3e9c3a443968cdd8ef032de1, type: 3}
+  - {fileID: 21300000, guid: 510a3b449804e094995b30e1e7e64f3b, type: 3}
+  citadelSkySprites:
+  - {fileID: 21300000, guid: dc8b6815e0ffc0749a230ebe8c35472f, type: 3}
+  - {fileID: 21300000, guid: 4430917808d88da48beef5a91050c32f, type: 3}
+  - {fileID: 21300000, guid: 8879c61ebfa726545bb13e65f0fa8c26, type: 3}
 --- !u!114 &936825013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3603,7 +3603,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 936825011}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 256
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 0
