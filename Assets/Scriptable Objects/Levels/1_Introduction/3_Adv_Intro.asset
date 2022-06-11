@@ -15,20 +15,19 @@ MonoBehaviour:
   LevelName: The warning
   LevelType: 0
   FieldType: 0
-  TextToType: 'A messenger appears and says: "I came to warn you. They''ll come looking
-    for the orb, you need to take it to the citadel, you need to take it to the order..."
-    before disappearing. MCName goes to bed, paying no attention to the words uttered
-    by the enemy.'
+  TextToType: 'Outside, a messenger appears and says: "I came to warn you. They''ll
+    come looking for this orb, you need to take it to the order..." then disappears.
+    MCName goes to bed, paying no attention to the words uttered by this stranger.'
   NextLevelAfterAdventure: {fileID: 11400000, guid: 929e6e01573652442b0b99fd2b867358,
     type: 2}
   HasBranching: 0
   PossibleChoices: []
   PossibleOutcomes: []
   NumEncounters: 3
-  EncounterWordKey: 000000002200000030000000
+  EncounterWordKey: 000000001c00000029000000
   EncounterValue:
   - {fileID: 11400000, guid: 541fbc13528103346b127b9860dc9e73, type: 2}
-  - {fileID: 11400000, guid: 548813dcc126fc04987619bc970e3896, type: 2}
+  - {fileID: 11400000, guid: c62cc6686b383b649be48030152d466c, type: 2}
   - {fileID: 11400000, guid: 688d96eb9d4b73a47900b4045854f96a, type: 2}
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}

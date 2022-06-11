@@ -29,7 +29,7 @@ MonoBehaviour:
   NextLevelAfterSparingBoss: {fileID: 0}
   CorrectWord: purple
   QuestionBoard: {fileID: 21300000, guid: 73ed15641d3e32f4694d1a5c07dec55e, type: 3}
-  NextLevelAfterPuzzle: {fileID: 11400000, guid: 086761bcb3cc0774593db31f20f3ca97,
+  NextLevelAfterPuzzle: {fileID: 11400000, guid: 871177cbdc846124dbea295c666c6d12,
     type: 2}
   StartingEnergy: 0
   EnergyLostPerSecond: 0

@@ -15,27 +15,25 @@ MonoBehaviour:
   LevelName: 
   LevelType: 0
   FieldType: 1
-  TextToType: Upon defeating the slimes, MCName travels deeper into the forest in
-    search of said citadel. Somehow, MCName gets lost inside the forest until two
-    demi-human forest dwellers approach them. MCName gets scared at first but doesn't
-    treat the two strange creatures as a threat. The two present themselves as Y
-    and Z. Y & Z start explaining to MCName how dangerous the inhabitants of the
-    forest are and how they should find the exit as fast as they can and get out.
-    As MCName tells them about their journey, they soon understand how important
-    it is for them to get to the citadel and help them get on the right track to
-    get to the said destination.
-  NextLevelAfterAdventure: {fileID: 11400000, guid: dbaf5932c5c903d42816247412e7bd05,
+  TextToType: "While traveling, MCName gets lost inside the forest until two demi-human
+    dwellers approach them. They present themselves as Leo and Zevridia. They explain
+    how dangerous the forest is and how they should find the exit as soon as possible.
+    As MCName tells them about their journey, they understand how important it is
+    and decide to help them get on the right track.\r MCName continues walking. The
+    path ends and MCName is met with a large boulder with a strange inscription."
+  NextLevelAfterAdventure: {fileID: 11400000, guid: 22384ab25cafcb8489387716cdfbf6ed,
     type: 2}
   HasBranching: 0
   PossibleChoices: []
   PossibleOutcomes: []
-  NumEncounters: 4
-  EncounterWordKey: 000000001d0000005200000075000000
+  NumEncounters: 5
+  EncounterWordKey: 000000000f000000280000003f00000050000000
   EncounterValue:
   - {fileID: 11400000, guid: 4f523fdbb2b535f42be16d75de2f95eb, type: 2}
   - {fileID: 11400000, guid: 259baf66a94a00d41baeb9300d4dcda0, type: 2}
   - {fileID: 11400000, guid: 087e7a70a93cd8c4d91a1d0a786570c4, type: 2}
-  - {fileID: 11400000, guid: 490d49886a7090449a0642ae5040468d, type: 2}
+  - {fileID: 11400000, guid: 609d3ad9ba52b9f43a90871d204d3222, type: 2}
+  - {fileID: 11400000, guid: 8d35ea1c6b10bd849871ef9041e06c7a, type: 2}
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   NextLevelAfterKillingBoss: {fileID: 0}

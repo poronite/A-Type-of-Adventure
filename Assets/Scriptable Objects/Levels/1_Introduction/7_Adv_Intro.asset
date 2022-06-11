@@ -15,7 +15,7 @@ MonoBehaviour:
   LevelName: Looking for the orb
   LevelType: 0
   FieldType: 0
-  TextToType: Now that they're gone, MCName decides to look for the orb.
+  TextToType: Now that they're gone, MCName decides to look for said orb.
   NextLevelAfterAdventure: {fileID: 11400000, guid: 66acb3cc9cd4bbd4b9730d7bc591bcaf,
     type: 2}
   HasBranching: 0

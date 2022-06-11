@@ -10,22 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
-  m_Name: 12_Adv_End2_Path1
+  m_Name: 8_Adv_Path1
   m_EditorClassIdentifier: 
   LevelName: 
   LevelType: 0
   FieldType: 2
-  TextToType: Gillah's reign of terror comes to an end and MCName is invited to become
-    one of the knights. The End.
-  NextLevelAfterAdventure: {fileID: 0}
+  TextToType: "Inside the citadel, a hooded figure approaches them. It's the messenger!
+    She calls out for the remaining members of the order. She tells them that the
+    orb is a key to banish Lord Gillah. It was hidden so as to prevent him from finding
+    it. But Lord Gillah was already informed about the orb\u2019s whereabouts. \u201CHand
+    over the orb, now!\u201D He roared. MCName was ready to fight."
+  NextLevelAfterAdventure: {fileID: 11400000, guid: ac83875d9ebbd384384a6f2d82101288,
+    type: 2}
   HasBranching: 0
   PossibleChoices: []
   PossibleOutcomes: []
-  NumEncounters: 2
-  EncounterWordKey: 0000000014000000
+  NumEncounters: 4
+  EncounterWordKey: 00000000160000002e00000043000000
   EncounterValue:
-  - {fileID: 11400000, guid: d17061a521ff2cb4e94383858f3717e7, type: 2}
-  - {fileID: 11400000, guid: d31ea39552791a0409ef2711148e125a, type: 2}
+  - {fileID: 11400000, guid: 38ca7990a62e1794eb4ba43839061d91, type: 2}
+  - {fileID: 11400000, guid: 73c7d39031f891e46a3dcade736b3ef9, type: 2}
+  - {fileID: 11400000, guid: 9c99ef41d5f5eaf49af787af3cad2e0f, type: 2}
+  - {fileID: 11400000, guid: 85ec98c9184417148949caac5b4c2808, type: 2}
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   NextLevelAfterKillingBoss: {fileID: 0}

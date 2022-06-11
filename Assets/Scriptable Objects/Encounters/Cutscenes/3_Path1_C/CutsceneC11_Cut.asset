@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31e1aaccb6227d6409cca00de46224ec, type: 3}
-  m_Name: CutsceneC7_Cut
+  m_Name: CutsceneC11_Cut
   m_EditorClassIdentifier: 
   EncounterType: 1
-  FieldType: 2
+  DisplayImage: 0
+  ImageToDisplay: {fileID: 0}
+  cutsceneVideo: {fileID: 0}
+  cutsceneVideoLoop: {fileID: 0}
   EndOfCutscene: 1
-  TransitionDuration: 0
-  NewCutscene: 0
-  CutscenePrefab: {fileID: 0}

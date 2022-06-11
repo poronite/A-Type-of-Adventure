@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
-  m_Name: 10_Boss_Path1
+  m_Name: 5_Challenge_Path1
   m_EditorClassIdentifier: 
   LevelName: 
-  LevelType: 1
-  FieldType: 2
+  LevelType: 3
+  FieldType: 1
   TextToType: 
   NextLevelAfterAdventure: {fileID: 0}
   HasBranching: 0
@@ -23,20 +23,28 @@ MonoBehaviour:
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []
-  Enemy: {fileID: 11400000, guid: 91ff01dac6c2c2e4fa64f4c9b5c2d87a, type: 2}
+  Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
-  NextLevelAfterKillingBoss: {fileID: 11400000, guid: d9f699458d7e0414abdfd64d9706bad3,
-    type: 2}
-  NextLevelAfterSparingBoss: {fileID: 11400000, guid: ae9b97a93e8de80458ab889bc364a469,
-    type: 2}
+  NextLevelAfterKillingBoss: {fileID: 0}
+  NextLevelAfterSparingBoss: {fileID: 0}
   CorrectWord: 
   QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}
-  StartingEnergy: 0
-  EnergyLostPerSecond: 0
-  EnergyGainedPerWord: 0
-  ChallengeBoard: {fileID: 0}
-  ChallengeBoardFill: {fileID: 0}
-  WordListSize: 0
-  WordList: []
-  NextLevelAfterChallenge: {fileID: 0}
+  StartingEnergy: 50
+  EnergyLostPerSecond: 3
+  EnergyGainedPerWord: 10
+  ChallengeBoard: {fileID: 21300000, guid: f95a67bf7192d8d4fbbeed418a076b92, type: 3}
+  ChallengeBoardFill: {fileID: 21300000, guid: d6efc632558fa60458e9015fa0e00cef, type: 3}
+  WordListSize: 9
+  WordList:
+  - flos
+  - iter
+  - arcis
+  - sequor
+  - aurum
+  - signum
+  - silva
+  - destinatio
+  - haeream
+  NextLevelAfterChallenge: {fileID: 11400000, guid: 53e53758672a7304d83f678e646ad17d,
+    type: 2}

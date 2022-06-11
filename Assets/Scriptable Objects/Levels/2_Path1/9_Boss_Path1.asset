@@ -10,29 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
-  m_Name: 9_Adv_Intro
+  m_Name: 9_Boss_Path1
   m_EditorClassIdentifier: 
-  LevelName: Orb found.
-  LevelType: 0
-  FieldType: 0
-  TextToType: MCName found the orb, but now it's time to decide what to do with it.
-    Go through the enchanted forest.
-  NextLevelAfterAdventure: {fileID: 11400000, guid: 871177cbdc846124dbea295c666c6d12,
-    type: 2}
+  LevelName: 
+  LevelType: 1
+  FieldType: 2
+  TextToType: 
+  NextLevelAfterAdventure: {fileID: 0}
   HasBranching: 0
-  PossibleChoices:
-  - enchanted forest.
-  - goblin village.
-  PossibleOutcomes:
-  - {fileID: 11400000, guid: 871177cbdc846124dbea295c666c6d12, type: 2}
-  - {fileID: 11400000, guid: 6e9cad772d7a7bb4b9d8f19d62c84b8c, type: 2}
+  PossibleChoices: []
+  PossibleOutcomes: []
   NumEncounters: 0
   EncounterWordKey: 
   EncounterValue: []
-  Enemy: {fileID: 0}
+  Enemy: {fileID: 11400000, guid: 91ff01dac6c2c2e4fa64f4c9b5c2d87a, type: 2}
   NextLevelAfterCombat: {fileID: 0}
-  NextLevelAfterKillingBoss: {fileID: 0}
-  NextLevelAfterSparingBoss: {fileID: 0}
+  NextLevelAfterKillingBoss: {fileID: 11400000, guid: d9f699458d7e0414abdfd64d9706bad3,
+    type: 2}
+  NextLevelAfterSparingBoss: {fileID: 11400000, guid: ae9b97a93e8de80458ab889bc364a469,
+    type: 2}
   CorrectWord: 
   QuestionBoard: {fileID: 0}
   NextLevelAfterPuzzle: {fileID: 0}

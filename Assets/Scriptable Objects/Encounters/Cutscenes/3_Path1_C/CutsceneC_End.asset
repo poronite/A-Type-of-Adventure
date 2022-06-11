@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e1aaccb6227d6409cca00de46224ec, type: 3}
   m_Name: CutsceneC_End
   m_EditorClassIdentifier: 
-  EncounterType: 0
-  FieldType: 1
+  EncounterType: 1
+  DisplayImage: 0
+  ImageToDisplay: {fileID: 0}
+  cutsceneVideo: {fileID: 0}
+  cutsceneVideoLoop: {fileID: 0}
   EndOfCutscene: 1
-  TransitionDuration: 0
-  NewCutscene: 0
-  CutscenePrefab: {fileID: 0}
