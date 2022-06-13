@@ -732,27 +732,34 @@ MonoBehaviour:
       Data3: 1889082499
       Data4: -623391425
     Path: event:/SFX/UI/Gameplay/Cutscene End
-  plains_eventReference:
+  magicForest_Music_reference:
+    Guid:
+      Data1: -1369478812
+      Data2: 1169713137
+      Data3: -1493955188
+      Data4: -570179178
+    Path: event:/Music/Magic Forest Music
+  plains_AMB_eventReference:
     Guid:
       Data1: 553753818
       Data2: 1222735035
       Data3: -1122227032
       Data4: 1488411266
     Path: event:/AMB/Plains
-  magicForest_eventReference:
+  magicForest_AMB_eventReference:
     Guid:
       Data1: 1817668302
       Data2: 1084455671
       Data3: 915951026
       Data4: 501619212
     Path: event:/AMB/Magic Forest
-  castle_eventReference:
+  citadel_AMB_eventReference:
     Guid:
       Data1: -1830006630
       Data2: 1127054686
       Data3: 1036471177
       Data4: -1603059309
-    Path: event:/AMB/Castle
+    Path: event:/AMB/Citadel
   normalStateSnapshotReference:
     Guid:
       Data1: -789093229
@@ -3679,7 +3686,6 @@ Transform:
   m_Children:
   - {fileID: 1526835252}
   - {fileID: 2006027613}
-  - {fileID: 2096166404}
   m_Father: {fileID: 350824311}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5602,7 +5608,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 2
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1531878045
 GameObject:
@@ -6419,86 +6425,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!1 &2096166403
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2096166404}
-  - component: {fileID: 2096166405}
-  m_Layer: 0
-  m_Name: Enemy_Death_Mask
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2096166404
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2096166403}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -6.7, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 1}
-  m_Children: []
-  m_Father: {fileID: 971985662}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!331 &2096166405
-SpriteMask:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2096166403}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c6cef10ea3f9cdc49a1fc032c4806265, type: 3}
-  m_MaskAlphaCutoff: 0.2
-  m_FrontSortingLayerID: 0
-  m_BackSortingLayerID: 0
-  m_FrontSortingLayer: 0
-  m_BackSortingLayer: 0
-  m_FrontSortingOrder: 0
-  m_BackSortingOrder: 0
-  m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2100869356
 GameObject:

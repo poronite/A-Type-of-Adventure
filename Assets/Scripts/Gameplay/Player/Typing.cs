@@ -402,7 +402,7 @@ public class Typing : MonoBehaviour
             case PlayerState.Combat:
             case PlayerState.Puzzle:
             case PlayerState.Challenge:
-                AddTime.Invoke();
+                AddTime?.Invoke();
                 break;
             default:
                 break;

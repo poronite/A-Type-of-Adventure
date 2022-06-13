@@ -48,21 +48,30 @@ public class AudioController : MonoBehaviour
     EventInstance cutsceneEnd_instance;
 
 
+    //Music
+    //Audio references
+    [SerializeField]
+    private EventReference magicForest_Music_reference;
+
+    //Audio event instances
+    EventInstance magicForest_Music_instance;
+
+
     //AMB
     //Audio references
     [SerializeField]
-    private EventReference plains_eventReference;
+    private EventReference plains_AMB_eventReference;
 
     [SerializeField]
-    private EventReference magicForest_eventReference;
+    private EventReference magicForest_AMB_eventReference;
 
     [SerializeField]
-    private EventReference castle_eventReference;
+    private EventReference citadel_AMB_eventReference;
 
     //Audio event instances
-    EventInstance plains_instance;
-    EventInstance magicForest_instance;
-    EventInstance castle_instance;
+    EventInstance plains_AMB_instance;
+    EventInstance magicForest_AMB_instance;
+    EventInstance citadel_AMB_instance;
 
 
     //Snapshots
@@ -78,20 +87,25 @@ public class AudioController : MonoBehaviour
     EventInstance lowHealthStateSnapshotInstance;
 
 
-
-    private void Awake()
+    public void SetInstances()
     {
         //set instances
+        //SFX
         typewriterKey_instance = RuntimeManager.CreateInstance(typewriterKey_eventReference);
         completeWord_instance = RuntimeManager.CreateInstance(completeWord_eventReference);
         mistake_instance = RuntimeManager.CreateInstance(mistake_eventReference);
         cutsceneChange_instance = RuntimeManager.CreateInstance(cutsceneChange_eventReference);
         cutsceneEnd_instance = RuntimeManager.CreateInstance(cutsceneEnd_eventReference);
 
-        plains_instance = RuntimeManager.CreateInstance(plains_eventReference);
-        magicForest_instance = RuntimeManager.CreateInstance(magicForest_eventReference);
-        castle_instance = RuntimeManager.CreateInstance(castle_eventReference);
+        //Music
+        magicForest_Music_instance = RuntimeManager.CreateInstance(magicForest_Music_reference);
 
+        //AMB
+        plains_AMB_instance = RuntimeManager.CreateInstance(plains_AMB_eventReference);
+        magicForest_AMB_instance = RuntimeManager.CreateInstance(magicForest_AMB_eventReference);
+        citadel_AMB_instance = RuntimeManager.CreateInstance(citadel_AMB_eventReference);
+
+        //snapshots
         normalStateSnapshotInstance = RuntimeManager.CreateInstance(normalStateSnapshotReference);
         lowHealthStateSnapshotInstance = RuntimeManager.CreateInstance(lowHealthStateSnapshotReference);
     }
@@ -121,23 +135,42 @@ public class AudioController : MonoBehaviour
         }
     }
 
-    public void ChangeAMB(FieldType field)
+    public void ChangeMusic(FieldType field)
     {
-        plains_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        magicForest_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        castle_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        magicForest_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
 
         switch (field)
         {
             case FieldType.Plains:
-                plains_instance.start();
                 break;
             case FieldType.MagicForest:
-                magicForest_instance.start();
+                magicForest_Music_instance.start();
                 break;
             case FieldType.Citadel:
-                castle_instance.start();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ChangeAMB(FieldType field)
+    {
+        plains_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        magicForest_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        citadel_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+
+        switch (field)
+        {
+            case FieldType.Plains:
+                plains_AMB_instance.start();
+                break;
+            case FieldType.MagicForest:
+                magicForest_AMB_instance.start();
+                break;
+            case FieldType.Citadel:
+                citadel_AMB_instance.start();
                 break;
             default:
                 break;
@@ -174,9 +207,9 @@ public class AudioController : MonoBehaviour
         cutsceneChange_instance.release();
         cutsceneEnd_instance.release();
 
-        plains_instance.release();
-        magicForest_instance.release();
-        castle_instance.release();
+        plains_AMB_instance.release();
+        magicForest_AMB_instance.release();
+        citadel_AMB_instance.release();
        
         normalStateSnapshotInstance.release();
         lowHealthStateSnapshotInstance.release();

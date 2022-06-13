@@ -102,7 +102,7 @@ public class Challenge : MonoBehaviour
     private void ReduceEnergy()
     {
         currentEnergy = Mathf.Clamp(currentEnergy - energyLostPerSecond * Time.deltaTime, 0f, 100f);
-        UpdateProgressBarFillChl.Invoke(currentEnergy);
+        UpdateProgressBarFillChl?.Invoke(currentEnergy);
         //EnergyBarEmpty();
     }
 

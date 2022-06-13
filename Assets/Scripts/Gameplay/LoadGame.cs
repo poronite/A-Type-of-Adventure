@@ -54,6 +54,10 @@ public class LoadGame : MonoBehaviour
         EncounterController encounterController = GameObject.FindGameObjectWithTag("EncountersController").GetComponent<EncounterController>();
         encounterController.SetDelegatesEncounters();
 
+        //audio
+        AudioController audioController = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>();
+        audioController.SetInstances();
+
 
         //Start Game
         levelController.ChangeLevel(firstLevel);

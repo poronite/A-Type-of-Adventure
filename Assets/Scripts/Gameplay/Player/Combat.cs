@@ -82,8 +82,6 @@ public class Combat : MonoBehaviour
 
     private Animator playerAnimator;
 
-    private CombatAnimations combatAnimator;
-
     private PostProcessVolume globalVolume;
 
 
@@ -94,8 +92,6 @@ public class Combat : MonoBehaviour
         enemyController = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
 
         playerAnimator = GameObject.Find("MC_Combat").GetComponent<Animator>();
-
-        combatAnimator = playerAnimator.gameObject.GetComponent<CombatAnimations>();
 
         globalVolume = FindObjectOfType<PostProcessVolume>();
     }
@@ -142,7 +138,6 @@ public class Combat : MonoBehaviour
         currentPhase = Phase.Normal;
         enemyController.gameObject.GetComponent<EnemyStats>().SetupEnemy(enemy);
         enemyController.ResetAttackProgress();
-        combatAnimator.ResetEnemyPosition();
         GenerateActionWordsCmb();
         Debug.Log("Started combat.");
     }

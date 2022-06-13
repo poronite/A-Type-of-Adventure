@@ -33,30 +33,12 @@ public class CombatAnimations : MonoBehaviour
             case "MC":
                 player.Attack();
                 enemyAnimator.SetTrigger("TakeDamage");
-
-                if (!enemyStats.IsBoss)
-                {
-                    enemyAnimator.SetBool("Death", enemyStats.IsEnemyDead);
-                }
-                else
-                {
-                    enemyAnimator.SetBool("Death", false); //boss doesn't have death animation
-                }
                 break;
             case "Enemy":
                 if (!playerStats.IsPlayerDodging)
                 {
                     enemy.Attack();
                     mcAnimator.SetTrigger("TakeDamage");
-
-                    if (playerStats.PlayerCurrentHP == 0)
-                    {
-                        mcAnimator.SetBool("Death", true);
-                    }
-                    else
-                    {
-                        mcAnimator.SetBool("Death", false);
-                    }
                 }
                 else
                 {
@@ -67,17 +49,5 @@ public class CombatAnimations : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    public void ResetPlayerPosition()
-    {
-        mcAnimator.gameObject.transform.GetChild(0).localPosition = Vector3.zero;
-        mcAnimator.Play("Idle", 0);
-    }
-
-    public void ResetEnemyPosition()
-    {
-        enemyAnimator.gameObject.transform.GetChild(0).localPosition = Vector3.zero;
-        enemyAnimator.Play("Idle", 0);
     }
 }

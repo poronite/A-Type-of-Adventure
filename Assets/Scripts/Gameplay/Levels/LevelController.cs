@@ -46,6 +46,10 @@ public class LevelController : MonoBehaviour
     FieldDelegate ChangeFieldParalax;
 
 
+    //audio controller
+    AudioController audioController;
+
+
     //Functions
     public void SetDelegatesLevel()
     {
@@ -60,6 +64,8 @@ public class LevelController : MonoBehaviour
         BackgroundManager backgroundManager = FindObjectOfType<BackgroundManager>().GetComponent<BackgroundManager>();
         ChangeFieldNonParalax = backgroundManager.ChangeFieldNonParalax;
         ChangeFieldParalax = backgroundManager.ChangeFieldParalax;
+
+        audioController = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>();
     }
 
 
@@ -130,6 +136,9 @@ public class LevelController : MonoBehaviour
             default:
                 break;
         }
+
+        audioController.ChangeAMB(fieldType);
+        audioController.ChangeMusic(fieldType);
     }
 
     private void CreateBranching()
