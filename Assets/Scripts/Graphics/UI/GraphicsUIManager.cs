@@ -15,9 +15,6 @@ public class GraphicsUIManager : MonoBehaviour
     private GameObject Adventure;
 
     [SerializeField]
-    private Image AdventureTextBar;
-
-    [SerializeField]
     private GameObject Combat;
 
     [SerializeField]
@@ -28,12 +25,6 @@ public class GraphicsUIManager : MonoBehaviour
 
     [SerializeField]
     private CameraMovement mainCamera;
-
-
-    private void Start()
-    {
-        AdventureTextBar.color = new Color(0, 0, 0, PlayerPrefs.GetFloat("BarOpacity", 0.4f));  
-    }
 
     public IEnumerator ActivateLoadingScreen()
     {

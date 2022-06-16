@@ -100,14 +100,14 @@ public class AdventureUI : MonoBehaviour
     {
         float letterWidth = currentTextUIAdv.GetPreferredValues(character).x;
 
-        advUIElements.localPosition -= new Vector3(letterWidth, advUIElements.localPosition.y, advUIElements.localPosition.z);
+        advUIElements.localPosition -= new Vector3(letterWidth, 0, 0);
     }
 
 
     //Reset adventure UI elements position after player has finished typing the current word
     private void ResetAdvUIElementsPosition()
     {
-        advUIElements.localPosition = new Vector3(0, advUIElements.localPosition.y, advUIElements.localPosition.z);
+        advUIElements.localPosition = new Vector3(0, -10, 0);
     }
 
 
