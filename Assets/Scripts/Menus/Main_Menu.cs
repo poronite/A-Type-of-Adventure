@@ -11,7 +11,7 @@ public class Main_Menu : MonoBehaviour
 {
     [SerializeField]
     private GameObject MainMenu;
-
+    
     [SerializeField]
     private GameObject OptionsMenu;
 
@@ -49,8 +49,8 @@ public class Main_Menu : MonoBehaviour
 
     public void Play()
     {
-        input.sendNavigationEvents = false;
         MainMenu.SetActive(false);
+        input.sendNavigationEvents = false;
         StartCoroutine(LoadGame());
     }
 
@@ -67,8 +67,8 @@ public class Main_Menu : MonoBehaviour
     {
         Debug.Log("Open Options Menu");
         MainMenu.SetActive(false);
-        OptionsMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
+        OptionsMenu.SetActive(true);
     }
 
     public void QuitGame()
@@ -87,7 +87,7 @@ public class Main_Menu : MonoBehaviour
 
     void Update()
     {
-        if (MainMenu.activeInHierarchy == true)
+        if (MainMenu.activeInHierarchy)
         {
             if (EventSystem.current.currentSelectedGameObject != null)
             {

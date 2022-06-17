@@ -10,10 +10,7 @@ using FMODUnity;
 public class Options_Menu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject MainMenu;
-
-    [SerializeField]
-    private GameObject OptionsMenu;
+    private GameObject Menu;
 
     [SerializeField]
     private Toggle fullscreenToggle;
@@ -26,12 +23,6 @@ public class Options_Menu : MonoBehaviour
 
     [SerializeField]
     private Slider voiceVolumeSlider;
-
-    [SerializeField]
-    private Slider barOpacitySlider;
-
-    [SerializeField]
-    private Image barOpacityTest;
 
     private GameObject lastSelectedUIOptionsMenu;
 
@@ -52,7 +43,6 @@ public class Options_Menu : MonoBehaviour
         lastSelectedUIOptionsMenu = fullscreenToggle.gameObject;
 
         fullscreenToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Fullscreen", 1));
-        barOpacitySlider.value = PlayerPrefs.GetFloat("BarOpacity", 0.4f);
 
         musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.8f);
         MusicBus.setVolume(musicVolumeSlider.value);
@@ -67,28 +57,24 @@ public class Options_Menu : MonoBehaviour
 
     public void Back()
     {
-        Debug.Log("Return to Main Menu");
-        OptionsMenu.SetActive(false);
-        MainMenu.SetActive(true);
+        Debug.Log("Return to Main/Pause Menu");
+        Menu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         lastSelectedUIOptionsMenu = fullscreenToggle.gameObject;
+        gameObject.SetActive(false);
     }
 
 
     void Update()
     {
-        if (OptionsMenu.activeInHierarchy == true)
+        //Debug.Log(EventSystem.current.currentSelectedGameObject);
+        if (EventSystem.current.currentSelectedGameObject != null)
         {
-            //Debug.Log(EventSystem.current.currentSelectedGameObject);
-            if (EventSystem.current.currentSelectedGameObject != null)
-            {
-                lastSelectedUIOptionsMenu = EventSystem.current.currentSelectedGameObject;
-                
-            }
-            else
-            {
-                EventSystem.current.SetSelectedGameObject(lastSelectedUIOptionsMenu);
-            }
+            lastSelectedUIOptionsMenu = EventSystem.current.currentSelectedGameObject;
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(lastSelectedUIOptionsMenu);
         }
     }
 
@@ -97,13 +83,6 @@ public class Options_Menu : MonoBehaviour
     {
         Screen.fullScreen = fullscreenToggle.isOn;
         PlayerPrefs.SetInt("Fullscreen", Convert.ToInt32(fullscreenToggle.isOn));
-    }
-
-    public void OnBarOpacitySlider()
-    {
-        //maybe change an element on screen to show how it looks?
-        barOpacityTest.color = new Color(0, 0, 0, barOpacitySlider.value);
-        PlayerPrefs.SetFloat("BarOpacity", barOpacitySlider.value);
     }
 
     public void OnMusicVolumeSlider()
