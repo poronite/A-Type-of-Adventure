@@ -1314,6 +1314,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383626986}
   m_CullTransparentMesh: 0
+--- !u!1 &1476111487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4957348355163702971, guid: 55d79a3fd3f84804bb233e29745c54be,
+    type: 3}
+  m_PrefabInstance: {fileID: 43088664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1554697744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1600,7 +1606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainMenu: {fileID: 2018794873}
-  OptionsMenu: {fileID: 0}
+  OptionsMenu: {fileID: 1476111487}
   playButton: {fileID: 544823406}
   fadeIn: {fileID: 1683232221}
   pointer: {fileID: 1822733375}
