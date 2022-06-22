@@ -26,7 +26,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 113000
+  Length: 33000
 --- !u!114 &-3765441767079699382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,10 +96,10 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637912777058283673
+  lastModified: 637915043956434355
   FileSizes:
   - Name: Desktop
-    Value: 5394080
+    Value: 7192096
   Exists: 1
 --- !u!114 &-1859402901081445360
 MonoBehaviour:
@@ -244,7 +244,7 @@ MonoBehaviour:
   - {fileID: -2471981782142384683}
   StringsBanks:
   - {fileID: 8510983333597803202}
-  cacheTime: 637912777058313758
+  cacheTime: 637915043956464457
   cacheVersion: 10
 --- !u!114 &168708697234499999
 MonoBehaviour:
@@ -293,13 +293,13 @@ MonoBehaviour:
     Data4: -1603059309
   Banks:
   - {fileID: -2471981782142384683}
-  IsStream: 0
+  IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 100000
 --- !u!114 &321015067445133914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,7 +531,7 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637912777058313758
+  lastModified: 637915043956464457
   FileSizes:
   - Name: Desktop
     Value: 1696

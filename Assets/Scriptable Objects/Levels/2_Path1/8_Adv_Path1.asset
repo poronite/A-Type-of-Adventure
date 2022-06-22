@@ -30,7 +30,7 @@ MonoBehaviour:
   EncounterValue:
   - {fileID: 11400000, guid: 38ca7990a62e1794eb4ba43839061d91, type: 2}
   - {fileID: 11400000, guid: 73c7d39031f891e46a3dcade736b3ef9, type: 2}
-  - {fileID: 11400000, guid: 9c99ef41d5f5eaf49af787af3cad2e0f, type: 2}
+  - {fileID: 11400000, guid: 305744d3630f54c45b353fa9c74bed30, type: 2}
   - {fileID: 11400000, guid: 85ec98c9184417148949caac5b4c2808, type: 2}
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
