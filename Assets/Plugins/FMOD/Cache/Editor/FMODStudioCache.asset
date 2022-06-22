@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 33000
+--- !u!114 &-6721997779393391613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Combat/Attack Actions/Hit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Combat/Attack Actions/Hit
+  Guid:
+    Data1: 1935692638
+    Data2: 1217245181
+    Data3: 765503413
+    Data4: -907388703
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-3765441767079699382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,33 +81,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
---- !u!114 &-2826507814393982478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Combat/Roll
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Combat/Roll
-  Guid:
-    Data1: -164683791
-    Data2: 1214052421
-    Data3: 1173104562
-    Data4: -1408276334
-  Banks:
-  - {fileID: -2471981782142384683}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-2471981782142384683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,10 +96,10 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637915043956434355
+  lastModified: 637915366454637456
   FileSizes:
   - Name: Desktop
-    Value: 7192096
+    Value: 7229440
   Exists: 1
 --- !u!114 &-1859402901081445360
 MonoBehaviour:
@@ -119,6 +119,33 @@ MonoBehaviour:
     Data2: 1261278126
     Data3: -1173892171
     Data4: 953190481
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1822905210302132683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Combat/Attack Actions/Punch
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Combat/Attack Actions/Punch
+  Guid:
+    Data1: 1812424944
+    Data2: 1082558493
+    Data3: 264596394
+    Data4: -552289060
   Banks:
   - {fileID: -2471981782142384683}
   IsStream: 0
@@ -206,6 +233,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-225170518104055750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Combat/Dodge Actions/Roll
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Combat/Dodge Actions/Roll
+  Guid:
+    Data1: -164683791
+    Data2: 1214052421
+    Data3: 1173104562
+    Data4: -1408276334
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-68941673157453964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Combat/Attack Actions/Slash
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Combat/Attack Actions/Slash
+  Guid:
+    Data1: 1658359838
+    Data2: 1245130999
+    Data3: 415203260
+    Data4: -779126839
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,9 +309,6 @@ MonoBehaviour:
   - {fileID: -1859402901081445360}
   - {fileID: -543853196333455098}
   - {fileID: 321015067445133914}
-  - {fileID: 2654836226946607743}
-  - {fileID: 7394243472716659370}
-  - {fileID: -2826507814393982478}
   - {fileID: -1134443622030999321}
   - {fileID: -3765441767079699382}
   - {fileID: 4969004078665755644}
@@ -238,13 +316,20 @@ MonoBehaviour:
   - {fileID: 823410647005762354}
   - {fileID: 4003972433291724678}
   - {fileID: 311514149990808136}
+  - {fileID: -68941673157453964}
+  - {fileID: 6282606102899362557}
+  - {fileID: -6721997779393391613}
+  - {fileID: 1083314732140380538}
+  - {fileID: 9103306335281128651}
+  - {fileID: -1822905210302132683}
+  - {fileID: -225170518104055750}
   EditorParameters:
   - {fileID: -1113453570435039438}
   MasterBanks:
   - {fileID: -2471981782142384683}
   StringsBanks:
   - {fileID: 8510983333597803202}
-  cacheTime: 637915043956464457
+  cacheTime: 637915366454677587
   cacheVersion: 10
 --- !u!114 &168708697234499999
 MonoBehaviour:
@@ -354,6 +439,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 108000
+--- !u!114 &1083314732140380538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Combat/Dodge Actions/Block
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Combat/Dodge Actions/Block
+  Guid:
+    Data1: 1981440910
+    Data2: 1209990788
+    Data3: -1632725059
+    Data4: -655990648
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1223475959931507001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,33 +484,6 @@ MonoBehaviour:
     Data2: 1228283059
     Data3: -235060079
     Data4: -1495828643
-  Banks:
-  - {fileID: -2471981782142384683}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &2654836226946607743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Combat/Crouch
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Combat/Crouch
-  Guid:
-    Data1: 536721457
-    Data2: 1308124301
-    Data3: 1788598172
-    Data4: -350941377
   Banks:
   - {fileID: -2471981782142384683}
   IsStream: 0
@@ -489,7 +574,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
---- !u!114 &7394243472716659370
+--- !u!114 &6282606102899362557
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -499,14 +584,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Combat/Dash
+  m_Name: event:/SFX/Combat/Dodge Actions/Crouch
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Combat/Dash
+  Path: event:/SFX/Combat/Dodge Actions/Crouch
   Guid:
-    Data1: 1104648603
-    Data2: 1322000434
-    Data3: -1388652634
-    Data4: -338674438
+    Data1: 536721457
+    Data2: 1308124301
+    Data3: 1788598172
+    Data4: -350941377
   Banks:
   - {fileID: -2471981782142384683}
   IsStream: 0
@@ -531,8 +616,35 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637915043956464457
+  lastModified: 637915366454677587
   FileSizes:
   - Name: Desktop
-    Value: 1696
+    Value: 1892
   Exists: 1
+--- !u!114 &9103306335281128651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Combat/Dodge Actions/Dash
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Combat/Dodge Actions/Dash
+  Guid:
+    Data1: 1104648603
+    Data2: 1322000434
+    Data3: -1388652634
+    Data4: -338674438
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0

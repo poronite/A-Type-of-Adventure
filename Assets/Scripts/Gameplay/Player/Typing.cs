@@ -76,7 +76,7 @@ public class Typing : MonoBehaviour
     delegate void UpdateHint(string hint);
     UpdateHint UpdateHintAdvUI;
 
-    delegate void TriggerAudio(AudioName audioName);
+    delegate void TriggerAudio(SFXName audioName);
     TriggerAudio TriggerSFX;
 
 
@@ -175,7 +175,7 @@ public class Typing : MonoBehaviour
                     {
                         Mistake.Invoke();
 
-                        TriggerSFX(AudioName.Mistake);
+                        TriggerSFX(SFXName.Mistake);
                     }
                     break;
                 case PlayerState.Puzzle:
@@ -281,7 +281,7 @@ public class Typing : MonoBehaviour
             }
         }
 
-        TriggerSFX(AudioName.TypewriterKey);
+        TriggerSFX(SFXName.TypewriterKey);
 
         //Debug.Log($"Character typed: {character} | {outputWord}");
 
@@ -290,7 +290,7 @@ public class Typing : MonoBehaviour
             case PlayerState.Adventure:
                 if (IsWordComplete(character))
                 {
-                    TriggerSFX(AudioName.CompleteWord);
+                    TriggerSFX(SFXName.CompleteWord);
 
                     CompleteWordAdv.Invoke(outputWord.ToString());
                 }
@@ -299,7 +299,7 @@ public class Typing : MonoBehaviour
                     isSettingName = false;
                     string name = outputWord.ToString();
 
-                    TriggerSFX(AudioName.CompleteWord);
+                    TriggerSFX(SFXName.CompleteWord);
 
                     CompleteWordAdv.Invoke(outputWord.ToString());
 
@@ -310,7 +310,7 @@ public class Typing : MonoBehaviour
             case PlayerState.Combat:
                 if (IsWordComplete(character))
                 {
-                    TriggerSFX(AudioName.CompleteWord);
+                    TriggerSFX(SFXName.CompleteWord);
 
                     CompleteWordCmb.Invoke(outputWord.ToString());
                 }
@@ -320,7 +320,7 @@ public class Typing : MonoBehaviour
             case PlayerState.Puzzle:
                 if (IsWordComplete(character))
                 {
-                    TriggerSFX(AudioName.CompleteWord);
+                    TriggerSFX(SFXName.CompleteWord);
 
                     CompleteWordPzl.Invoke(outputWord.ToString());
                 }
@@ -330,7 +330,7 @@ public class Typing : MonoBehaviour
             case PlayerState.Challenge:
                 if (IsWordComplete(character))
                 {
-                    TriggerSFX(AudioName.CompleteWord);
+                    TriggerSFX(SFXName.CompleteWord);
 
                     CompleteWordChl.Invoke(outputWord.ToString());
                 }

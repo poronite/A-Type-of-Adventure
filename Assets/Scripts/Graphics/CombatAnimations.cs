@@ -12,11 +12,14 @@ public class CombatAnimations : MonoBehaviour
 
     private EnemyStats enemyStats;
 
+    private AudioController audioController;
+
     [SerializeField]
     private Animator mcAnimator;
 
     [SerializeField]
     private Animator enemyAnimator;
+
 
     private void Start()
     {
@@ -24,6 +27,7 @@ public class CombatAnimations : MonoBehaviour
         playerStats = player.gameObject.GetComponent<PlayerStats>();
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
         enemyStats = enemy.gameObject.GetComponent<EnemyStats>();
+        audioController = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>();
     }
 
     public void TriggerAttack(string attacker)
@@ -49,5 +53,10 @@ public class CombatAnimations : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void TriggerAnimationSFX(SFXName combatSFXName)
+    {
+        audioController.TriggerSFX(combatSFXName);
     }
 }

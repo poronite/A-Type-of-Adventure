@@ -21,7 +21,7 @@ public class EncounterController : MonoBehaviour
     delegate IEnumerator StopVideoDelegate();
     StopVideoDelegate StopVideo;
 
-    delegate void AudioDelegate(AudioName name);
+    delegate void AudioDelegate(SFXName name);
     AudioDelegate TriggerSFX;
 
 
@@ -63,14 +63,14 @@ public class EncounterController : MonoBehaviour
 
                 if (encounter.EndOfCutscene)
                 {
-                    TriggerSFX.Invoke(AudioName.CutsceneEnd);
+                    TriggerSFX.Invoke(SFXName.CutsceneEnd);
 
                     StartCoroutine(StopVideo.Invoke());
                     break;
                 }
                 else
                 {
-                    TriggerSFX.Invoke(AudioName.CutsceneChange);
+                    TriggerSFX.Invoke(SFXName.CutsceneChange);
 
                     StartCoroutine(PlayVideo.Invoke(encounter.cutsceneVideo, encounter.cutsceneVideoLoop));
                 }

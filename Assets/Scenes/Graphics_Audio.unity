@@ -733,6 +733,55 @@ MonoBehaviour:
       Data3: 1889082499
       Data4: -623391425
     Path: event:/SFX/UI/Gameplay/Cutscene End
+  slash_eventReference:
+    Guid:
+      Data1: 1658359838
+      Data2: 1245130999
+      Data3: 415203260
+      Data4: -779126839
+    Path: event:/SFX/Combat/Attack Actions/Slash
+  hit_eventReference:
+    Guid:
+      Data1: 1935692638
+      Data2: 1217245181
+      Data3: 765503413
+      Data4: -907388703
+    Path: event:/SFX/Combat/Attack Actions/Hit
+  punch_eventReference:
+    Guid:
+      Data1: 1812424944
+      Data2: 1082558493
+      Data3: 264596394
+      Data4: -552289060
+    Path: event:/SFX/Combat/Attack Actions/Punch
+  crouch_eventReference:
+    Guid:
+      Data1: 536721457
+      Data2: 1308124301
+      Data3: 1788598172
+      Data4: -350941377
+    Path: event:/SFX/Combat/Dodge Actions/Crouch
+  dash_eventReference:
+    Guid:
+      Data1: 1104648603
+      Data2: 1322000434
+      Data3: -1388652634
+      Data4: -338674438
+    Path: event:/SFX/Combat/Dodge Actions/Dash
+  roll_eventReference:
+    Guid:
+      Data1: -164683791
+      Data2: 1214052421
+      Data3: 1173104562
+      Data4: -1408276334
+    Path: event:/SFX/Combat/Dodge Actions/Roll
+  block_eventReference:
+    Guid:
+      Data1: 1981440910
+      Data2: 1209990788
+      Data3: -1632725059
+      Data4: -655990648
+    Path: event:/SFX/Combat/Dodge Actions/Block
   magicForest_Music_reference:
     Guid:
       Data1: -1369478812
@@ -4453,6 +4502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mcAnimator: {fileID: 1221776842}
   enemyAnimator: {fileID: 971985663}
+  audioController: {fileID: 147487987}
 --- !u!1 &976748699
 GameObject:
   m_ObjectHideFlags: 0
@@ -5328,6 +5378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mcAnimator: {fileID: 1221776842}
   enemyAnimator: {fileID: 971985663}
+  audioController: {fileID: 147487987}
 --- !u!224 &1224599224 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4957348355163702964, guid: 55d79a3fd3f84804bb233e29745c54be,
@@ -5574,7 +5625,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.1825, y: 5.11}
+  m_Size: {x: 5.3202925, y: 6.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0

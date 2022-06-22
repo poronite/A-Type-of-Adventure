@@ -4,13 +4,26 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 
-public enum AudioName
+public enum SFXName
 {
     TypewriterKey,
     CompleteWord,
     Mistake,
     CutsceneChange,
-    CutsceneEnd
+    CutsceneEnd,
+    Slash,
+    Hit,
+    Punch,
+    Crouch,
+    Dash,
+    Roll,
+    Block
+}
+
+public enum OtherMusic
+{
+    Combat,
+    GameOver
 }
 
 public enum SnapshotName
@@ -40,12 +53,40 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     private EventReference cutsceneEnd_eventReference;
 
+    [SerializeField]
+    private EventReference slash_eventReference;
+
+    [SerializeField]
+    private EventReference hit_eventReference;
+
+    [SerializeField]
+    private EventReference punch_eventReference;
+
+    [SerializeField]
+    private EventReference crouch_eventReference;
+
+    [SerializeField]
+    private EventReference dash_eventReference;
+
+    [SerializeField]
+    private EventReference roll_eventReference;
+
+    [SerializeField]
+    private EventReference block_eventReference;
+
     //Audio event instances
     EventInstance typewriterKey_instance;
     EventInstance completeWord_instance;
     EventInstance mistake_instance;
     EventInstance cutsceneChange_instance;
     EventInstance cutsceneEnd_instance;
+    EventInstance slash_instance;
+    EventInstance hit_instance;
+    EventInstance punch_instance;
+    EventInstance crouch_instance;
+    EventInstance dash_instance;
+    EventInstance roll_instance;
+    EventInstance block_instance;
 
 
     //Music
@@ -96,6 +137,13 @@ public class AudioController : MonoBehaviour
         mistake_instance = RuntimeManager.CreateInstance(mistake_eventReference);
         cutsceneChange_instance = RuntimeManager.CreateInstance(cutsceneChange_eventReference);
         cutsceneEnd_instance = RuntimeManager.CreateInstance(cutsceneEnd_eventReference);
+        slash_instance = RuntimeManager.CreateInstance(slash_eventReference);
+        hit_instance = RuntimeManager.CreateInstance(hit_eventReference);
+        punch_instance = RuntimeManager.CreateInstance(punch_eventReference);
+        crouch_instance = RuntimeManager.CreateInstance(crouch_eventReference);
+        dash_instance = RuntimeManager.CreateInstance(dash_eventReference);
+        roll_instance = RuntimeManager.CreateInstance(roll_eventReference);
+        block_instance = RuntimeManager.CreateInstance(block_eventReference);
 
         //Music
         magicForest_Music_instance = RuntimeManager.CreateInstance(magicForest_Music_reference);
@@ -111,69 +159,123 @@ public class AudioController : MonoBehaviour
     }
 
 
-    public void TriggerSFX(AudioName audioName)
+    public void TriggerSFX(SFXName sfxName)
     {
-        switch (audioName)
+        switch (sfxName)
         {
-            case AudioName.TypewriterKey:
+            case SFXName.TypewriterKey:
                 typewriterKey_instance.start();
                 break;
-            case AudioName.CompleteWord:
+            case SFXName.CompleteWord:
                 completeWord_instance.start();
                 break;
-            case AudioName.Mistake:
+            case SFXName.Mistake:
                 mistake_instance.start();
                 break;
-            case AudioName.CutsceneChange:
+            case SFXName.CutsceneChange:
                 cutsceneChange_instance.start();
                 break;
-            case AudioName.CutsceneEnd:
+            case SFXName.CutsceneEnd:
                 cutsceneEnd_instance.start();
                 break;
+            case SFXName.Slash:
+                slash_instance.start();
+                break;
+            case SFXName.Hit:
+                hit_instance.start();
+                break;
+            case SFXName.Punch:
+                punch_instance.start();
+                break;
+            case SFXName.Crouch:
+                crouch_instance.start();
+                break;
+            case SFXName.Dash:
+                dash_instance.start();
+                break;
+            case SFXName.Roll:
+                roll_instance.start();
+                break;
+            case SFXName.Block:
+                block_instance.start();
+                break;
             default:
                 break;
         }
     }
 
-    public void ChangeMusic(FieldType field)
+    public void ChangeMusic(FieldType field = FieldType.Plains, bool playOtherMusic = false, OtherMusic otherMusicName = OtherMusic.Combat)
     {
-        magicForest_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
-
-        switch (field)
+        if (!playOtherMusic)
         {
-            case FieldType.Plains:
-                break;
-            case FieldType.MagicForest:
-                magicForest_Music_instance.start();
-                break;
-            case FieldType.Citadel:
-                break;
-            default:
-                break;
+            switch (field)
+            {
+                case FieldType.Plains:
+                    magicForest_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+                    //play
+                    break;
+                case FieldType.MagicForest:
+                    //stop
+
+                    magicForest_Music_instance.start();
+                    break;
+                case FieldType.Citadel:
+                    magicForest_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+                    //play
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            switch (otherMusicName)
+            {
+                case OtherMusic.Combat:
+                    break;
+                case OtherMusic.GameOver:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-    public void ChangeAMB(FieldType field)
+    public void ChangeAMB(FieldType field = FieldType.Plains, bool stopPlaying = false)
     {
-        plains_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        magicForest_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        citadel_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
-
-        switch (field)
+        if (!stopPlaying)
         {
-            case FieldType.Plains:
-                plains_AMB_instance.start();
-                break;
-            case FieldType.MagicForest:
-                magicForest_AMB_instance.start();
-                break;
-            case FieldType.Citadel:
-                citadel_AMB_instance.start();
-                break;
-            default:
-                break;
+            switch (field)
+            {
+                case FieldType.Plains:
+                    magicForest_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    citadel_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+                    plains_AMB_instance.start();
+                    break;
+                case FieldType.MagicForest:
+                    plains_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    citadel_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+                    magicForest_AMB_instance.start();
+                    break;
+                case FieldType.Citadel:
+                    plains_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    magicForest_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+                    citadel_AMB_instance.start();
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            plains_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            magicForest_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            citadel_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 

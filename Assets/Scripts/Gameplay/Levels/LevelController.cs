@@ -105,6 +105,9 @@ public class LevelController : MonoBehaviour
                 player.GetComponent<Adventure>().StartAdventure(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Adventure"));
 
+                audioController.ChangeAMB(fieldType);
+                audioController.ChangeMusic(fieldType);
+
                 break;
             case LevelType.Combat:
 
@@ -113,6 +116,9 @@ public class LevelController : MonoBehaviour
                 //Start combat
                 player.GetComponent<Combat>().StartCombat(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Combat"));
+
+                audioController.ChangeAMB(fieldType, true);
+                audioController.ChangeMusic(fieldType, true, OtherMusic.Combat);
 
                 break;
             case LevelType.Puzzle:
@@ -123,6 +129,9 @@ public class LevelController : MonoBehaviour
                 player.GetComponent<Puzzle>().StartPuzzle(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Puzzle"));
 
+                audioController.ChangeAMB(fieldType);
+                audioController.ChangeMusic(fieldType);
+
                 break;
             case LevelType.Challenge:
 
@@ -132,13 +141,13 @@ public class LevelController : MonoBehaviour
                 player.GetComponent<Challenge>().StartChallenge(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Challenge"));
 
+                audioController.ChangeAMB(fieldType);
+                audioController.ChangeMusic(fieldType);
+
                 break;
             default:
                 break;
         }
-
-        audioController.ChangeAMB(fieldType);
-        audioController.ChangeMusic(fieldType);
     }
 
     private void CreateBranching()
