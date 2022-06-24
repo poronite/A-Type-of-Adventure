@@ -782,6 +782,13 @@ MonoBehaviour:
       Data3: -1632725059
       Data4: -655990648
     Path: event:/SFX/Combat/Dodge Actions/Block
+  plains_Music_reference:
+    Guid:
+      Data1: 322905563
+      Data2: 1145199767
+      Data3: -233792367
+      Data4: 600719511
+    Path: event:/Music/Plains Music
   magicForest_Music_reference:
     Guid:
       Data1: -1369478812
@@ -789,6 +796,13 @@ MonoBehaviour:
       Data3: -1493955188
       Data4: -570179178
     Path: event:/Music/Magic Forest Music
+  combat_Music_reference:
+    Guid:
+      Data1: -1364619393
+      Data2: 1107812974
+      Data3: 1617154999
+      Data4: 1707031234
+    Path: event:/Music/Combat Music
   plains_AMB_eventReference:
     Guid:
       Data1: 553753818
@@ -4502,7 +4516,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mcAnimator: {fileID: 1221776842}
   enemyAnimator: {fileID: 971985663}
-  audioController: {fileID: 147487987}
 --- !u!1 &976748699
 GameObject:
   m_ObjectHideFlags: 0
@@ -5378,7 +5391,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mcAnimator: {fileID: 1221776842}
   enemyAnimator: {fileID: 971985663}
-  audioController: {fileID: 147487987}
 --- !u!224 &1224599224 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4957348355163702964, guid: 55d79a3fd3f84804bb233e29745c54be,

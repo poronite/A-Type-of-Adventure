@@ -20,7 +20,7 @@ MonoBehaviour:
     Data4: 501619212
   Banks:
   - {fileID: -2471981782142384683}
-  IsStream: 1
+  IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters: []
@@ -96,11 +96,38 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637915722106148144
+  lastModified: 637916827934542603
   FileSizes:
   - Name: Desktop
-    Value: 7229440
+    Value: 7410272
   Exists: 1
+--- !u!114 &-2117620324607415575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Plains Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Plains Music
+  Guid:
+    Data1: 322905563
+    Data2: 1145199767
+    Data3: -233792367
+    Data4: 600719511
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5609
 --- !u!114 &-1859402901081445360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +260,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-281253782837221566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Combat Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Combat Music
+  Guid:
+    Data1: -1364619393
+    Data2: 1107812974
+    Data3: 1617154999
+    Data4: 1707031234
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 9931
 --- !u!114 &-225170518104055750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,13 +377,15 @@ MonoBehaviour:
   - {fileID: 9103306335281128651}
   - {fileID: -1822905210302132683}
   - {fileID: -225170518104055750}
+  - {fileID: -281253782837221566}
+  - {fileID: -2117620324607415575}
   EditorParameters:
   - {fileID: -1113453570435039438}
   MasterBanks:
   - {fileID: -2471981782142384683}
   StringsBanks:
   - {fileID: 8510983333597803202}
-  cacheTime: 637915722106178147
+  cacheTime: 637916827934582733
   cacheVersion: 10
 --- !u!114 &168708697234499999
 MonoBehaviour:
@@ -378,7 +434,7 @@ MonoBehaviour:
     Data4: -1603059309
   Banks:
   - {fileID: -2471981782142384683}
-  IsStream: 1
+  IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters: []
@@ -432,7 +488,7 @@ MonoBehaviour:
     Data4: 1488411266
   Banks:
   - {fileID: -2471981782142384683}
-  IsStream: 1
+  IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters: []
@@ -513,7 +569,7 @@ MonoBehaviour:
     Data4: 1462083065
   Banks:
   - {fileID: -2471981782142384683}
-  IsStream: 1
+  IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters: []
@@ -540,7 +596,7 @@ MonoBehaviour:
     Data4: -570179178
   Banks:
   - {fileID: -2471981782142384683}
-  IsStream: 1
+  IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters: []
@@ -616,10 +672,10 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637915722106178147
+  lastModified: 637916827934582733
   FileSizes:
   - Name: Desktop
-    Value: 1892
+    Value: 1990
   Exists: 1
 --- !u!114 &9103306335281128651
 MonoBehaviour:

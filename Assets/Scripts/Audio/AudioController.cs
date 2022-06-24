@@ -20,7 +20,7 @@ public enum SFXName
     Block
 }
 
-public enum OtherMusic
+public enum OtherMusicName
 {
     Combat,
     GameOver
@@ -92,10 +92,26 @@ public class AudioController : MonoBehaviour
     //Music
     //Audio references
     [SerializeField]
+    private EventReference plains_Music_reference;
+
+    [SerializeField]
     private EventReference magicForest_Music_reference;
 
+    //[SerializeField]
+    //private EventReference citadel_Music_reference;
+
+    [SerializeField]
+    private EventReference combat_Music_reference;
+
+    //[SerializeField]
+    //private EventReference gameOver_Music_reference;
+
     //Audio event instances
+    EventInstance plains_Music_instance;
     EventInstance magicForest_Music_instance;
+    //EventInstance citadel_Music_instance;
+    EventInstance combat_Music_instance;
+    //EventInstance gameOver_Music_instance;
 
 
     //AMB
@@ -146,7 +162,11 @@ public class AudioController : MonoBehaviour
         block_instance = RuntimeManager.CreateInstance(block_eventReference);
 
         //Music
+        plains_Music_instance = RuntimeManager.CreateInstance(plains_Music_reference);
         magicForest_Music_instance = RuntimeManager.CreateInstance(magicForest_Music_reference);
+        //citadel_Music_instance = RuntimeManager.CreateInstance(citadel_Music_reference);
+        combat_Music_instance = RuntimeManager.CreateInstance(combat_Music_reference);
+        //gameOver_Music_instance = RuntimeManager.CreateInstance(gameOver_Music_reference);
 
         //AMB
         plains_AMB_instance = RuntimeManager.CreateInstance(plains_AMB_eventReference);
@@ -204,26 +224,36 @@ public class AudioController : MonoBehaviour
         }
     }
 
-    public void ChangeMusic(FieldType field = FieldType.Plains, bool playOtherMusic = false, OtherMusic otherMusicName = OtherMusic.Combat)
+    public void ChangeMusic(FieldType field = FieldType.Plains, bool playOtherMusic = false, OtherMusicName otherMusicName = OtherMusicName.Combat)
     {
+        EventInstance musicToPlay = new EventInstance();
+
         if (!playOtherMusic)
         {
             switch (field)
             {
                 case FieldType.Plains:
                     magicForest_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    //citadel_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    combat_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
-                    //play
+                    Debug.Log("Plains");
+
+                    musicToPlay = plains_Music_instance;
                     break;
                 case FieldType.MagicForest:
-                    //stop
+                    plains_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    //citadel_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    combat_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
-                    magicForest_Music_instance.start();
+                    musicToPlay = magicForest_Music_instance;
                     break;
                 case FieldType.Citadel:
+                    plains_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                     magicForest_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    combat_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
-                    //play
+                    //musicToPlay = citadel_Music_instance;
                     break;
                 default:
                     break;
@@ -233,14 +263,33 @@ public class AudioController : MonoBehaviour
         {
             switch (otherMusicName)
             {
-                case OtherMusic.Combat:
+                case OtherMusicName.Combat:
+                    plains_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    magicForest_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    //citadel_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+                    musicToPlay = combat_Music_instance;
                     break;
-                case OtherMusic.GameOver:
+                case OtherMusicName.GameOver:
+                    combat_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+                    //musicToPlay = gameOver_Music_instance;
                     break;
                 default:
                     break;
             }
         }
+
+        musicToPlay.getPlaybackState(out PLAYBACK_STATE state);
+
+        musicToPlay.getDescription(out EventDescription description);
+
+        description.getPath(out string path);
+
+        Debug.Log($"{path}, {state}");
+
+        if (state != PLAYBACK_STATE.PLAYING)
+            musicToPlay.start();
     }
 
     public void ChangeAMB(FieldType field = FieldType.Plains, bool stopPlaying = false)
@@ -303,16 +352,34 @@ public class AudioController : MonoBehaviour
         lowHealthStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
         //free instances from memory
+        //SFX
         typewriterKey_instance.release();
         completeWord_instance.release();
         mistake_instance.release();
         cutsceneChange_instance.release();
         cutsceneEnd_instance.release();
+        slash_instance.release();
+        hit_instance.release();
+        punch_instance.release();
+        crouch_instance.release();
+        dash_instance.release();
+        roll_instance.release();
+        block_instance.release();
 
+        //Music
+        plains_Music_instance.release();
+        magicForest_Music_instance.release();
+        //citadel_Music_instance.release();
+        combat_Music_instance.release();
+        //gameOver_Music_instance.release();
+
+
+        //AMB
         plains_AMB_instance.release();
         magicForest_AMB_instance.release();
         citadel_AMB_instance.release();
-       
+        
+        //Snapshots
         normalStateSnapshotInstance.release();
         lowHealthStateSnapshotInstance.release();
     }

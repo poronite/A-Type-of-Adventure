@@ -117,8 +117,8 @@ public class LevelController : MonoBehaviour
                 player.GetComponent<Combat>().StartCombat(levelData);
                 yield return StartCoroutine(ChangeLevelGraphics.Invoke("Combat"));
 
-                audioController.ChangeAMB(fieldType, true);
-                audioController.ChangeMusic(fieldType, true, OtherMusic.Combat);
+                audioController.ChangeAMB(stopPlaying: true);
+                audioController.ChangeMusic(playOtherMusic: true, otherMusicName: OtherMusicName.Combat);
 
                 break;
             case LevelType.Puzzle:
