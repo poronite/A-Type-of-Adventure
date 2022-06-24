@@ -26,10 +26,11 @@ public enum OtherMusicName
     GameOver
 }
 
-public enum SnapshotName
+public enum SoundState
 {
     Normal,
-    LowHealth
+    LowHealth,
+    Pause
 }
 
 
@@ -139,9 +140,18 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     private EventReference lowHealthStateSnapshotReference;
 
+    [SerializeField]
+    private EventReference pauseStateSnapshotReference;
+
+
+
     //Instances
     EventInstance normalStateSnapshotInstance;
     EventInstance lowHealthStateSnapshotInstance;
+    EventInstance pauseStateSnapshotInstance;
+
+    //mixer
+    private Bus SFXBus;
 
 
     public void SetInstances()
@@ -176,6 +186,11 @@ public class AudioController : MonoBehaviour
         //snapshots
         normalStateSnapshotInstance = RuntimeManager.CreateInstance(normalStateSnapshotReference);
         lowHealthStateSnapshotInstance = RuntimeManager.CreateInstance(lowHealthStateSnapshotReference);
+        pauseStateSnapshotInstance = RuntimeManager.CreateInstance(pauseStateSnapshotReference);
+
+        SFXBus = RuntimeManager.GetBus("bus:/SFX");
+
+        ChangeSnapshot(SoundState.Normal);
     }
 
 
@@ -224,8 +239,18 @@ public class AudioController : MonoBehaviour
         }
     }
 
-    public void ChangeMusic(FieldType field = FieldType.Plains, bool playOtherMusic = false, OtherMusicName otherMusicName = OtherMusicName.Combat)
+    public void ChangeMusic(FieldType field = FieldType.Plains, bool playOtherMusic = false, OtherMusicName otherMusicName = OtherMusicName.Combat, bool stopPlayingAll = false)
     {
+        if (stopPlayingAll)
+        {
+            plains_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            magicForest_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            //citadel_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            combat_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+            return;
+        }
+
         EventInstance musicToPlay = new EventInstance();
 
         if (!playOtherMusic)
@@ -292,64 +317,94 @@ public class AudioController : MonoBehaviour
             musicToPlay.start();
     }
 
-    public void ChangeAMB(FieldType field = FieldType.Plains, bool stopPlaying = false)
+    public void ChangeAMB(FieldType field = FieldType.Plains, bool stopPlayingAll = false)
     {
-        if (!stopPlaying)
-        {
-            switch (field)
-            {
-                case FieldType.Plains:
-                    magicForest_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                    citadel_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
-                    plains_AMB_instance.start();
-                    break;
-                case FieldType.MagicForest:
-                    plains_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                    citadel_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
-                    magicForest_AMB_instance.start();
-                    break;
-                case FieldType.Citadel:
-                    plains_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                    magicForest_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
-                    citadel_AMB_instance.start();
-                    break;
-                default:
-                    break;
-            }
-        }
-        else
+        if (stopPlayingAll)
         {
             plains_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             magicForest_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             citadel_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        }
-    }
 
-    public void ChangeSnapshot(SnapshotName snapshotName)
-    {
-        switch (snapshotName)
+            return;
+        }
+
+        switch (field)
         {
-            case SnapshotName.Normal:
-                lowHealthStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                normalStateSnapshotInstance.start();
+            case FieldType.Plains:
+                magicForest_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                citadel_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+                plains_AMB_instance.start();
                 break;
-            case SnapshotName.LowHealth:
-                normalStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                lowHealthStateSnapshotInstance.start();
+            case FieldType.MagicForest:
+                plains_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                citadel_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+                magicForest_AMB_instance.start();
+                break;
+            case FieldType.Citadel:
+                plains_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                magicForest_AMB_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+                citadel_AMB_instance.start();
                 break;
             default:
                 break;
         }
     }
 
+    public void ChangeSnapshot(SoundState snapshotName = SoundState.Normal, bool stopPlayingAll = false)
+    {
+        //I know that this is the same has case normal but I like to be consistent
+        if (stopPlayingAll)
+        {
+            normalStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            pauseStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            lowHealthStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+            return;
+        }
+
+        switch (snapshotName)
+        {
+            case SoundState.Normal:
+                pauseStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                lowHealthStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                normalStateSnapshotInstance.start();
+                break;
+            case SoundState.LowHealth:
+                normalStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                pauseStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                lowHealthStateSnapshotInstance.start();
+                break;
+            case SoundState.Pause:
+                normalStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                lowHealthStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                pauseStateSnapshotInstance.start();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ResumePauseSounds(bool pause)
+    {
+        SFXBus.setPaused(pause);
+
+        if (pause)
+        {
+            ChangeSnapshot(SoundState.Pause);
+        }
+        else
+        {
+            ChangeSnapshot(SoundState.Normal);
+        }
+    }
+
     private void OnDestroy()
     {
         //stop snapshots
-        normalStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        lowHealthStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        ChangeSnapshot(stopPlayingAll: true);
 
         //free instances from memory
         //SFX
@@ -367,6 +422,7 @@ public class AudioController : MonoBehaviour
         block_instance.release();
 
         //Music
+        ChangeMusic(stopPlayingAll: true);
         plains_Music_instance.release();
         magicForest_Music_instance.release();
         //citadel_Music_instance.release();
@@ -375,12 +431,13 @@ public class AudioController : MonoBehaviour
 
 
         //AMB
+        ChangeAMB(stopPlayingAll: true);
         plains_AMB_instance.release();
         magicForest_AMB_instance.release();
         citadel_AMB_instance.release();
         
         //Snapshots
-        normalStateSnapshotInstance.release();
         lowHealthStateSnapshotInstance.release();
+        pauseStateSnapshotInstance.release();
     }
 }

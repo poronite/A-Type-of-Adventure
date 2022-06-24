@@ -16,9 +16,6 @@ public class Main_Menu : MonoBehaviour
     private GameObject OptionsMenu;
 
     [SerializeField]
-    private Button playButton;
-
-    [SerializeField]
     private CanvasGroup fadeIn;
 
     [SerializeField]
@@ -26,8 +23,6 @@ public class Main_Menu : MonoBehaviour
 
     [SerializeField]
     private EventSystem input;
-
-    private GameObject lastSelectedUIMainMenu;
 
 
     //snapshot
@@ -40,7 +35,7 @@ public class Main_Menu : MonoBehaviour
 
     private void Start()
     {
-        lastSelectedUIMainMenu = playButton.gameObject;
+        Time.timeScale = 1.0f;
 
         normalStateSnapshotInstance = RuntimeManager.CreateInstance(normalStateSnapshotReference);
 
@@ -67,7 +62,6 @@ public class Main_Menu : MonoBehaviour
     {
         Debug.Log("Open Options Menu");
         MainMenu.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(null);
         OptionsMenu.SetActive(true);
     }
 
@@ -82,24 +76,5 @@ public class Main_Menu : MonoBehaviour
         normalStateSnapshotInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 
         normalStateSnapshotInstance.release();
-    }
-
-
-    void Update()
-    {
-        if (MainMenu.activeInHierarchy)
-        {
-            if (EventSystem.current.currentSelectedGameObject != null)
-            {
-                lastSelectedUIMainMenu = EventSystem.current.currentSelectedGameObject;
-                pointer.position = new Vector3(pointer.position.x,
-                    lastSelectedUIMainMenu.transform.position.y,
-                    pointer.position.z);
-            }
-            else
-            {
-                EventSystem.current.SetSelectedGameObject(lastSelectedUIMainMenu);
-            }
-        }
     }
 }

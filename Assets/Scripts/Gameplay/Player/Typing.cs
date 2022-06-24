@@ -15,13 +15,19 @@ public enum PlayerState
     Dead,
     CombatComplete,
     ChallengeComplete,
-    Loading
+    Loading,
+    Pause,
+    Options,
+    EndGame
 }
 
 public class Typing : MonoBehaviour
 {
     //Variables
     public PlayerState CurrentPlayerState = PlayerState.Adventure;
+
+    //when pausing use this to store last player state 
+    private PlayerState lastPlayerState = PlayerState.Adventure;
 
     ///<summary>Is player setting their name for the first time.</summary>
     private bool isSettingName = false;
@@ -73,11 +79,15 @@ public class Typing : MonoBehaviour
     CompleteWordDelegate CompleteWordPzl;
     CompleteWordDelegate CompleteWordChl;
 
-    delegate void UpdateHint(string hint);
-    UpdateHint UpdateHintAdvUI;
+    delegate void UpdateHintDelegate(string hint);
+    UpdateHintDelegate UpdateHintAdvUI;
 
-    delegate void TriggerAudio(SFXName audioName);
-    TriggerAudio TriggerSFX;
+    delegate void TriggerAudioDelegate(SFXName audioName);
+    TriggerAudioDelegate TriggerSFX;
+
+    delegate void MenuDelegate(bool display);
+    MenuDelegate ResumePauseGame;
+    MenuDelegate DisplayOptionsMenu;
 
 
 
@@ -113,6 +123,10 @@ public class Typing : MonoBehaviour
         UpdateHintAdvUI = advController.UpdateHintUI;
 
         TriggerSFX = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>().TriggerSFX;
+
+        GraphicsUIManager gfxUImanager = GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>();
+        ResumePauseGame = gfxUImanager.ResumePauseGame;
+        DisplayOptionsMenu = gfxUImanager.DisplayOptionsMenu;
     }
 
 
@@ -419,6 +433,39 @@ public class Typing : MonoBehaviour
     public void Victory()
     {
         CurrentPlayerState = PlayerState.CombatComplete;
+    }
+
+    public void PauseResumeGame()
+    {
+        switch (CurrentPlayerState)
+        {
+            case PlayerState.Adventure:
+            case PlayerState.Combat:
+            case PlayerState.Puzzle:
+            case PlayerState.Challenge:
+                lastPlayerState = CurrentPlayerState;
+                CurrentPlayerState = PlayerState.Pause;
+                Time.timeScale = 0.0f;
+                ResumePauseGame.Invoke(true);
+                break;
+            case PlayerState.Pause:
+                CurrentPlayerState = lastPlayerState;
+                Time.timeScale = 1.0f;
+                ResumePauseGame.Invoke(false);
+                break;
+            case PlayerState.Options:
+                CurrentPlayerState = PlayerState.Pause;
+                DisplayOptionsMenu.Invoke(false);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void DisplayOptions()
+    {
+        CurrentPlayerState = PlayerState.Options;
+        DisplayOptionsMenu.Invoke(true);
     }
 
 

@@ -75,6 +75,30 @@ public class CutsceneManager : MonoBehaviour
         cutsceneVideoPlayer.Stop();
     }
 
+    public void PauseVideo()
+    {
+        if (cutsceneVideoPlayer.isPlaying)
+        {
+            cutsceneVideoPlayer.Pause();
+        }
+        else if (cutsceneVideoPlayerLoop.isPlaying)
+        {
+            cutsceneVideoPlayerLoop.Pause();
+        }
+    }
+
+    public void ResumeVideo()
+    {
+        if (cutsceneVideoPlayer.isPaused)
+        {
+            cutsceneVideoPlayer.Play();
+        }
+        else if (cutsceneVideoPlayerLoop.isPaused)
+        {
+            cutsceneVideoPlayerLoop.Play();
+        }
+    }
+
 
     public IEnumerator StopVideo()
     {

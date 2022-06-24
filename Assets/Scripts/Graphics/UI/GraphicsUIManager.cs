@@ -24,6 +24,15 @@ public class GraphicsUIManager : MonoBehaviour
     private GameObject Challenge;
 
     [SerializeField]
+    private GameObject PauseMenu;
+
+    [SerializeField]
+    private GameObject PauseMenuButtons;
+
+    [SerializeField]
+    private GameObject OptionsMenu;
+
+    [SerializeField]
     private CameraMovement mainCamera;
 
     public IEnumerator ActivateLoadingScreen()
@@ -84,5 +93,17 @@ public class GraphicsUIManager : MonoBehaviour
         }
 
         yield return StartCoroutine(DeactivateLoadingScreen());
+    }
+
+
+    public void ResumePauseGame(bool display)
+    {
+        PauseMenu.SetActive(display);
+    }
+
+    public void DisplayOptionsMenu(bool display)
+    {
+        PauseMenuButtons.SetActive(!display);
+        OptionsMenu.SetActive(display);
     }
 }

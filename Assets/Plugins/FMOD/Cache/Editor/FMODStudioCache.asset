@@ -54,33 +54,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-3765441767079699382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: snapshot:/NormalState
-  m_EditorClassIdentifier: 
-  Path: snapshot:/NormalState
-  Guid:
-    Data1: -789093229
-    Data2: 1134318354
-    Data3: 1953665446
-    Data4: 606007803
-  Banks:
-  - {fileID: -2471981782142384683}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
 --- !u!114 &-2471981782142384683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,10 +69,10 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637916827934542603
+  lastModified: 637917060098269642
   FileSizes:
   - Name: Desktop
-    Value: 7410272
+    Value: 7411744
   Exists: 1
 --- !u!114 &-2117620324607415575
 MonoBehaviour:
@@ -364,7 +337,6 @@ MonoBehaviour:
   - {fileID: -543853196333455098}
   - {fileID: 321015067445133914}
   - {fileID: -1134443622030999321}
-  - {fileID: -3765441767079699382}
   - {fileID: 4969004078665755644}
   - {fileID: -9069491052197558961}
   - {fileID: 823410647005762354}
@@ -379,13 +351,15 @@ MonoBehaviour:
   - {fileID: -225170518104055750}
   - {fileID: -281253782837221566}
   - {fileID: -2117620324607415575}
+  - {fileID: 321895497707371939}
+  - {fileID: 8435191335647995074}
   EditorParameters:
   - {fileID: -1113453570435039438}
   MasterBanks:
   - {fileID: -2471981782142384683}
   StringsBanks:
   - {fileID: 8510983333597803202}
-  cacheTime: 637916827934582733
+  cacheTime: 637917060098309821
   cacheVersion: 10
 --- !u!114 &168708697234499999
 MonoBehaviour:
@@ -467,6 +441,33 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+  Length: 0
+--- !u!114 &321895497707371939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/PauseState
+  m_EditorClassIdentifier: 
+  Path: snapshot:/PauseState
+  Guid:
+    Data1: 884671019
+    Data2: 1158538896
+    Data3: -1722806094
+    Data4: -513942224
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
   Length: 0
 --- !u!114 &823410647005762354
 MonoBehaviour:
@@ -657,6 +658,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &8435191335647995074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/NormalState
+  m_EditorClassIdentifier: 
+  Path: snapshot:/NormalState
+  Guid:
+    Data1: 1911276614
+    Data2: 1325861267
+    Data3: 307081133
+    Data4: 1444281796
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &8510983333597803202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,10 +700,10 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637916827934582733
+  lastModified: 637917060098309821
   FileSizes:
   - Name: Desktop
-    Value: 1990
+    Value: 1994
   Exists: 1
 --- !u!114 &9103306335281128651
 MonoBehaviour:

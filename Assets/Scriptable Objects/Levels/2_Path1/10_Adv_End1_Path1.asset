@@ -24,7 +24,7 @@ MonoBehaviour:
   NumEncounters: 2
   EncounterWordKey: 0000000016000000
   EncounterValue:
-  - {fileID: 11400000, guid: 9c99ef41d5f5eaf49af787af3cad2e0f, type: 2}
+  - {fileID: 11400000, guid: 535d66b3e5eea7347886bcf7b02e9703, type: 2}
   - {fileID: 11400000, guid: d31ea39552791a0409ef2711148e125a, type: 2}
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}

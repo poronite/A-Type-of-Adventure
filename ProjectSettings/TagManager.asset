@@ -30,6 +30,7 @@ TagManager:
   - CutsceneManager
   - MCGfx
   - Pause
+  - Pointer
   layers:
   - Default
   - TransparentFX

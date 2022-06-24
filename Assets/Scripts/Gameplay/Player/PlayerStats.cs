@@ -69,7 +69,7 @@ public class PlayerStats : MonoBehaviour
     delegate void PlayerHPBarFill(string id, float fillAmount);
     PlayerHPBarFill UpdatePlayerHPBarFill;
 
-    delegate void SnapshotDelegate(SnapshotName snapshotName);
+    delegate void SnapshotDelegate(SoundState snapshotName, bool stopAllSounds);
     SnapshotDelegate ChangeSnapshot;
 
 
@@ -163,15 +163,15 @@ public class PlayerStats : MonoBehaviour
             case 4:
             case 3:
                 StartCoroutine(ATOA_Utilities.VignetteLerp(globalVolume, 2f, false, 0f));
-                UpdateSoundFilter(SnapshotName.Normal);
+                UpdateSoundFilter(SoundState.Normal);
                 break;
             case 2:
                 StartCoroutine(ATOA_Utilities.VignetteLerp(globalVolume, 2f, true, 0.15f));
-                UpdateSoundFilter(SnapshotName.Normal);
+                UpdateSoundFilter(SoundState.Normal);
                 break;
             case 1:
                 StartCoroutine(ATOA_Utilities.VignetteLerp(globalVolume, 2f, true, 0.3f));
-                UpdateSoundFilter(SnapshotName.LowHealth);
+                UpdateSoundFilter(SoundState.LowHealth);
                 break;
             case 0:
                 break;
@@ -180,9 +180,9 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void UpdateSoundFilter(SnapshotName name)
+    public void UpdateSoundFilter(SoundState name)
     {
-        ChangeSnapshot.Invoke(name);
+        ChangeSnapshot.Invoke(name, false);
     }
 
     public void UpdateHPUI()

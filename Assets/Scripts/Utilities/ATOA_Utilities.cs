@@ -15,7 +15,7 @@ namespace ATOA
             while (time < duration)
             {
                 uiElement.alpha = Mathf.Lerp(startValue, targetValue, time / duration);
-                time += Time.deltaTime;
+                time += Time.unscaledDeltaTime;
                 yield return null;
             }
 
@@ -28,7 +28,7 @@ namespace ATOA
         {
             int newWordIndex;
 
-            //if I don't make a clone the function will end up removing the words from the original list lol
+            //if I don't make a clone the function will end up removing the words from the original list
             List<string> wordListClone = new List<string>(wordList);
 
             //reset random

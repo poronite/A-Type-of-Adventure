@@ -16,33 +16,39 @@ public class Options_Menu : MonoBehaviour
     private Toggle fullscreenToggle;
 
     [SerializeField]
+    private Slider masterVolumeSlider;
+
+    [SerializeField]
     private Slider musicVolumeSlider;
 
     [SerializeField]
     private Slider sfxVolumeSlider;
 
     [SerializeField]
-    private Slider voiceVolumeSlider;
+    private Slider ambVolumeSlider;
 
-    private GameObject lastSelectedUIOptionsMenu;
+
+
 
     //FMOD Mixer Bus
+    private Bus MasterBus;
     private Bus SFXBus;
     private Bus MusicBus;
-    private Bus VoiceBus;
+    private Bus AMBBus;
 
 
 
     private void Start()
     {
+        MasterBus = RuntimeManager.GetBus("bus:/");
         SFXBus = RuntimeManager.GetBus("bus:/SFX");
         MusicBus = RuntimeManager.GetBus("bus:/Music");
-        VoiceBus = RuntimeManager.GetBus("bus:/Voice");
-
-
-        lastSelectedUIOptionsMenu = fullscreenToggle.gameObject;
+        AMBBus = RuntimeManager.GetBus("bus:/AMB");
 
         fullscreenToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("Fullscreen", 1));
+
+        masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 0.8f);
+        MasterBus.setVolume(masterVolumeSlider.value);
 
         musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.8f);
         MusicBus.setVolume(musicVolumeSlider.value);
@@ -50,8 +56,8 @@ public class Options_Menu : MonoBehaviour
         sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.8f);
         SFXBus.setVolume(sfxVolumeSlider.value);
 
-        voiceVolumeSlider.value = PlayerPrefs.GetFloat("VoiceVolume", 0.8f);
-        VoiceBus.setVolume(voiceVolumeSlider.value);
+        ambVolumeSlider.value = PlayerPrefs.GetFloat("AMBVolume", 0.8f);
+        AMBBus.setVolume(ambVolumeSlider.value);
     }
 
 
@@ -59,23 +65,7 @@ public class Options_Menu : MonoBehaviour
     {
         Debug.Log("Return to Main/Pause Menu");
         Menu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
-        lastSelectedUIOptionsMenu = fullscreenToggle.gameObject;
         gameObject.SetActive(false);
-    }
-
-
-    void Update()
-    {
-        //Debug.Log(EventSystem.current.currentSelectedGameObject);
-        if (EventSystem.current.currentSelectedGameObject != null)
-        {
-            lastSelectedUIOptionsMenu = EventSystem.current.currentSelectedGameObject;
-        }
-        else
-        {
-            EventSystem.current.SetSelectedGameObject(lastSelectedUIOptionsMenu);
-        }
     }
 
 
@@ -83,6 +73,13 @@ public class Options_Menu : MonoBehaviour
     {
         Screen.fullScreen = fullscreenToggle.isOn;
         PlayerPrefs.SetInt("Fullscreen", Convert.ToInt32(fullscreenToggle.isOn));
+    }
+
+    public void OnMasterVolumeSlider()
+    {
+        //change in FMOD
+        MasterBus.setVolume(masterVolumeSlider.value);
+        PlayerPrefs.SetFloat("MasterVolume", masterVolumeSlider.value);
     }
 
     public void OnMusicVolumeSlider()
@@ -99,10 +96,10 @@ public class Options_Menu : MonoBehaviour
         PlayerPrefs.SetFloat("SFXVolume", sfxVolumeSlider.value);
     }
 
-    public void OnVoiceVolumeSlider()
+    public void OnAMBVolumeSlider()
     {
         //change in FMOD
-        VoiceBus.setVolume(voiceVolumeSlider.value);
-        PlayerPrefs.SetFloat("VoiceVolume", voiceVolumeSlider.value);
+        AMBBus.setVolume(ambVolumeSlider.value);
+        PlayerPrefs.SetFloat("AMBVolume", ambVolumeSlider.value);
     }
 }

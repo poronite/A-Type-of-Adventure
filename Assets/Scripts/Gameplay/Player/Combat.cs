@@ -338,7 +338,7 @@ public class Combat : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.5f);
                 yield return StartCoroutine(ATOA_Utilities.VignetteLerp(globalVolume, 2f, false, 0f));
-                stats.UpdateSoundFilter(SnapshotName.Normal);
+                stats.UpdateSoundFilter(SoundState.Normal);
             }
 
             stats.UpdateHPUI();

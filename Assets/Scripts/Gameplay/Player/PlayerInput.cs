@@ -15,12 +15,16 @@ public class PlayerInput : MonoBehaviour
     delegate void DeleteDelegate();
     DeleteDelegate DeleteInput;
 
+    delegate void EscapeDelegate();
+    EscapeDelegate PauseResumeGame;
+
 
     //Player game object will not start disabled so OnEnable is enough
     private void OnEnable()
     {
         SendInput = gameObject.GetComponent<Typing>().TypeCharacter;
         DeleteInput = gameObject.GetComponent<Typing>().DeleteWord;
+        PauseResumeGame = gameObject.GetComponent<Typing>().PauseResumeGame;
     }
 
 
@@ -35,6 +39,10 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             DeleteInput.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseResumeGame.Invoke();
         }
         else if (Input.anyKeyDown)
         {
