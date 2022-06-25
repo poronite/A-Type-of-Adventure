@@ -18,8 +18,7 @@ MonoBehaviour:
   TextToType: "This inscription tells MCName that a golden flower will signal that
     they are nearing the exit. The golden flower was already in sight and soon the
     citadel could be seen in the distance. When MCName reaches the main gate, they
-    notice it\u2019s closed. A guard requests the password which was the answer to
-    a riddle.\r"
+    notice it's closed. A guard requests the password which was the answer to a riddle.\r"
   NextLevelAfterAdventure: {fileID: 11400000, guid: 8682219da296226458ccc85659ae8bab,
     type: 2}
   HasBranching: 0
