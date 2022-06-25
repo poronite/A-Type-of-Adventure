@@ -57,6 +57,9 @@ public class CombatAnimations : MonoBehaviour
 
     public void TriggerAnimationSFX(SFXName combatSFXName)
     {
-        audioController.TriggerSFX(combatSFXName);
+        if (!playerStats.IsPlayerDodging)
+        {
+            audioController.TriggerSFX(combatSFXName);
+        }
     }
 }

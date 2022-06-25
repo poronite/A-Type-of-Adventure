@@ -73,7 +73,9 @@ public class Enemy : MonoBehaviour
             {
                 combatAnimation.TriggerAttack("Enemy");
             }
-            
+
+            playerDodgeWord = string.Empty;
+
             ResetAttackProgress();
         }
     }
