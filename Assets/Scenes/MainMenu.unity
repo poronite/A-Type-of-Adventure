@@ -1567,10 +1567,10 @@ MonoBehaviour:
   input: {fileID: 972902047}
   normalStateSnapshotReference:
     Guid:
-      Data1: -789093229
-      Data2: 1134318354
-      Data3: 1953665446
-      Data4: 606007803
+      Data1: 1911276614
+      Data2: 1325861267
+      Data3: 307081133
+      Data4: 1444281796
     Path: snapshot:/NormalState
 --- !u!114 &1928524969
 MonoBehaviour:

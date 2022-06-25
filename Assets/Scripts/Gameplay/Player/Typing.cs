@@ -44,6 +44,9 @@ public class Typing : MonoBehaviour
     ///<summary>Index of the next character that needs to be typed by player.</summary>
     private int nextCharacterIndex = 0;
 
+    [HideInInspector]
+    public bool canEndGame = false;
+
 
 
     //Delegates
@@ -119,6 +122,11 @@ public class Typing : MonoBehaviour
         CompleteWordCmb = cmbController.CompleteWordCmb;
         CompleteWordPzl = pzlController.CompleteWordPzl;
         CompleteWordChl = chlController.CompleteWordChl;
+
+        CompleteWordAdv += stats.AddTypedWordNumber;
+        CompleteWordCmb += stats.AddTypedWordNumber;
+        CompleteWordPzl += stats.AddTypedWordNumber;
+        CompleteWordChl += stats.AddTypedWordNumber;
 
         UpdateHintAdvUI = advController.UpdateHintUI;
 
@@ -442,18 +450,18 @@ public class Typing : MonoBehaviour
             case PlayerState.Adventure:
             case PlayerState.Combat:
             case PlayerState.Puzzle:
-            case PlayerState.Challenge:
+            case PlayerState.Challenge: //resume to pause
                 lastPlayerState = CurrentPlayerState;
                 CurrentPlayerState = PlayerState.Pause;
                 Time.timeScale = 0.0f;
                 ResumePauseGame.Invoke(true);
                 break;
-            case PlayerState.Pause:
+            case PlayerState.Pause: //pause to resume
                 CurrentPlayerState = lastPlayerState;
                 Time.timeScale = 1.0f;
                 ResumePauseGame.Invoke(false);
                 break;
-            case PlayerState.Options:
+            case PlayerState.Options: //options to pause
                 CurrentPlayerState = PlayerState.Pause;
                 DisplayOptionsMenu.Invoke(false);
                 break;
@@ -466,6 +474,18 @@ public class Typing : MonoBehaviour
     {
         CurrentPlayerState = PlayerState.Options;
         DisplayOptionsMenu.Invoke(true);
+    }
+
+    public void EndGame()
+    {
+        switch (CurrentPlayerState)
+        {            
+            case PlayerState.EndGame:
+                StartCoroutine(GameObject.FindGameObjectWithTag("EndGame").GetComponent<EndGameScreen>().LoadMainMenu());
+                break;
+            default:
+                break;
+        }
     }
 
 

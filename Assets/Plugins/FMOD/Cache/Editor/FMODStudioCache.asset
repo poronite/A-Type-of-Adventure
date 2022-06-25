@@ -69,10 +69,10 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637917060098269642
+  lastModified: 637917959406328946
   FileSizes:
   - Name: Desktop
-    Value: 7411744
+    Value: 7480416
   Exists: 1
 --- !u!114 &-2117620324607415575
 MonoBehaviour:
@@ -353,13 +353,15 @@ MonoBehaviour:
   - {fileID: -2117620324607415575}
   - {fileID: 321895497707371939}
   - {fileID: 8435191335647995074}
+  - {fileID: 455080520789767077}
+  - {fileID: 6658672246933716126}
   EditorParameters:
   - {fileID: -1113453570435039438}
   MasterBanks:
   - {fileID: -2471981782142384683}
   StringsBanks:
   - {fileID: 8510983333597803202}
-  cacheTime: 637917060098309821
+  cacheTime: 637917959406359025
   cacheVersion: 10
 --- !u!114 &168708697234499999
 MonoBehaviour:
@@ -468,6 +470,33 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+  Length: 0
+--- !u!114 &455080520789767077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/Gameplay/Text Pop Up
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/Gameplay/Text Pop Up
+  Guid:
+    Data1: 1748930578
+    Data2: 1239850286
+    Data3: -189233256
+    Data4: 1795587319
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
   Length: 0
 --- !u!114 &823410647005762354
 MonoBehaviour:
@@ -658,6 +687,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &6658672246933716126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/Gameplay/Rank Appear
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/Gameplay/Rank Appear
+  Guid:
+    Data1: -358823331
+    Data2: 1281202941
+    Data3: 1285257406
+    Data4: -1673547970
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8435191335647995074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,10 +756,10 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637917060098309821
+  lastModified: 637917959406359025
   FileSizes:
   - Name: Desktop
-    Value: 1994
+    Value: 2090
   Exists: 1
 --- !u!114 &9103306335281128651
 MonoBehaviour:

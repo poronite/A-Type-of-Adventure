@@ -57,10 +57,10 @@ public class Pause_Menu : MonoBehaviour
     public void OnMainMenuButtonPressed()
     {
         input.sendNavigationEvents = false;
-        StartCoroutine(LoadGame());
+        StartCoroutine(LoadMainMenu());
     }
 
-    IEnumerator LoadGame()
+    IEnumerator LoadMainMenu()
     {
         yield return StartCoroutine(ATOA_Utilities.FadeLoadingScreen(1f, 1f, fadeIn));
 

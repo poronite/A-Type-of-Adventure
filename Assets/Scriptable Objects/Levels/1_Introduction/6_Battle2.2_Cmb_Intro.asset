@@ -24,7 +24,7 @@ MonoBehaviour:
   EncounterWordKey: 
   EncounterValue: []
   Enemy: {fileID: 11400000, guid: c28dba7546acdd141bf9a62c43d26b71, type: 2}
-  NextLevelAfterCombat: {fileID: 11400000, guid: a0486447ba6c9ae489b17ec3c81a7bd2,
+  NextLevelAfterCombat: {fileID: 11400000, guid: 66acb3cc9cd4bbd4b9730d7bc591bcaf,
     type: 2}
   NextLevelAfterKillingBoss: {fileID: 0}
   NextLevelAfterSparingBoss: {fileID: 0}

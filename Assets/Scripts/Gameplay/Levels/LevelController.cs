@@ -12,6 +12,8 @@ public class LevelController : MonoBehaviour
     private LevelTemplate levelData;
 
     private GameObject player;
+    private Typing typingController;
+    private PlayerStats stats;
 
     //Common stats to all levels
     private string levelName;
@@ -54,6 +56,8 @@ public class LevelController : MonoBehaviour
     public void SetDelegatesLevel()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        typingController = player.GetComponent<Typing>();
+        stats = player.GetComponent<PlayerStats>();
 
         EncounterController encountersController = GameObject.FindGameObjectWithTag("EncountersController").GetComponent<EncounterController>();
         TriggerEncounters = encountersController.EncounterTriggered;
@@ -77,76 +81,84 @@ public class LevelController : MonoBehaviour
 
     IEnumerator SetupLevel(LevelTemplate levelToLoad)
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Typing>().CurrentPlayerState = PlayerState.Loading;
+        typingController.CurrentPlayerState = PlayerState.Loading;
 
         yield return StartCoroutine(ShowLoadingScreen.Invoke());
 
-        DestroyGraphicsEventClones();
+        //DestroyGraphicsEventClones();
 
-        levelData = levelToLoad;
+        if (levelToLoad != null)
+        {            
+            levelData = levelToLoad;
 
-        levelName = levelData.LevelName;
-        levelType = levelData.LevelType;
-        fieldType = levelData.FieldType;
+            levelName = levelData.LevelName;
+            levelType = levelData.LevelType;
+            fieldType = levelData.FieldType;
 
-        switch (levelType)
+            switch (levelType)
+            {
+                case LevelType.Adventure:
+
+                    //branching
+                    CreateBranching();
+
+                    //create branching and encounter dictionaries
+                    CreateDictionaries();
+
+                    ChangeFieldParalax.Invoke(fieldType);
+
+                    //Start adventure
+                    player.GetComponent<Adventure>().StartAdventure(levelData);
+                    yield return StartCoroutine(ChangeLevelGraphics.Invoke("Adventure"));
+
+                    audioController.ChangeAMB(fieldType);
+                    audioController.ChangeMusic(fieldType);
+
+                    break;
+                case LevelType.Combat:
+
+                    ChangeFieldNonParalax.Invoke(fieldType);
+
+                    //Start combat
+                    player.GetComponent<Combat>().StartCombat(levelData);
+                    yield return StartCoroutine(ChangeLevelGraphics.Invoke("Combat"));
+
+                    audioController.ChangeAMB(stopPlayingAll: true);
+                    audioController.ChangeMusic(playOtherMusic: true, otherMusicName: OtherMusicName.Combat);
+
+                    break;
+                case LevelType.Puzzle:
+
+                    ChangeFieldNonParalax.Invoke(fieldType);
+
+                    //Start puzzle
+                    player.GetComponent<Puzzle>().StartPuzzle(levelData);
+                    yield return StartCoroutine(ChangeLevelGraphics.Invoke("Puzzle"));
+
+                    audioController.ChangeAMB(fieldType);
+                    audioController.ChangeMusic(fieldType);
+
+                    break;
+                case LevelType.Challenge:
+
+                    ChangeFieldNonParalax.Invoke(fieldType);
+
+                    //Start challenge
+                    player.GetComponent<Challenge>().StartChallenge(levelData);
+                    yield return StartCoroutine(ChangeLevelGraphics.Invoke("Challenge"));
+
+                    audioController.ChangeAMB(fieldType);
+                    audioController.ChangeMusic(fieldType);
+
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
         {
-            case LevelType.Adventure:
-
-                //branching
-                CreateBranching();
-
-                //create branching and encounter dictionaries
-                CreateDictionaries();
-
-                ChangeFieldParalax.Invoke(fieldType);
-
-                //Start adventure
-                player.GetComponent<Adventure>().StartAdventure(levelData);
-                yield return StartCoroutine(ChangeLevelGraphics.Invoke("Adventure"));
-
-                audioController.ChangeAMB(fieldType);
-                audioController.ChangeMusic(fieldType);
-
-                break;
-            case LevelType.Combat:
-
-                ChangeFieldNonParalax.Invoke(fieldType);
-
-                //Start combat
-                player.GetComponent<Combat>().StartCombat(levelData);
-                yield return StartCoroutine(ChangeLevelGraphics.Invoke("Combat"));
-
-                audioController.ChangeAMB(stopPlayingAll: true);
-                audioController.ChangeMusic(playOtherMusic: true, otherMusicName: OtherMusicName.Combat);
-
-                break;
-            case LevelType.Puzzle:
-
-                ChangeFieldNonParalax.Invoke(fieldType);
-
-                //Start puzzle
-                player.GetComponent<Puzzle>().StartPuzzle(levelData);
-                yield return StartCoroutine(ChangeLevelGraphics.Invoke("Puzzle"));
-
-                audioController.ChangeAMB(fieldType);
-                audioController.ChangeMusic(fieldType);
-
-                break;
-            case LevelType.Challenge:
-
-                ChangeFieldNonParalax.Invoke(fieldType);
-
-                //Start challenge
-                player.GetComponent<Challenge>().StartChallenge(levelData);
-                yield return StartCoroutine(ChangeLevelGraphics.Invoke("Challenge"));
-
-                audioController.ChangeAMB(fieldType);
-                audioController.ChangeMusic(fieldType);
-
-                break;
-            default:
-                break;
+            yield return StartCoroutine(ChangeLevelGraphics.Invoke("EndGame"));
+            stats.SetScoreRank();
         }
     }
 
@@ -224,6 +236,7 @@ public class LevelController : MonoBehaviour
     }
 
     
+    //not used
     //destroy the objects such as sprites that are spawned at certain points of the game
     private void DestroyGraphicsEventClones()
     {

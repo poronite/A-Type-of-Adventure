@@ -12,17 +12,21 @@ public class PlayerStats : MonoBehaviour
 
     private int playerCurrentHP = 4;
 
-    public bool isPlayerDodging = false;
+    private bool isPlayerDodging = false;
 
     private bool isPlayerDead = false;
 
-    ///<summary>Number of mistakes player does while typing (Adventure and Combat states only).</summary>
+    ///<summary>Number of mistakes player does while typing (Adventure, Combat and Challenge states only).</summary>
     private int numMistakes;
 
-    ///<summary>Time elapsed since start of the game. (Adventure, Combat and Puzzle states only).</summary>
+    ///<summary>Time elapsed since start of the game. (Adventure, Combat, Puzzle and Challenge states only).</summary>
     private float timeElapsedSeconds;
 
+    //float to make sure it divides properly with time
+    private float numWordsTyped;
+
     private PostProcessVolume globalVolume;
+    
 
 
     public int PlayerCurrentHP
@@ -49,8 +53,6 @@ public class PlayerStats : MonoBehaviour
         set
         {
             isPlayerDodging = value;
-
-            //update UI
         }
     }
 
@@ -115,6 +117,13 @@ public class PlayerStats : MonoBehaviour
         timeElapsedSeconds += Time.deltaTime;
 
         //UpdateTimeElapsedUI((int)timeElapsedSeconds);
+    }
+
+    //Invoked every word completed
+    //the string is just there otherwise couldn't activate this on already existing delegate
+    public void AddTypedWordNumber(string filler)
+    {
+        numWordsTyped++;
     }
 
 
@@ -189,5 +198,72 @@ public class PlayerStats : MonoBehaviour
     {
         float fillAmount = (float)playerCurrentHP / (float)playerMaxHP;
         UpdatePlayerHPBarFill.Invoke("Player", fillAmount);
+    }
+
+    public void SetScoreRank()
+    {
+        //wpm - mistakes
+        float wpm = numWordsTyped / (timeElapsedSeconds / 60);
+
+        int minutes = (int)timeElapsedSeconds / 60;
+        int seconds = (int)timeElapsedSeconds % 60;
+
+        string timePlayed = string.Empty;
+
+        if (minutes < 10)
+        {
+            timePlayed += $"0{minutes} : ";
+        }
+        else
+        {
+            timePlayed += $"{minutes} : ";
+        }
+
+        if (seconds < 10)
+        {
+            timePlayed += $"0{seconds}";
+        }
+        else
+        {
+            timePlayed += $"{seconds}";
+        }
+
+        int score = (int)wpm - numMistakes / 60;
+
+        if (score <= 0)
+        {
+            score = 1;
+        }
+
+        string rank = "E";
+
+        if (score > 75)
+        {
+            rank = "S";
+        }
+        else if (score > 60)
+        {
+            rank = "A";
+        }
+        else if (score > 40)
+        {
+            rank = "B";
+        }
+        else if (score > 25)
+        {
+            rank = "C";
+        }
+        else if (score > 15)
+        {
+            rank = "D";
+        }
+        else if (score > 1)
+        {
+            rank = "E";
+        }
+
+        EndGameScreen endGame = GameObject.FindGameObjectWithTag("EndGame").GetComponent<EndGameScreen>();
+
+        StartCoroutine(endGame.DisplayEndGameScreen(score, timePlayed, numMistakes, rank));
     }
 }

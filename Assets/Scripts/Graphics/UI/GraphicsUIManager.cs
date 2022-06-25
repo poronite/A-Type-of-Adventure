@@ -33,6 +33,9 @@ public class GraphicsUIManager : MonoBehaviour
     private GameObject OptionsMenu;
 
     [SerializeField]
+    private GameObject endGameScreen;
+
+    [SerializeField]
     private CameraMovement mainCamera;
 
     public IEnumerator ActivateLoadingScreen()
@@ -87,6 +90,13 @@ public class GraphicsUIManager : MonoBehaviour
                 Adventure.SetActive(false);
                 Combat.SetActive(false);
                 Puzzle.SetActive(false);
+                break;
+            case "EndGame":
+                Adventure.SetActive(false);
+                Combat.SetActive(false);
+                Puzzle.SetActive(false);
+                Challenge.SetActive(false);
+                endGameScreen.SetActive(true);
                 break;
             default:
                 break;
