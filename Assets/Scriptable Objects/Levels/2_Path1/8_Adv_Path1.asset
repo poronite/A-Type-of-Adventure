@@ -18,7 +18,7 @@ MonoBehaviour:
   TextToType: "Inside the citadel, a hooded figure approaches them. It's the messenger!
     She calls out for the remaining members of the order. She tells them that the
     orb is a key to banish Lord Gillah. It was hidden so as to prevent him from finding
-    it. But Lord Gillah was already informed about the orb\u2019s whereabouts. \u201CHand
+    it. But Lord Gillah was already informed about the orb's whereabouts. \u201CHand
     over the orb, now!\u201D He roared. MCName was ready to fight."
   NextLevelAfterAdventure: {fileID: 11400000, guid: ac83875d9ebbd384384a6f2d82101288,
     type: 2}
