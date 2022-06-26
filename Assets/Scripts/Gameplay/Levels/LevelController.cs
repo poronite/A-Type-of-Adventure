@@ -157,6 +157,7 @@ public class LevelController : MonoBehaviour
         }
         else
         {
+            audioController.ChangeAMB(stopPlayingAll: true);
             yield return StartCoroutine(ChangeLevelGraphics.Invoke("EndGame"));
             stats.SetScoreRank();
         }
