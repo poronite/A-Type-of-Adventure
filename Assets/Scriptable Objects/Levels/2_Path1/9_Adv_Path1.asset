@@ -10,25 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37a4665bbba324f428ea814ac4811e40, type: 3}
-  m_Name: 6_Adv_Path1
+  m_Name: 9_Adv_Path1
   m_EditorClassIdentifier: 
   LevelName: 
   LevelType: 0
-  FieldType: 1
-  TextToType: This inscription tells MCName that a golden flower will signal that
-    they are nearing the exit. The golden flower was already in sight and soon the
-    citadel could be seen in the distance.
-  NextLevelAfterAdventure: {fileID: 11400000, guid: 5cf85db5b32c44244bea8d7d931da7d5,
+  FieldType: 2
+  TextToType: Inside the citadel, a hooded figure approaches them. It's the messenger!
+    She calls out for the remaining members of the order. She tells them that the
+    orb is a key to banish Lord Gillah. It was hidden so as to prevent him from finding
+    it. But Lord Gillah was already informed about the orb's whereabouts. "Hand over
+    the orb, now!" He roared. MCName was ready to fight.
+  NextLevelAfterAdventure: {fileID: 11400000, guid: ac83875d9ebbd384384a6f2d82101288,
     type: 2}
   HasBranching: 0
   PossibleChoices: []
   PossibleOutcomes: []
-  NumEncounters: 3
-  EncounterWordKey: 000000001100000021000000
+  NumEncounters: 4
+  EncounterWordKey: 00000000160000002e00000043000000
   EncounterValue:
-  - {fileID: 11400000, guid: 4ac96d28ab8b3704b899920bbfda582f, type: 2}
-  - {fileID: 11400000, guid: b293975e7f2a625409cad5bd90f4da56, type: 2}
-  - {fileID: 11400000, guid: da827c230dc26644bb4cd5c747170e34, type: 2}
+  - {fileID: 11400000, guid: 38ca7990a62e1794eb4ba43839061d91, type: 2}
+  - {fileID: 11400000, guid: 73c7d39031f891e46a3dcade736b3ef9, type: 2}
+  - {fileID: 11400000, guid: 305744d3630f54c45b353fa9c74bed30, type: 2}
+  - {fileID: 11400000, guid: 85ec98c9184417148949caac5b4c2808, type: 2}
   Enemy: {fileID: 0}
   NextLevelAfterCombat: {fileID: 0}
   NextLevelAfterKillingBoss: {fileID: 0}

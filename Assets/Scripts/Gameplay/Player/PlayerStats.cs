@@ -14,8 +14,6 @@ public class PlayerStats : MonoBehaviour
 
     private bool isPlayerDodging = false;
 
-    private bool isPlayerDead = false;
-
     ///<summary>Number of mistakes player does while typing (Adventure, Combat and Challenge states only).</summary>
     private int numMistakes;
 
@@ -136,23 +134,19 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage()
     {
-        if (!isPlayerDead)
+        PlayerCurrentHP -= 1;
+        
+        Debug.Log($"Player took 1 damage | {playerCurrentHP} HP left | {playerMaxHP} Max HP.");
+        
+        if (playerCurrentHP == 0)
         {
-            PlayerCurrentHP -= 1;
-
-            Debug.Log($"Player took 1 damage | {playerCurrentHP} HP left | {playerMaxHP} Max HP.");
-
-            if (playerCurrentHP == 0)
-            {
-                PlayerDies();
-            }
+            PlayerDies();
         }
     }
 
 
     private void PlayerDies()
     {
-        isPlayerDead = true;
         GameOver.Invoke();
         Debug.Log("Player died.");
     }

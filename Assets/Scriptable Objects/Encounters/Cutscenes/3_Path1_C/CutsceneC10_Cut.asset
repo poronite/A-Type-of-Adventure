@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31e1aaccb6227d6409cca00de46224ec, type: 3}
-  m_Name: CutsceneC4
+  m_Name: CutsceneC10_Cut
   m_EditorClassIdentifier: 
   EncounterType: 1
   DisplayImage: 0
   ImageToDisplay: {fileID: 0}
-  cutsceneVideo: {fileID: 32900000, guid: bbfe7037b10e81a45a282330a19d54ad, type: 3}
-  cutsceneVideoLoop: {fileID: 32900000, guid: 94cf2274ef35df74c8c57d1a7a3c0bd7, type: 3}
-  EndOfCutscene: 0
+  cutsceneVideo: {fileID: 0}
+  cutsceneVideoLoop: {fileID: 0}
+  EndOfCutscene: 1

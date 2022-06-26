@@ -15,6 +15,6 @@ MonoBehaviour:
   EncounterType: 1
   DisplayImage: 0
   ImageToDisplay: {fileID: 0}
-  cutsceneVideo: {fileID: 32900000, guid: e5ce181ac661ab34786e86189cb81241, type: 3}
-  cutsceneVideoLoop: {fileID: 32900000, guid: 7a6120762fc554d48b84d7bd93eaa50e, type: 3}
+  cutsceneVideo: {fileID: 32900000, guid: 0fe33a204c9a2c64b9b529bd6b522e74, type: 3}
+  cutsceneVideoLoop: {fileID: 32900000, guid: 700645b30b123dd499d67a36309e69ff, type: 3}
   EndOfCutscene: 0

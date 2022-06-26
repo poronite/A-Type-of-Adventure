@@ -191,6 +191,7 @@ public class LevelController : MonoBehaviour
 
     public void LoadFromCheckpoint()
     {
+        stats.RecoverFullHP();
         StartCoroutine(SetupLevel(lastCheckpoint, true));
     }
 
