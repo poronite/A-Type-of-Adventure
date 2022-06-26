@@ -159,7 +159,7 @@ public class PlayerStats : MonoBehaviour
 
     public void RecoverFullHP()
     {
-        playerCurrentHP = playerMaxHP;
+        PlayerCurrentHP = playerMaxHP;
     }
 
 

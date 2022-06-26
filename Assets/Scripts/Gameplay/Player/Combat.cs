@@ -328,20 +328,11 @@ public class Combat : MonoBehaviour
         }
         else
         {
+            yield return new WaitForSeconds(1f);
+
             stats.RecoverFullHP();
 
-            if (globalVolume.profile.TryGetSettings(out Vignette effect) && !effect.active)
-            {
-                yield return new WaitForSeconds(1f);
-            }
-            else
-            {
-                yield return new WaitForSeconds(0.5f);
-                yield return StartCoroutine(ATOA_Utilities.VignetteLerp(globalVolume, 2f, false, 0f));
-                stats.UpdateSoundFilter(SoundState.Normal);
-            }
-
-            stats.UpdateHPUI();
+            yield return new WaitForSeconds(1.5f);
         }
 
 
