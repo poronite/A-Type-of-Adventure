@@ -18,9 +18,6 @@ public class PlayerMovementAdv : MonoBehaviour
     private float playerspeed;
 
     [SerializeField]
-    private float accelerationDuration;
-
-    [SerializeField]
     private float movementDuration;
 
     private MovementState moveState = MovementState.Idle;
@@ -28,11 +25,6 @@ public class PlayerMovementAdv : MonoBehaviour
     private float accelerationProgress = 0.0f;
 
     private float remainingDuration;
-
-    private Coroutine movementCoroutine = null;
-
-    [SerializeField]
-    private Animator playerAnimator;
 
 
     private void Start()
@@ -48,9 +40,9 @@ public class PlayerMovementAdv : MonoBehaviour
         //if already moving don't trigger coroutine again or it will overlap!
         if (moveState == MovementState.Idle)
         {
-            isMovementCoroutineRunning();
             moveState = MovementState.Move;
-            movementCoroutine = StartCoroutine(SmoothMovementChange());
+            accelerationProgress = 1.0f;
+            remainingDuration = movementDuration;
         }
     }
 
@@ -63,49 +55,7 @@ public class PlayerMovementAdv : MonoBehaviour
         
         gameObject.transform.position = position;
 
-        playerAnimator.SetFloat("Movement", accelerationProgress);
-
         //Debug.Log("Movement progress: " + playerAnimator.GetFloat("Movement"));
-    }
-
-
-    IEnumerator SmoothMovementChange()
-    {
-        float time = 0.0f;
-        float targetValue = 0.0f;
-
-        switch (moveState)
-        {
-            case MovementState.Idle:
-                targetValue = 0.0f;
-                break;
-            case MovementState.Move:
-                targetValue = 1.0f;
-                break;
-            default:
-                break;
-        }
-
-        while (time < accelerationDuration)
-        {
-            accelerationProgress = Mathf.Lerp(accelerationProgress, targetValue, time / accelerationDuration);
-            MovePlayer();
-            time += Time.deltaTime;
-            yield return null;
-        }
-
-        accelerationProgress = targetValue;
-
-        movementCoroutine = null;
-    }
-
-
-    private void isMovementCoroutineRunning()
-    {
-        if (movementCoroutine != null)
-        {
-            StopCoroutine(movementCoroutine);
-        }
     }
 
 
@@ -119,9 +69,8 @@ public class PlayerMovementAdv : MonoBehaviour
 
             if (remainingDuration <= 0)
             {
-                isMovementCoroutineRunning();
                 moveState = MovementState.Idle;
-                movementCoroutine = StartCoroutine(SmoothMovementChange());
+                accelerationProgress = 0.0f;
             }
         }
     }
