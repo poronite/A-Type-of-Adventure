@@ -1,6 +1,9 @@
 ﻿using System.Text;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.PostProcessing;
+using ATOA;
 
 //This class will receive input from PlayerInput class and will type or delete a letter on the OutputWord string.
 //It will also contain the PlayerState so that it can decide what to do with the input received.
@@ -46,6 +49,10 @@ public class Typing : MonoBehaviour
 
     [HideInInspector]
     public bool canEndGame = false;
+
+    private GraphicsUIManager gfxUIManager;
+    private AudioController audioController;
+    private PostProcessVolume globalVolume;
 
 
 
@@ -93,7 +100,6 @@ public class Typing : MonoBehaviour
     MenuDelegate DisplayOptionsMenu;
 
 
-
     public void SetDelegatesTyping()
     {
         PlayerStats stats = gameObject.GetComponent<PlayerStats>();
@@ -130,11 +136,14 @@ public class Typing : MonoBehaviour
 
         UpdateHintAdvUI = advController.UpdateHintUI;
 
-        TriggerSFX = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>().TriggerSFX;
+        audioController = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>();
+        TriggerSFX = audioController.TriggerSFX;
 
-        GraphicsUIManager gfxUImanager = GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>();
-        ResumePauseGame = gfxUImanager.ResumePauseGame;
-        DisplayOptionsMenu = gfxUImanager.DisplayOptionsMenu;
+        gfxUIManager = GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>();
+        ResumePauseGame = gfxUIManager.ResumePauseGame;
+        DisplayOptionsMenu = gfxUIManager.DisplayOptionsMenu;
+
+        globalVolume = FindObjectOfType<PostProcessVolume>();
     }
 
 
@@ -342,7 +351,7 @@ public class Typing : MonoBehaviour
             case PlayerState.Puzzle:
                 if (IsWordComplete(character))
                 {
-                    TriggerSFX(SFXName.CompleteWord);
+                    TriggerSFX(SFXName.PuzzleComplete);
 
                     CompleteWordPzl.Invoke(outputWord.ToString());
                 }
@@ -435,6 +444,17 @@ public class Typing : MonoBehaviour
     public void GameOver()
     {
         CurrentPlayerState = PlayerState.Dead;
+        StartCoroutine(DisplayGameOverScreen());
+    }
+
+    private IEnumerator DisplayGameOverScreen()
+    {
+        yield return StartCoroutine(ATOA_Utilities.VignetteLerp(globalVolume, 2f, false, 0f));
+        yield return StartCoroutine(gfxUIManager.ActivateLoadingScreen());
+        audioController.ChangeAMB(stopPlayingAll: true);
+        audioController.ChangeSnapshot(SoundState.Normal);
+        audioController.ChangeMusic(playOtherMusic: true, otherMusicName: OtherMusicName.GameOver);
+        yield return StartCoroutine(gfxUIManager.ChangeLevelGraphics("GameOver"));
     }
 
 

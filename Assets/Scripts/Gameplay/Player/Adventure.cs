@@ -78,10 +78,15 @@ public class Adventure : MonoBehaviour
     }
 
 
-    public void StartAdventure(LevelTemplate level) //Start of a new game (Adventure)
+    public void StartAdventure(LevelTemplate level, bool deleteWrittenText = false) //Start of a new game (Adventure)
     {
         numWordsWritten = 0;
         TriggerEncounter.Invoke(numWordsWritten);
+
+        if (deleteWrittenText)
+        {
+            writtenPlotText = writtenPlotText.Clear();
+        }
 
         //remove any white spaces that may cause problems
         remainingPlotText = level.TextToType.Trim();

@@ -51,25 +51,31 @@ public class LevelController : MonoBehaviour
     //audio controller
     AudioController audioController;
 
+    [HideInInspector]
+    public LevelTemplate lastCheckpoint;
+
 
     //Functions
-    public void SetDelegatesLevel()
+    public void SetReferencesLevel()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         typingController = player.GetComponent<Typing>();
         stats = player.GetComponent<PlayerStats>();
+        audioController = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>();
+    }
 
+    public void SetDelegatesLevel()
+    {
         EncounterController encountersController = GameObject.FindGameObjectWithTag("EncountersController").GetComponent<EncounterController>();
         TriggerEncounters = encountersController.EncounterTriggered;
 
-        ShowLoadingScreen = GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ActivateLoadingScreen;
-        ChangeLevelGraphics = GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>().ChangeLevelGraphics;
+        GraphicsUIManager manager = GameObject.FindGameObjectWithTag("GfxUIManager").GetComponent<GraphicsUIManager>();
+        ShowLoadingScreen = manager.ActivateLoadingScreen;
+        ChangeLevelGraphics = manager.ChangeLevelGraphics;
 
         BackgroundManager backgroundManager = FindObjectOfType<BackgroundManager>().GetComponent<BackgroundManager>();
         ChangeFieldNonParalax = backgroundManager.ChangeFieldNonParalax;
         ChangeFieldParalax = backgroundManager.ChangeFieldParalax;
-
-        audioController = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>();
     }
 
 
@@ -79,7 +85,7 @@ public class LevelController : MonoBehaviour
     }
 
 
-    IEnumerator SetupLevel(LevelTemplate levelToLoad)
+    IEnumerator SetupLevel(LevelTemplate levelToLoad, bool retry = false)
     {
         typingController.CurrentPlayerState = PlayerState.Loading;
 
@@ -108,11 +114,16 @@ public class LevelController : MonoBehaviour
                     ChangeFieldParalax.Invoke(fieldType);
 
                     //Start adventure
-                    player.GetComponent<Adventure>().StartAdventure(levelData);
+                    player.GetComponent<Adventure>().StartAdventure(levelData, retry);
                     yield return StartCoroutine(ChangeLevelGraphics.Invoke("Adventure"));
 
                     audioController.ChangeAMB(fieldType);
                     audioController.ChangeMusic(fieldType);
+
+                    if (levelData.NextLevelAfterAdventure?.LevelType == LevelType.Combat)
+                    {
+                        TriggerCheckpoint(levelData);
+                    }
 
                     break;
                 case LevelType.Combat:
@@ -138,6 +149,11 @@ public class LevelController : MonoBehaviour
                     audioController.ChangeAMB(fieldType);
                     audioController.ChangeMusic(fieldType);
 
+                    if (levelData.NextLevelAfterPuzzle?.LevelType == LevelType.Combat)
+                    {
+                        TriggerCheckpoint(levelData);
+                    }
+
                     break;
                 case LevelType.Challenge:
 
@@ -150,6 +166,11 @@ public class LevelController : MonoBehaviour
                     audioController.ChangeAMB(fieldType);
                     audioController.ChangeMusic(fieldType);
 
+                    if (levelData.NextLevelAfterChallenge?.LevelType == LevelType.Combat)
+                    {
+                        TriggerCheckpoint(levelData);
+                    }
+
                     break;
                 default:
                     break;
@@ -161,6 +182,16 @@ public class LevelController : MonoBehaviour
             yield return StartCoroutine(ChangeLevelGraphics.Invoke("EndGame"));
             stats.SetScoreRank();
         }
+    }
+
+    private void TriggerCheckpoint(LevelTemplate level)
+    {
+        lastCheckpoint = level;
+    }
+
+    public void LoadFromCheckpoint()
+    {
+        StartCoroutine(SetupLevel(lastCheckpoint, true));
     }
 
     private void CreateBranching()

@@ -17,7 +17,8 @@ public enum SFXName
     Crouch,
     Dash,
     Roll,
-    Block
+    Block,
+    PuzzleComplete
 }
 
 public enum OtherMusicName
@@ -75,6 +76,9 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     private EventReference block_eventReference;
 
+    [SerializeField]
+    private EventReference puzzleComplete_eventReference;
+
     //Audio event instances
     EventInstance typewriterKey_instance;
     EventInstance completeWord_instance;
@@ -88,6 +92,7 @@ public class AudioController : MonoBehaviour
     EventInstance dash_instance;
     EventInstance roll_instance;
     EventInstance block_instance;
+    EventInstance puzzleComplete_instance;
 
 
     //Music
@@ -104,15 +109,15 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     private EventReference combat_Music_reference;
 
-    //[SerializeField]
-    //private EventReference gameOver_Music_reference;
+    [SerializeField]
+    private EventReference gameOver_Music_reference;
 
     //Audio event instances
     EventInstance plains_Music_instance;
     EventInstance magicForest_Music_instance;
     //EventInstance citadel_Music_instance;
     EventInstance combat_Music_instance;
-    //EventInstance gameOver_Music_instance;
+    EventInstance gameOver_Music_instance;
 
 
     //AMB
@@ -170,13 +175,14 @@ public class AudioController : MonoBehaviour
         dash_instance = RuntimeManager.CreateInstance(dash_eventReference);
         roll_instance = RuntimeManager.CreateInstance(roll_eventReference);
         block_instance = RuntimeManager.CreateInstance(block_eventReference);
+        puzzleComplete_instance = RuntimeManager.CreateInstance(puzzleComplete_eventReference);
 
         //Music
         plains_Music_instance = RuntimeManager.CreateInstance(plains_Music_reference);
         magicForest_Music_instance = RuntimeManager.CreateInstance(magicForest_Music_reference);
         //citadel_Music_instance = RuntimeManager.CreateInstance(citadel_Music_reference);
         combat_Music_instance = RuntimeManager.CreateInstance(combat_Music_reference);
-        //gameOver_Music_instance = RuntimeManager.CreateInstance(gameOver_Music_reference);
+        gameOver_Music_instance = RuntimeManager.CreateInstance(gameOver_Music_reference);
 
         //AMB
         plains_AMB_instance = RuntimeManager.CreateInstance(plains_AMB_eventReference);
@@ -234,6 +240,9 @@ public class AudioController : MonoBehaviour
             case SFXName.Block:
                 block_instance.start();
                 break;
+            case SFXName.PuzzleComplete:
+                puzzleComplete_instance.start();
+                break;
             default:
                 break;
         }
@@ -247,6 +256,7 @@ public class AudioController : MonoBehaviour
             magicForest_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             //citadel_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             combat_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            gameOver_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
             return;
         }
@@ -260,23 +270,27 @@ public class AudioController : MonoBehaviour
                 case FieldType.Plains:
                     magicForest_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                     //citadel_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                    combat_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
-                    Debug.Log("Plains");
+                    combat_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    gameOver_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
                     musicToPlay = plains_Music_instance;
                     break;
                 case FieldType.MagicForest:
                     plains_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                     //citadel_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
                     combat_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    gameOver_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
                     musicToPlay = magicForest_Music_instance;
                     break;
                 case FieldType.Citadel:
                     plains_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                     magicForest_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
                     combat_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    gameOver_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
                     //musicToPlay = citadel_Music_instance;
                     break;
@@ -298,7 +312,7 @@ public class AudioController : MonoBehaviour
                 case OtherMusicName.GameOver:
                     combat_Music_instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
-                    //musicToPlay = gameOver_Music_instance;
+                    musicToPlay = gameOver_Music_instance;
                     break;
                 default:
                     break;
@@ -420,6 +434,7 @@ public class AudioController : MonoBehaviour
         dash_instance.release();
         roll_instance.release();
         block_instance.release();
+        puzzleComplete_instance.release();
 
         //Music
         ChangeMusic(stopPlayingAll: true);

@@ -33,7 +33,10 @@ public class GraphicsUIManager : MonoBehaviour
     private GameObject OptionsMenu;
 
     [SerializeField]
-    private GameObject endGameScreen;
+    private GameObject GameOverScreen;
+
+    [SerializeField]
+    private GameObject EndGameScreen;
 
     [SerializeField]
     private CameraMovement mainCamera;
@@ -74,29 +77,41 @@ public class GraphicsUIManager : MonoBehaviour
                 Combat.SetActive(false);
                 Puzzle.SetActive(false);
                 Challenge.SetActive(false);
+                GameOverScreen.SetActive(false);
                 mainCamera.canMoveCamera = true; //activate camera
                 break;
             case "Combat":
                 Adventure.SetActive(false);
                 Puzzle.SetActive(false);
                 Challenge.SetActive(false);
+                GameOverScreen.SetActive(false);
                 break;
             case "Puzzle":
                 Adventure.SetActive(false);
                 Combat.SetActive(false);
                 Challenge.SetActive(false);
+                GameOverScreen.SetActive(false);
                 break;
             case "Challenge":
                 Adventure.SetActive(false);
                 Combat.SetActive(false);
                 Puzzle.SetActive(false);
+                GameOverScreen.SetActive(false);
+                break;
+            case "GameOver":
+                Adventure.SetActive(false);
+                Combat.SetActive(false);
+                Puzzle.SetActive(false);
+                Challenge.SetActive(false);
+                GameOverScreen.SetActive(true);
                 break;
             case "EndGame":
                 Adventure.SetActive(false);
                 Combat.SetActive(false);
                 Puzzle.SetActive(false);
                 Challenge.SetActive(false);
-                endGameScreen.SetActive(true);
+                GameOverScreen.SetActive(false);
+                EndGameScreen.SetActive(true);
                 break;
             default:
                 break;
