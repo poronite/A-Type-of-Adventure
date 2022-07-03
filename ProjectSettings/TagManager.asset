@@ -33,6 +33,7 @@ TagManager:
   - Pointer
   - EndGame
   - GameOver
+  - PostProcessing
   layers:
   - Default
   - TransparentFX
@@ -43,8 +44,8 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
+  - Blur
+  - NoBlur
   - 
   - 
   - 

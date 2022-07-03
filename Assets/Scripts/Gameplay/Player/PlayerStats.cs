@@ -94,7 +94,7 @@ public class PlayerStats : MonoBehaviour
 
         ChangeSnapshot = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>().ChangeSnapshot;
 
-        globalVolume = FindObjectOfType<PostProcessVolume>();
+        globalVolume = GameObject.FindGameObjectWithTag("PostProcessing").GetComponent<PostProcessVolume>();
 
         //Debug.Log(globalVolume.name);
     }

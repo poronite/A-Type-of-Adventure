@@ -1045,6 +1045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4db192da1893346ab1a406bee28fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementDirection: 0
   buttonSelectAudio: {fileID: 4935983471475222661}
 --- !u!1 &4957348354127125790
 GameObject:
@@ -1546,6 +1547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4db192da1893346ab1a406bee28fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementDirection: 0
   buttonSelectAudio: {fileID: 4935983471475222661}
 --- !u!1 &4957348354440447953
 GameObject:
@@ -1656,6 +1658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4db192da1893346ab1a406bee28fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementDirection: 0
   buttonSelectAudio: {fileID: 4935983471475222661}
 --- !u!1 &4957348354518599297
 GameObject:
@@ -2469,8 +2472,8 @@ MonoBehaviour:
   Menu: {fileID: 0}
   fullscreenToggle: {fileID: 4957348354440447954}
   masterVolumeSlider: {fileID: 4957348355625223505}
-  musicVolumeSlider: {fileID: 4957348355625223505}
-  sfxVolumeSlider: {fileID: 4957348354076498081}
+  musicVolumeSlider: {fileID: 4957348354076498081}
+  sfxVolumeSlider: {fileID: 4957348355190452698}
   ambVolumeSlider: {fileID: 7034978895205467432}
 --- !u!1 &4957348355190452697
 GameObject:
@@ -2584,6 +2587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4db192da1893346ab1a406bee28fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementDirection: 0
   buttonSelectAudio: {fileID: 4935983471475222661}
 --- !u!1 &4957348355305416316
 GameObject:
@@ -2807,6 +2811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4db192da1893346ab1a406bee28fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementDirection: 0
   buttonSelectAudio: {fileID: 4935983471475222661}
 --- !u!1 &5195602832746319825
 GameObject:
@@ -3032,6 +3037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4db192da1893346ab1a406bee28fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementDirection: 0
   buttonSelectAudio: {fileID: 4935983471475222661}
 --- !u!1 &8900248004790279145
 GameObject:
