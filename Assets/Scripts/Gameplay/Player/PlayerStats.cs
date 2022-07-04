@@ -231,27 +231,27 @@ public class PlayerStats : MonoBehaviour
 
         string rank = "E";
 
-        if (score > 75)
+        if (score > 50)
         {
             rank = "S";
         }
-        else if (score > 60)
+        else if (score > 40)
         {
             rank = "A";
         }
-        else if (score > 40)
+        else if (score > 30)
         {
             rank = "B";
         }
-        else if (score > 25)
+        else if (score > 15)
         {
             rank = "C";
         }
-        else if (score > 15)
+        else if (score > 5)
         {
             rank = "D";
         }
-        else if (score > 1)
+        else if (score >= 1)
         {
             rank = "E";
         }
