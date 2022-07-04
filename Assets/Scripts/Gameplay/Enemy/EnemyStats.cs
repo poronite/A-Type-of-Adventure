@@ -17,8 +17,6 @@ public class EnemyStats : MonoBehaviour
 
     public bool IsBoss;
 
-    public bool BossPhaseHappened;
-
     public bool IsEnemyDead;
 
 
@@ -77,9 +75,8 @@ public class EnemyStats : MonoBehaviour
             if (IsBoss)
             {
                 //trigger boss special phase
-                if (enemyCurrentHP <= enemyMaxHP / 2 && !BossPhaseHappened)
+                if (enemyCurrentHP == enemyMaxHP / 2)
                 {
-                    BossPhaseHappened = true;
                     ActivateBossPhase.Invoke(gameObject.GetComponent<Enemy>().StartBossPhase());
                 }
             }

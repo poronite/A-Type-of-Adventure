@@ -143,7 +143,7 @@ public class Typing : MonoBehaviour
         ResumePauseGame = gfxUIManager.ResumePauseGame;
         DisplayOptionsMenu = gfxUIManager.DisplayOptionsMenu;
 
-        globalVolume = FindObjectOfType<PostProcessVolume>();
+        globalVolume = GameObject.FindGameObjectWithTag("PostProcessing").GetComponent<PostProcessVolume>();
     }
 
 
