@@ -203,13 +203,13 @@ public class Combat : MonoBehaviour
     ///Then decide player's action based on word chosen.</summary>
     private string DecideAction(string character)
     {
-        if (character == attackWordText[0].ToString().ToLower())
+        if (character.ToLower() == attackWordText[0].ToString().ToLower())
         {
             //Debug.Log("Chose to attack.");
             actionChosen = Actions.Attack;
             return attackWordText;
         }    
-        else if (character == dodgeWordText[0].ToString().ToLower())
+        else if (character.ToLower() == dodgeWordText[0].ToString().ToLower())
         {
             //Debug.Log("Chose to dodge.");
             actionChosen = Actions.Dodge;
