@@ -37,6 +37,12 @@ public class AdventureUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI branchWord2UIAdv;
 
+    [SerializeField]
+    private TextMeshProUGUI comboText;
+
+    [SerializeField]
+    private Animator comboTextAnimator;
+
 
 
     ///<summary>Display output with new character added.</summary>
@@ -124,5 +130,12 @@ public class AdventureUI : MonoBehaviour
         branchWord2UIAdv.text = string.Empty;
 
         currentTextUIAdv.text = word;
+    }
+
+    public void UpdateComboUIAdv(int combo)
+    {
+        comboText.text = $"Combo: {combo}x";
+
+        comboTextAnimator.SetInteger("Combo", combo);
     }
 }

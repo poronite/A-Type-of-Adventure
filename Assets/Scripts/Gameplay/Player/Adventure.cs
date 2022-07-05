@@ -24,6 +24,9 @@ public class Adventure : MonoBehaviour
     //words used in branching for current adventure level
     private List<string> branchingWords = new List<string>();
 
+    //number of letters player typed without making a mistake
+    private int currentCombo = 0;
+
     //Delegates
     delegate void WordDelegate(string word);
     WordDelegate SendNextWordAdv;
@@ -52,6 +55,9 @@ public class Adventure : MonoBehaviour
     delegate void RefreshMovement();
     RefreshMovement RefreshPlayerMovement;
 
+    delegate void ComboDelegate(int combo);
+    ComboDelegate UpdateComboAdv;
+
 
 
     ///<summary>Adventure starts when Graphics scene is loaded.</summary>
@@ -73,6 +79,7 @@ public class Adventure : MonoBehaviour
         DisplayNewHintAdv = AdvUIController.DisplayNewHintUIAdv;
         DisplayBranchingWordsAdv = AdvUIController.DisplayBranchingWordsUIAdv;
         DisplayChosenBranchingWordAdv = AdvUIController.DisplayChosenBranchingWordUIAdv;
+        UpdateComboAdv = AdvUIController.UpdateComboUIAdv;
 
         RefreshPlayerMovement = GameObject.FindGameObjectWithTag("PlayerGfx").GetComponent<PlayerMovementAdv>().RefreshPlayerMovementDuration;
     }
@@ -223,6 +230,7 @@ public class Adventure : MonoBehaviour
     public void AddCharacterUI(string character)
     {
         AddCharacterAdv.Invoke(character);
+        AddCombo();
     }
 
 
@@ -252,5 +260,17 @@ public class Adventure : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void AddCombo()
+    {
+        currentCombo++;
+        UpdateComboAdv.Invoke(currentCombo);
+    }
+
+    public void ResetCombo()
+    {
+        currentCombo = 0;
+        UpdateComboAdv.Invoke(currentCombo);
     }
 }

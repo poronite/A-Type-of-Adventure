@@ -99,6 +99,9 @@ public class Typing : MonoBehaviour
     MenuDelegate ResumePauseGame;
     MenuDelegate DisplayOptionsMenu;
 
+    delegate void ComboDelegate();
+    ComboDelegate ResetComboAdv;
+
 
     public void SetDelegatesTyping()
     {
@@ -135,6 +138,8 @@ public class Typing : MonoBehaviour
         CompleteWordChl += stats.AddTypedWordNumber;
 
         UpdateHintAdvUI = advController.UpdateHintUI;
+
+        ResetComboAdv = advController.ResetCombo;
 
         audioController = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>();
         TriggerSFX = audioController.TriggerSFX;
@@ -207,6 +212,12 @@ public class Typing : MonoBehaviour
                         Mistake.Invoke();
 
                         TriggerSFX(SFXName.Mistake);
+
+                        //Adventure only
+                        if (CurrentPlayerState == PlayerState.Adventure)
+                        {
+                            ResetComboAdv.Invoke();
+                        }
                     }
                     break;
                 case PlayerState.Puzzle:
