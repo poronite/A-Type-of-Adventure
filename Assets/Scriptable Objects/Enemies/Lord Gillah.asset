@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Lord Gillah
   Sprite: {fileID: 21300000, guid: a036296ee5a5dc243a1b3013443ba10b, type: 3}
-  Icon: {fileID: 21300000, guid: af8c706ba1bc20f41baeaa1c76ca5e00, type: 3}
+  Icon: {fileID: 21300000, guid: 371ac96c569cc084a8ecc74cb3c03349, type: 3}
   IsBoss: 1

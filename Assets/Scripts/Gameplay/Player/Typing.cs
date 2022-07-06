@@ -330,7 +330,7 @@ public class Typing : MonoBehaviour
         switch (CurrentPlayerState)
         {
             case PlayerState.Adventure:
-                if (IsWordComplete(character))
+                if (IsWordComplete())
                 {
                     TriggerSFX(SFXName.CompleteWord);
 
@@ -350,7 +350,7 @@ public class Typing : MonoBehaviour
                 break;
 
             case PlayerState.Combat:
-                if (IsWordComplete(character))
+                if (IsWordComplete())
                 {
                     TriggerSFX(SFXName.CompleteWord);
 
@@ -360,17 +360,21 @@ public class Typing : MonoBehaviour
                 break;
 
             case PlayerState.Puzzle:
-                if (IsWordComplete(character))
+                if (IsWordComplete())
                 {
                     TriggerSFX(SFXName.PuzzleComplete);
 
                     CompleteWordPzl.Invoke(outputWord.ToString());
                 }
+                else if (IsWordWrong())
+                {
+                    TriggerSFX(SFXName.PuzzleWrong);
+                }
 
                 break;
 
             case PlayerState.Challenge:
-                if (IsWordComplete(character))
+                if (IsWordComplete())
                 {
                     TriggerSFX(SFXName.CompleteWord);
 
@@ -399,9 +403,15 @@ public class Typing : MonoBehaviour
 
 
     //return true when player completes a word or types their name
-    private bool IsWordComplete(string character)
+    private bool IsWordComplete()
     {
         return outputWord.ToString() == currentWord && !isSettingName;
+    }
+
+    //only for puzzle
+    private bool IsWordWrong()
+    {
+        return outputWord.Length == currentWord.Length && outputWord.ToString() != currentWord;
     }
 
 

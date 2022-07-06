@@ -108,6 +108,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-3096807181944906433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Puzzle/Puzzle Wrong
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Puzzle/Puzzle Wrong
+  Guid:
+    Data1: -662763082
+    Data2: 1108820977
+    Data3: 850518177
+    Data4: -544203879
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2471981782142384683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,10 +150,10 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637918601108591388
+  lastModified: 637927257381064762
   FileSizes:
   - Name: Desktop
-    Value: 7565344
+    Value: 7694688
   Exists: 1
 --- !u!114 &-2117620324607415575
 MonoBehaviour:
@@ -200,6 +227,33 @@ MonoBehaviour:
     Data2: 1082558493
     Data3: 264596394
     Data4: -552289060
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1809028466297349208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Combat/Enemy Attack Complete
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Combat/Enemy Attack Complete
+  Guid:
+    Data1: -702372518
+    Data2: 1274538337
+    Data3: -700617318
+    Data4: 2043101594
   Banks:
   - {fileID: -2471981782142384683}
   IsStream: 0
@@ -411,13 +465,16 @@ MonoBehaviour:
   - {fileID: 6658672246933716126}
   - {fileID: -3576375969233289295}
   - {fileID: -6881459771959496730}
+  - {fileID: -1809028466297349208}
+  - {fileID: -3096807181944906433}
+  - {fileID: 6731044133853705569}
   EditorParameters:
   - {fileID: -1113453570435039438}
   MasterBanks:
   - {fileID: -2471981782142384683}
   StringsBanks:
   - {fileID: 8510983333597803202}
-  cacheTime: 637918601108631526
+  cacheTime: 637927257381104887
   cacheVersion: 10
 --- !u!114 &168708697234499999
 MonoBehaviour:
@@ -770,6 +827,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &6731044133853705569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Citadel Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Citadel Music
+  Guid:
+    Data1: 607935321
+    Data2: 1223209951
+    Data3: -116301438
+    Data4: 344495630
+  Banks:
+  - {fileID: -2471981782142384683}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 9000
 --- !u!114 &8435191335647995074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,10 +896,10 @@ MonoBehaviour:
   Path: ../../FMOD Studio Projects/A-Type-of-Adventure-FMOD-Studio-Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637918601108631526
+  lastModified: 637927257381104887
   FileSizes:
   - Name: Desktop
-    Value: 2188
+    Value: 2344
   Exists: 1
 --- !u!114 &9103306335281128651
 MonoBehaviour:

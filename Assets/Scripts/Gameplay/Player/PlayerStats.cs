@@ -191,7 +191,7 @@ public class PlayerStats : MonoBehaviour
     public void UpdateHPUI()
     {
         float fillAmount = (float)playerCurrentHP / (float)playerMaxHP;
-        UpdatePlayerHPBarFill.Invoke("Player", fillAmount);
+        UpdatePlayerHPBarFill?.Invoke("Player", fillAmount);
     }
 
     public void SetScoreRank()

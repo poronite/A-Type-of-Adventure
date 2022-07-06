@@ -918,6 +918,13 @@ MonoBehaviour:
       Data3: -1632725059
       Data4: -655990648
     Path: event:/SFX/Combat/Dodge Actions/Block
+  enemyAttackComplete_eventReference:
+    Guid:
+      Data1: -702372518
+      Data2: 1274538337
+      Data3: -700617318
+      Data4: 2043101594
+    Path: event:/SFX/Combat/Enemy Attack Complete
   puzzleComplete_eventReference:
     Guid:
       Data1: -139917615
@@ -925,6 +932,13 @@ MonoBehaviour:
       Data3: 1537471927
       Data4: -1959501998
     Path: event:/SFX/Puzzle/Puzzle Complete
+  puzzleWrong_eventReference:
+    Guid:
+      Data1: -662763082
+      Data2: 1108820977
+      Data3: 850518177
+      Data4: -544203879
+    Path: event:/SFX/Puzzle/Puzzle Wrong
   plains_Music_reference:
     Guid:
       Data1: 322905563
@@ -939,6 +953,13 @@ MonoBehaviour:
       Data3: -1493955188
       Data4: -570179178
     Path: event:/Music/Magic Forest Music
+  citadel_Music_reference:
+    Guid:
+      Data1: 607935321
+      Data2: 1223209951
+      Data3: -116301438
+      Data4: 344495630
+    Path: event:/Music/Citadel Music
   combat_Music_reference:
     Guid:
       Data1: -1364619393
@@ -6449,6 +6470,7 @@ GameObject:
   - component: {fileID: 1260867231}
   - component: {fileID: 1260867233}
   - component: {fileID: 1260867232}
+  - component: {fileID: 1260867234}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -6504,6 +6526,18 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!114 &1260867234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260867230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c473390bb87e694f983d519a852797e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1263793836
 GameObject:
   m_ObjectHideFlags: 0

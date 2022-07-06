@@ -32,6 +32,10 @@ public class Enemy : MonoBehaviour
 
     private string playerDodgeWord;
 
+
+    delegate void AudioDelegate(SFXName name);
+    AudioDelegate TriggerSFX;
+
     
 
     //functions
@@ -49,6 +53,8 @@ public class Enemy : MonoBehaviour
         enemyAnimator = GameObject.Find("Enemy_Combat").GetComponent<Animator>();
 
         combatAnimation = enemyAnimator.gameObject.GetComponent<CombatAnimations>();
+
+        TriggerSFX = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioController>().TriggerSFX;
     }
 
 
@@ -73,6 +79,8 @@ public class Enemy : MonoBehaviour
             {
                 combatAnimation.TriggerAttack("Enemy");
             }
+
+            TriggerSFX.Invoke(SFXName.EnemyAttackComplete);
 
             playerDodgeWord = string.Empty;
 
