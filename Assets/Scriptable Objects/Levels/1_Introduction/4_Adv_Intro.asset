@@ -26,7 +26,7 @@ MonoBehaviour:
   NumEncounters: 3
   EncounterWordKey: 000000001000000026000000
   EncounterValue:
-  - {fileID: 11400000, guid: 548813dcc126fc04987619bc970e3896, type: 2}
+  - {fileID: 11400000, guid: 3b61d3fbb0bdec14d96348b6f9ecc78c, type: 2}
   - {fileID: 11400000, guid: 744268b7a3f33f34bba8489cdc7bb026, type: 2}
   - {fileID: 11400000, guid: e46388f0e0149bf4a9c0b6175bec64c6, type: 2}
   Enemy: {fileID: 0}
